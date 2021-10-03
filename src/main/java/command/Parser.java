@@ -2,7 +2,6 @@ package command;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 public class Parser {
 
@@ -23,17 +22,20 @@ public class Parser {
     public static final String DELETECLASS = "deleteclass";
     public static final String DELETETASK = "deletetask";
     public static final String DELETEGRADE = "deletegrade";
+    public static final String START_OF_DATE = "/by";
 
     static String taskType;
     static String taskDescription;
+    protected String moduleName;
+    protected boolean isExit;
     public static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     public static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
 
-    void chooseTask() {
-        Scanner in = new Scanner(System.in);
-        String line = in.nextLine();
+    public Parser() {
+        this.isExit = false;
+    }
+    public void chooseTask(TaskList tasks, Storage storage, String line) {
         splitInput(line);
-
         switch (taskType) {
         case HELP:
             //print help Ui
@@ -75,15 +77,16 @@ public class Parser {
         case EXIT:
             //Ui print exit message
             System.out.println("Exit Test");
-            return;
+            this.isExit = true;
+            break;
         case MODULETYPE:
             //the functions that are module specific
-            moduleParser(taskDescription);
+            moduleParser(tasks, storage, taskDescription);
             break;
         default:
             System.out.println("Invalid Input!");
+            break;
         }
-        chooseTask();
 
     }
 
@@ -94,9 +97,9 @@ public class Parser {
      * @param input String to be separated
      */
 
-    static void moduleParser(String input) {
+     void moduleParser(TaskList tasks, Storage storage, String input) {
         splitInput(input);
-        String moduleName = taskType;
+        this.moduleName = taskType;
         System.out.println("Module: " + moduleName);
 
         if (taskDescription.isEmpty()) {
@@ -119,8 +122,12 @@ public class Parser {
                 Ui.missingDescription();
                 break;
             }
-            //moduleName -> addtask method
-            System.out.println("AddTask test");
+            if (!taskDescription.contains(START_OF_DATE)) {
+                Ui.invalidDate();
+                break;
+            }
+            tasks.addTask(storage.taskList, taskDescription);
+            Ui.addTaskMessage(storage.taskList.get(tasks.getTaskCount()), this.moduleName);
             break;
         case ADDGRADE:
             if (taskDescription.isEmpty()) {
@@ -144,6 +151,7 @@ public class Parser {
             break;
         default:
             System.out.println("Invalid Input!");
+            break;
         }
     }
 
@@ -161,7 +169,6 @@ public class Parser {
         }
     }
 
-
     public static LocalDateTime parseDate(String str) {
         return LocalDateTime.parse(str, inputFormatter);
     }
@@ -170,6 +177,11 @@ public class Parser {
         return dateTime.format(outputFormatter);
     }
 
-
+    public boolean isExit() {
+        return this.isExit;
+    }
+    public String getModuleName() {
+         return this.moduleName;
+    }
 
 }

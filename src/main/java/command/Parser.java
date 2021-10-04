@@ -34,7 +34,7 @@ public class Parser {
     public Parser() {
         this.isExit = false;
     }
-    public void chooseTask(TaskList tasks, Storage storage, String line) {
+    public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {
         case HELP:
@@ -81,7 +81,7 @@ public class Parser {
             break;
         case MODULETYPE:
             //the functions that are module specific
-            moduleParser(tasks, storage, taskDescription);
+            moduleParser(taskDescription);
             break;
         default:
             System.out.println("Invalid Input!");
@@ -97,9 +97,11 @@ public class Parser {
      * @param input String to be separated
      */
 
-     void moduleParser(TaskList tasks, Storage storage, String input) {
+     void moduleParser(String input) {
         splitInput(input);
         this.moduleName = taskType;
+        //access module tasklist
+         TaskList tasks = new TaskList();
         System.out.println("Module: " + moduleName);
 
         if (taskDescription.isEmpty()) {
@@ -126,8 +128,8 @@ public class Parser {
                 Ui.invalidDate();
                 break;
             }
-            tasks.addTask(storage.taskList, taskDescription);
-            Ui.addTaskMessage(storage.taskList.get(tasks.getTaskCount()), this.moduleName);
+            tasks.addTask(taskDescription);
+            Ui.addTaskMessage(tasks.taskList.get(tasks.getTaskCount()), this.moduleName);
             break;
         case ADDGRADE:
             if (taskDescription.isEmpty()) {

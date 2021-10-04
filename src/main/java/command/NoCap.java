@@ -4,11 +4,9 @@ import java.util.Scanner;
 
 public class NoCap {
     private final Storage storage;
-    private final TaskList tasks;
 
     public NoCap() {
         storage = new Storage();
-        tasks = new TaskList(storage.taskList);
     }
     private void run() {
         Ui.printStartMessage();
@@ -16,7 +14,7 @@ public class NoCap {
         Scanner in = new Scanner(System.in);
         while (!parse.isExit()) {
             String input = in.nextLine();
-            parse.chooseTask(tasks, storage, input);
+            parse.chooseTask(input);
         }
         Ui.printEndMessage();
     }

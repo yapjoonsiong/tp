@@ -24,6 +24,9 @@ public class Task {
     public String getDate() {
         return " by: " + this.date;
     }
+    public void markDone() {
+        this.isDone = true;
+    }
     public String toString() {
         return getStatusIcon() + getDescription() + getDate();
     }

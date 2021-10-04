@@ -4,18 +4,22 @@ import java.util.ArrayList;
 
 public class TaskList {
     private static final String EMPTY_STRING = "";
-
+    protected ArrayList<Task> taskList;
     protected int taskCount;
 
-    /**
-     * @param taskList The list of tasks stored in an ArrayList
-     */
-    public TaskList(ArrayList<Task> taskList) {
-        loadTaskCount(taskList);
+
+    public TaskList() {
+        this.taskList = new ArrayList<>();
     }
 
     public int getTaskCount() {
         return taskCount;
+    }
+    public Task get(int index) {
+        return this.taskList.get(index);
+    }
+    public void delete(Task task) {
+        taskList.remove(task);
     }
     private static String getDate(String description) {
         try {
@@ -33,25 +37,21 @@ public class TaskList {
             return EMPTY_STRING;
         }
     }
-    public void loadTaskCount(ArrayList<Task> taskList) {
-        this.taskCount = taskList.size();
-    }
 
     /**
      * Create a new Task object and add it to the tasks list
      *
-     * @param taskList list of items stored in an ArrayList
      * @param userInput task description input by user
      *
      */
-    public void addTask(ArrayList<Task> taskList, String userInput) {
+    public void addTask(String userInput) {
         String date = getDate(userInput);
         if (date.isBlank()) {
             Ui.missingDate();
         } else {
             String description = removeDate(userInput);
             Task newTask = new Task(description, date);
-            taskList.add(taskCount, newTask);
+            this.taskList.add(taskCount, newTask);
         }
     }
 

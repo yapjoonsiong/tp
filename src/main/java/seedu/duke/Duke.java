@@ -19,9 +19,9 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
 
-        Scanner in = new Scanner(System.in);
+        //Scanner in = new Scanner(System.in);
 
-        System.out.println("Hello " + in.nextLine());
+        //System.out.println("Hello " + in.nextLine());
 
         //Function to test module class, comment out if not in use
         moduleTest();
@@ -34,6 +34,7 @@ public class Duke {
         m.addGrade("A+");
         String start = "0800";
         m.addClass(new Schedule("WED", start, "E1-01", "week 1,3,5,7,9"));
+        m.addTask("read /by 1800");
         System.out.println(m);
     }
 

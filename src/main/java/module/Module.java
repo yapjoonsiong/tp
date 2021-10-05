@@ -1,15 +1,15 @@
 package module;
 
 import command.TaskList;
-
 import java.util.ArrayList;
+
 
 public class Module {
     protected String letterGrade;
     protected String moduleName;
-    //protected Schedule schedule;
+    protected Schedule schedule;
+    protected TaskList taskList;
     private ArrayList<Schedule> scheduleList;
-   // protected Tasklist taskList = new TaskList();
     protected int credits;
 
     public Module(String moduleName){
@@ -17,6 +17,7 @@ public class Module {
         this.letterGrade = null;
         this.scheduleList = new ArrayList<Schedule>();
         this.credits = 0;
+        this.taskList = new TaskList();
     }
     public int size() {
         return this.scheduleList.size();
@@ -34,18 +35,19 @@ public class Module {
         this.scheduleList.add(schedule);
     }
 
-//    public void addTask(Task task){
-//        this.taskList.add(task);
-//    }
+    public void addTask(String userInput){
+        this.taskList.addTask(userInput);
+    }
 
-    public void addCredits(int credits){
+    public void addCredits(int credits ){
         this.credits = credits;
     }
 
     public String toString(){
         return "Module name: " + moduleName +
                 "\nCredits: " + credits +
-                //"\nSchedule: " + schedule +
-                "\nGrade: " + letterGrade;
+                "\nSchedule: \n" + scheduleList +
+                "\nGrade: " + letterGrade +
+                "\nTasks: " + taskList;
     }
 }

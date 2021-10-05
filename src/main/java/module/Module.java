@@ -1,19 +1,30 @@
 package module;
 
 import command.TaskList;
+import java.util.ArrayList;
+
 
 public class Module {
     protected String letterGrade;
     protected String moduleName;
     protected Schedule schedule;
-   // protected Tasklist taskList = new TaskList();
+    protected TaskList taskList;
+    private ArrayList<Schedule> scheduleList;
     protected int credits;
 
     public Module(String moduleName){
         this.moduleName = moduleName;
         this.letterGrade = null;
-        this.schedule = null;
+        this.scheduleList = new ArrayList<Schedule>();
         this.credits = 0;
+        this.taskList = new TaskList();
+    }
+    public int size() {
+        return this.scheduleList.size();
+    }
+
+    public Schedule get(int index) {
+        return this.scheduleList.get(index);
     }
 
     public void addGrade(String letterGrade){
@@ -21,21 +32,22 @@ public class Module {
     }
 
     public void addClass(Schedule schedule){
-        this.schedule = schedule;
+        this.scheduleList.add(schedule);
     }
 
-//    public void addTask(Task task){
-//        this.taskList.add(task);
-//    }
+    public void addTask(String userInput){
+        this.taskList.addTask(userInput);
+    }
 
-    public void addCredits(int credits){
+    public void addCredits(int credits ){
         this.credits = credits;
     }
 
     public String toString(){
         return "Module name: " + moduleName +
                 "\nCredits: " + credits +
-                "\nSchedule: " + schedule +
-                "\nGrade: " + letterGrade;
+                "\nSchedule: \n" + scheduleList +
+                "\nGrade: " + letterGrade +
+                "\nTasks: " + taskList;
     }
 }

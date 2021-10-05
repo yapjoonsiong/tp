@@ -4,34 +4,35 @@ import java.time.Duration;
 import java.time.LocalTime;
 
 public class Schedule {
-    protected LocalTime startTime;
-    protected LocalTime endTime;
+    protected String startTime;
+    protected String location;
     protected String day;
+    protected String comment;
 
-    public Schedule(String day, LocalTime startTime, LocalTime endTime){
+    public Schedule(String day, String startTime, String location, String comment){
         this.day = day;
         this.startTime = startTime;
-        this.endTime = endTime;
+        this.location = location;
+        this.comment = comment;
     }
-
+    public String getLocation() {
+        return this.location;
+    }
+    public String getComment() {
+        return this.comment;
+    }
     public String getDay() {
         return day;
     }
 
-    public LocalTime getStartTime(){
+    public String getStartTime(){
         return startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public long period(){
-        return Duration.between(this.endTime, this.startTime).toMinutes();
     }
 
     public String toString(){
         return "Day: " + day +
-                "\nPeriod: " + startTime + " - " + endTime;
+                "\nStart Time: " + startTime
+                + "\nLocation: " + location
+                +"\nComments: " + comment;
     }
 }

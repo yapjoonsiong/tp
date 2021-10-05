@@ -29,6 +29,7 @@ public class TaskList {
             return EMPTY_STRING;
         }
     }
+
     private static String removeDate(String description) {
         try {
             int datePos = description.indexOf(Parser.START_OF_DATE);
@@ -54,7 +55,17 @@ public class TaskList {
             this.taskList.add(taskCount, newTask);
         }
     }
-
+    public void printTaskList(String module) {
+        int index = 1;
+        Ui.printTaskList(module);
+        for (Task task : taskList) {
+            if (task != null) {
+                System.out.print(index + ".");
+                System.out.println(task);
+                index++;
+            }
+        }
+    }
 }
 
 

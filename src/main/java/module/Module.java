@@ -7,9 +7,8 @@ import java.util.ArrayList;
 public class Module {
     protected String letterGrade;
     protected String moduleName;
-    //protected Schedule schedule;
-    private ArrayList<Schedule> scheduleList;
-   // protected Tasklist taskList = new TaskList();
+    protected Schedule schedule;
+    protected TaskList taskList;
     protected int credits;
 
     public Module(String moduleName){
@@ -34,9 +33,9 @@ public class Module {
         this.scheduleList.add(schedule);
     }
 
-//    public void addTask(Task task){
-//        this.taskList.add(task);
-//    }
+    public void addTask(String userInput){
+        this.taskList.addTask(userInput);
+    }
 
     public void addCredits(int credits){
         this.credits = credits;
@@ -45,7 +44,8 @@ public class Module {
     public String toString(){
         return "Module name: " + moduleName +
                 "\nCredits: " + credits +
-                //"\nSchedule: " + schedule +
-                "\nGrade: " + letterGrade;
+                "\nSchedule: " + schedule +
+                "\nGrade: " + letterGrade +
+                "\nTasks: " + taskList;
     }
 }

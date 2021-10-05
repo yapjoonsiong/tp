@@ -32,8 +32,10 @@ public class Duke {
         Module m = new Module("cs2113T");
         m.addCredits(4);
         m.addGrade("A+");
-        String start = "0800";
-        m.addClass(new Schedule("WED", start, "E1-01", "week 1,3,5,7,9"));
+        LocalTime start = LocalTime.parse("13:00:00");
+        LocalTime end = LocalTime.parse("15:00:00");
+        m.addClass(new Schedule("WEDNESDAY", start, end));
+        m.addTask("book /by 1800");
         System.out.println(m);
     }
 

@@ -31,6 +31,8 @@ public class Schedule {
 
     public String toString(){
         return "Day: " + day +
-                "\nPeriod: " + startTime;
+                "\nStart Time: " + startTime
+                + "\nLocation: " + location
+                +"\nComments: " + comment;
     }
 }

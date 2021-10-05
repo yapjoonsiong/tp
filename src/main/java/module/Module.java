@@ -39,7 +39,7 @@ public class Module {
         this.taskList.addTask(userInput);
     }
 
-    public void addCredits(int credits){
+    public void addCredits(int credits ){
         this.credits = credits;
     }
 

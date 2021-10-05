@@ -22,4 +22,7 @@ public class Ui {
         System.out.println("Added new task to " +  moduleName);
         System.out.println(task);
     }
+    public static void printTaskList(String module) {
+        System.out.println("The tasks in " + module + " are: ");
+    }
 }

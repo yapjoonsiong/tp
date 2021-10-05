@@ -55,7 +55,17 @@ public class TaskList {
             this.taskList.add(taskCount, newTask);
         }
     }
-
+    public void printTaskList(String module) {
+        int index = 1;
+        Ui.printTaskList(module);
+        for (Task task : taskList) {
+            if (task != null) {
+                System.out.print(index + ".");
+                System.out.println(task);
+                index++;
+            }
+        }
+    }
 }
 
 

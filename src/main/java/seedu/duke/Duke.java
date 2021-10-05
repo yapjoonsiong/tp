@@ -45,6 +45,7 @@ public class Duke {
         String start = "0800";
         m.addClass(new Schedule("WED", start, "E1-01", "wk 1,3,5,7,9"));
         a.add(m);
+        m.addClass(new Schedule("MON", "1000", "E-Learning","hi"));
         a.printTimeTable();
     }
 }

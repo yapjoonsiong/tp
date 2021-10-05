@@ -42,10 +42,10 @@ public class Module {
         this.credits = credits;
     }
 
-    /*public String toString(){
+    public String toString(){
         return "Module name: " + moduleName +
                 "\nCredits: " + credits +
-                "\nSchedule: " + schedule +
+                //"\nSchedule: " + schedule +
                 "\nGrade: " + letterGrade;
-    }*/
+    }
 }

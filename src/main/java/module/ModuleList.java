@@ -41,15 +41,15 @@ public class ModuleList {
     private int moduleAtTime(String timeString, int r) {
         int moduleIndex = -1;
         String day;
-        if (r >= 3 && r <= 6) {
+        if (r <= 6) {
             day = "MON";
-        } else if (r >= 8 && r <= 11) {
+        } else if (r <= 11) {
             day = "TUE";
-        } else if (r >= 13 && r <= 16) {
+        } else if (r <= 16) {
             day = "WED";
-        } else if (r >= 18 && r <= 21) {
+        } else if (r <= 21) {
             day = "THU";
-        } else if (r >= 23 && r <= 26) {
+        } else if (r <= 26) {
             day = "FRI";
         } else {
             day = "SAT";
@@ -84,8 +84,7 @@ public class ModuleList {
         for (int i = 0; i < moduleList.size(); i++) {
             for (int j = 0; j < moduleList.get(i).size(); j++) {
                 if (Objects.equals(moduleList.get(i).get(j).getDay(), day) && Objects.equals(moduleList.get(i).get(j).getStartTime(), timeString)) {
-                    classIndex = i;
-                    //i = moduleList.size();
+                    classIndex = j;
                     break;
                 }
             }
@@ -94,11 +93,11 @@ public class ModuleList {
     }
     public void printTimeTable() {
         int height = 33;
-        int length = 191;
+        int length = 207;
         for (int r = 0; r < height; r++) {
             for (int c = 0; c < length; c++) {
-                if ((c + 3) % 15 == 0) {
-                    int time = ((c + 3) / 15) + 7;
+                if ((c + 12) % 20 == 0) {
+                    int time = ((c + 12) / 20) + 7;
                     String timeString = formatTimeString(time);
                     if (r == 1) { // print time header
                         System.out.print(timeString);
@@ -124,7 +123,7 @@ public class ModuleList {
                             c += moduleList.get(moduleIndex).get(classIndex).getComment().length();
                         }
                     }
-                } else if ((r + 2) % 5 == 0 && c == 4) { //print day
+                } else if ((r + 2) % 5 == 0 && c == 2) { //print day
                     int day = (r + 2) / 5;
                     switch (day) {
                     case 1:
@@ -149,7 +148,7 @@ public class ModuleList {
                     c += 2;
                 } else if (c == length - 1) {
                     System.out.println("#");
-                } else if ((r - 2) % 5 == 0 || r == 0 || r == height - 1 || (c - 10) % 15 == 0 || c == 0) {
+                } else if ((r - 2) % 5 == 0 || r == 0 || r == height - 1 || (c - 6) % 20 == 0 || c == 0) {
                     System.out.print("#");
                 } else {
                     System.out.print(" ");

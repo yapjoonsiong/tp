@@ -8,6 +8,7 @@ public class NoCap {
     public NoCap() {
         storage = new Storage();
     }
+
     private void run() {
         Ui.printStartMessage();
         Parser parse = new Parser();
@@ -18,6 +19,7 @@ public class NoCap {
         }
         Ui.printEndMessage();
     }
+
     public static void main(String[] args) {
         new NoCap().run();
     }

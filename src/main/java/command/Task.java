@@ -6,6 +6,8 @@ public class Task {
     protected String date;
 
     /**
+     * temp message.
+     *
      * @param description The description of the task given by the user
      */
     public Task(String description, String date) {
@@ -17,15 +19,19 @@ public class Task {
     public String getStatusIcon() {
         return "[" + (isDone ? "X" : " ") + "] ";
     }
+
     public String getDescription() {
         return this.description;
     }
+
     public String getDate() {
         return " by: " + this.date;
     }
+
     public void markDone() {
         this.isDone = true;
     }
+
     public String toString() {
         return getStatusIcon() + getDescription() + getDate();
     }

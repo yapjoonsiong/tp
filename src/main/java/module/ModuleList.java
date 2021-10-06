@@ -10,24 +10,30 @@ public class ModuleList {
     public ModuleList() {
         this.moduleList = new ArrayList<>();
     }
+
     public void add(Module module) {
         this.moduleList.add(module);
     }
+
     public void delete(Module module) {
         moduleList.remove(module);
     }
+
     public int size() {
         return this.moduleList.size();
     }
+
     public Module get(int index) {
         return this.moduleList.get(index);
     }
+
     public void printModules() {
         for (int i = 0; i < moduleList.size(); i++) {
             System.out.println(i + 1);
             System.out.println(moduleList.get(i));
         }
     }
+
     private String formatTimeString(int time) {
         String timeString;
         if (time < 10) {
@@ -56,7 +62,8 @@ public class ModuleList {
         }
         for (int i = 0; i < moduleList.size(); i++) {
             for (int j = 0; j < moduleList.get(i).size(); j++) {
-                if (Objects.equals(moduleList.get(i).get(j).getDay(), day) && Objects.equals(moduleList.get(i).get(j).getStartTime(), timeString)) {
+                if (Objects.equals(moduleList.get(i).get(j).getDay(), day)
+                        && Objects.equals(moduleList.get(i).get(j).getStartTime(), timeString)) {
                     moduleIndex = i;
                     //i = moduleList.size();
                     break;
@@ -65,6 +72,7 @@ public class ModuleList {
         }
         return moduleIndex;
     }
+
     private int classAtTime(String timeString, int r) {
         int classIndex = 0;
         String day;
@@ -83,7 +91,8 @@ public class ModuleList {
         }
         for (int i = 0; i < moduleList.size(); i++) {
             for (int j = 0; j < moduleList.get(i).size(); j++) {
-                if (Objects.equals(moduleList.get(i).get(j).getDay(), day) && Objects.equals(moduleList.get(i).get(j).getStartTime(), timeString)) {
+                if (Objects.equals(moduleList.get(i).get(j).getDay(), day)
+                        && Objects.equals(moduleList.get(i).get(j).getStartTime(), timeString)) {
                     classIndex = j;
                     break;
                 }
@@ -91,6 +100,7 @@ public class ModuleList {
         }
         return classIndex;
     }
+
     public void printTimeTable() {
         int height = 33;
         int length = 207;
@@ -108,14 +118,14 @@ public class ModuleList {
                             System.out.print(moduleList.get(moduleIndex).moduleName);
                             c += moduleList.get(moduleIndex).moduleName.length();
                         }
-                    } else if ((r + 1) % 5 == 0) {//print class location
+                    } else if ((r + 1) % 5 == 0) { //print class location
                         int moduleIndex = moduleAtTime(timeString, r);
                         int classIndex = classAtTime(timeString, r);
                         if (moduleIndex >= 0) {
                             System.out.print(moduleList.get(moduleIndex).get(classIndex).getLocation());
                             c += moduleList.get(moduleIndex).get(classIndex).getLocation().length();
                         }
-                    } else if (r > 0 && r % 5 == 0) {//print class comment
+                    } else if (r > 0 && r % 5 == 0) { //print class comment
                         int moduleIndex = moduleAtTime(timeString, r);
                         int classIndex = classAtTime(timeString, r);
                         if (moduleIndex >= 0) {
@@ -144,6 +154,8 @@ public class ModuleList {
                     case 6:
                         System.out.print("SAT");
                         break;
+                    default:
+                        System.out.print("INVALID");
                     }
                     c += 2;
                 } else if (c == length - 1) {

@@ -34,6 +34,7 @@ public class Parser {
     public Parser() {
         this.isExit = false;
     }
+
     public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {
@@ -87,7 +88,6 @@ public class Parser {
             System.out.println("Invalid Input!");
             break;
         }
-
     }
 
     /**
@@ -97,11 +97,11 @@ public class Parser {
      * @param input String to be separated
      */
 
-     void moduleParser(String input) {
+    void moduleParser(String input) {
         splitInput(input);
         this.moduleName = taskType;
         //access module tasklist
-         TaskList tasks = new TaskList();
+        TaskList tasks = new TaskList();
         System.out.println("Module: " + moduleName);
 
         if (taskDescription.isEmpty()) {
@@ -163,9 +163,7 @@ public class Parser {
             int typePos = input.indexOf(SPACE_STRING);
             taskType = input.substring(0, typePos);
             taskDescription = input.substring(typePos).trim();
-        }
-        //no space in input string
-        catch (StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             taskType = input;
             taskDescription = EMPTY_STRING;
         }
@@ -182,8 +180,9 @@ public class Parser {
     public boolean isExit() {
         return this.isExit;
     }
+
     public String getModuleName() {
-         return this.moduleName;
+        return this.moduleName;
     }
 
 }

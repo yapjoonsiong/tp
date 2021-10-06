@@ -1,4 +1,5 @@
 package seedu.duke;
+
 import module.ModuleList;
 import module.Module;
 import module.Schedule;
@@ -9,7 +10,6 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -28,7 +28,7 @@ public class Duke {
         moduleListTest();
     }
 
-    private static void moduleTest(){
+    private static void moduleTest() {
         Module m = new Module("cs2113T");
         m.addCredits(4);
         m.addGrade("A+");
@@ -39,14 +39,14 @@ public class Duke {
     }
 
     private static void moduleListTest() {
-        ModuleList a = new ModuleList();
         Module m = new Module("cs2113T");
         m.addCredits(4);
         m.addGrade("A+");
         String start = "0800";
         m.addClass(new Schedule("WED", start, "E1-01", "wk 1,3,5,7,9"));
+        ModuleList a = new ModuleList();
         a.add(m);
-        m.addClass(new Schedule("MON", "1000", "E-Learning","hi"));
+        m.addClass(new Schedule("MON", "1000", "E-Learning", "hi"));
         a.printTimeTable();
     }
 }

@@ -12,8 +12,21 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+    //Getters
     public int getTaskCount() {
         return taskCount;
+    }
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
+
+    //Setters
+    public void setTaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    public void setTaskCount(int taskCount) {
+        this.taskCount = taskCount;
     }
 
     public Task get(int index) {

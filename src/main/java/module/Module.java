@@ -21,6 +21,62 @@ public class Module {
         this.taskList = new TaskList();
     }
 
+    /**
+     * For deserialization  from JSON file
+     */
+    public Module() {
+    }
+
+    //Getters and Setters
+    public String getLetterGrade() {
+        return letterGrade;
+    }
+
+    public void setLetterGrade(String letterGrade) {
+        this.letterGrade = letterGrade;
+    }
+
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
+    }
+
+    public ArrayList<Schedule> getScheduleList() {
+        return scheduleList;
+    }
+
+    public void setScheduleList(ArrayList<Schedule> scheduleList) {
+        this.scheduleList = scheduleList;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    //Methods
     public int size() {
         return this.scheduleList.size();
     }

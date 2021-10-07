@@ -5,12 +5,9 @@ public class Task {
     protected boolean isDone;
     protected String date;
 
-
-
     public boolean isDone() {
         return isDone;
     }
-
 
 
     /**
@@ -22,6 +19,12 @@ public class Task {
         this.description = description;
         this.date = date;
         this.isDone = false;
+    }
+
+    /**
+     * For deserialization from JSON file.
+     */
+    public Task() {
     }
 
     //Getters

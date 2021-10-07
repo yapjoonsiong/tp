@@ -17,6 +17,7 @@ class StorageDecoderTest {
         modules.get(0).addCredits(4);
         modules.get(2).addClass(new Schedule("Monday", "12pm","E3", "Bad"));
         modules.get(0).addClass(new Schedule("Monday", "12pm","D3", "Bad"));
+        modules.get(0).addClass(new Schedule("Tuesday", "12pm","D3", "Bad"));
         StorageEncoder.encodeModuleListToJson(modules);
         ModuleList loadedModules = StorageDecoder.decodeJsonToModuleList();
         loadedModules.printModules();

@@ -1,5 +1,7 @@
 package command;
 
+import module.ModuleList;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -35,6 +37,11 @@ public class Parser {
         this.isExit = false;
     }
 
+    /**
+     * Method to process user command.
+     *
+     * @param line User input
+     */
     public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {

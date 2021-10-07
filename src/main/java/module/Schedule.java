@@ -16,6 +16,7 @@ public class Schedule {
         this.comment = comment;
     }
 
+    //Getters
     public String getLocation() {
         return this.location;
     }
@@ -30,6 +31,23 @@ public class Schedule {
 
     public String getStartTime() {
         return startTime;
+    }
+
+    //Setters
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String toString() {

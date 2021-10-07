@@ -5,6 +5,14 @@ public class Task {
     protected boolean isDone;
     protected String date;
 
+
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+
+
     /**
      * temp message.
      *
@@ -16,6 +24,7 @@ public class Task {
         this.isDone = false;
     }
 
+    //Getters
     public String getStatusIcon() {
         return "[" + (isDone ? "X" : " ") + "] ";
     }
@@ -26,6 +35,19 @@ public class Task {
 
     public String getDate() {
         return " by: " + this.date;
+    }
+
+    //Setters
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void markDone() {

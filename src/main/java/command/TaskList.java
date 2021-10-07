@@ -16,6 +16,7 @@ public class TaskList {
     public int getTaskCount() {
         return taskCount;
     }
+
     public ArrayList<Task> getTaskList() {
         return taskList;
     }

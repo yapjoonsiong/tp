@@ -38,7 +38,7 @@ public class Parser {
     }
 
     /**
-     * Method to process user command
+     * Method to process user command.
      *
      * @param line User input
      */

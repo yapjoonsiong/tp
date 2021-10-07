@@ -4,13 +4,14 @@ import module.Module;
 import module.ModuleList;
 import org.junit.jupiter.api.Test;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 class StorageEncoderTest {
@@ -24,15 +25,18 @@ class StorageEncoderTest {
         modules.add(new Module("CS2102"));
         modules.add(new Module("CS2112"));
         modules.add(new Module("CS2132"));
-        StorageEncoder.encodeModuleListToJSON(modules);
+        StorageEncoder.encodeModuleListToJson(modules);
         assertTrue(Files.exists(FILE_PATH));
         try {
             String fileContent = Files.readString(FILE_PATH);
-            assertEquals("{\"moduleList\":[{\"letterGrade\":null,\"moduleName\":\"CS2102\",\"schedule\":null," +
-                    "\"taskList\":{\"taskList\":[],\"taskCount\":0},\"scheduleList\":[],\"credits\":0},{\"letterGrade\":null," +
-                    "\"moduleName\":\"CS2112\",\"schedule\":null,\"taskList\":{\"taskList\":[],\"taskCount\":0},\"scheduleList\":" +
-                    "[],\"credits\":0},{\"letterGrade\":null,\"moduleName\":\"CS2132\",\"schedule\":null,\"taskList\":{\"taskList\":[]," +
-                    "\"taskCount\":0},\"scheduleList\":[],\"credits\":0}]}", fileContent);
+            assertEquals("{\"moduleList\":[{\"letterGrade\":null,\"moduleName\""
+                    + ":\"CS2102\",\"schedule\":null,\"taskList\":{\"taskList\":[],"
+                    + "\"taskCount\":0},\"scheduleList\":[],\"credits\":0},{\"letterGrade\""
+                    + ":null,\"moduleName\":\"CS2112\",\"schedule\":null,\"taskList\":"
+                    + "{\"taskList\":[],\"taskCount\":0},\"scheduleList\":[],\"credits\":0},"
+                    + "{\"letterGrade\":null,\"moduleName\":\"CS2132\",\"schedule\":null,\"taskList\""
+                    + ":{\"taskList\":[],\"taskCount\":0},\"scheduleList\":[],\"credits\":0}]}",
+                    fileContent);
         } catch (IOException e) {
             fail(e.getMessage());
         }

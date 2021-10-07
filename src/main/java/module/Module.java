@@ -22,7 +22,7 @@ public class Module {
     }
 
     /**
-     * For deserialization  from JSON file
+     * For deserialization from JSON file.
      */
     public Module() {
     }

@@ -13,7 +13,7 @@ public class StorageDecoder {
     private static final String ROOT = System.getProperty("user.dir");
     private static final Path FILE_PATH = Paths.get(ROOT, "data", "data.json");
 
-    public static ModuleList decodeJSONToModuleList () {
+    public static ModuleList decodeJsonToModuleList() {
         ObjectMapper objectMapper = new ObjectMapper();
         ModuleList modules = new ModuleList();
         if (!Files.exists(FILE_PATH)) {

@@ -16,7 +16,7 @@ public class StorageEncoder {
     private static final Path FILE_PATH = Paths.get(ROOT, "data", "data.json");
     private static final Path DIRECTORY_PATH = Paths.get(ROOT, "data");
 
-    public static void encodeModuleListToJSON(ModuleList moduleList) {
+    public static void encodeModuleListToJson(ModuleList moduleList) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (!Files.exists(DIRECTORY_PATH)) {
@@ -32,23 +32,24 @@ public class StorageEncoder {
         }
     }
 
+    //TODO: Implement custom exceptions
     private static void createDataDirectory() /*throws DukeException*/ {
         File newDirectory = new File(DIRECTORY_PATH.toString());
         boolean createSuccess = newDirectory.mkdir();
         if (!createSuccess) {
-//            throw new DukeException(ExceptionMessages.EXCEPTION_CREATE_DIRECTORY_FAIL);
+            //throw new DukeException(ExceptionMessages.EXCEPTION_CREATE_DIRECTORY_FAIL);
         }
     }
 
-    private static void createFile() /*throws DukeException*/ {
+    //TODO: Implement custom exceptions
+    private static void createFile() {
         try {
             File newFile = new File(FILE_PATH.toString());
             boolean createSuccess = newFile.createNewFile();
-//            if (!createSuccess) {
-//                throw new DukeException(ExceptionMessages.EXCEPTION_CREATE_FILE_FAIL);
-//            }
+            if (!createSuccess) {
+                System.out.println("Error creating save file");
+            }
         } catch (IOException e) {
-//            Ui.showCreateSaveFileError();
             System.out.println("Error saving file");
         }
     }

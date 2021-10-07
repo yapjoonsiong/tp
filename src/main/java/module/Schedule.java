@@ -16,6 +16,12 @@ public class Schedule {
         this.comment = comment;
     }
 
+    /**
+     * For deserialization from JSON file.
+     */
+    public Schedule() {
+    }
+
     //Getters
     public String getLocation() {
         return this.location;

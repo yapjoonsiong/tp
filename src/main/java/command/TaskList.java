@@ -83,6 +83,11 @@ public class TaskList {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return taskList.toString();
+    }
 }
 
 

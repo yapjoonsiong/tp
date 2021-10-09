@@ -23,30 +23,6 @@ public class Duke {
 
         //System.out.println("Hello " + in.nextLine());
 
-        //Function to test module class, comment out if not in use
-        moduleTest();
-        moduleListTest();
     }
 
-    private static void moduleTest() {
-        Module m = new Module("cs2113T");
-        m.addCredits(4);
-        m.addGrade("A+");
-        String start = "0800";
-        m.addClass(new Schedule("WED", start, "E1-01", "week 1,3,5,7,9"));
-        m.addTask("read /by 1800");
-        System.out.println(m);
-    }
-
-    private static void moduleListTest() {
-        Module m = new Module("cs2113T");
-        m.addCredits(4);
-        m.addGrade("A+");
-        String start = "0800";
-        m.addClass(new Schedule("WED", start, "E1-01", "wk 1,3,5,7,9"));
-        ModuleList a = new ModuleList();
-        a.add(m);
-        m.addClass(new Schedule("MON", "1000", "E-Learning", "hi"));
-        a.printTimeTable();
-    }
 }

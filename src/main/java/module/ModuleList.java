@@ -179,4 +179,13 @@ public class ModuleList {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < moduleList.size(); i++) {
+            output.append(i + 1).append(System.lineSeparator()).append(moduleList.get(i)).append(System.lineSeparator());
+        }
+        return output.toString();
+    }
+
 }

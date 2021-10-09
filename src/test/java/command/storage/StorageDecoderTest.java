@@ -5,6 +5,8 @@ import module.ModuleList;
 import module.Schedule;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class StorageDecoderTest {
 
     @Test
@@ -20,7 +22,8 @@ class StorageDecoderTest {
         modules.get(0).addClass(new Schedule("Tuesday", "12pm","D3", "Bad"));
         StorageEncoder.encodeModuleListToJson(modules);
         ModuleList loadedModules = StorageDecoder.decodeJsonToModuleList();
-        loadedModules.printModules();
+        assertEquals(loadedModules.toString(), modules.toString());
+        System.out.println(modules.toString());
     }
 
 }

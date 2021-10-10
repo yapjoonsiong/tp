@@ -1,6 +1,6 @@
 package command;
 
-import module.ModuleList;
+import task.TaskList;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -138,7 +138,7 @@ public class Parser {
                 break;
             }
             tasks.addTask(taskDescription);
-            Ui.addTaskMessage(tasks.taskList.get(tasks.getTaskCount()), this.moduleName);
+            Ui.addTaskMessage(tasks.get(tasks.getTaskCount()), this.moduleName);
             break;
         case ADDGRADE:
             if (taskDescription.isEmpty()) {

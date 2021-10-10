@@ -1,5 +1,6 @@
 package command;
 
+import command.storage.StorageEncoder;
 import module.Module;
 import module.Schedule;
 
@@ -60,6 +61,7 @@ public class Parser {
             }
             Module module = new Module(taskDescription);
             NoCap.moduleList.add(module);
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             logger.log(Level.INFO, "Add Test");
             break;
         case DELETE:
@@ -69,6 +71,7 @@ public class Parser {
             }
             int moduleIndex = Integer.parseInt(taskDescription) - 1;
             NoCap.moduleList.delete(NoCap.moduleList.get(moduleIndex));
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             logger.log(Level.INFO, "Delete Test");
             break;
         case LIST:
@@ -99,11 +102,13 @@ public class Parser {
         case EXIT:
             //Ui print exit message
             logger.log(Level.INFO, "Exit Test");
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             this.isExit = true;
             break;
         case MODULETYPE:
             //the functions that are module specific
             moduleParser(taskDescription);
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             break;
         default:
             logger.log(Level.INFO, "Invalid Input!");

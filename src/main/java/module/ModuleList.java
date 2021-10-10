@@ -7,6 +7,10 @@ public class ModuleList {
 
     private ArrayList<Module> moduleList;
 
+    public ModuleList() {
+        this.moduleList = new ArrayList<>();
+    }
+
     //Getters
     public ArrayList<Module> getModuleList() {
         return moduleList;
@@ -15,10 +19,6 @@ public class ModuleList {
     //Setters
     public void setModuleList(ArrayList<Module> moduleList) {
         this.moduleList = moduleList;
-    }
-
-    public ModuleList() {
-        this.moduleList = new ArrayList<>();
     }
 
     public void add(Module module) {

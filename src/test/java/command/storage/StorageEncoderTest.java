@@ -25,7 +25,7 @@ class StorageEncoderTest {
         modules.add(new Module("CS2102"));
         modules.add(new Module("CS2112"));
         modules.add(new Module("CS2132"));
-        StorageEncoder.encodeModuleListToJson(modules);
+        StorageEncoder.encodeAndSaveModuleListToJson(modules);
         assertTrue(Files.exists(FILE_PATH));
         try {
             String fileContent = Files.readString(FILE_PATH);

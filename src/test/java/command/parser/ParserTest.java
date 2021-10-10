@@ -1,4 +1,4 @@
-package command.storage;
+package command.parser;
 
 import command.Parser;
 import org.junit.jupiter.api.Test;

@@ -1,16 +1,13 @@
 package command;
 
+import command.storage.StorageDecoder;
 import command.storage.StorageEncoder;
 import module.ModuleList;
 
 import java.util.Scanner;
 
 public class NoCap {
-    private final StorageEncoder storage;
-    public static ModuleList moduleList = new ModuleList();
-    public NoCap() {
-        storage = new StorageEncoder();
-    }
+    public static ModuleList moduleList = StorageDecoder.decodeJsonToModuleList();
 
     private void run() {
         Ui.printStartMessage();

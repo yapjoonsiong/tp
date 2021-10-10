@@ -1,4 +1,7 @@
-package command;
+package task;
+
+import command.Parser;
+import command.Ui;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,7 @@ public class TaskList {
 
     public void delete(Task task) {
         taskList.remove(task);
+        this.taskCount = taskList.size();
     }
 
     private static String getDate(String description) {
@@ -72,6 +76,7 @@ public class TaskList {
             String description = removeDate(userInput);
             Task newTask = new Task(description, date);
             this.taskList.add(taskCount, newTask);
+            this.taskCount = taskList.size();
         }
     }
 

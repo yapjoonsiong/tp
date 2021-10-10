@@ -1,12 +1,13 @@
 package command;
 
 import command.storage.StorageEncoder;
+import module.ModuleList;
 
 import java.util.Scanner;
 
 public class NoCap {
     private final StorageEncoder storage;
-
+    public static ModuleList moduleList = new ModuleList();
     public NoCap() {
         storage = new StorageEncoder();
     }

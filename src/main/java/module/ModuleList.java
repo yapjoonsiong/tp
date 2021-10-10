@@ -37,6 +37,20 @@ public class ModuleList {
         return this.moduleList.get(index);
     }
 
+    public Module find(String input) {
+        String moduleName = input.trim();
+        int index = -1;
+        for (int i = 0; i < moduleList.size(); i++) {
+            if (Objects.equals(moduleList.get(i).moduleName, moduleName)) {
+                index = i;
+            }
+        }
+        if (index == -1) {
+            throw new ArrayIndexOutOfBoundsException("Unable to find task");
+        }
+        return moduleList.get(index);
+    }
+
     public void printModules() {
         for (int i = 0; i < moduleList.size(); i++) {
             System.out.println(i + 1);

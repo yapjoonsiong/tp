@@ -49,7 +49,7 @@ public class Parser {
         splitInput(line);
         switch (taskType) {
         case HELP:
-            //print help Ui
+            Ui.printHelpMessage();
             logger.log(Level.INFO, "Help Test");
             break;
         case ADD:

@@ -17,8 +17,8 @@ public class TaskTest {
     void getStatusIcon_success(){
         Task task = new Task("Submit Assignment 1", "19th September 2021");
         task.markDone();
-        task.getStatusIcon();
-        assertEquals("[X] ", task.getStatusIcon());
+        task.statusIcon();
+        assertEquals("[X] ", task.statusIcon());
     }
     @Test
     void getDescription_success(){

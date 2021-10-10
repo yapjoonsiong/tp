@@ -19,8 +19,8 @@ public class TaskTest {
     void getStatusIcon_success() {
         Task task = new Task("Submit Assignment 1", "19th September 2021");
         task.markDone();
-        task.statusIcon();
-        assertEquals("[X] ", task.statusIcon());
+        task.createStatusIcon();
+        assertEquals("[X] ", task.createStatusIcon());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class TaskTest {
     @Test
     void getDate_success() {
         Task task = new Task("Submit Assignment 1", "19th September 2021");
-        assertEquals(" by: 19th September 2021", task.getDate());
+        assertEquals("19th September 2021", task.getDate());
     }
 
     @Test
@@ -54,6 +54,6 @@ public class TaskTest {
     void setDate_success() {
         Task task = new Task("Submit Assignment 1", "19th September 2021");
         task.setDate("20th October 2021");
-        assertEquals(" by: 20th October 2021", task.getDate());
+        assertEquals("20th October 2021", task.getDate());
     }
 }

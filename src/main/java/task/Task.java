@@ -55,11 +55,11 @@ public class Task {
         this.isDone = true;
     }
 
-    public String statusIcon() {
+    public String createStatusIcon() {
         return "[" + (isDone ? "X" : " ") + "] ";
     }
 
     public String toString() {
-        return statusIcon() + getDescription() + " by: " + getDate();
+        return createStatusIcon() + getDescription() + " by: " + getDate();
     }
 }

@@ -102,10 +102,12 @@ public class Module {
         this.credits = credits;
     }
 
+    @Override
     public String toString() {
+        String sList = this.scheduleList.toString();
         return "Module name: " + moduleName
                 + "\nCredits: " + credits
-                + "\nSchedule: \n" + scheduleList
+                + "\nSchedule: \n" + scheduleList.toString().substring(1, sList.length() - 1)
                 + "\nGrade: " + letterGrade
                 + "\nTasks: " + taskList;
     }

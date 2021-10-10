@@ -9,7 +9,8 @@ import java.util.Collections;
 import java.util.List;
 
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
 
 public class TaskListTest {
@@ -36,15 +37,16 @@ public class TaskListTest {
         tasks.addTask("Return Book /by Tuesday");
         assertEquals(2, tasks.getTaskCount());
     }
+
     @Test
     void getTaskList_success() {
         TaskList a = new TaskList();
         TaskList b = new TaskList();
-        ArrayList<Task> list = new ArrayList<>();
         a.addTask("Read Book A /by Monday");
         a.addTask("Read Book B /by Friday");
         b.addTask("Buy Book A /by Tuesday");
         b.addTask("Buy Book B /by Wednesday");
+        ArrayList<Task> list = new ArrayList<>();
         list.addAll(a.getTaskList());
         list.addAll(b.getTaskList());
         assertEquals(4, list.size());
@@ -68,12 +70,14 @@ public class TaskListTest {
         assertEquals("[ ] Buy Book B by: Wednesday", a.get(1).toString());
 
     }
+
     @Test
     void setTaskCount_success() {
         TaskList a = new TaskList();
         a.setTaskCount(10);
         assertEquals(10, a.getTaskCount());
     }
+
     @Test
     void delete_success() {
         TaskList a = new TaskList();
@@ -84,6 +88,7 @@ public class TaskListTest {
         a.delete(a.get(0));
         assertEquals("[ ] Read Book B by: Friday", a.get(0).toString());
     }
+
     @Test
     void printTaskList_success() {
         TaskList a = new TaskList();
@@ -97,9 +102,9 @@ public class TaskListTest {
         // Print some output: goes to your special stream
         a.printTaskList("Read");
         List<String> actualLines = List.of(read.toString().split("/n"));
-        List<String> expectedLines = Collections.singletonList("The tasks in Read are: " + System.lineSeparator() +
-                "1.[ ] Read Book A by: Monday" + System.lineSeparator() +
-                "2.[ ] Read Book B by: Friday" + System.lineSeparator());
+        List<String> expectedLines = Collections.singletonList("The tasks in Read are: " + System.lineSeparator()
+                + "1.[ ] Read Book A by: Monday" + System.lineSeparator()
+                + "2.[ ] Read Book B by: Friday" + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 }

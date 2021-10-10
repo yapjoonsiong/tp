@@ -20,6 +20,9 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
+    public int size() {
+        return this.taskList.size();
+    }
 
     //Setters
     public void setTaskList(ArrayList<Task> taskList) {

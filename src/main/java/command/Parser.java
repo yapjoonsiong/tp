@@ -1,6 +1,7 @@
 package command;
 
-import module.ModuleList;
+import module.Module;
+import module.Schedule;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -57,7 +58,8 @@ public class Parser {
                 Ui.missingDescription();
                 break;
             }
-            //add module
+            Module module = new Module(taskDescription);
+            NoCap.moduleList.add(module);
             logger.log(Level.INFO, "Add Test");
             break;
         case DELETE:
@@ -65,16 +67,24 @@ public class Parser {
                 Ui.missingDescription();
                 break;
             }
-            //delete module
+            int moduleIndex = Integer.parseInt(taskDescription) - 1;
+            NoCap.moduleList.delete(NoCap.moduleList.get(moduleIndex));
             logger.log(Level.INFO, "Delete Test");
             break;
         case LIST:
             if (taskDescription.equals(TASK)) {
                 //list task
+                for (int i = 0; i < NoCap.moduleList.size(); i++) {
+                    System.out.println((i + 1) + ". " + NoCap.moduleList.get(i).getModuleName());
+                    for (int j = 0; j < NoCap.moduleList.get(i).taskList.size(); j++) {
+                        System.out.println("\t" + (j + 1) + ". " + NoCap.moduleList.get(i).getTaskList().get(j));
+                    }
+                }
                 logger.log(Level.INFO, "List Task Test");
                 break;
             }
             if (taskDescription.equals(MODULE)) {
+                NoCap.moduleList.printModules();
                 //list module
                 logger.log(Level.INFO, "List Module Test");
                 break;
@@ -83,6 +93,7 @@ public class Parser {
             break;
         case TIMETABLE:
             //show timetable
+            NoCap.moduleList.printTimeTable();
             logger.log(Level.INFO, "Timetable Test");
             break;
         case EXIT:
@@ -125,7 +136,9 @@ public class Parser {
                 Ui.missingDescription();
                 break;
             }
-            //moduleName -> addclass method
+            String[] scheduleInfo = taskDescription.split("/");
+            Schedule schedule = new Schedule (scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
+            NoCap.moduleList.find(moduleName).addClass(schedule);
             logger.log(Level.INFO, "AddClass test");
             break;
         case ADDTASK:
@@ -137,15 +150,16 @@ public class Parser {
                 Ui.invalidDate();
                 break;
             }
-            tasks.addTask(taskDescription);
-            Ui.addTaskMessage(tasks.taskList.get(tasks.getTaskCount()), this.moduleName);
+            NoCap.moduleList.find(moduleName).addTask(taskDescription);
+           // tasks.addTask(taskDescription);
+            Ui.addTaskMessage(NoCap.moduleList.find(moduleName).taskList.get(tasks.getTaskCount()), this.moduleName);
             break;
         case ADDGRADE:
             if (taskDescription.isEmpty()) {
                 Ui.missingDescription();
                 break;
             }
-            //moduleName -> addgrade method
+            NoCap.moduleList.find(moduleName).addGrade(taskDescription);
             logger.log(Level.INFO, "AddGrade test");
             break;
         case DELETECLASS:
@@ -157,6 +171,7 @@ public class Parser {
             logger.log(Level.INFO, "DeleteTask test");
             break;
         case DELETEGRADE:
+            NoCap.moduleList.find(moduleName).deleteGrade();
             //moduleName -> deletegrade method
             logger.log(Level.INFO, "DeleteGrade test");
             break;

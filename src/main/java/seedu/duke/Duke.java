@@ -19,14 +19,9 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
 
-        //Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
 
-        //System.out.println("Hello " + in.nextLine());
-
-        Module m = new Module("cs2113T");
-        String start = "0800";
-        m.addClass(new Schedule("WED", start, "E1-01", "week 1,3,5,7,9"));
-        System.out.println(m);
+        System.out.println("Hello " + in.nextLine());
     }
 
 }

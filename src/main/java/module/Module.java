@@ -10,7 +10,7 @@ public class Module {
     protected String letterGrade;
     protected String moduleName;
     protected Schedule schedule;
-    protected TaskList taskList;
+    public TaskList taskList;
     private ArrayList<Schedule> scheduleList;
     protected int credits;
 
@@ -88,6 +88,10 @@ public class Module {
 
     public void addGrade(String letterGrade) {
         this.letterGrade = letterGrade;
+    }
+
+    public void deleteGrade() {
+        this.letterGrade = null;
     }
 
     public void addClass(Schedule schedule) {

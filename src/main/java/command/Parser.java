@@ -1,6 +1,7 @@
 package command;
 
-import task.TaskList;
+import module.Module;
+import module.Schedule;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -48,55 +49,65 @@ public class Parser {
     public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {
-        case HELP:
-            Ui.printHelpMessage();
-            logger.log(Level.INFO, "Help Test");
-            break;
-        case ADD:
-            if (taskDescription.isEmpty()) {
+            case HELP:
+                Ui.printHelpMessage();
+                logger.log(Level.INFO, "Help Test");
+                break;
+            case ADD:
+                if (taskDescription.isEmpty()) {
+                    Ui.missingDescription();
+                    break;
+                }
+                Module module = new Module(taskDescription);
+                NoCap.moduleList.add(module);
+                logger.log(Level.INFO, "Add Test");
+                break;
+            case DELETE:
+                if (taskDescription.isEmpty()) {
+                    Ui.missingDescription();
+                    break;
+                }
+                int moduleIndex = Integer.parseInt(taskDescription) - 1;
+                NoCap.moduleList.delete(NoCap.moduleList.get(moduleIndex));
+                logger.log(Level.INFO, "Delete Test");
+                break;
+            case LIST:
+                if (taskDescription.equals(TASK)) {
+                    //list task
+                    for (int i = 0; i < NoCap.moduleList.size(); i++) {
+                        System.out.println((i + 1) + ". " + NoCap.moduleList.get(i).getModuleName());
+                        for (int j = 0; j < NoCap.moduleList.get(i).taskList.size(); j++) {
+                            System.out.println("\t" + (j + 1) + ". " + NoCap.moduleList.get(i).getTaskList().get(j));
+                        }
+                    }
+                    logger.log(Level.INFO, "List Task Test");
+                    break;
+                }
+                if (taskDescription.equals(MODULE)) {
+                    NoCap.moduleList.printModules();
+                    //list module
+                    logger.log(Level.INFO, "List Module Test");
+                    break;
+                }
                 Ui.missingDescription();
                 break;
-            }
-            //add module
-            logger.log(Level.INFO, "Add Test");
-            break;
-        case DELETE:
-            if (taskDescription.isEmpty()) {
-                Ui.missingDescription();
+            case TIMETABLE:
+                //show timetable
+                NoCap.moduleList.printTimeTable();
+                logger.log(Level.INFO, "Timetable Test");
                 break;
-            }
-            //delete module
-            logger.log(Level.INFO, "Delete Test");
-            break;
-        case LIST:
-            if (taskDescription.equals(TASK)) {
-                //list task
-                logger.log(Level.INFO, "List Task Test");
+            case EXIT:
+                //Ui print exit message
+                logger.log(Level.INFO, "Exit Test");
+                this.isExit = true;
                 break;
-            }
-            if (taskDescription.equals(MODULE)) {
-                //list module
-                logger.log(Level.INFO, "List Module Test");
+            case MODULETYPE:
+                //the functions that are module specific
+                moduleParser(taskDescription);
                 break;
-            }
-            Ui.missingDescription();
-            break;
-        case TIMETABLE:
-            //show timetable
-            logger.log(Level.INFO, "Timetable Test");
-            break;
-        case EXIT:
-            //Ui print exit message
-            logger.log(Level.INFO, "Exit Test");
-            this.isExit = true;
-            break;
-        case MODULETYPE:
-            //the functions that are module specific
-            moduleParser(taskDescription);
-            break;
-        default:
-            logger.log(Level.INFO, "Invalid Input!");
-            break;
+            default:
+                logger.log(Level.INFO, "Invalid Input!");
+                break;
         }
     }
 
@@ -120,49 +131,53 @@ public class Parser {
         splitInput(taskDescription);
 
         switch (taskType) {
-        case ADDCLASS:
-            if (taskDescription.isEmpty()) {
-                Ui.missingDescription();
+            case ADDCLASS:
+                if (taskDescription.isEmpty()) {
+                    Ui.missingDescription();
+                    break;
+                }
+                String[] scheduleInfo = taskDescription.split("/");
+                Schedule schedule = new Schedule (scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
+                NoCap.moduleList.find(moduleName).addClass(schedule);
+                logger.log(Level.INFO, "AddClass test");
                 break;
-            }
-            //moduleName -> addclass method
-            logger.log(Level.INFO, "AddClass test");
-            break;
-        case ADDTASK:
-            if (taskDescription.isEmpty()) {
-                Ui.missingDescription();
+            case ADDTASK:
+                if (taskDescription.isEmpty()) {
+                    Ui.missingDescription();
+                    break;
+                }
+                if (!taskDescription.contains(START_OF_DATE)) {
+                    Ui.invalidDate();
+                    break;
+                }
+                NoCap.moduleList.find(moduleName).addTask(taskDescription);
+                // tasks.addTask(taskDescription);
+                Ui.addTaskMessage(NoCap.moduleList.find(moduleName).taskList.get(tasks.getTaskCount()), this.moduleName);
                 break;
-            }
-            if (!taskDescription.contains(START_OF_DATE)) {
-                Ui.invalidDate();
+            case ADDGRADE:
+                if (taskDescription.isEmpty()) {
+                    Ui.missingDescription();
+                    break;
+                }
+                NoCap.moduleList.find(moduleName).addGrade(taskDescription);
+                logger.log(Level.INFO, "AddGrade test");
                 break;
-            }
-            tasks.addTask(taskDescription);
-            Ui.addTaskMessage(tasks.get(tasks.getTaskCount()), this.moduleName);
-            break;
-        case ADDGRADE:
-            if (taskDescription.isEmpty()) {
-                Ui.missingDescription();
+            case DELETECLASS:
+                //moduleName -> deleteclass method
+                logger.log(Level.INFO, "DeleteClass test");
                 break;
-            }
-            //moduleName -> addgrade method
-            logger.log(Level.INFO, "AddGrade test");
-            break;
-        case DELETECLASS:
-            //moduleName -> deleteclass method
-            logger.log(Level.INFO, "DeleteClass test");
-            break;
-        case DELETETASK:
-            //moduleName -> deletetask method
-            logger.log(Level.INFO, "DeleteTask test");
-            break;
-        case DELETEGRADE:
-            //moduleName -> deletegrade method
-            logger.log(Level.INFO, "DeleteGrade test");
-            break;
-        default:
-            System.out.println("Invalid Input!");
-            break;
+            case DELETETASK:
+                //moduleName -> deletetask method
+                logger.log(Level.INFO, "DeleteTask test");
+                break;
+            case DELETEGRADE:
+                NoCap.moduleList.find(moduleName).deleteGrade();
+                //moduleName -> deletegrade method
+                logger.log(Level.INFO, "DeleteGrade test");
+                break;
+            default:
+                System.out.println("Invalid Input!");
+                break;
         }
     }
 

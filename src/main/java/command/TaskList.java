@@ -12,15 +12,32 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+    //Getters
     public int getTaskCount() {
         return taskCount;
     }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
+
+    //Setters
+    public void setTaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    public void setTaskCount(int taskCount) {
+        this.taskCount = taskCount;
+    }
+
     public Task get(int index) {
         return this.taskList.get(index);
     }
+
     public void delete(Task task) {
         taskList.remove(task);
     }
+
     private static String getDate(String description) {
         try {
             int datePos = description.indexOf(Parser.START_OF_DATE);
@@ -40,10 +57,9 @@ public class TaskList {
     }
 
     /**
-     * Create a new Task object and add it to the tasks list
+     * Create a new Task object and add it to the tasks list.
      *
      * @param userInput task description input by user
-     *
      */
     public void addTask(String userInput) {
         String date = getDate(userInput);
@@ -55,6 +71,7 @@ public class TaskList {
             this.taskList.add(taskCount, newTask);
         }
     }
+
     public void printTaskList(String module) {
         int index = 1;
         Ui.printTaskList(module);
@@ -65,6 +82,11 @@ public class TaskList {
                 index++;
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return taskList.toString();
     }
 }
 

@@ -1,7 +1,11 @@
 package command;
 
+import module.ModuleList;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Parser {
 
@@ -28,18 +32,25 @@ public class Parser {
     static String taskDescription;
     protected String moduleName;
     protected boolean isExit;
+    private static Logger logger = Logger.getLogger(Parser.class.getName());
     public static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     public static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
 
     public Parser() {
         this.isExit = false;
     }
+
+    /**
+     * Method to process user command.
+     *
+     * @param line User input
+     */
     public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {
         case HELP:
             //print help Ui
-            System.out.println("Help Test");
+            logger.log(Level.INFO, "Help Test");
             break;
         case ADD:
             if (taskDescription.isEmpty()) {
@@ -47,7 +58,7 @@ public class Parser {
                 break;
             }
             //add module
-            System.out.println("Add Test");
+            logger.log(Level.INFO, "Add Test");
             break;
         case DELETE:
             if (taskDescription.isEmpty()) {
@@ -55,28 +66,28 @@ public class Parser {
                 break;
             }
             //delete module
-            System.out.println("Delete Test");
+            logger.log(Level.INFO, "Delete Test");
             break;
         case LIST:
             if (taskDescription.equals(TASK)) {
                 //list task
-                System.out.println("List Task Test");
+                logger.log(Level.INFO, "List Task Test");
                 break;
             }
             if (taskDescription.equals(MODULE)) {
                 //list module
-                System.out.println("List Module Test");
+                logger.log(Level.INFO, "List Module Test");
                 break;
             }
             Ui.missingDescription();
             break;
         case TIMETABLE:
             //show timetable
-            System.out.println("Timetable Test");
+            logger.log(Level.INFO, "Timetable Test");
             break;
         case EXIT:
             //Ui print exit message
-            System.out.println("Exit Test");
+            logger.log(Level.INFO, "Exit Test");
             this.isExit = true;
             break;
         case MODULETYPE:
@@ -84,10 +95,9 @@ public class Parser {
             moduleParser(taskDescription);
             break;
         default:
-            System.out.println("Invalid Input!");
+            logger.log(Level.INFO, "Invalid Input!");
             break;
         }
-
     }
 
     /**
@@ -96,13 +106,12 @@ public class Parser {
      *
      * @param input String to be separated
      */
-
-     void moduleParser(String input) {
+    void moduleParser(String input) {
         splitInput(input);
         this.moduleName = taskType;
         //access module tasklist
-         TaskList tasks = new TaskList();
-        System.out.println("Module: " + moduleName);
+        TaskList tasks = new TaskList();
+        logger.log(Level.INFO, "Module: " + moduleName);
 
         if (taskDescription.isEmpty()) {
             Ui.missingDescription();
@@ -117,7 +126,7 @@ public class Parser {
                 break;
             }
             //moduleName -> addclass method
-            System.out.println("AddClass test");
+            logger.log(Level.INFO, "AddClass test");
             break;
         case ADDTASK:
             if (taskDescription.isEmpty()) {
@@ -137,19 +146,19 @@ public class Parser {
                 break;
             }
             //moduleName -> addgrade method
-            System.out.println("AddGrade test");
+            logger.log(Level.INFO, "AddGrade test");
             break;
         case DELETECLASS:
             //moduleName -> deleteclass method
-            System.out.println("DeleteClass test");
+            logger.log(Level.INFO, "DeleteClass test");
             break;
         case DELETETASK:
             //moduleName -> deletetask method
-            System.out.println("DeleteTask test");
+            logger.log(Level.INFO, "DeleteTask test");
             break;
         case DELETEGRADE:
             //moduleName -> deletegrade method
-            System.out.println("DeleteGrade test");
+            logger.log(Level.INFO, "DeleteGrade test");
             break;
         default:
             System.out.println("Invalid Input!");
@@ -163,11 +172,10 @@ public class Parser {
             int typePos = input.indexOf(SPACE_STRING);
             taskType = input.substring(0, typePos);
             taskDescription = input.substring(typePos).trim();
-        }
-        //no space in input string
-        catch (StringIndexOutOfBoundsException e) {
-            taskType = input;
+        } catch (StringIndexOutOfBoundsException e) {
+            taskType = input.trim();
             taskDescription = EMPTY_STRING;
+            assert (taskType.equals(input.trim()));
         }
     }
 
@@ -182,8 +190,17 @@ public class Parser {
     public boolean isExit() {
         return this.isExit;
     }
+
     public String getModuleName() {
-         return this.moduleName;
+        return this.moduleName;
+    }
+
+    public String getTaskType() {
+        return taskType;
+    }
+
+    public String getTaskDescription() {
+        return taskDescription;
     }
 
 }

@@ -5,9 +5,7 @@ public class Task {
     protected boolean isDone;
     protected String date;
 
-    public boolean isDone() {
-        return isDone;
-    }
+
 
 
     /**
@@ -28,16 +26,16 @@ public class Task {
     }
 
     //Getters
-    public String getStatusIcon() {
-        return "[" + (isDone ? "X" : " ") + "] ";
-    }
-
     public String getDescription() {
         return this.description;
     }
 
     public String getDate() {
-        return " by: " + this.date;
+        return this.date;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     //Setters
@@ -57,7 +55,11 @@ public class Task {
         this.isDone = true;
     }
 
+    public String createStatusIcon() {
+        return "[" + (isDone ? "X" : " ") + "] ";
+    }
+
     public String toString() {
-        return getStatusIcon() + getDescription() + getDate();
+        return createStatusIcon() + getDescription() + " by: " + getDate();
     }
 }

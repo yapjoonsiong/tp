@@ -1,9 +1,12 @@
 package command.storage;
 
+import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import command.Ui;
 import module.ModuleList;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,13 +20,19 @@ public class StorageDecoder {
         ObjectMapper objectMapper = new ObjectMapper();
         ModuleList modules = new ModuleList();
         if (!Files.exists(FILE_PATH)) {
+            Ui.printNoSaveFileMessage();
+            assert modules.getModuleList().size() == 0;
             return modules;
         }
         try {
             modules = objectMapper.readValue(new File(FILE_PATH.toString()), ModuleList.class);
+            Ui.loadFileSuccessful();
+        } catch (DatabindException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error reading save file");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            //TODO: Add catch blocks for each exception
         }
         return modules;
     }

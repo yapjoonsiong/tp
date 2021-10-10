@@ -16,7 +16,7 @@ public class StorageEncoder {
     private static final Path FILE_PATH = Paths.get(ROOT, "data", "data.json");
     private static final Path DIRECTORY_PATH = Paths.get(ROOT, "data");
 
-    public static void encodeModuleListToJson(ModuleList moduleList) {
+    public static void encodeAndSaveModuleListToJson(ModuleList moduleList) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (!Files.exists(DIRECTORY_PATH)) {

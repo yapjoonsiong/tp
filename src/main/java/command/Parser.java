@@ -143,7 +143,7 @@ public class Parser {
                 break;
             }
             String[] scheduleInfo = taskDescription.split("/");
-            Schedule schedule = new Schedule (scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
+            Schedule schedule = new Schedule(scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
             NoCap.moduleList.find(moduleName).addClass(schedule);
             logger.log(Level.INFO, "AddClass test");
             break;
@@ -157,7 +157,7 @@ public class Parser {
                 break;
             }
             NoCap.moduleList.find(moduleName).addTask(taskDescription);
-           // tasks.addTask(taskDescription);
+            //tasks.addTask(taskDescription);
             Ui.addTaskMessage(NoCap.moduleList.find(moduleName).taskList.get(tasks.getTaskCount()), this.moduleName);
             break;
         case ADDGRADE:

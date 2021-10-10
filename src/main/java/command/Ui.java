@@ -1,6 +1,8 @@
 package command;
 
 
+import task.Task;
+
 public class Ui {
 
     public static void printHelpMessage() {

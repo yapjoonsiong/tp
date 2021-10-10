@@ -58,7 +58,7 @@ public class Parser {
                 break;
             }
             //add module
-            logger.log(Level.INFO,"Add Test");
+            logger.log(Level.INFO, "Add Test");
             break;
         case DELETE:
             if (taskDescription.isEmpty()) {
@@ -66,28 +66,28 @@ public class Parser {
                 break;
             }
             //delete module
-            logger.log(Level.INFO,"Delete Test");
+            logger.log(Level.INFO, "Delete Test");
             break;
         case LIST:
             if (taskDescription.equals(TASK)) {
                 //list task
-                logger.log(Level.INFO,"List Task Test");
+                logger.log(Level.INFO, "List Task Test");
                 break;
             }
             if (taskDescription.equals(MODULE)) {
                 //list module
-                logger.log(Level.INFO,"List Module Test");
+                logger.log(Level.INFO, "List Module Test");
                 break;
             }
             Ui.missingDescription();
             break;
         case TIMETABLE:
             //show timetable
-            logger.log(Level.INFO,"Timetable Test");
+            logger.log(Level.INFO, "Timetable Test");
             break;
         case EXIT:
             //Ui print exit message
-            logger.log(Level.INFO,"Exit Test");
+            logger.log(Level.INFO, "Exit Test");
             this.isExit = true;
             break;
         case MODULETYPE:
@@ -95,7 +95,7 @@ public class Parser {
             moduleParser(taskDescription);
             break;
         default:
-            logger.log(Level.INFO,"Invalid Input!");
+            logger.log(Level.INFO, "Invalid Input!");
             break;
         }
     }
@@ -111,7 +111,7 @@ public class Parser {
         this.moduleName = taskType;
         //access module tasklist
         TaskList tasks = new TaskList();
-        logger.log(Level.INFO,"Module: " + moduleName);
+        logger.log(Level.INFO, "Module: " + moduleName);
 
         if (taskDescription.isEmpty()) {
             Ui.missingDescription();
@@ -126,7 +126,7 @@ public class Parser {
                 break;
             }
             //moduleName -> addclass method
-            logger.log(Level.INFO,"AddClass test");
+            logger.log(Level.INFO, "AddClass test");
             break;
         case ADDTASK:
             if (taskDescription.isEmpty()) {
@@ -146,19 +146,19 @@ public class Parser {
                 break;
             }
             //moduleName -> addgrade method
-            logger.log(Level.INFO,"AddGrade test");
+            logger.log(Level.INFO, "AddGrade test");
             break;
         case DELETECLASS:
             //moduleName -> deleteclass method
-            logger.log(Level.INFO,"DeleteClass test");
+            logger.log(Level.INFO, "DeleteClass test");
             break;
         case DELETETASK:
             //moduleName -> deletetask method
-            logger.log(Level.INFO,"DeleteTask test");
+            logger.log(Level.INFO, "DeleteTask test");
             break;
         case DELETEGRADE:
             //moduleName -> deletegrade method
-            logger.log(Level.INFO,"DeleteGrade test");
+            logger.log(Level.INFO, "DeleteGrade test");
             break;
         default:
             System.out.println("Invalid Input!");
@@ -175,7 +175,7 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             taskType = input.trim();
             taskDescription = EMPTY_STRING;
-            assert(taskType.equals(input.trim()));
+            assert (taskType.equals(input.trim()));
         }
     }
 

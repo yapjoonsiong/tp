@@ -1,9 +1,13 @@
 package module;
 
 
+import command.storage.StorageDecoder;
+import task.Task;
 import task.TaskList;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Module {
@@ -13,10 +17,12 @@ public class Module {
     public TaskList taskList;
     private ArrayList<Schedule> scheduleList;
     protected int credits;
+    private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
 
     public Module(String moduleName) {
+        assert !moduleName.equals("");
         this.moduleName = moduleName;
-        this.letterGrade = null;
+        this.letterGrade = "-";
         this.scheduleList = new ArrayList<Schedule>();
         this.credits = 0;
         this.taskList = new TaskList();
@@ -83,6 +89,7 @@ public class Module {
     }
 
     public Schedule get(int index) {
+        assert index > 0;
         return this.scheduleList.get(index);
     }
 
@@ -101,8 +108,10 @@ public class Module {
     //overloading to take in String input * Added by jiexiong to keep Parser clean
     public void addClass(String input) {
         String[] scheduleInfo = input.split("/");
+        assert scheduleInfo.length == 4;
         Schedule schedule = new Schedule(scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
         this.scheduleList.add(schedule);
+        logger.log(Level.INFO,"Schedule added successfully");
     }
 
     public void addTask(String userInput) {
@@ -119,11 +128,21 @@ public class Module {
 
     @Override
     public String toString() {
-        String stringList = this.scheduleList.toString();
+        int index  = 1;
+        String schedulePrint = new String();
+        for (Schedule s : scheduleList) {
+            if (s != null) {
+                schedulePrint = schedulePrint + String.valueOf(index) + ".\n";
+                schedulePrint = schedulePrint + s.toString() + "\n" ;
+                index++;
+            }
+        }
         return "Module name: " + moduleName
-                + "\nCredits: " + credits
-                + "\nSchedule: \n" + scheduleList.toString().substring(1, stringList.length() - 1)
-                + "\nGrade: " + letterGrade
-                + "\nTasks: " + taskList;
+                + "\nCREDITS: " + credits
+                + "\n--------------------------- "
+                + "\nSCHEDULE: \n" + schedulePrint
+                + "--------------------------- "
+                + "\nGRADE: " + letterGrade
+                + "\nTASKS: " + taskList;
     }
 }

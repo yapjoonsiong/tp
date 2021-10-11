@@ -68,10 +68,10 @@ Examples:
 
 ## Add class : `/m <module> addclass`
 Adds a class to a module  
-Format: `MODULENAME addclass DESCRIPTION /on DAY /at PERIOD`  
+Format: `MODULENAME addclass DAY/STARTIME/LOCATON/COMMENTS`  
 Examples:
-* `CS2113 addclass tutorial /on Wednesday /at 2300`
-* `MA1508 addclass lecture /on Monday /at 1200`
+* `CS2113 addclass MON/0800/E4-02/LAB`
+* `MA1508 addclass WED/1000/ZOOM/TUTORIAL`
 
 ## Add task : `/m <module> addtask `
 Adds a task to a module  

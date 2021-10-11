@@ -1,5 +1,7 @@
 package module;
 
+import command.NoCap;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -25,8 +27,20 @@ public class ModuleList {
         this.moduleList.add(module);
     }
 
+    //overloading to take in String input * Added by jiexiong to keep Parser clean
+    public void add(String input) {
+        Module module = new Module(input);
+        this.moduleList.add(module);
+    }
+
     public void delete(Module module) {
         moduleList.remove(module);
+    }
+
+    //overloading to take in String input * Added by jiexiong to keep Parser clean
+    public void delete(String input) {
+        int moduleIndex = Integer.parseInt(input) - 1;
+        moduleList.remove(get(moduleIndex));
     }
 
     public int size() {

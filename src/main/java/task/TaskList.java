@@ -2,11 +2,9 @@ package task;
 
 import command.Parser;
 import command.Ui;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -95,24 +93,16 @@ public class TaskList {
         }
     }
 
-    public static Comparator<Task> sortByDate = new Comparator<Task>() {
-        @Override
-        public int compare(Task t1, Task t2) {
-            return t1.deadline.compareTo(t2.deadline);
-        }
-    };
+    public static Comparator<Task> sortByDate = Comparator.comparing(t -> t.deadline);
 
-    public static Comparator<Task> sortByStatus = new Comparator<Task>() {
-        @Override
-        public int compare(Task t1, Task t2) {
-            if (t1.isDone && !t2.isDone) {
-                return -1;
-            }
-            if (!t1.isDone && t2.isDone) {
-                return 1;
-            }
-            return 0;
+    public static Comparator<Task> sortByStatus = (t1, t2) -> {
+        if (t1.isDone && !t2.isDone) {
+            return -1;
         }
+        if (!t1.isDone && t2.isDone) {
+            return 1;
+        }
+        return 0;
     };
 
     private boolean isWeekly(Task t) {

@@ -3,6 +3,7 @@ package task;
 import command.Parser;
 import command.Ui;
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -54,7 +55,6 @@ public class TaskList {
             return EMPTY_STRING;
         }
     }
-
     private static String removeDate(String description) {
         try {
             int datePos = description.indexOf(Parser.START_OF_DATE);
@@ -69,15 +69,20 @@ public class TaskList {
      *
      * @param userInput task description input by user
      */
-    public void addTask(String userInput) {
+    public void addTask(String module, String userInput) throws DateTimeException {
         String date = getDate(userInput);
         if (date.isBlank()) {
             Ui.missingDate();
         } else {
-            String description = removeDate(userInput);
-            Task newTask = new Task(description, date);
-            this.taskList.add(taskCount, newTask);
-            this.taskCount = taskList.size();
+            try {
+                String description = removeDate(userInput);
+                Task newTask = new Task(description, date);
+                this.taskList.add(taskCount, newTask);
+                this.taskCount = taskList.size();
+                Ui.addTaskMessage(newTask, module);
+            } catch (DateTimeException e) {
+                Ui.wrongDateTimeFormat();
+            }
         }
     }
 

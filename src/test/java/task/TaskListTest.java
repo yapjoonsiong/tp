@@ -16,8 +16,8 @@ public class TaskListTest {
     @Test
     void get_success() {
         TaskList a = new TaskList();
-        a.addTask("Read Book A /by Monday");
-        a.addTask("Read Book B /by Friday");
+        a.addTask("cs1010","Read Book A /by Monday");
+        a.addTask("cs1010","Read Book B /by Friday");
         assertEquals("[ ] Read Book A by: Monday", a.get(0).toString());
         assertEquals("[ ] Read Book B by: Friday", a.get(1).toString());
     }
@@ -25,15 +25,15 @@ public class TaskListTest {
     @Test
     void addTask_success() {
         TaskList tasks = new TaskList();
-        tasks.addTask("Read Book /by Monday");
+        tasks.addTask("cs1010", "Read Book /by Monday");
         assertEquals("[ ] Read Book by: Monday", tasks.get(0).toString());
     }
 
     @Test
     void getTaskCount_success() {
         TaskList tasks = new TaskList();
-        tasks.addTask("Read Book /by Monday");
-        tasks.addTask("Return Book /by Tuesday");
+        tasks.addTask("cs1010", "Read Book /by Monday");
+        tasks.addTask("cs1010", "Return Book /by Tuesday");
         assertEquals(2, tasks.getTaskCount());
     }
 
@@ -41,10 +41,10 @@ public class TaskListTest {
     void getTaskList_success() {
         TaskList a = new TaskList();
         TaskList b = new TaskList();
-        a.addTask("Read Book A /by Monday");
-        a.addTask("Read Book B /by Friday");
-        b.addTask("Buy Book A /by Tuesday");
-        b.addTask("Buy Book B /by Wednesday");
+        a.addTask("cs1010", "Read Book A /by Monday");
+        a.addTask("cs1010", "Read Book B /by Friday");
+        b.addTask("cs1010", "Buy Book A /by Tuesday");
+        b.addTask("cs1010", "Buy Book B /by Wednesday");
         ArrayList<Task> list = new ArrayList<>();
         list.addAll(a.getTaskList());
         list.addAll(b.getTaskList());
@@ -59,10 +59,10 @@ public class TaskListTest {
     void setTaskList_success() {
         TaskList a = new TaskList();
         TaskList b = new TaskList();
-        a.addTask("Read Book A /by Monday");
-        a.addTask("Read Book B /by Friday");
-        b.addTask("Buy Book A /by Tuesday");
-        b.addTask("Buy Book B /by Wednesday");
+        a.addTask("cs1010", "Read Book A /by Monday");
+        a.addTask("cs1010", "Read Book B /by Friday");
+        b.addTask("cs1010", "Buy Book A /by Tuesday");
+        b.addTask("cs1010", "Buy Book B /by Wednesday");
         a.setTaskList(b.getTaskList());
         assertEquals(2, a.getTaskCount());
         assertEquals("[ ] Buy Book A by: Tuesday", a.get(0).toString());
@@ -80,8 +80,8 @@ public class TaskListTest {
     @Test
     void delete_success() {
         TaskList a = new TaskList();
-        a.addTask("Read Book A /by Monday");
-        a.addTask("Read Book B /by Friday");
+        a.addTask("cs1010", "Read Book A /by Monday");
+        a.addTask("cs1010", "Read Book B /by Friday");
         assertEquals("[ ] Read Book A by: Monday", a.get(0).toString());
         assertEquals("[ ] Read Book B by: Friday", a.get(1).toString());
         a.delete(a.get(0));
@@ -91,8 +91,8 @@ public class TaskListTest {
     @Test
     void printTaskList_success() {
         TaskList a = new TaskList();
-        a.addTask("Read Book A /by Monday");
-        a.addTask("Read Book B /by Friday");
+        a.addTask("cs1010", "Read Book A /by Monday");
+        a.addTask("cs1010", "Read Book B /by Friday");
         // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);

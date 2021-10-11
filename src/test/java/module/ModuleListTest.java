@@ -1,7 +1,6 @@
 package module;
-import task.TaskList;
-import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ModuleListTest {
@@ -12,6 +11,7 @@ public class ModuleListTest {
         moduleList.add(m);
         assertEquals(m, moduleList.get(0));
     }
+
     @Test
     void find_success() {
         ModuleList moduleList = new ModuleList();
@@ -19,6 +19,7 @@ public class ModuleListTest {
         moduleList.add(m);
         assertEquals(m, moduleList.find("cs2113T"));
     }
+
     @Test
     void size_success() {
         ModuleList moduleList = new ModuleList();

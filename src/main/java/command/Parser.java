@@ -157,8 +157,6 @@ public class Parser {
                 break;
             }
             NoCap.moduleList.find(moduleName).addTask(taskDescription);
-            //tasks.addTask(taskDescription);
-            Ui.addTaskMessage(NoCap.moduleList.find(moduleName).taskList.get(tasks.getTaskCount()), this.moduleName);
             break;
         case ADDGRADE:
             if (taskDescription.isEmpty()) {

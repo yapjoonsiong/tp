@@ -41,6 +41,11 @@ public class Ui {
         System.out.println("Wrong date format input");
     }
 
+    public static void wrongDateTimeFormat() {
+        System.out.println("Wrong date format input!");
+        System.out.println("Format: dd/MM/yy hhmm");
+    }
+
     public static void addTaskMessage(Task task, String moduleName) {
         System.out.println("Added new task to " + moduleName);
         System.out.println(task);

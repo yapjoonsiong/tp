@@ -133,7 +133,7 @@ public class Module {
         for (Schedule s : scheduleList) {
             if (s != null) {
                 schedulePrint = schedulePrint + String.valueOf(index) + ".\n";
-                schedulePrint = schedulePrint + s.toString() + "\n" ;
+                schedulePrint = schedulePrint + s.toString() + "\n";
                 index++;
             }
         }

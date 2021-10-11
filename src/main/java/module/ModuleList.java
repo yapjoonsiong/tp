@@ -89,7 +89,6 @@ public class ModuleList {
                 if (Objects.equals(moduleList.get(i).get(j).getDay(), day)
                         && Objects.equals(moduleList.get(i).get(j).getStartTime(), timeString)) {
                     moduleIndex = i;
-                    //i = moduleList.size();
                     break;
                 }
             }

@@ -98,12 +98,23 @@ public class Module {
         this.scheduleList.add(schedule);
     }
 
+    //overloading to take in String input * Added by jiexiong to keep Parser clean
+    public void addClass(String input) {
+        String[] scheduleInfo = input.split("/");
+        Schedule schedule = new Schedule(scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
+        this.scheduleList.add(schedule);
+    }
+
     public void addTask(String userInput) {
         this.taskList.addTask(this.moduleName, userInput);
     }
 
     public void addCredits(int credits) {
         this.credits = credits;
+    }
+
+    public void showInformation() {
+        System.out.println(toString());
     }
 
     @Override

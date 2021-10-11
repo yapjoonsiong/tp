@@ -52,7 +52,19 @@ public class Ui {
     }
 
     public static void printTaskList(String module) {
-        System.out.println("The tasks in " + module + " are: ");
+        System.out.println("The tasks due in " + module + " are: ");
+    }
+
+    public static void printWeeklyTaskList(String module) {
+        System.out.println("The tasks due within 7 days in " + module + " are: ");
+    }
+
+    public static void printMonthlyTaskList(String module) {
+        System.out.println("The tasks due within a month in " + module + " are: ");
+    }
+
+    public static void printYearlyTaskList(String module) {
+        System.out.println("The tasks due within a year in " + module + " are: ");
     }
 
     public static void loadFileSuccessful() {

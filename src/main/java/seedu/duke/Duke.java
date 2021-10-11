@@ -1,10 +1,5 @@
 package seedu.duke;
 
-import command.Parser;
-import module.ModuleList;
-import module.Module;
-import module.Schedule;
-
 import java.util.Scanner;
 
 public class Duke {
@@ -23,5 +18,4 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
     }
-
 }

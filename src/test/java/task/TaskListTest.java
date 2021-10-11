@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
 
 public class TaskListTest {
+
     @Test
     void get_success() {
         TaskList a = new TaskList();
@@ -92,8 +93,10 @@ public class TaskListTest {
     @Test
     void printTaskList_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010","Read Book A /by 12/12/2021 1600");
+        a.addTask("cs1010","Read Book C /by 14/12/2021 1600");
         a.addTask("cs1010","Read Book B /by 13/12/2021 1600");
+        a.addTask("cs1010","Read Book A /by 12/12/2021 1600");
+        a.addTask("cs1010","Read Book D /by 12/12/2021 1100");
         // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);
@@ -103,8 +106,10 @@ public class TaskListTest {
         a.printTaskList("Read");
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList("The tasks in Read are: " + System.lineSeparator()
-                + "1.[ ] Read Book A by: 12 Dec 2021 04:00 PM" + System.lineSeparator()
-                + "2.[ ] Read Book B by: 13 Dec 2021 04:00 PM" + System.lineSeparator());
+                + "1.[ ] Read Book D by: 12 Dec 2021 11:00 AM" + System.lineSeparator()
+                + "2.[ ] Read Book A by: 12 Dec 2021 04:00 PM" + System.lineSeparator()
+                + "3.[ ] Read Book B by: 13 Dec 2021 04:00 PM" + System.lineSeparator()
+                + "4.[ ] Read Book C by: 14 Dec 2021 04:00 PM" + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 }

@@ -59,6 +59,7 @@ public class Task {
     public void setDeadline(String date) {
         this.deadline = Parser.parseDate(date);
     }
+
     public String getDeadline() {
         return Parser.dateStringOutput(this.deadline);
     }
@@ -70,6 +71,7 @@ public class Task {
     public String createStatusIcon() {
         return "[" + (isDone ? "X" : " ") + "] ";
     }
+
     public String toString() {
         return  createStatusIcon() + getDescription() + " by: " + getDeadline();
     }

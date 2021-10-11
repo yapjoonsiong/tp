@@ -55,6 +55,7 @@ public class TaskList {
             return EMPTY_STRING;
         }
     }
+
     private static String removeDate(String description) {
         try {
             int datePos = description.indexOf(Parser.START_OF_DATE);

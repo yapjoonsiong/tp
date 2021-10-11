@@ -1,12 +1,14 @@
 package command;
 
 
+import task.Task;
+
 public class Ui {
 
     public static void printHelpMessage() {
         System.out.println("Display help messages: help");
-        System.out.println("Add Module: Add <module>");
-        System.out.println("Delete Module: Delete <Module>");
+        System.out.println("Add Module: add <module>");
+        System.out.println("Delete Module: delete <Module>");
         System.out.println("List tasks: list task");
         System.out.println("List modules: list module");
         System.out.println("Show timetable: timetable");
@@ -39,12 +41,37 @@ public class Ui {
         System.out.println("Wrong date format input");
     }
 
+    public static void wrongDateTimeFormat() {
+        System.out.println("Wrong date format input!");
+        System.out.println("Format: dd/MM/yy hhmm");
+    }
+
     public static void addTaskMessage(Task task, String moduleName) {
         System.out.println("Added new task to " + moduleName);
         System.out.println(task);
     }
 
     public static void printTaskList(String module) {
-        System.out.println("The tasks in " + module + " are: ");
+        System.out.println("The tasks due in " + module + " are: ");
+    }
+
+    public static void printWeeklyTaskList(String module) {
+        System.out.println("The tasks due within 7 days in " + module + " are: ");
+    }
+
+    public static void printMonthlyTaskList(String module) {
+        System.out.println("The tasks due within a month in " + module + " are: ");
+    }
+
+    public static void printYearlyTaskList(String module) {
+        System.out.println("The tasks due within a year in " + module + " are: ");
+    }
+
+    public static void loadFileSuccessful() {
+        System.out.println("Modules loaded successfully");
+    }
+
+    public static void printNoSaveFileMessage() {
+        System.out.println("No save file found, starting with an empty template");
     }
 }

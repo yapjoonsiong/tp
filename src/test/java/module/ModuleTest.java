@@ -1,6 +1,6 @@
 package module;
 
-import command.TaskList;
+import task.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,7 +25,7 @@ class ModuleTest {
         Module m = new Module("cs2113T");
         m.addTask("read /by 1800");
         TaskList taskList = new TaskList();
-        taskList.addTask("read /by 1800");
+        taskList.addTask("cs2113T", "read /by 1800");
         assertEquals(taskList.toString(), m.getTaskList().toString());
     }
 

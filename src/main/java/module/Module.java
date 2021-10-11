@@ -1,7 +1,7 @@
 package module;
 
 
-import command.TaskList;
+import task.TaskList;
 
 import java.util.ArrayList;
 
@@ -99,7 +99,7 @@ public class Module {
     }
 
     public void addTask(String userInput) {
-        this.taskList.addTask(userInput);
+        this.taskList.addTask(this.moduleName, userInput);
     }
 
     public void addCredits(int credits) {

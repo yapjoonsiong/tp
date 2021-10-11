@@ -1,7 +1,9 @@
 package command;
 
+import command.storage.StorageEncoder;
 import module.Module;
 import module.Schedule;
+import task.TaskList;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -60,6 +62,7 @@ public class Parser {
             }
             Module module = new Module(taskDescription);
             NoCap.moduleList.add(module);
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             logger.log(Level.INFO, "Add Test");
             break;
         case DELETE:
@@ -69,6 +72,7 @@ public class Parser {
             }
             int moduleIndex = Integer.parseInt(taskDescription) - 1;
             NoCap.moduleList.delete(NoCap.moduleList.get(moduleIndex));
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             logger.log(Level.INFO, "Delete Test");
             break;
         case LIST:
@@ -99,11 +103,13 @@ public class Parser {
         case EXIT:
             //Ui print exit message
             logger.log(Level.INFO, "Exit Test");
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             this.isExit = true;
             break;
         case MODULETYPE:
             //the functions that are module specific
             moduleParser(taskDescription);
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             break;
         default:
             logger.log(Level.INFO, "Invalid Input!");
@@ -137,7 +143,7 @@ public class Parser {
                 break;
             }
             String[] scheduleInfo = taskDescription.split("/");
-            Schedule schedule = new Schedule (scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
+            Schedule schedule = new Schedule(scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
             NoCap.moduleList.find(moduleName).addClass(schedule);
             logger.log(Level.INFO, "AddClass test");
             break;
@@ -151,8 +157,6 @@ public class Parser {
                 break;
             }
             NoCap.moduleList.find(moduleName).addTask(taskDescription);
-           // tasks.addTask(taskDescription);
-            Ui.addTaskMessage(NoCap.moduleList.find(moduleName).taskList.get(tasks.getTaskCount()), this.moduleName);
             break;
         case ADDGRADE:
             if (taskDescription.isEmpty()) {

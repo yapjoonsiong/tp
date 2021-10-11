@@ -1,14 +1,14 @@
-package command;
+package task;
+
+import command.Parser;
+import java.time.LocalDateTime;
+
 
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String date;
-
-    public boolean isDone() {
-        return isDone;
-    }
-
+    protected LocalDateTime deadline;
 
     /**
      * temp message.
@@ -16,9 +16,10 @@ public class Task {
      * @param description The description of the task given by the user
      */
     public Task(String description, String date) {
-        this.description = description;
-        this.date = date;
-        this.isDone = false;
+        setDescription(description);
+        setDate(date);
+        setDone(false);
+        setDeadline(date);
     }
 
     /**
@@ -28,16 +29,16 @@ public class Task {
     }
 
     //Getters
-    public String getStatusIcon() {
-        return "[" + (isDone ? "X" : " ") + "] ";
-    }
-
     public String getDescription() {
         return this.description;
     }
 
     public String getDate() {
-        return " by: " + this.date;
+        return this.date;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     //Setters
@@ -53,11 +54,23 @@ public class Task {
         this.date = date;
     }
 
+    public void setDeadline(String date) {
+        this.deadline = Parser.parseDate(date);
+    }
+
+    public String getDeadline() {
+        return Parser.dateStringOutput(this.deadline);
+    }
+
     public void markDone() {
         this.isDone = true;
     }
 
+    public String createStatusIcon() {
+        return "[" + (isDone ? "X" : " ") + "] ";
+    }
+
     public String toString() {
-        return getStatusIcon() + getDescription() + getDate();
+        return  createStatusIcon() + getDescription() + " by: " + getDeadline();
     }
 }

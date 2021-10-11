@@ -4,7 +4,7 @@ NoCap (NC) is a **desktop app for managing modules taken in NUS, optimized for u
 
 * Features
     * Viewing help : `help`
-    * Adding a module: `addm <module>`
+    * Adding a module: `add <module>`
     * Deleting a module : `delete <module>`
     * Adding tasks for a module : `/m <module> addtask <description>`
     * Adding grade for a module : `/m <module> addgrade <grade letter>`

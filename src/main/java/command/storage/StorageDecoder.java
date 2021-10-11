@@ -10,11 +10,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class StorageDecoder {
 
+    //Constants
     private static final String ROOT = System.getProperty("user.dir");
     private static final Path FILE_PATH = Paths.get(ROOT, "data", "data.json");
+
+    //Logger object
+    private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
 
     public static ModuleList decodeJsonToModuleList() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -27,8 +33,10 @@ public class StorageDecoder {
         try {
             modules = objectMapper.readValue(new File(FILE_PATH.toString()), ModuleList.class);
             Ui.loadFileSuccessful();
+            logger.log(Level.INFO,"Load file successful");
         } catch (DatabindException e) {
             System.out.println("Save file is corrupted, creating new template");
+            logger.log(Level.INFO,"Load file successful");
         } catch (IOException e) {
             System.out.println("Error reading save file, creating new template");
         } catch (Exception e) {

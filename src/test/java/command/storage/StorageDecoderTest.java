@@ -25,4 +25,12 @@ class StorageDecoderTest {
         assertEquals(loadedModules.toString(), modules.toString());
     }
 
+    @Test
+    public void decodeModuleList_emptyModuleList_success() {
+        ModuleList modules = new ModuleList();
+        StorageEncoder.encodeAndSaveModuleListToJson(modules);
+        ModuleList loadedModules = StorageDecoder.decodeJsonToModuleList();
+        assertEquals(loadedModules.toString(), modules.toString());
+    }
+
 }

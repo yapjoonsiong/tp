@@ -30,13 +30,26 @@ class StorageEncoderTest {
         try {
             String fileContent = Files.readString(FILE_PATH);
             assertEquals("{\"moduleList\":[{\"letterGrade\":null,\"moduleName\""
-                    + ":\"CS2102\",\"schedule\":null,\"taskList\":{\"taskList\":[],"
-                    + "\"taskCount\":0},\"scheduleList\":[],\"credits\":0},{\"letterGrade\""
-                    + ":null,\"moduleName\":\"CS2112\",\"schedule\":null,\"taskList\":"
-                    + "{\"taskList\":[],\"taskCount\":0},\"scheduleList\":[],\"credits\":0},"
-                    + "{\"letterGrade\":null,\"moduleName\":\"CS2132\",\"schedule\":null,\"taskList\""
-                    + ":{\"taskList\":[],\"taskCount\":0},\"scheduleList\":[],\"credits\":0}]}",
+                            + ":\"CS2102\",\"schedule\":null,\"taskList\":{\"taskList\":[],"
+                            + "\"taskCount\":0},\"scheduleList\":[],\"credits\":0},{\"letterGrade\""
+                            + ":null,\"moduleName\":\"CS2112\",\"schedule\":null,\"taskList\":"
+                            + "{\"taskList\":[],\"taskCount\":0},\"scheduleList\":[],\"credits\":0},"
+                            + "{\"letterGrade\":null,\"moduleName\":\"CS2132\",\"schedule\":null,\"taskList\""
+                            + ":{\"taskList\":[],\"taskCount\":0},\"scheduleList\":[],\"credits\":0}]}",
                     fileContent);
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void encodeModuleList_emptyModuleList_success() {
+        ModuleList modules = new ModuleList();
+        StorageEncoder.encodeAndSaveModuleListToJson(modules);
+        assertTrue(Files.exists(FILE_PATH));
+        try {
+            String fileContent = Files.readString(FILE_PATH);
+            assertEquals("{\"moduleList\":[]}", fileContent);
         } catch (IOException e) {
             fail(e.getMessage());
         }

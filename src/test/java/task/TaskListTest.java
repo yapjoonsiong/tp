@@ -1,5 +1,6 @@
 package task;
 
+import command.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -16,24 +17,24 @@ public class TaskListTest {
     @Test
     void get_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010","Read Book A /by Monday");
-        a.addTask("cs1010","Read Book B /by Friday");
-        assertEquals("[ ] Read Book A by: Monday", a.get(0).toString());
-        assertEquals("[ ] Read Book B by: Friday", a.get(1).toString());
+        a.addTask("cs1010","Read Book A /by 12/12/2021 1600");
+        a.addTask("cs1010","Read Book B /by 13/12/2021 1600");
+        assertEquals("[ ] Read Book A by: 12 Dec 2021 04:00 PM" , a.get(0).toString());
+        assertEquals("[ ] Read Book B by: 13 Dec 2021 04:00 PM" , a.get(1).toString());
     }
 
     @Test
     void addTask_success() {
         TaskList tasks = new TaskList();
-        tasks.addTask("cs1010", "Read Book /by Monday");
-        assertEquals("[ ] Read Book by: Monday", tasks.get(0).toString());
+        tasks.addTask("cs1010", "Read Book /by 12/12/2021 1600");
+        assertEquals("[ ] Read Book by: 12 Dec 2021 04:00 PM", tasks.get(0).toString());
     }
 
     @Test
     void getTaskCount_success() {
         TaskList tasks = new TaskList();
-        tasks.addTask("cs1010", "Read Book /by Monday");
-        tasks.addTask("cs1010", "Return Book /by Tuesday");
+        tasks.addTask("cs1010", "Read Book /by 12/12/2021 1600");
+        tasks.addTask("cs1010", "Return Book /by 13/12/2021 1600");
         assertEquals(2, tasks.getTaskCount());
     }
 
@@ -41,32 +42,32 @@ public class TaskListTest {
     void getTaskList_success() {
         TaskList a = new TaskList();
         TaskList b = new TaskList();
-        a.addTask("cs1010", "Read Book A /by Monday");
-        a.addTask("cs1010", "Read Book B /by Friday");
-        b.addTask("cs1010", "Buy Book A /by Tuesday");
-        b.addTask("cs1010", "Buy Book B /by Wednesday");
+        a.addTask("cs1010","Read Book A /by 12/12/2021 1600");
+        a.addTask("cs1010","Read Book B /by 13/12/2021 1600");
+        b.addTask("cs1010", "Buy Book A /by 14/12/2021 1600");
+        b.addTask("cs1010", "Buy Book B /by 15/12/2021 1600");
         ArrayList<Task> list = new ArrayList<>();
         list.addAll(a.getTaskList());
         list.addAll(b.getTaskList());
         assertEquals(4, list.size());
-        assertEquals("[ ] Read Book A by: Monday", list.get(0).toString());
-        assertEquals("[ ] Read Book B by: Friday", list.get(1).toString());
-        assertEquals("[ ] Buy Book A by: Tuesday", list.get(2).toString());
-        assertEquals("[ ] Buy Book B by: Wednesday", list.get(3).toString());
+        assertEquals("[ ] Read Book A by: 12 Dec 2021 04:00 PM", list.get(0).toString());
+        assertEquals("[ ] Read Book B by: 13 Dec 2021 04:00 PM", list.get(1).toString());
+        assertEquals("[ ] Buy Book A by: 14 Dec 2021 04:00 PM", list.get(2).toString());
+        assertEquals("[ ] Buy Book B by: 15 Dec 2021 04:00 PM", list.get(3).toString());
     }
 
     @Test
     void setTaskList_success() {
         TaskList a = new TaskList();
         TaskList b = new TaskList();
-        a.addTask("cs1010", "Read Book A /by Monday");
-        a.addTask("cs1010", "Read Book B /by Friday");
-        b.addTask("cs1010", "Buy Book A /by Tuesday");
-        b.addTask("cs1010", "Buy Book B /by Wednesday");
+        a.addTask("cs1010","Read Book A /by 12/12/2021 1600");
+        a.addTask("cs1010","Read Book B /by 13/12/2021 1600");
+        b.addTask("cs1010", "Buy Book A /by 14/12/2021 1600");
+        b.addTask("cs1010", "Buy Book B /by 15/12/2021 1600");
         a.setTaskList(b.getTaskList());
         assertEquals(2, a.getTaskCount());
-        assertEquals("[ ] Buy Book A by: Tuesday", a.get(0).toString());
-        assertEquals("[ ] Buy Book B by: Wednesday", a.get(1).toString());
+        assertEquals("[ ] Buy Book A by: 14 Dec 2021 04:00 PM", a.get(0).toString());
+        assertEquals("[ ] Buy Book B by: 15 Dec 2021 04:00 PM", a.get(1).toString());
 
     }
 
@@ -80,19 +81,19 @@ public class TaskListTest {
     @Test
     void delete_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010", "Read Book A /by Monday");
-        a.addTask("cs1010", "Read Book B /by Friday");
-        assertEquals("[ ] Read Book A by: Monday", a.get(0).toString());
-        assertEquals("[ ] Read Book B by: Friday", a.get(1).toString());
+        a.addTask("cs1010","Read Book A /by 12/12/2021 1600");
+        a.addTask("cs1010","Read Book B /by 13/12/2021 1600");
+        assertEquals("[ ] Read Book A by: 12 Dec 2021 04:00 PM", a.get(0).toString());
+        assertEquals("[ ] Read Book B by: 13 Dec 2021 04:00 PM", a.get(1).toString());
         a.delete(a.get(0));
-        assertEquals("[ ] Read Book B by: Friday", a.get(0).toString());
+        assertEquals("[ ] Read Book B by: 13 Dec 2021 04:00 PM", a.get(0).toString());
     }
 
     @Test
     void printTaskList_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010", "Read Book A /by Monday");
-        a.addTask("cs1010", "Read Book B /by Friday");
+        a.addTask("cs1010","Read Book A /by 12/12/2021 1600");
+        a.addTask("cs1010","Read Book B /by 13/12/2021 1600");
         // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);
@@ -102,8 +103,8 @@ public class TaskListTest {
         a.printTaskList("Read");
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList("The tasks in Read are: " + System.lineSeparator()
-                + "1.[ ] Read Book A by: Monday" + System.lineSeparator()
-                + "2.[ ] Read Book B by: Friday" + System.lineSeparator());
+                + "1.[ ] Read Book A by: 12 Dec 2021 04:00 PM" + System.lineSeparator()
+                + "2.[ ] Read Book B by: 13 Dec 2021 04:00 PM" + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 }

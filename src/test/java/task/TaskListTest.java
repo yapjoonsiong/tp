@@ -102,7 +102,7 @@ public class TaskListTest {
         // Print some output: goes to your special stream
         a.printTaskList("Read");
         List<String> actualLines = List.of(read.toString().split("/n"));
-        List<String> expectedLines = Collections.singletonList("The tasks in Read are: " + System.lineSeparator()
+        List<String> expectedLines = Collections.singletonList("The tasks due in Read are: " + System.lineSeparator()
                 + "1.[ ] Read Book D by: 12 Dec 2021 11:00 AM" + System.lineSeparator()
                 + "2.[ ] Read Book A by: 12 Dec 2021 04:00 PM" + System.lineSeparator()
                 + "3.[ ] Read Book B by: 13 Dec 2021 04:00 PM" + System.lineSeparator()

@@ -17,10 +17,10 @@ public class TaskListTest {
     @Test
     void get_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010","Read Book A /by 12/12/2021 1600");
-        a.addTask("cs1010","Read Book B /by 13/12/2021 1600");
-        assertEquals("[ ] Read Book A by: 12 Dec 2021 04:00 PM" , a.get(0).toString());
-        assertEquals("[ ] Read Book B by: 13 Dec 2021 04:00 PM" , a.get(1).toString());
+        a.addTask("cs1010", "Read Book A /by 12/12/2021 1600");
+        a.addTask("cs1010", "Read Book B /by 13/12/2021 1600");
+        assertEquals("[ ] Read Book A by: 12 Dec 2021 04:00 PM", a.get(0).toString());
+        assertEquals("[ ] Read Book B by: 13 Dec 2021 04:00 PM", a.get(1).toString());
     }
 
     @Test

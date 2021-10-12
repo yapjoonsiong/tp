@@ -22,7 +22,7 @@ public class Module {
     public Module(String moduleName) {
         assert !moduleName.equals("");
         this.moduleName = moduleName;
-        this.letterGrade = "-";
+        this.letterGrade = null;
         this.scheduleList = new ArrayList<Schedule>();
         this.credits = 0;
         this.taskList = new TaskList();

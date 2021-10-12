@@ -113,7 +113,7 @@ public class Module {
         this.scheduleList.add(schedule);
         logger.log(Level.INFO,"Schedule added successfully");
     }
-    
+
     public void deleteClass() {
         while (this.scheduleList.size() != 0) {
             this.scheduleList.remove(scheduleList.get(0));

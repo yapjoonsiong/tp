@@ -11,8 +11,6 @@ public class Schedule {
     protected String comment;
 
     public Schedule(String day, String startTime, String location, String comment) {
-        assert (startTime.substring(2).equals("00") && Integer.parseInt(startTime.substring(0, 2)) < 24
-                && Integer.parseInt(startTime.substring(0, 2)) >= 0);
         assert location.length() <= 16;
         assert comment.length() <= 16;
 

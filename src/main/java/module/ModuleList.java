@@ -1,12 +1,19 @@
 package module;
 
-import command.NoCap;
+import command.storage.StorageDecoder;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ModuleList {
+    private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
 
+    protected int HEIGHT = 33;
+    protected int LENGTH = 207;
+    protected int BOXWIDTH = 20;
+    protected int BOXHEIGHT = 5;
     private ArrayList<Module> moduleList;
 
     public ModuleList() {
@@ -31,6 +38,7 @@ public class ModuleList {
     public void add(String input) {
         Module module = new Module(input);
         this.moduleList.add(module);
+        logger.log(Level.INFO,"Module added successfully");
     }
 
     public void delete(Module module) {
@@ -41,6 +49,7 @@ public class ModuleList {
     public void delete(String input) {
         int moduleIndex = Integer.parseInt(input) - 1;
         moduleList.remove(get(moduleIndex));
+        logger.log(Level.INFO,"Module deleted successfully");
     }
 
     public int size() {
@@ -48,6 +57,7 @@ public class ModuleList {
     }
 
     public Module get(int index) {
+        assert index >= 0;
         return this.moduleList.get(index);
     }
 
@@ -62,6 +72,7 @@ public class ModuleList {
         if (index == -1) {
             throw new ArrayIndexOutOfBoundsException("Unable to find task");
         }
+        logger.log(Level.INFO,"Module found successfully");
         return moduleList.get(index);
     }
 
@@ -74,11 +85,13 @@ public class ModuleList {
 
     private String formatTimeString(int time) {
         String timeString;
+        assert (time < 24 && time >= 0);
         if (time < 10) {
             timeString = "0" + time + "00";
         } else {
             timeString = time + "00";
         }
+        assert timeString.length() == 4;
         return timeString;
     }
 
@@ -113,6 +126,21 @@ public class ModuleList {
     private int classAtTime(String timeString, int r) {
         int classIndex = 0;
         String day;
+        day = dayOfRow(r);
+        for (Module module : moduleList) {
+            for (int j = 0; j < module.size(); j++) {
+                if (Objects.equals(module.get(j).getDay(), day)
+                        && Objects.equals(module.get(j).getStartTime(), timeString)) {
+                    classIndex = j;
+                    break;
+                }
+            }
+        }
+        return classIndex;
+    }
+
+    private String dayOfRow(int r) {
+        String day;
         if (r >= 3 && r <= 6) {
             day = "MON";
         } else if (r >= 8 && r <= 11) {
@@ -126,84 +154,99 @@ public class ModuleList {
         } else {
             day = "SAT";
         }
-        for (int i = 0; i < moduleList.size(); i++) {
-            for (int j = 0; j < moduleList.get(i).size(); j++) {
-                if (Objects.equals(moduleList.get(i).get(j).getDay(), day)
-                        && Objects.equals(moduleList.get(i).get(j).getStartTime(), timeString)) {
-                    classIndex = j;
-                    break;
-                }
-            }
-        }
-        return classIndex;
+        return day;
     }
 
     public void printTimeTable() {
-        int height = 33;
-        int length = 207;
-        for (int r = 0; r < height; r++) {
-            for (int c = 0; c < length; c++) {
-                if ((c + 12) % 20 == 0) {
-                    int time = ((c + 12) / 20) + 7;
+        for (int r = 0; r < HEIGHT; r++) {
+            for (int c = 0; c < LENGTH; c++) {
+                if ((c + 12) % BOXWIDTH == 0) {
+                    int time = ((c + 12) / BOXWIDTH) + 7;
                     String timeString = formatTimeString(time);
-                    if (r == 1) { // print time header
-                        System.out.print(timeString);
-                        c += 4;
-                    } else if ((r + 2) % 5 == 0) { //print module name if class exists in timeslot
-                        int moduleIndex = moduleAtTime(timeString, r);
-                        if (moduleIndex >= 0) {
-                            System.out.print(moduleList.get(moduleIndex).moduleName);
-                            c += moduleList.get(moduleIndex).moduleName.length();
-                        }
-                    } else if ((r + 1) % 5 == 0) { //print class location
-                        int moduleIndex = moduleAtTime(timeString, r);
-                        int classIndex = classAtTime(timeString, r);
-                        if (moduleIndex >= 0) {
-                            System.out.print(moduleList.get(moduleIndex).get(classIndex).getLocation());
-                            c += moduleList.get(moduleIndex).get(classIndex).getLocation().length();
-                        }
-                    } else if (r > 0 && r % 5 == 0) { //print class comment
-                        int moduleIndex = moduleAtTime(timeString, r);
-                        int classIndex = classAtTime(timeString, r);
-                        if (moduleIndex >= 0) {
-                            System.out.print(moduleList.get(moduleIndex).get(classIndex).getComment());
-                            c += moduleList.get(moduleIndex).get(classIndex).getComment().length();
-                        }
-                    }
-                } else if ((r + 2) % 5 == 0 && c == 2) { //print day
-                    int day = (r + 2) / 5;
-                    switch (day) {
-                    case 1:
-                        System.out.print("MON");
-                        break;
-                    case 2:
-                        System.out.print("TUE");
-                        break;
-                    case 3:
-                        System.out.print("WED");
-                        break;
-                    case 4:
-                        System.out.print("THU");
-                        break;
-                    case 5:
-                        System.out.print("FRI");
-                        break;
-                    case 6:
-                        System.out.print("SAT");
-                        break;
-                    default:
-                        System.out.print("INVALID");
-                    }
-                    c += 2;
-                } else if (c == length - 1) {
+                    c = printTimeColumns(r, c, timeString);
+                } else if ((r + 2) % BOXHEIGHT == 0 && c == 2) { //print day
+                    c = printRowDay(r, c);
+                } else if (c == LENGTH - 1) {
                     System.out.println("#");
-                } else if ((r - 2) % 5 == 0 || r == 0 || r == height - 1 || (c - 6) % 20 == 0 || c == 0) {
+                } else if ((r - 2) % BOXHEIGHT == 0 || r == 0 || r == HEIGHT - 1 || (c - 6) % BOXWIDTH == 0 || c == 0) {
                     System.out.print("#");
                 } else {
                     System.out.print(" ");
                 }
             }
         }
+        logger.log(Level.INFO,"Timetable printed successfully");
+    }
+
+    private int printTimeColumns(int r, int c, String timeString) {
+        if (r == 1) { // print time header
+            System.out.print(timeString);
+            c += 4;
+        } else if ((r + 2) % BOXHEIGHT == 0) { //print module name if class exists in timeslot
+            c = printSlotModuleName(r, c, timeString);
+        } else if ((r + 1) % BOXHEIGHT == 0) { //print class location
+            c = printSlotClassLocation(r, c, timeString);
+        } else if (r > 0 && r % BOXHEIGHT == 0) { //print class comment
+            c = printSlotClassComment(r, c, timeString);
+        }
+        return c;
+    }
+
+    private int printRowDay(int r, int c) {
+        int day = (r + 2) / BOXHEIGHT;
+        switch (day) {
+        case 1:
+            System.out.print("MON");
+            break;
+        case 2:
+            System.out.print("TUE");
+            break;
+        case 3:
+            System.out.print("WED");
+            break;
+        case 4:
+            System.out.print("THU");
+            break;
+        case 5:
+            System.out.print("FRI");
+            break;
+        case 6:
+            System.out.print("SAT");
+            break;
+        default:
+            System.out.print("INVALID");
+        }
+        c += 2;
+        return c;
+    }
+
+    private int printSlotClassComment(int r, int c, String timeString) {
+        int moduleIndex = moduleAtTime(timeString, r);
+        int classIndex = classAtTime(timeString, r);
+        if (moduleIndex >= 0) {
+            System.out.print(moduleList.get(moduleIndex).get(classIndex).getComment());
+            c += moduleList.get(moduleIndex).get(classIndex).getComment().length();
+        }
+        return c;
+    }
+
+    private int printSlotClassLocation(int r, int c, String timeString) {
+        int moduleIndex = moduleAtTime(timeString, r);
+        int classIndex = classAtTime(timeString, r);
+        if (moduleIndex >= 0) {
+            System.out.print(moduleList.get(moduleIndex).get(classIndex).getLocation());
+            c += moduleList.get(moduleIndex).get(classIndex).getLocation().length();
+        }
+        return c;
+    }
+
+    private int printSlotModuleName(int r, int c, String timeString) {
+        int moduleIndex = moduleAtTime(timeString, r);
+        if (moduleIndex >= 0) {
+            System.out.print(moduleList.get(moduleIndex).moduleName);
+            c += moduleList.get(moduleIndex).moduleName.length();
+        }
+        return c;
     }
 
     @Override

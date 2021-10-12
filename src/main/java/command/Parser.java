@@ -4,6 +4,7 @@ import command.storage.StorageEncoder;
 import module.Module;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,6 +36,7 @@ public class Parser {
     public static final String SHOW_YEAR = "y";
     public static final String SHOW_ALL = "a";
 
+
     static String taskType;
     static String taskDescription;
     protected String moduleName;
@@ -56,48 +58,48 @@ public class Parser {
     public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {
-        case HELP:
-            Ui.printHelpMessage();
-            logger.log(Level.INFO, "Help Test");
-            break;
-        case ADD:
-            if (taskDescription.isEmpty()) {
-                Ui.missingDescription();
+            case HELP:
+                Ui.printHelpMessage();
+                logger.log(Level.INFO, "Help Test");
                 break;
-            }
-            NoCap.moduleList.add(taskDescription);
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
-            logger.log(Level.INFO, "Add Test");
-            break;
-        case DELETE:
-            if (taskDescription.isEmpty()) {
-                Ui.missingDescription();
+            case ADD:
+                if (taskDescription.isEmpty()) {
+                    Ui.missingDescription();
+                    break;
+                }
+                NoCap.moduleList.add(taskDescription);
+                StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+                logger.log(Level.INFO, "Add Test");
                 break;
-            }
-            NoCap.moduleList.delete(taskDescription);
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
-            logger.log(Level.INFO, "Delete Test");
-            break;
-        case LIST:
-            listParser(taskDescription);
-            break;
-        case TIMETABLE:
-            NoCap.moduleList.printTimeTable();
-            logger.log(Level.INFO, "Timetable Test");
-            break;
-        case EXIT:
-            Ui.printExitMessage();
-            logger.log(Level.INFO, "Exit Test");
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
-            this.isExit = true;
-            break;
-        case MODULETYPE:
-            moduleParser(taskDescription);
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
-            break;
-        default:
-            System.out.println("Invalid Input!");
-            break;
+            case DELETE:
+                if (taskDescription.isEmpty()) {
+                    Ui.missingDescription();
+                    break;
+                }
+                NoCap.moduleList.delete(taskDescription);
+                StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+                logger.log(Level.INFO, "Delete Test");
+                break;
+            case LIST:
+                listParser(taskDescription);
+                break;
+            case TIMETABLE:
+                NoCap.moduleList.printTimeTable();
+                logger.log(Level.INFO, "Timetable Test");
+                break;
+            case EXIT:
+                Ui.printExitMessage();
+                logger.log(Level.INFO, "Exit Test");
+                StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+                this.isExit = true;
+                break;
+            case MODULETYPE:
+                moduleParser(taskDescription);
+                StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+                break;
+            default:
+                System.out.println("Invalid Input!");
+                break;
         }
     }
 
@@ -125,51 +127,51 @@ public class Parser {
         splitInput(taskDescription);
 
         switch (taskType) {
-        case ADDCLASS:
-            if (taskDescription.isEmpty()) {
-                Ui.missingDescription();
+            case ADDCLASS:
+                if (taskDescription.isEmpty()) {
+                    Ui.missingDescription();
+                    break;
+                }
+                module.addClass(taskDescription);
+                logger.log(Level.INFO, "AddClass test");
                 break;
-            }
-            module.addClass(taskDescription);
-            logger.log(Level.INFO, "AddClass test");
-            break;
-        case ADDTASK:
-            if (taskDescription.isEmpty()) {
-                Ui.missingDescription();
+            case ADDTASK:
+                if (taskDescription.isEmpty()) {
+                    Ui.missingDescription();
+                    break;
+                }
+                if (!taskDescription.contains(START_OF_DATE)) {
+                    Ui.invalidDate();
+                    break;
+                }
+                module.addTask(taskDescription);
                 break;
-            }
-            if (!taskDescription.contains(START_OF_DATE)) {
-                Ui.invalidDate();
+            case ADDGRADE:
+                if (taskDescription.isEmpty()) {
+                    Ui.missingDescription();
+                    break;
+                }
+                module.addGrade(taskDescription);
+                logger.log(Level.INFO, "AddGrade test");
                 break;
-            }
-            module.addTask(taskDescription);
-            break;
-        case ADDGRADE:
-            if (taskDescription.isEmpty()) {
-                Ui.missingDescription();
+            case DELETECLASS:
+                //moduleName -> deleteclass method
+                logger.log(Level.INFO, "DeleteClass test");
                 break;
-            }
-            module.addGrade(taskDescription);
-            logger.log(Level.INFO, "AddGrade test");
-            break;
-        case DELETECLASS:
-            //moduleName -> deleteclass method
-            logger.log(Level.INFO, "DeleteClass test");
-            break;
-        case DELETETASK:
-            //moduleName -> deletetask method
-            logger.log(Level.INFO, "DeleteTask test");
-            break;
-        case DELETEGRADE:
-            module.deleteGrade();
-            logger.log(Level.INFO, "DeleteGrade test");
-            break;
-        case INFO:
-            module.showInformation();
-            break;
-        default:
-            System.out.println("Invalid Module Command!");
-            break;
+            case DELETETASK:
+                //moduleName -> deletetask method
+                logger.log(Level.INFO, "DeleteTask test");
+                break;
+            case DELETEGRADE:
+                module.deleteGrade();
+                logger.log(Level.INFO, "DeleteGrade test");
+                break;
+            case INFO:
+                module.showInformation();
+                break;
+            default:
+                System.out.println("Invalid Module Command!");
+                break;
         }
     }
 
@@ -210,34 +212,98 @@ public class Parser {
         return taskDescription;
     }
 
+    private boolean isEmpty(Module module) {
+        if (module.taskList.size() == 0) {
+            Ui.printEmptyTaskList(module.getModuleName());
+            return true;
+        }
+        return false;
+    }
+
+    private void sortByDate(ArrayList<Module> moduleList) {
+        for (Module module : moduleList) {
+            if (isEmpty(module)) {
+                break;
+            }
+            module.taskList.sortTaskListByDate(module.getModuleName());
+        }
+    }
+
+    private void sortByStatus(ArrayList<Module> moduleList) {
+        for (Module module : moduleList) {
+            if (isEmpty(module)) {
+                break;
+            }
+            module.taskList.sortTaskListByStatus(module.getModuleName());
+        }
+    }
+
+    private void listWeekly(ArrayList<Module> moduleList) {
+        for (Module module : moduleList) {
+            if (isEmpty(module)) {
+                break;
+            }
+            module.taskList.showAllWeekly(module.getModuleName());
+        }
+    }
+
+    private void listAll(ArrayList<Module> moduleList) {
+        for (Module module : moduleList) {
+            if (isEmpty(module)) {
+                break;
+            }
+            module.taskList.printTasks(module.getModuleName());
+        }
+    }
+
+    private void listMonthly(ArrayList<Module> moduleList) {
+        for (Module module : moduleList) {
+            if (isEmpty(module)) {
+                break;
+            }
+            module.taskList.showAllMonthly(module.getModuleName());
+        }
+    }
+
+    private void listYearly(ArrayList<Module> moduleList) {
+        for (Module module : moduleList) {
+            if (isEmpty(module)) {
+                break;
+            }
+            module.taskList.showAllYearly(module.getModuleName());
+        }
+    }
+
     void listParser(String input) {
         splitInput(input);
         if (taskType.equals(MODULE)) {
             NoCap.moduleList.printModules();
+
             logger.log(Level.INFO, "List Module Test");
         } else if (taskType.equals(TASK)) {
+            ArrayList<Module> moduleList = new ArrayList<>(NoCap.moduleList.getModuleList());
             switch (taskDescription) {
-            case SORT_BY_DATE:
-                module.taskList.sortTaskListByDate(moduleName);
-                break;
-            case SORT_BY_STATUS:
-                module.taskList.sortTaskListByStatus(moduleName);
-                break;
-            case SHOW_ALL:
-                module.taskList.printTasks(moduleName);
-                break;
-            case SHOW_WEEK:
-                module.taskList.showAllWeekly(moduleName);
-                break;
-            case SHOW_MONTH:
-                module.taskList.showAllMonthly(moduleName);
-                break;
-            case SHOW_YEAR:
-                module.taskList.showAllYearly(moduleName);
-                break;
-            default:
-                System.out.println("Invalid optional command!");
-                break;
+                case SORT_BY_DATE:
+                    sortByDate(moduleList);
+                    break;
+                case SORT_BY_STATUS:
+                    sortByStatus(moduleList);
+                    break;
+                case SHOW_ALL:
+                    listAll(moduleList);
+                    break;
+                case SHOW_WEEK:
+                    listWeekly(moduleList);
+                    break;
+                case SHOW_MONTH:
+                    listMonthly(moduleList);
+                    break;
+                case SHOW_YEAR:
+                    listYearly(moduleList);
+                    break;
+                default:
+                    System.out.println("Invalid optional command!");
+                    break;
             }
         } else {
             Ui.printInvalidListFormat();

@@ -60,7 +60,7 @@ public class TaskList {
     }
 
     public void delete(Task task) {
-        logger.log(Level.INFO, "Delete task");
+        logger.log(Level.INFO, "Successfully deleted task");
         taskList.remove(task);
         this.taskCount = taskList.size();
     }
@@ -89,7 +89,7 @@ public class TaskList {
      * @param userInput task description input by user
      */
     public void addTask(String module, String userInput) throws DateTimeException {
-        logger.log(Level.INFO, "Add task");
+        logger.log(Level.INFO, "Successfully added task");
         String date = getDate(userInput);
         if (date.isBlank()) {
             Ui.missingDate();
@@ -140,6 +140,7 @@ public class TaskList {
     }
 
     public void showAllWeekly(String module) {
+        logger.log(Level.INFO, "Printing weekly tasks list...");
         ArrayList<Task> tmp = new ArrayList<>(taskList);
         tmp.sort(sortByDate);
         Ui.printWeeklyTaskList(module);
@@ -147,6 +148,7 @@ public class TaskList {
     }
 
     public void showAllMonthly(String module) {
+        logger.log(Level.INFO, "Printing monthly tasks list...");
         ArrayList<Task> tmp = new ArrayList<>(taskList);
         tmp.sort(sortByDate);
         Ui.printMonthlyTaskList(module);
@@ -154,6 +156,7 @@ public class TaskList {
     }
 
     public void showAllYearly(String module) {
+        logger.log(Level.INFO, "Printing yearly tasks list...");
         ArrayList<Task> tmp = new ArrayList<>(taskList);
         tmp.sort(sortByDate);
         Ui.printYearlyTaskList(module);
@@ -163,7 +166,8 @@ public class TaskList {
     private void printWeekly(Task tmp) {
         int index = 1;
         for (Task task : taskList) {
-            if (task != null && isWeekly(tmp, task)) {
+            assert (task != null);
+            if (isWeekly(tmp, task)) {
                 System.out.print(index + ".");
                 System.out.println(task);
                 index++;
@@ -174,7 +178,8 @@ public class TaskList {
     private void printMonthly(Task tmp) {
         int index = 1;
         for (Task task : taskList) {
-            if (task != null && isMonthly(tmp, task)) {
+            assert (task != null);
+            if (isMonthly(tmp, task)) {
                 System.out.print(index + ".");
                 System.out.println(task);
                 index++;
@@ -185,7 +190,8 @@ public class TaskList {
     private void printYearly(Task tmp) {
         int index = 1;
         for (Task task : taskList) {
-            if (task != null && isYearly(tmp, task)) {
+            assert (task != null);
+            if (isYearly(tmp, task)) {
                 System.out.print(index + ".");
                 System.out.println(task);
                 index++;
@@ -206,11 +212,13 @@ public class TaskList {
     }
 
     public void sortTaskListByDate(String module) {
+        logger.log(Level.INFO, "Sorting tasks list by date...");
         taskList.sort(sortByDate);
         Ui.printSortListByDate(module);
     }
 
     public void sortTaskListByStatus(String module) {
+        logger.log(Level.INFO, "Sorting tasks list by status...");
         taskList.sort(sortByStatus);
         Ui.printSortListByStatus(module);
     }

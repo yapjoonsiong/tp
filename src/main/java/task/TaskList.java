@@ -122,7 +122,6 @@ public class TaskList {
         LocalDateTime refDay = refTask.deadline;
         Period p = Period.between(refDay.toLocalDate(), t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        System.out.println("test:  " + day);
         return day <= DAYS_IN_A_WEEK;
     }
 
@@ -130,7 +129,6 @@ public class TaskList {
         LocalDateTime refDay = refTask.deadline;
         Period p = Period.between(refDay.toLocalDate(), t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        System.out.println("test:  " + day);
         return day <= DAYS_IN_A_MONTH;
     }
 
@@ -138,7 +136,6 @@ public class TaskList {
         LocalDateTime refDay = refTask.deadline;
         Period p = Period.between(refDay.toLocalDate(), t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        System.out.println("test:  " + day);
         return day <= DAYS_IN_A_YEAR;
     }
 

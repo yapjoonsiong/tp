@@ -156,10 +156,12 @@ public class Parser {
             break;
         case DELETECLASS:
             //moduleName -> deleteclass method
+            module.deleteClass();
             logger.log(Level.INFO, "DeleteClass test");
             break;
         case DELETETASK:
             //moduleName -> deletetask method
+            module.deleteTask(module.getTaskList().get(Integer.parseInt(taskDescription)));
             logger.log(Level.INFO, "DeleteTask test");
             break;
         case DELETEGRADE:

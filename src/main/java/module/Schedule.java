@@ -2,6 +2,7 @@ package module;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.Objects;
 
 public class Schedule {
     protected String startTime;
@@ -10,10 +11,18 @@ public class Schedule {
     protected String comment;
 
     public Schedule(String day, String startTime, String location, String comment) {
+        assert location.length() <= 16;
+        assert comment.length() <= 16;
+
         this.day = day;
         this.startTime = startTime;
         this.location = location;
         this.comment = comment;
+    }
+
+    private boolean isCorrectDayFormat(String day) {
+        return Objects.equals(day, "MON") || Objects.equals(day, "TUE") || Objects.equals(day, "WED")
+                || Objects.equals(day, "THU") || Objects.equals(day, "FRI") || Objects.equals(day, "SAT");
     }
 
     /**

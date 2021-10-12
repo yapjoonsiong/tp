@@ -26,6 +26,7 @@ public class Parser {
     public static final String DELETECLASS = "deleteclass";
     public static final String DELETETASK = "deletetask";
     public static final String DELETEGRADE = "deletegrade";
+    public static final String DONE = "done";
     public static final String INFO = "info";
     public static final String START_OF_DATE = "/by";
     public static final String SORT_BY_DATE = "sortbydate";
@@ -33,7 +34,6 @@ public class Parser {
     public static final String SHOW_WEEK = "w";
     public static final String SHOW_MONTH = "m";
     public static final String SHOW_YEAR = "y";
-    public static final String SHOW_ALL = "a";
 
 
     static String taskType;
@@ -145,6 +145,23 @@ public class Parser {
                 break;
             }
             module.addTask(taskDescription);
+            break;
+        case DONE:
+            try {
+                if (taskDescription.isBlank()) {
+                    Ui.printInvalidIndex();
+                    break;
+                }
+                int index = Integer.parseInt(taskDescription) - 1;
+                if (index < 0) {
+                    Ui.printInvalidIndex();
+                    break;
+                }
+                module.taskList.get(index).markDone();
+                Ui.printMarkDoneMessage(module.taskList.get(index));
+            } catch (IndexOutOfBoundsException e) {
+                Ui.printInvalidIndex();
+            }
             break;
         case ADDGRADE:
             if (taskDescription.isEmpty()) {

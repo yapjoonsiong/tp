@@ -77,7 +77,7 @@ public class Ui {
 
     public static void printInvalidListFormat() {
         System.out.println("The list format is wrong! Please use list module/tasks "
-                + "[ sortbydate | sortbystatus ] [ w | m | y ]");
+                + "[ sortbydate | sortbystatus ] [ w | m | y | a]");
         System.out.println("Please refer to the user guide or help function for more details!");
     }
 

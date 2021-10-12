@@ -67,10 +67,10 @@ public class Task {
     }
 
     public String createStatusIcon() {
-        return "[" + (isDone ? "X" : " ") + "] ";
+        return "[" + (this.isDone ? "X" : " ") + "] ";
     }
 
     public String toString() {
-        return  createStatusIcon() + getDescription() + " by: " + getDeadline();
+        return  createStatusIcon() + getDescription() + " by: " + "(" + getDeadline() + ")";
     }
 }

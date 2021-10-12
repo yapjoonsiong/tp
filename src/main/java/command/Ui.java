@@ -99,6 +99,14 @@ public class Ui {
         System.out.println("Please refer to the user guide or help function for more details!");
     }
 
+    public static void printInvalidIndex() {
+        System.out.println("Task with the specified index not found!");
+    }
+
+    public static void printMarkDoneMessage(Task task) {
+        System.out.println("Task is completed:" + System.lineSeparator() + task);
+    }
+
     public static void printExitMessage() {
         System.out.println("Thank you for using NoCap!");
         System.out.println("Have a nice day!");

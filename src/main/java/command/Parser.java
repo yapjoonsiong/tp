@@ -4,7 +4,6 @@ import command.storage.StorageEncoder;
 import module.Module;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +38,7 @@ public class Parser {
 
     static String taskType;
     static String taskDescription;
+    private final List list = new List();
     protected String moduleName;
     protected Module module;
     protected boolean isExit;
@@ -81,7 +81,7 @@ public class Parser {
             logger.log(Level.INFO, "Delete Test");
             break;
         case LIST:
-            listParser(taskDescription);
+            list.listParser(taskDescription);
             break;
         case TIMETABLE:
             NoCap.moduleList.printTimeTable();
@@ -214,107 +214,7 @@ public class Parser {
         return taskDescription;
     }
 
-    private boolean isEmpty(Module module) {
-        if (module.taskList.size() == 0) {
-            Ui.printEmptyTaskList(module.getModuleName());
-            return true;
-        }
-        return false;
-    }
-
-    private void sortByDate(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            if (isEmpty(module)) {
-                break;
-            }
-            module.taskList.sortTaskListByDate(module.getModuleName());
-        }
-    }
-
-    private void sortByStatus(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            if (isEmpty(module)) {
-                break;
-            }
-            module.taskList.sortTaskListByStatus(module.getModuleName());
-        }
-    }
-
-    private void listWeekly(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            if (isEmpty(module)) {
-                break;
-            }
-            module.taskList.showAllWeekly(module.getModuleName());
-        }
-    }
-
-    private void listAll(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            if (isEmpty(module)) {
-                break;
-            }
-            module.taskList.printTasks(module.getModuleName());
-        }
-    }
-
-    private void listMonthly(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            if (isEmpty(module)) {
-                break;
-            }
-            module.taskList.showAllMonthly(module.getModuleName());
-        }
-    }
-
-    private void listYearly(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            if (isEmpty(module)) {
-                break;
-            }
-            module.taskList.showAllYearly(module.getModuleName());
-        }
-    }
-
     void listParser(String input) {
-        splitInput(input);
-        if (taskType.equals(MODULE)) {
-            NoCap.moduleList.printModules();
-            logger.log(Level.INFO, "List Module Test");
-        } else if (taskType.equals(TASK)) {
-            ArrayList<Module> moduleList = new ArrayList<>(NoCap.moduleList.getModuleList());
-            switch (taskDescription) {
-            case SORT_BY_DATE:
-                sortByDate(moduleList);
-                break;
-            case SORT_BY_STATUS:
-                sortByStatus(moduleList);
-                break;
-            case SHOW_ALL:
-                listAll(moduleList);
-                break;
-            case SHOW_WEEK:
-                listWeekly(moduleList);
-                break;
-            case SHOW_MONTH:
-                listMonthly(moduleList);
-                break;
-            case SHOW_YEAR:
-                listYearly(moduleList);
-                break;
-            default:
-                System.out.println("Invalid optional command!");
-                break;
-            }
-        } else {
-            Ui.printInvalidListFormat();
-        }
+        list.listParser(input);
     }
 }
-        /*
-        for (int i = 0; i < NoCap.moduleList.size(); i++) {
-            System.out.println((i + 1) + ". " + NoCap.moduleList.get(i).getModuleName());
-            for (int j = 0; j < NoCap.moduleList.get(i).taskList.size(); j++) {
-                System.out.println("\t" + (j + 1) + ". " + NoCap.moduleList.get(i).getTaskList().get(j));
-            }
-        }*/

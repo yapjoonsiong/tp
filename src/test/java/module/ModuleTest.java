@@ -33,8 +33,8 @@ class ModuleTest {
     void getScheduleList() {
         Module m = new Module("cs2113T");
         String start = "0800";
-        m.addClass(new Schedule("WED", start, "E1-01", "week 1,3,5,7,9"));
-        assertEquals(new Schedule("WED", start, "E1-01", "week 1,3,5,7,9").toString(),m.get(0).toString());
+        m.addClass("WED/0800/E1-01/tut");
+        assertEquals(new Schedule("WED", "0800", "E1-01", "tut").toString(),m.get(0).toString());
     }
 
     @Test

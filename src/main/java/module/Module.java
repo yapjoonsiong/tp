@@ -89,7 +89,7 @@ public class Module {
     }
 
     public Schedule get(int index) {
-        assert index > 0;
+        assert index >= 0;
         return this.scheduleList.get(index);
     }
 

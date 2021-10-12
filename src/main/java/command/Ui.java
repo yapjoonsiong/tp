@@ -3,6 +3,8 @@ package command;
 
 import task.Task;
 
+import java.util.Locale;
+
 public class Ui {
 
     public static void printHelpMessage() {
@@ -51,32 +53,36 @@ public class Ui {
         System.out.println(task);
     }
 
-    public static void printTaskList(String module) {
-        System.out.println("The tasks due in " + module + " are: ");
+    public static void printTaskList(String module, int taskCount) {
+        System.out.println("Task List for " + module.toUpperCase(Locale.ROOT) + ":");
+        System.out.println("There are " + taskCount + " tasks");
     }
 
-    public static void printWeeklyTaskList(String module) {
-        System.out.println("The tasks due within 7 days in " + module + " are: ");
+    public static void printWeeklyTaskList(String module, int taskCount) {
+        System.out.println("Task List for " + module.toUpperCase(Locale.ROOT) + ":");
+        System.out.println("There are " + taskCount + " tasks due within 7 days");
     }
 
-    public static void printMonthlyTaskList(String module) {
-        System.out.println("The tasks due within a month in " + module + " are: ");
+    public static void printMonthlyTaskList(String module, int taskCount) {
+        System.out.println("Task List for " + module.toUpperCase(Locale.ROOT) + ":");
+        System.out.println("There are " + taskCount + " tasks due within a month");
     }
 
-    public static void printYearlyTaskList(String module) {
-        System.out.println("The tasks due within a year in " + module + " are: ");
+    public static void printYearlyTaskList(String module, int taskCount) {
+        System.out.println("Task List for " + module.toUpperCase(Locale.ROOT) + ":");
+        System.out.println("There are " + taskCount + " tasks due within a year");
     }
 
     public static void printEmptyTaskList(String module) {
-        System.out.println("There are no tasks due in " + module);
+        System.out.println("There are no tasks due in " + module.toUpperCase(Locale.ROOT));
     }
 
     public static void printSortListByDate(String module) {
-        System.out.println(module + " successfully sorted by date");
+        System.out.println(module.toUpperCase(Locale.ROOT) + " successfully sorted by date");
     }
 
     public static void printSortListByStatus(String module) {
-        System.out.println(module + " successfully sorted by status");
+        System.out.println(module.toUpperCase(Locale.ROOT) + " successfully sorted by status");
     }
 
     public static void loadFileSuccessful() {
@@ -89,7 +95,7 @@ public class Ui {
 
     public static void printInvalidListFormat() {
         System.out.println("The list format is wrong! Please use list module/tasks "
-                + "[ sortbydate | sortbystatus ] [ w | m | y | a]");
+                + "[ sortbydate | sortbystatus ] [ w | m | y]");
         System.out.println("Please refer to the user guide or help function for more details!");
     }
 

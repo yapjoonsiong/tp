@@ -3,7 +3,6 @@ package task;
 import command.Parser;
 import command.Ui;
 
-import java.lang.reflect.Array;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -208,10 +207,12 @@ public class TaskList {
 
     public void sortTaskListByDate(String module) {
         taskList.sort(sortByDate);
+        Ui.printSortListByDate(module);
     }
 
     public void sortTaskListByStatus(String module) {
         taskList.sort(sortByStatus);
+        Ui.printSortListByStatus(module);
     }
 
     @Override

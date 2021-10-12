@@ -67,6 +67,18 @@ public class Ui {
         System.out.println("The tasks due within a year in " + module + " are: ");
     }
 
+    public static void printEmptyTaskList(String module) {
+        System.out.println("There are no tasks due in " + module);
+    }
+
+    public static void printSortListByDate(String module) {
+        System.out.println(module + " successfully sorted by date");
+    }
+
+    public static void printSortListByStatus(String module) {
+        System.out.println(module + " successfully sorted by status");
+    }
+
     public static void loadFileSuccessful() {
         System.out.println("Modules loaded successfully");
     }

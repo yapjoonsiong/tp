@@ -6,6 +6,8 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
@@ -100,30 +102,32 @@ public class TaskListTest {
         // Tell Java to use your special stream
         System.setOut(save);
         // Print some output: goes to your special stream
-        a.printTasks("Read");
+        a.printTasks(a.taskList);
         List<String> actualLines = List.of(read.toString().split("/n"));
-        List<String> expectedLines = Collections.singletonList("The tasks due in Read are: " + System.lineSeparator()
-                + "1.[ ] Read Book C by: 14 Dec 2021 04:00 PM" + System.lineSeparator()
+        List<String> expectedLines = Collections.singletonList(
+                  "1.[ ] Read Book C by: 14 Dec 2021 04:00 PM" + System.lineSeparator()
                 + "2.[ ] Read Book B by: 13 Dec 2021 04:00 PM" + System.lineSeparator()
                 + "3.[ ] Read Book A by: 12 Dec 2021 04:00 PM" + System.lineSeparator()
                 + "4.[ ] Read Book D by: 12 Dec 2021 11:00 AM" + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 
-    private List<String> getWeeklyStrings(String module) {
-        return Collections.singletonList("The tasks due within 7 days in " + module + " are: " + System.lineSeparator()
-                + "1.[ ] Read Book C by: 1 Jan 2021 04:00 PM" + System.lineSeparator()
-                + "2.[ ] Read Book B by: 3 Jan 2021 04:00 PM" + System.lineSeparator()
-                + "3.[ ] Read Book A by: 6 Jan 2021 04:00 PM" + System.lineSeparator());
+    private List<String> getWeeklyStrings(String module, int taskCount) {
+        return Collections.singletonList("Task List for " + module.toUpperCase(Locale.ROOT) + ":"
+                + System.lineSeparator()
+                + "There are " + taskCount + " tasks due within 7 days" + System.lineSeparator()
+                + "1.[ ] Read Book C by: 15 Oct 2021 04:00 PM" + System.lineSeparator()
+                + "2.[ ] Read Book B by: 14 Oct 2021 04:00 PM" + System.lineSeparator()
+                + "3.[ ] Read Book A by: 14 Oct 2021 12:00 PM" + System.lineSeparator());
     }
 
     @Test
     void showAllWeekly_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010", "Read Book C /by 01/01/2021 1600");
-        a.addTask("cs1010", "Read Book B /by 03/01/2021 1600");
-        a.addTask("cs1010", "Read Book A /by 06/01/2021 1600");
-        a.addTask("cs1010", "Read Book D /by 13/01/2021 1100");
+        a.addTask("cs1010", "Read Book C /by 15/10/2021 1600");
+        a.addTask("cs1010", "Read Book B /by 14/10/2021 1600");
+        a.addTask("cs1010", "Read Book A /by 14/10/2021 1200");
+        a.addTask("cs1010", "Read Book D /by 30/10/2021 1100");
         // Create a stream to hold the output
         String module = "moduleName";
         ByteArrayOutputStream read = new ByteArrayOutputStream();
@@ -133,29 +137,30 @@ public class TaskListTest {
         // Print some output: goes to your special stream
         a.showAllWeekly(module);
         List<String> actualLines = List.of(read.toString().split("/n"));
-        List<String> expectedLines = getWeeklyStrings(module);
+        List<String> expectedLines = getWeeklyStrings(module, a.getWeeklyTaskList().size());
         assertLinesMatch(expectedLines, actualLines);
     }
 
-    private List<String> getMonthlyStrings(String module) {
-        return Collections.singletonList("The tasks due within a month in " + module + " are: " + System.lineSeparator()
-                + "1.[ ] Read Book A by: 1 Jan 2021 04:00 PM" + System.lineSeparator()
-                + "2.[ ] Read Book C by: 3 Jan 2021 04:00 PM" + System.lineSeparator()
-                + "3.[ ] Read Book D by: 6 Jan 2021 04:00 PM" + System.lineSeparator()
-                + "4.[ ] Read Book E by: 13 Jan 2021 11:00 AM" + System.lineSeparator()
-                + "5.[ ] Read Book F by: 30 Jan 2021 11:00 AM" + System.lineSeparator());
+    private List<String> getMonthlyStrings(String module, int taskCount) {
+        return Collections.singletonList("Task List for " + module.toUpperCase(Locale.ROOT) + ":"
+                + System.lineSeparator()
+                + "There are " + taskCount + " tasks due within a month" + System.lineSeparator()
+                + "1.[ ] Read Book D by: 6 Nov 2021 04:00 PM" + System.lineSeparator()
+                + "2.[ ] Read Book E by: 13 Oct 2021 11:00 AM" + System.lineSeparator()
+                + "3.[ ] Read Book F by: 30 Oct 2021 11:00 AM" + System.lineSeparator()
+                + "4.[ ] Read Book G by: 14 Oct 2021 11:00 AM" + System.lineSeparator());
     }
 
     @Test
     void showAllMonthly_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010", "Read Book A /by 01/01/2021 1600");
-        a.addTask("cs1010", "Read Book B /by 01/04/2021 1600");
-        a.addTask("cs1010", "Read Book C /by 03/01/2021 1600");
-        a.addTask("cs1010", "Read Book D /by 06/01/2021 1600");
-        a.addTask("cs1010", "Read Book E /by 13/01/2021 1100");
-        a.addTask("cs1010", "Read Book F /by 30/01/2021 1100");
-        a.addTask("cs1010", "Read Book G /by 13/02/2021 1100");
+        a.addTask("cs1010", "Read Book A /by 01/01/2022 1600");
+        a.addTask("cs1010", "Read Book B /by 01/04/2022 1600");
+        a.addTask("cs1010", "Read Book C /by 03/01/2022 1600");
+        a.addTask("cs1010", "Read Book D /by 06/11/2021 1600");
+        a.addTask("cs1010", "Read Book E /by 13/10/2021 1100");
+        a.addTask("cs1010", "Read Book F /by 30/10/2021 1100");
+        a.addTask("cs1010", "Read Book G /by 14/10/2021 1100");
         // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);
@@ -165,17 +170,16 @@ public class TaskListTest {
         String module = "moduleName";
         a.showAllMonthly(module);
         List<String> actualLines = List.of(read.toString().split("/n"));
-        List<String> expectedLines = getMonthlyStrings(module);
+        List<String> expectedLines = getMonthlyStrings(module, a.getMonthlyTaskList().size());
         assertLinesMatch(expectedLines, actualLines);
     }
 
-    private List<String> getYearlyStrings(String module) {
-        return Collections.singletonList("The tasks due within a year in " + module + " are: " + System.lineSeparator()
-                + "1.[ ] Read Book C by: 1 Jan 2021 04:00 PM" + System.lineSeparator()
-                + "2.[ ] Read Book B by: 3 Jan 2021 04:00 PM" + System.lineSeparator()
-                + "3.[ ] Read Book A by: 6 Jan 2021 04:00 PM" + System.lineSeparator()
-                + "4.[ ] Read Book D by: 13 Jan 2021 11:00 AM" + System.lineSeparator()
-                + "5.[ ] Read Book E by: 1 Jan 2022 11:00 AM" + System.lineSeparator());
+    private List<String> getYearlyStrings(String module, int taskCount) {
+        return Collections.singletonList("Task List for " + module.toUpperCase(Locale.ROOT) + ":"
+                + System.lineSeparator()
+                + "There are " + taskCount + " tasks due within a year" + System.lineSeparator()
+                + "1.[ ] Read Book E by: 1 Jan 2022 11:00 AM" + System.lineSeparator()
+                + "2.[ ] Read Book F by: 30 Dec 2021 11:00 AM" + System.lineSeparator());
     }
 
     @Test
@@ -196,7 +200,7 @@ public class TaskListTest {
         String module = "moduleName";
         a.showAllYearly(module);
         List<String> actualLines = List.of(read.toString().split("/n"));
-        List<String> expectedLines = getYearlyStrings(module);
+        List<String> expectedLines = getYearlyStrings(module, a.getYearlyTaskList().size());
         assertLinesMatch(expectedLines, actualLines);
     }
 }

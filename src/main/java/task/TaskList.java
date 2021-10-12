@@ -4,6 +4,7 @@ import command.Parser;
 import command.Ui;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
@@ -118,89 +119,82 @@ public class TaskList {
         return 0;
     };
 
-    private boolean isWeekly(Task refTask, Task t) {
-        LocalDateTime refDay = refTask.deadline;
-        Period p = Period.between(refDay.toLocalDate(), t.deadline.toLocalDate()).normalized();
+    private boolean isWeekly(Task t) {
+        LocalDate date = LocalDate.now();
+        Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day <= DAYS_IN_A_WEEK;
+        return day > 0 && day <= DAYS_IN_A_WEEK;
     }
 
-    private boolean isMonthly(Task refTask, Task t) {
-        LocalDateTime refDay = refTask.deadline;
-        Period p = Period.between(refDay.toLocalDate(), t.deadline.toLocalDate()).normalized();
+    private boolean isMonthly(Task t) {
+        LocalDate date = LocalDate.now();
+        Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day <= DAYS_IN_A_MONTH;
+        return day >= 0 && day <= DAYS_IN_A_MONTH;
     }
 
-    private boolean isYearly(Task refTask, Task t) {
-        LocalDateTime refDay = refTask.deadline;
-        Period p = Period.between(refDay.toLocalDate(), t.deadline.toLocalDate()).normalized();
+    private boolean isYearly(Task t) {
+        LocalDate date = LocalDate.now();
+        Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day <= DAYS_IN_A_YEAR;
+        return day >= 0 && day <= DAYS_IN_A_YEAR;
     }
 
     public void showAllWeekly(String module) {
         logger.log(Level.INFO, "Printing weekly tasks list...");
-        ArrayList<Task> tmp = new ArrayList<>(taskList);
-        tmp.sort(sortByDate);
-        Ui.printWeeklyTaskList(module);
-        printWeekly(tmp.get(0));
+        ArrayList<Task> list = new ArrayList<>(getWeeklyTaskList());
+        Ui.printWeeklyTaskList(module, list.size());
+        printTasks(list);
     }
 
     public void showAllMonthly(String module) {
         logger.log(Level.INFO, "Printing monthly tasks list...");
-        ArrayList<Task> tmp = new ArrayList<>(taskList);
-        tmp.sort(sortByDate);
-        Ui.printMonthlyTaskList(module);
-        printMonthly(tmp.get(0));
+        ArrayList<Task> list = new ArrayList<>(getMonthlyTaskList());
+        Ui.printMonthlyTaskList(module, list.size());
+        printTasks(list);
     }
 
     public void showAllYearly(String module) {
         logger.log(Level.INFO, "Printing yearly tasks list...");
-        ArrayList<Task> tmp = new ArrayList<>(taskList);
-        tmp.sort(sortByDate);
-        Ui.printYearlyTaskList(module);
-        printYearly(tmp.get(0));
+        ArrayList<Task> list = new ArrayList<>(getYearlyTaskList());
+        Ui.printYearlyTaskList(module, list.size());
+        printTasks(list);
     }
 
-    private void printWeekly(Task tmp) {
-        int index = 1;
+    public ArrayList<Task> getWeeklyTaskList() {
+        ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList) {
             assert (task != null);
-            if (isWeekly(tmp, task)) {
-                System.out.print(index + ".");
-                System.out.println(task);
-                index++;
+            if (isWeekly(task)) {
+                list.add(task);
             }
         }
+        return list;
     }
 
-    private void printMonthly(Task tmp) {
-        int index = 1;
+    public ArrayList<Task> getMonthlyTaskList() {
+        ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList) {
             assert (task != null);
-            if (isMonthly(tmp, task)) {
-                System.out.print(index + ".");
-                System.out.println(task);
-                index++;
+            if (isMonthly(task)) {
+                list.add(task);
             }
         }
+        return list;
     }
 
-    private void printYearly(Task tmp) {
-        int index = 1;
+    public ArrayList<Task> getYearlyTaskList() {
+        ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList) {
             assert (task != null);
-            if (isYearly(tmp, task)) {
-                System.out.print(index + ".");
-                System.out.println(task);
-                index++;
+            if (isYearly(task)) {
+                list.add(task);
             }
         }
+        return list;
     }
 
-    public void printTasks(String module) {
-        Ui.printTaskList(module);
+    public void printTasks(ArrayList<Task> taskList) {
         int index = 1;
         for (Task task : taskList) {
             if (task != null) {

@@ -2,9 +2,6 @@ package command;
 
 import command.storage.StorageEncoder;
 import module.Module;
-import module.Schedule;
-import task.TaskList;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
@@ -29,11 +26,19 @@ public class Parser {
     public static final String DELETECLASS = "deleteclass";
     public static final String DELETETASK = "deletetask";
     public static final String DELETEGRADE = "deletegrade";
+    public static final String INFO = "info";
     public static final String START_OF_DATE = "/by";
+    public static final String SORT_BY_DATE = "sortbydate";
+    public static final String SORT_BY_STATUS = "sortbystatus";
+    public static final String SHOW_WEEK = "w";
+    public static final String SHOW_MONTH = "m";
+    public static final String SHOW_YEAR = "y";
+    public static final String SHOW_ALL = "a";
 
     static String taskType;
     static String taskDescription;
     protected String moduleName;
+    protected Module module;
     protected boolean isExit;
     private static Logger logger = Logger.getLogger(Parser.class.getName());
     public static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
@@ -60,8 +65,7 @@ public class Parser {
                 Ui.missingDescription();
                 break;
             }
-            Module module = new Module(taskDescription);
-            NoCap.moduleList.add(module);
+            NoCap.moduleList.add(taskDescription);
             StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             logger.log(Level.INFO, "Add Test");
             break;
@@ -70,49 +74,29 @@ public class Parser {
                 Ui.missingDescription();
                 break;
             }
-            int moduleIndex = Integer.parseInt(taskDescription) - 1;
-            NoCap.moduleList.delete(NoCap.moduleList.get(moduleIndex));
+            NoCap.moduleList.delete(taskDescription);
             StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             logger.log(Level.INFO, "Delete Test");
             break;
         case LIST:
-            if (taskDescription.equals(TASK)) {
-                //list task
-                for (int i = 0; i < NoCap.moduleList.size(); i++) {
-                    System.out.println((i + 1) + ". " + NoCap.moduleList.get(i).getModuleName());
-                    for (int j = 0; j < NoCap.moduleList.get(i).taskList.size(); j++) {
-                        System.out.println("\t" + (j + 1) + ". " + NoCap.moduleList.get(i).getTaskList().get(j));
-                    }
-                }
-                logger.log(Level.INFO, "List Task Test");
-                break;
-            }
-            if (taskDescription.equals(MODULE)) {
-                NoCap.moduleList.printModules();
-                //list module
-                logger.log(Level.INFO, "List Module Test");
-                break;
-            }
-            Ui.missingDescription();
+            listParser(taskDescription);
             break;
         case TIMETABLE:
-            //show timetable
             NoCap.moduleList.printTimeTable();
             logger.log(Level.INFO, "Timetable Test");
             break;
         case EXIT:
-            //Ui print exit message
+            Ui.printExitMessage();
             logger.log(Level.INFO, "Exit Test");
             StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             this.isExit = true;
             break;
         case MODULETYPE:
-            //the functions that are module specific
             moduleParser(taskDescription);
             StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             break;
         default:
-            logger.log(Level.INFO, "Invalid Input!");
+            System.out.println("Invalid Input!");
             break;
         }
     }
@@ -124,11 +108,15 @@ public class Parser {
      * @param input String to be separated
      */
     void moduleParser(String input) {
+
         splitInput(input);
-        this.moduleName = taskType;
-        //access module tasklist
-        TaskList tasks = new TaskList();
-        logger.log(Level.INFO, "Module: " + moduleName);
+        moduleName = taskType;
+        try {
+            module = NoCap.moduleList.find(moduleName);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("invalid Module name!");
+            return;
+        }
 
         if (taskDescription.isEmpty()) {
             Ui.missingDescription();
@@ -142,9 +130,7 @@ public class Parser {
                 Ui.missingDescription();
                 break;
             }
-            String[] scheduleInfo = taskDescription.split("/");
-            Schedule schedule = new Schedule(scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
-            NoCap.moduleList.find(moduleName).addClass(schedule);
+            module.addClass(taskDescription);
             logger.log(Level.INFO, "AddClass test");
             break;
         case ADDTASK:
@@ -156,14 +142,14 @@ public class Parser {
                 Ui.invalidDate();
                 break;
             }
-            NoCap.moduleList.find(moduleName).addTask(taskDescription);
+            module.addTask(taskDescription);
             break;
         case ADDGRADE:
             if (taskDescription.isEmpty()) {
                 Ui.missingDescription();
                 break;
             }
-            NoCap.moduleList.find(moduleName).addGrade(taskDescription);
+            module.addGrade(taskDescription);
             logger.log(Level.INFO, "AddGrade test");
             break;
         case DELETECLASS:
@@ -175,12 +161,14 @@ public class Parser {
             logger.log(Level.INFO, "DeleteTask test");
             break;
         case DELETEGRADE:
-            NoCap.moduleList.find(moduleName).deleteGrade();
-            //moduleName -> deletegrade method
+            module.deleteGrade();
             logger.log(Level.INFO, "DeleteGrade test");
             break;
+        case INFO:
+            module.showInformation();
+            break;
         default:
-            System.out.println("Invalid Input!");
+            System.out.println("Invalid Module Command!");
             break;
         }
     }
@@ -222,4 +210,45 @@ public class Parser {
         return taskDescription;
     }
 
+    void listParser(String input) {
+        splitInput(input);
+        if (taskType.equals(MODULE)) {
+            NoCap.moduleList.printModules();
+            logger.log(Level.INFO, "List Module Test");
+        } else if (taskType.equals(TASK)) {
+            switch (taskDescription) {
+            case SORT_BY_DATE:
+                module.taskList.sortTaskListByDate(moduleName);
+                break;
+            case SORT_BY_STATUS:
+                module.taskList.sortTaskListByStatus(moduleName);
+                break;
+            case SHOW_ALL:
+                module.taskList.printTasks(moduleName);
+                break;
+            case SHOW_WEEK:
+                module.taskList.showAllWeekly(moduleName);
+                break;
+            case SHOW_MONTH:
+                module.taskList.showAllMonthly(moduleName);
+                break;
+            case SHOW_YEAR:
+                module.taskList.showAllYearly(moduleName);
+                break;
+            default:
+                System.out.println("Invalid optional command!");
+                break;
+            }
+        } else {
+            Ui.printInvalidListFormat();
+        }
+    }
 }
+
+            /*
+            for (int i = 0; i < NoCap.moduleList.size(); i++) {
+                System.out.println((i + 1) + ". " + NoCap.moduleList.get(i).getModuleName());
+                for (int j = 0; j < NoCap.moduleList.get(i).taskList.size(); j++) {
+                    System.out.println("\t" + (j + 1) + ". " + NoCap.moduleList.get(i).getTaskList().get(j));
+                }
+            }*/

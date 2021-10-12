@@ -74,4 +74,16 @@ public class Ui {
     public static void printNoSaveFileMessage() {
         System.out.println("No save file found, starting with an empty template");
     }
+
+    public static void printInvalidListFormat() {
+        System.out.println("The list format is wrong! Please use list module/tasks "
+                + "[ sortbydate | sortbystatus ] [ w | m | y | a]");
+        System.out.println("Please refer to the user guide or help function for more details!");
+    }
+
+    public static void printExitMessage() {
+        System.out.println("Thank you for using NoCap!");
+        System.out.println("Have a nice day!");
+    }
+
 }

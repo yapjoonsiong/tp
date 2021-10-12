@@ -10,10 +10,10 @@ import java.util.logging.Logger;
 public class ModuleList {
     private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
 
-    protected int HEIGHT = 33;
-    protected int LENGTH = 207;
-    protected int BOXWIDTH = 20;
-    protected int BOXHEIGHT = 5;
+    private static final int HEIGHT = 33;
+    private static final int LENGTH = 207;
+    private static final int BOXWIDTH = 20;
+    private static final int BOXHEIGHT = 5;
     private ArrayList<Module> moduleList;
 
     public ModuleList() {

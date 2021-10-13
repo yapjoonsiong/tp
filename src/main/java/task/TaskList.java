@@ -141,26 +141,26 @@ public class TaskList {
 
     public void showAllWeekly(String module) {
         logger.log(Level.INFO, "Printing weekly tasks list...");
-        ArrayList<Task> list = new ArrayList<>(getWeeklyTaskList());
+        ArrayList<Task> list = new ArrayList<>(weeklyTaskList());
         Ui.printWeeklyTaskList(module, list.size());
         printTasks(list);
     }
 
     public void showAllMonthly(String module) {
         logger.log(Level.INFO, "Printing monthly tasks list...");
-        ArrayList<Task> list = new ArrayList<>(getMonthlyTaskList());
+        ArrayList<Task> list = new ArrayList<>(monthlyTaskList());
         Ui.printMonthlyTaskList(module, list.size());
         printTasks(list);
     }
 
     public void showAllYearly(String module) {
         logger.log(Level.INFO, "Printing yearly tasks list...");
-        ArrayList<Task> list = new ArrayList<>(getYearlyTaskList());
+        ArrayList<Task> list = new ArrayList<>(yearlyTaskList());
         Ui.printYearlyTaskList(module, list.size());
         printTasks(list);
     }
 
-    public ArrayList<Task> getWeeklyTaskList() {
+    public ArrayList<Task> weeklyTaskList() {
         ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList) {
             assert (task != null);
@@ -171,7 +171,7 @@ public class TaskList {
         return list;
     }
 
-    public ArrayList<Task> getMonthlyTaskList() {
+    public ArrayList<Task> monthlyTaskList() {
         ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList) {
             assert (task != null);
@@ -182,7 +182,7 @@ public class TaskList {
         return list;
     }
 
-    public ArrayList<Task> getYearlyTaskList() {
+    public ArrayList<Task> yearlyTaskList() {
         ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList) {
             assert (task != null);

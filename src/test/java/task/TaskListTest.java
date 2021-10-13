@@ -137,7 +137,7 @@ public class TaskListTest {
         // Print some output: goes to your special stream
         a.showAllWeekly(module);
         List<String> actualLines = List.of(read.toString().split("/n"));
-        List<String> expectedLines = getWeeklyStrings(module, a.getWeeklyTaskList().size());
+        List<String> expectedLines = getWeeklyStrings(module, a.weeklyTaskList().size());
         assertLinesMatch(expectedLines, actualLines);
     }
 
@@ -170,7 +170,7 @@ public class TaskListTest {
         String module = "moduleName";
         a.showAllMonthly(module);
         List<String> actualLines = List.of(read.toString().split("/n"));
-        List<String> expectedLines = getMonthlyStrings(module, a.getMonthlyTaskList().size());
+        List<String> expectedLines = getMonthlyStrings(module, a.monthlyTaskList().size());
         assertLinesMatch(expectedLines, actualLines);
     }
 
@@ -200,7 +200,7 @@ public class TaskListTest {
         String module = "moduleName";
         a.showAllYearly(module);
         List<String> actualLines = List.of(read.toString().split("/n"));
-        List<String> expectedLines = getYearlyStrings(module, a.getYearlyTaskList().size());
+        List<String> expectedLines = getYearlyStrings(module, a.yearlyTaskList().size());
         assertLinesMatch(expectedLines, actualLines);
     }
 }

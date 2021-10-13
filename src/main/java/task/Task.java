@@ -1,15 +1,18 @@
 package task;
 
 import command.DateParser;
-
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Task {
+    private static final Logger logger = Logger.getLogger(Task.class.getName());
     protected String description;
     protected boolean isDone;
     protected String date;
     protected LocalDateTime deadline;
+
 
     /**
      * temp message.
@@ -56,6 +59,7 @@ public class Task {
     }
 
     public void setDeadline(String date) {
+        logger.log(Level.INFO, "Successfully set task deadline");
         this.deadline = DateParser.parseDate(date);
     }
 
@@ -64,6 +68,7 @@ public class Task {
     }
 
     public void markDone() {
+        logger.log(Level.INFO, "Successfully mark task as done...");
         this.isDone = true;
     }
 

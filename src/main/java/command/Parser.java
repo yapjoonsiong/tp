@@ -159,7 +159,8 @@ public class Parser {
                     break;
                 }
                 module.taskList.get(index).markDone();
-                Ui.printMarkDoneMessage(module.taskList.get(index));
+                Ui.printMarkDoneMessage(module.taskList.get(index)
+                );
             } catch (IndexOutOfBoundsException e) {
                 Ui.printInvalidIndex();
             }

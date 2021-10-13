@@ -17,6 +17,7 @@ public class Ui {
         System.out.println("Add class to module: /m <module> addclass <description> /by <date>");
         System.out.println("Add task to module: /m <module> addtask <description> /by <date>");
         System.out.println("Add grade to module: /m <module> addgrade <gradeLetter>");
+        System.out.println("Mark task as done: /m <module> done <taskIndex>");
         System.out.println("Delete all classes from a module: /m <module> deleteclass");
         System.out.println("Delete all tasks from a module: /m <module> deletetask");
         System.out.println("Delete grade from a module: /m <module> deletegrade");
@@ -111,5 +112,10 @@ public class Ui {
         System.out.println("Thank you for using NoCap!");
         System.out.println("Have a nice day!");
     }
+
+    public static void duplicateModuleError() {
+        System.out.println("This module already exists!");
+    }
+
 
 }

@@ -2,8 +2,8 @@ package command;
 
 import command.storage.StorageEncoder;
 import module.Module;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,7 +35,6 @@ public class Parser {
     public static final String SHOW_MONTH = "m";
     public static final String SHOW_YEAR = "y";
 
-
     static String taskType;
     static String taskDescription;
     private final List list = new List();
@@ -43,8 +42,6 @@ public class Parser {
     protected Module module;
     protected boolean isExit;
     private static Logger logger = Logger.getLogger(Parser.class.getName());
-    public static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    public static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
 
     public Parser() {
         this.isExit = false;
@@ -67,7 +64,11 @@ public class Parser {
                 Ui.missingDescription();
                 break;
             }
-            NoCap.moduleList.add(taskDescription);
+            if (isDuplicateModule(taskDescription)) {
+                Ui.duplicateModuleError();
+                break;
+            }
+            NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
             StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             logger.log(Level.INFO, "Add Test");
             break;
@@ -112,7 +113,7 @@ public class Parser {
     void moduleParser(String input) {
 
         splitInput(input);
-        moduleName = taskType;
+        moduleName = taskType.toUpperCase(Locale.ROOT);
         try {
             module = NoCap.moduleList.find(moduleName);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -172,12 +173,10 @@ public class Parser {
             logger.log(Level.INFO, "AddGrade test");
             break;
         case DELETECLASS:
-            //moduleName -> deleteclass method
             module.deleteClass();
             logger.log(Level.INFO, "DeleteClass test");
             break;
         case DELETETASK:
-            //moduleName -> deletetask method
             module.deleteTask(module.getTaskList().get(Integer.parseInt(taskDescription)));
             logger.log(Level.INFO, "DeleteTask test");
             break;
@@ -207,14 +206,6 @@ public class Parser {
         }
     }
 
-    public static LocalDateTime parseDate(String str) {
-        return LocalDateTime.parse(str, inputFormatter);
-    }
-
-    public static String dateStringOutput(LocalDateTime dateTime) {
-        return dateTime.format(outputFormatter);
-    }
-
     public boolean isExit() {
         return this.isExit;
     }
@@ -233,5 +224,20 @@ public class Parser {
 
     void listParser(String input) {
         list.listParser(input);
+    }
+
+    /**
+     * Used in add to verify module does not exist. Prevent duplicate module entries.
+     *
+     * @param input moduleName to be checked against.
+     * @return true if input is existing module.
+     */
+    boolean isDuplicateModule(String input) {
+        try {
+            module = NoCap.moduleList.find(input.toUpperCase(Locale.ROOT));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return true;
     }
 }

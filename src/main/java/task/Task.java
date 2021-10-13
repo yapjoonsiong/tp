@@ -1,6 +1,7 @@
 package task;
 
-import command.Parser;
+import command.DateParser;
+
 import java.time.LocalDateTime;
 
 
@@ -55,11 +56,11 @@ public class Task {
     }
 
     public void setDeadline(String date) {
-        this.deadline = Parser.parseDate(date);
+        this.deadline = DateParser.parseDate(date);
     }
 
     public String getDeadline() {
-        return Parser.dateStringOutput(this.deadline);
+        return DateParser.dateStringOutput(this.deadline);
     }
 
     public void markDone() {

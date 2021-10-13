@@ -72,6 +72,8 @@ public class Task {
     }
 
     public String toString() {
-        return  createStatusIcon() + getDescription() + " by: " + "(" + getDeadline() + ")";
+        return  createStatusIcon() + getDescription() + " by: "  + getDeadline();
+        //the original line fails the tests?
+        //return  createStatusIcon() + getDescription() + " by: " + "(" + getDeadline() + ")";
     }
 }

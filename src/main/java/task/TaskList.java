@@ -3,9 +3,8 @@ package task;
 import command.Parser;
 import command.Ui;
 
-import java.lang.reflect.Array;
 import java.time.DateTimeException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -61,7 +60,7 @@ public class TaskList {
     }
 
     public void delete(Task task) {
-        logger.log(Level.INFO, "Delete task");
+        logger.log(Level.INFO, "Successfully deleted task");
         taskList.remove(task);
         this.taskCount = taskList.size();
     }
@@ -90,7 +89,7 @@ public class TaskList {
      * @param userInput task description input by user
      */
     public void addTask(String module, String userInput) throws DateTimeException {
-        logger.log(Level.INFO, "Add task");
+        logger.log(Level.INFO, "Successfully added task");
         String date = getDate(userInput);
         if (date.isBlank()) {
             Ui.missingDate();
@@ -119,83 +118,82 @@ public class TaskList {
         return 0;
     };
 
-    private boolean isWeekly(Task refTask, Task t) {
-        LocalDateTime refDay = refTask.deadline;
-        Period p = Period.between(refDay.toLocalDate(), t.deadline.toLocalDate()).normalized();
+    private boolean isWeekly(Task t) {
+        LocalDate date = LocalDate.now();
+        Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day <= DAYS_IN_A_WEEK;
+        return day > 0 && day <= DAYS_IN_A_WEEK;
     }
 
-    private boolean isMonthly(Task refTask, Task t) {
-        LocalDateTime refDay = refTask.deadline;
-        Period p = Period.between(refDay.toLocalDate(), t.deadline.toLocalDate()).normalized();
+    private boolean isMonthly(Task t) {
+        LocalDate date = LocalDate.now();
+        Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day <= DAYS_IN_A_MONTH;
+        return day >= 0 && day <= DAYS_IN_A_MONTH;
     }
 
-    private boolean isYearly(Task refTask, Task t) {
-        LocalDateTime refDay = refTask.deadline;
-        Period p = Period.between(refDay.toLocalDate(), t.deadline.toLocalDate()).normalized();
+    private boolean isYearly(Task t) {
+        LocalDate date = LocalDate.now();
+        Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day <= DAYS_IN_A_YEAR;
+        return day >= 0 && day <= DAYS_IN_A_YEAR;
     }
 
     public void showAllWeekly(String module) {
-        ArrayList<Task> tmp = new ArrayList<>(taskList);
-        tmp.sort(sortByDate);
-        Ui.printWeeklyTaskList(module);
-        printWeekly(tmp.get(0));
+        logger.log(Level.INFO, "Printing weekly tasks list...");
+        ArrayList<Task> list = new ArrayList<>(weeklyTaskList());
+        Ui.printWeeklyTaskList(module, list.size());
+        printTasks(list);
     }
 
     public void showAllMonthly(String module) {
-        ArrayList<Task> tmp = new ArrayList<>(taskList);
-        tmp.sort(sortByDate);
-        Ui.printMonthlyTaskList(module);
-        printMonthly(tmp.get(0));
+        logger.log(Level.INFO, "Printing monthly tasks list...");
+        ArrayList<Task> list = new ArrayList<>(monthlyTaskList());
+        Ui.printMonthlyTaskList(module, list.size());
+        printTasks(list);
     }
 
     public void showAllYearly(String module) {
-        ArrayList<Task> tmp = new ArrayList<>(taskList);
-        tmp.sort(sortByDate);
-        Ui.printYearlyTaskList(module);
-        printYearly(tmp.get(0));
+        logger.log(Level.INFO, "Printing yearly tasks list...");
+        ArrayList<Task> list = new ArrayList<>(yearlyTaskList());
+        Ui.printYearlyTaskList(module, list.size());
+        printTasks(list);
     }
 
-    private void printWeekly(Task tmp) {
-        int index = 1;
+    public ArrayList<Task> weeklyTaskList() {
+        ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList) {
-            if (task != null && isWeekly(tmp, task)) {
-                System.out.print(index + ".");
-                System.out.println(task);
-                index++;
+            assert (task != null);
+            if (isWeekly(task)) {
+                list.add(task);
             }
         }
+        return list;
     }
 
-    private void printMonthly(Task tmp) {
-        int index = 1;
+    public ArrayList<Task> monthlyTaskList() {
+        ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList) {
-            if (task != null && isMonthly(tmp, task)) {
-                System.out.print(index + ".");
-                System.out.println(task);
-                index++;
+            assert (task != null);
+            if (isMonthly(task)) {
+                list.add(task);
             }
         }
+        return list;
     }
 
-    private void printYearly(Task tmp) {
-        int index = 1;
+    public ArrayList<Task> yearlyTaskList() {
+        ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList) {
-            if (task != null && isYearly(tmp, task)) {
-                System.out.print(index + ".");
-                System.out.println(task);
-                index++;
+            assert (task != null);
+            if (isYearly(task)) {
+                list.add(task);
             }
         }
+        return list;
     }
 
-    public void printTasks(String module) {
-        Ui.printTaskList(module);
+    public void printTasks(ArrayList<Task> taskList) {
         int index = 1;
         for (Task task : taskList) {
             if (task != null) {
@@ -207,11 +205,15 @@ public class TaskList {
     }
 
     public void sortTaskListByDate(String module) {
+        logger.log(Level.INFO, "Sorting tasks list by date...");
         taskList.sort(sortByDate);
+        Ui.printSortListByDate(module);
     }
 
     public void sortTaskListByStatus(String module) {
+        logger.log(Level.INFO, "Sorting tasks list by status...");
         taskList.sort(sortByStatus);
+        Ui.printSortListByStatus(module);
     }
 
     @Override

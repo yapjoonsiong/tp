@@ -1,10 +1,13 @@
 package task;
 
-import command.Parser;
+import command.DateParser;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Task {
+    private static final Logger logger = Logger.getLogger(Task.class.getName());
     protected String description;
     protected boolean isDone;
     protected String date;
@@ -55,22 +58,26 @@ public class Task {
     }
 
     public void setDeadline(String date) {
-        this.deadline = Parser.parseDate(date);
+        logger.log(Level.INFO, "Successfully set Task deadline...");
+        this.deadline = DateParser.parseDate(date);
     }
 
     public String getDeadline() {
-        return Parser.dateStringOutput(this.deadline);
+        return DateParser.dateStringOutput(this.deadline);
     }
 
     public void markDone() {
+        logger.log(Level.INFO, "Successfully marked Task as done...");
         this.isDone = true;
     }
 
     public String createStatusIcon() {
-        return "[" + (isDone ? "X" : " ") + "] ";
+        return "[" + (this.isDone ? "X" : " ") + "] ";
     }
 
     public String toString() {
-        return  createStatusIcon() + getDescription() + " by: " + getDeadline();
+        return  createStatusIcon() + getDescription() + " by: "  + getDeadline();
+        //the original line fails the tests?
+        //return  createStatusIcon() + getDescription() + " by: " + "(" + getDeadline() + ")";
     }
 }

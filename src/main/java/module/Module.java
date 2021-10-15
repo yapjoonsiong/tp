@@ -114,8 +114,18 @@ public class Module {
         logger.log(Level.INFO,"Schedule added successfully");
     }
 
+    public void deleteClass() {
+        while (this.scheduleList.size() != 0) {
+            this.scheduleList.remove(scheduleList.get(0));
+        }
+    }
+
     public void addTask(String userInput) {
         this.taskList.addTask(this.moduleName, userInput);
+    }
+
+    public void deleteTask(Task task) {
+        this.taskList.delete(task);
     }
 
     public void addCredits(int credits) {

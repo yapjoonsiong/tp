@@ -3,6 +3,8 @@ package command;
 
 import task.Task;
 
+import java.util.Locale;
+
 public class Ui {
 
     public static void printHelpMessage() {
@@ -15,6 +17,7 @@ public class Ui {
         System.out.println("Add class to module: /m <module> addclass <description> /by <date>");
         System.out.println("Add task to module: /m <module> addtask <description> /by <date>");
         System.out.println("Add grade to module: /m <module> addgrade <gradeLetter>");
+        System.out.println("Mark task as done: /m <module> done <taskIndex>");
         System.out.println("Delete all classes from a module: /m <module> deleteclass");
         System.out.println("Delete all tasks from a module: /m <module> deletetask");
         System.out.println("Delete grade from a module: /m <module> deletegrade");
@@ -43,7 +46,7 @@ public class Ui {
 
     public static void wrongDateTimeFormat() {
         System.out.println("Wrong date format input!");
-        System.out.println("Format: dd/MM/yy hhmm");
+        System.out.println("Format: dd/MM/yyyy hhmm");
     }
 
     public static void addTaskMessage(Task task, String moduleName) {
@@ -51,20 +54,36 @@ public class Ui {
         System.out.println(task);
     }
 
-    public static void printTaskList(String module) {
-        System.out.println("The tasks due in " + module + " are: ");
+    public static void printTaskList(String module, int taskCount) {
+        System.out.println("Task List for " + module.toUpperCase(Locale.ROOT) + ":");
+        System.out.println("There are " + taskCount + " tasks");
     }
 
-    public static void printWeeklyTaskList(String module) {
-        System.out.println("The tasks due within 7 days in " + module + " are: ");
+    public static void printWeeklyTaskList(String module, int taskCount) {
+        System.out.println("Task List for " + module.toUpperCase(Locale.ROOT) + ":");
+        System.out.println("There are " + taskCount + " tasks due within 7 days");
     }
 
-    public static void printMonthlyTaskList(String module) {
-        System.out.println("The tasks due within a month in " + module + " are: ");
+    public static void printMonthlyTaskList(String module, int taskCount) {
+        System.out.println("Task List for " + module.toUpperCase(Locale.ROOT) + ":");
+        System.out.println("There are " + taskCount + " tasks due within a month");
     }
 
-    public static void printYearlyTaskList(String module) {
-        System.out.println("The tasks due within a year in " + module + " are: ");
+    public static void printYearlyTaskList(String module, int taskCount) {
+        System.out.println("Task List for " + module.toUpperCase(Locale.ROOT) + ":");
+        System.out.println("There are " + taskCount + " tasks due within a year");
+    }
+
+    public static void printEmptyTaskList(String module) {
+        System.out.println("There are no tasks due in " + module.toUpperCase(Locale.ROOT));
+    }
+
+    public static void printSortListByDate(String module) {
+        System.out.println(module.toUpperCase(Locale.ROOT) + " successfully sorted by date");
+    }
+
+    public static void printSortListByStatus(String module) {
+        System.out.println(module.toUpperCase(Locale.ROOT) + " successfully sorted by status");
     }
 
     public static void loadFileSuccessful() {
@@ -77,13 +96,26 @@ public class Ui {
 
     public static void printInvalidListFormat() {
         System.out.println("The list format is wrong! Please use list module/tasks "
-                + "[ sortbydate | sortbystatus ] [ w | m | y | a]");
+                + "[ sortbydate | sortbystatus ] [ w | m | y]");
         System.out.println("Please refer to the user guide or help function for more details!");
+    }
+
+    public static void printInvalidIndex() {
+        System.out.println("Task with the specified index not found!");
+    }
+
+    public static void printMarkDoneMessage(Task task) {
+        System.out.println("Task is completed:" + System.lineSeparator() + task);
     }
 
     public static void printExitMessage() {
         System.out.println("Thank you for using NoCap!");
         System.out.println("Have a nice day!");
     }
+
+    public static void duplicateModuleError() {
+        System.out.println("This module already exists!");
+    }
+
 
 }

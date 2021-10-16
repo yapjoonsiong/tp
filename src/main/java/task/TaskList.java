@@ -50,6 +50,7 @@ public class TaskList {
         this.taskCount = taskCount;
     }
 
+    //assert index is valid
     public Task get(int index) {
         logger.log(Level.INFO, "Get task");
         return this.taskList.get(index);

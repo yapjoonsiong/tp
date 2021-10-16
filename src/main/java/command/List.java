@@ -19,7 +19,7 @@ public class List {
         return false;
     }
 
-    void sortByDate(ArrayList<Module> moduleList) {
+    private void sortByDate(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 module.taskList.sortTaskListByDate(module.getModuleName());
@@ -27,7 +27,7 @@ public class List {
         }
     }
 
-    void sortByStatus(ArrayList<Module> moduleList) {
+    private void sortByStatus(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 module.taskList.sortTaskListByStatus(module.getModuleName());
@@ -35,7 +35,7 @@ public class List {
         }
     }
 
-    void listWeekly(ArrayList<Module> moduleList) {
+    private void listWeekly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 module.taskList.showAllWeekly(module.getModuleName());
@@ -43,7 +43,7 @@ public class List {
         }
     }
 
-    void listAll(ArrayList<Module> moduleList) {
+    private  void listAll(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 Ui.printTaskList(module.getModuleName(), module.taskList.getTaskCount());
@@ -52,7 +52,7 @@ public class List {
         }
     }
 
-    void listMonthly(ArrayList<Module> moduleList) {
+    private void listMonthly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 module.taskList.showAllMonthly(module.getModuleName());
@@ -60,7 +60,7 @@ public class List {
         }
     }
 
-    void listYearly(ArrayList<Module> moduleList) {
+    private  void listYearly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 module.taskList.showAllYearly(module.getModuleName());
@@ -68,12 +68,12 @@ public class List {
         }
     }
 
-    void listParser(String input) {
+    public void listParser(String input) {
         Parser.splitInput(input);
         if (Parser.taskType.equals(Parser.MODULE)) {
             NoCap.moduleList.printModules();
         } else if (Parser.taskType.equals(Parser.TASK)) {
-            ArrayList<Module> moduleList = new ArrayList<Module>(NoCap.moduleList.getModuleList());
+            ArrayList<Module> moduleList = new ArrayList<>(NoCap.moduleList.getModuleList());
             switch (Parser.taskDescription) {
             case Parser.SORT_BY_DATE:
                 logger.log(Level.INFO, "Sort TaskList by date");

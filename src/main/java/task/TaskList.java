@@ -2,7 +2,6 @@ package task;
 
 import command.Parser;
 import command.Ui;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 public class TaskList {
     private static final String EMPTY_STRING = "";
@@ -20,8 +18,6 @@ public class TaskList {
     private static final Logger logger = Logger.getLogger(TaskList.class.getName());
     protected ArrayList<Task> taskList;
     protected int taskCount;
-
-
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -106,9 +102,9 @@ public class TaskList {
         }
     }
 
-    public static Comparator<Task> sortByDate = Comparator.comparing(t -> t.deadline);
+    private static final Comparator<Task> sortByDate = Comparator.comparing(t -> t.deadline);
 
-    public static Comparator<Task> sortByStatus = (t1, t2) -> {
+    private static final Comparator<Task> sortByStatus = (t1, t2) -> {
         if (t1.isDone && !t2.isDone) {
             return -1;
         }

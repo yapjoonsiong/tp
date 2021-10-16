@@ -58,25 +58,17 @@ public class Task {
         this.date = date;
     }
 
-    public void setDeadline(String date) {
-<<<<<<< HEAD
-        logger.log(Level.INFO, "Successfully set task deadline");
-=======
+    private void setDeadline(String date) {
         logger.log(Level.INFO, "Successfully set Task deadline...");
->>>>>>> 92402d96633977cc1497462c0305af28993d6fef
         this.deadline = DateParser.parseDate(date);
     }
 
-    public String getDeadline() {
+    private String getDeadline() {
         return DateParser.dateStringOutput(this.deadline);
     }
 
     public void markDone() {
-<<<<<<< HEAD
-        logger.log(Level.INFO, "Successfully mark task as done...");
-=======
         logger.log(Level.INFO, "Successfully marked Task as done...");
->>>>>>> 92402d96633977cc1497462c0305af28993d6fef
         this.isDone = true;
     }
 

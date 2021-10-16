@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class Parser {
 
-    private static final String EMPTY_STRING = "";
+    public static final String EMPTY_STRING = "";
     private static final String SPACE_STRING = " ";
     public static final String TASK = "task";
     public static final String MODULE = "module";

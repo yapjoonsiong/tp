@@ -32,7 +32,6 @@ class ModuleTest {
     @Test
     void getScheduleList() {
         Module m = new Module("cs2113T");
-        String start = "0800";
         m.addClass("WED/0800/E1-01/tut");
         assertEquals(new Schedule("WED", "0800", "E1-01", "tut").toString(),m.get(0).toString());
     }
@@ -45,7 +44,11 @@ class ModuleTest {
     }
 
     @Test
-    void get() {
+    void size() {
         Module m = new Module("cs2113T");
+        m.addClass("WED/0800/E1-01/tut");
+        m.addClass("TUE/0800/E1-01/lect");
+        m.addClass("MON/1000/E1-01/lect");
+        assertEquals(3, m.size());
     }
 }

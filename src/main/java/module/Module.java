@@ -136,10 +136,9 @@ public class Module {
         System.out.println(toString());
     }
 
-    @Override
-    public String toString() {
+    public String schedulePrint() {
         int index  = 1;
-        String schedulePrint = new String();
+        String schedulePrint = "";
         for (Schedule s : scheduleList) {
             if (s != null) {
                 schedulePrint = schedulePrint + String.valueOf(index) + ".\n";
@@ -147,10 +146,16 @@ public class Module {
                 index++;
             }
         }
+        return schedulePrint;
+    }
+
+    @Override
+    public String toString() {
+
         return "Module name: " + moduleName
                 + "\nCREDITS: " + credits
                 + "\n--------------------------- "
-                + "\nSCHEDULE: \n" + schedulePrint
+                + "\nSCHEDULE: \n" + schedulePrint()
                 + "--------------------------- "
                 + "\nGRADE: " + letterGrade
                 + "\nTASKS: " + taskList;

@@ -1,6 +1,8 @@
 package task;
 
 import command.DateParser;
+import command.Ui;
+
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,6 +70,7 @@ public class Task {
 
     public void markDone() {
         logger.log(Level.INFO, "Successfully marked Task as done...");
+        Ui.printMarkDoneMessage(this);
         this.isDone = true;
     }
 

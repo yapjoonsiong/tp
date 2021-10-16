@@ -136,6 +136,7 @@ public class Parser {
                 break;
             }
             module.addClass(taskDescription);
+            Ui.addModuleClassMessage(module);
             logger.log(Level.INFO, "AddClass test");
             break;
         case ADDTASK:
@@ -172,9 +173,17 @@ public class Parser {
                 break;
             }
             module.addGrade(taskDescription);
-            Ui.addModuleGradeMessage();
-            System.out.println(module);
+            Ui.addModuleGradeMessage(module);
             logger.log(Level.INFO, "AddGrade test");
+            break;
+        case ADDCREDIT:
+            if (taskDescription.isEmpty()) {
+                Ui.missingDescription();
+                break;
+            }
+            module.addCredits(Integer.parseInt(taskDescription));
+            Ui.addModuleCreditsMessage(module);
+            logger.log(Level.INFO, "AddCredit test");
             break;
         case DELETECLASS:
             module.deleteClass();
@@ -190,16 +199,6 @@ public class Parser {
             break;
         case INFO:
             module.showInformation();
-            break;
-        case ADDCREDIT:
-            if (taskDescription.isEmpty()) {
-                Ui.missingDescription();
-                break;
-            }
-            module.addCredits(Integer.parseInt(taskDescription));
-            Ui.addModuleCreditsMessage();
-            System.out.println(module);
-            logger.log(Level.INFO, "AddCredit test");
             break;
         default:
             System.out.println("Invalid Module Command!");

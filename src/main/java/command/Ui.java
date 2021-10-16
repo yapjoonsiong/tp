@@ -1,6 +1,7 @@
 package command;
 
 
+import module.Module;
 import module.ModuleList;
 import task.Task;
 
@@ -55,12 +56,19 @@ public class Ui {
         moduleList.printModules();
     }
 
-    public static void addModuleGradeMessage() {
+    public static void addModuleGradeMessage(Module module) {
         System.out.println("Module grade successfully added: ");
+        System.out.println(module);
     }
 
-    public static void addModuleCreditsMessage() {
+    public static void addModuleCreditsMessage(Module module) {
         System.out.println("Module credits successfully added: ");
+        System.out.println(module);
+    }
+
+    public static void addModuleClassMessage(Module module) {
+        System.out.println("Module Class successfully added: ");
+        System.out.println(module.schedulePrint());
     }
 
     public static void addTaskMessage(Task task, String moduleName) {

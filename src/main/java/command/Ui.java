@@ -1,6 +1,7 @@
 package command;
 
 
+import module.ModuleList;
 import task.Task;
 
 import java.util.Locale;
@@ -47,6 +48,19 @@ public class Ui {
     public static void wrongDateTimeFormat() {
         System.out.println("Wrong date format input!");
         System.out.println("Format: dd/MM/yyyy hhmm");
+    }
+
+    public static void addModuleNameMessage(ModuleList moduleList) {
+        System.out.println("Module successfully added: ");
+        moduleList.printModules();
+    }
+
+    public static void addModuleGradeMessage() {
+        System.out.println("Module grade successfully added: ");
+    }
+
+    public static void addModuleCreditsMessage() {
+        System.out.println("Module credits successfully added: ");
     }
 
     public static void addTaskMessage(Task task, String moduleName) {

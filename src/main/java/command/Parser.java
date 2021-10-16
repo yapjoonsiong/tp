@@ -23,6 +23,7 @@ public class Parser {
     public static final String ADDCLASS = "addclass";
     public static final String ADDTASK = "addtask";
     public static final String ADDGRADE = "addgrade";
+    public static final String ADDCREDIT = "addcredit";
     public static final String DELETECLASS = "deleteclass";
     public static final String DELETETASK = "deletetask";
     public static final String DELETEGRADE = "deletegrade";
@@ -39,7 +40,7 @@ public class Parser {
     static String taskDescription;
     private final List list = new List();
     protected String moduleName;
-    protected Module module;
+    public Module module;
     protected boolean isExit;
     private static Logger logger = Logger.getLogger(Parser.class.getName());
 
@@ -69,6 +70,7 @@ public class Parser {
                 break;
             }
             NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
+            Ui.addModuleNameMessage(NoCap.moduleList);
             StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             logger.log(Level.INFO, "Add Test");
             break;
@@ -170,6 +172,8 @@ public class Parser {
                 break;
             }
             module.addGrade(taskDescription);
+            Ui.addModuleGradeMessage();
+            System.out.println(module);
             logger.log(Level.INFO, "AddGrade test");
             break;
         case DELETECLASS:
@@ -186,6 +190,16 @@ public class Parser {
             break;
         case INFO:
             module.showInformation();
+            break;
+        case ADDCREDIT:
+            if (taskDescription.isEmpty()) {
+                Ui.missingDescription();
+                break;
+            }
+            module.addCredits(Integer.parseInt(taskDescription));
+            Ui.addModuleCreditsMessage();
+            System.out.println(module);
+            logger.log(Level.INFO, "AddCredit test");
             break;
         default:
             System.out.println("Invalid Module Command!");

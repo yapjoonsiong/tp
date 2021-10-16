@@ -61,7 +61,7 @@ public class Parser {
             Ui.printHelpMessage();
             break;
         case ADD:
-            if(isEmptyDescription(taskDescription) | isDuplicateModule(taskDescription)) {
+            if (isEmptyDescription(taskDescription) | isDuplicateModule(taskDescription)) {
                 break;
             }
             NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
@@ -69,7 +69,7 @@ public class Parser {
             StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             break;
         case DELETE:
-            if(isEmptyDescription(taskDescription)) {
+            if (isEmptyDescription(taskDescription)) {
                 break;
             }
             NoCap.moduleList.delete(taskDescription);
@@ -114,40 +114,40 @@ public class Parser {
             return;
         }
 
-        if(isEmptyDescription(taskDescription)) {
+        if (isEmptyDescription(taskDescription)) {
             return;
         }
         splitInput(taskDescription);
 
         switch (taskType) {
         case ADDCLASS:
-            if(isEmptyDescription(taskDescription)) {
+            if (isEmptyDescription(taskDescription)) {
                 break;
             }
             module.addClass(taskDescription);
             Ui.addModuleClassMessage(module);
             break;
         case ADDTASK:
-            if(isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription)) {
+            if (isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription)) {
                 break;
             }
             module.addTask(taskDescription);
             break;
         case DONE:
-            if(isEmptyDescription(taskDescription)) {
+            if (isEmptyDescription(taskDescription)) {
                 break;
             }
             getTaskFromIndex(taskDescription).markDone();
             break;
         case ADDGRADE:
-            if(isEmptyDescription(taskDescription)) {
+            if (isEmptyDescription(taskDescription)) {
                 break;
             }
             module.addGrade(taskDescription);
             Ui.addModuleGradeMessage(module);
             break;
         case ADDCREDIT:
-            if(isEmptyDescription(taskDescription)) {
+            if (isEmptyDescription(taskDescription)) {
                 break;
             }
             module.addCredits(Integer.parseInt(taskDescription));
@@ -157,7 +157,7 @@ public class Parser {
             module.deleteClass();
             break;
         case DELETETASK:
-            if(isEmptyDescription(taskDescription)) {
+            if (isEmptyDescription(taskDescription)) {
                 break;
             }
             module.deleteTask(getTaskFromIndex(taskDescription));
@@ -178,7 +178,7 @@ public class Parser {
         Task task = null;
         try {
             index = Integer.parseInt(input) - 1;
-            if(isValidIndex(index)) {
+            if (isValidIndex(index)) {
                 task = module.taskList.get(index);
             }
         } catch (IndexOutOfBoundsException e) {

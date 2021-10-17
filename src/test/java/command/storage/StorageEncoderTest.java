@@ -29,13 +29,16 @@ class StorageEncoderTest {
         assertTrue(Files.exists(FILE_PATH));
         try {
             String fileContent = Files.readString(FILE_PATH);
-            assertEquals("{\"moduleList\":[{\"letterGrade\":null,\"moduleName\""
-                            + ":\"CS2102\",\"schedule\":null,\"taskList\":{\"taskList\":[],"
-                            + "\"taskCount\":0},\"scheduleList\":[],\"credits\":0},{\"letterGrade\""
-                            + ":null,\"moduleName\":\"CS2112\",\"schedule\":null,\"taskList\":"
-                            + "{\"taskList\":[],\"taskCount\":0},\"scheduleList\":[],\"credits\":0},"
-                            + "{\"letterGrade\":null,\"moduleName\":\"CS2132\",\"schedule\":null,\"taskList\""
-                            + ":{\"taskList\":[],\"taskCount\":0},\"scheduleList\":[],\"credits\":0}]}",
+            assertEquals("{\"moduleList\":[{\"letterGrade\":null,\"moduleName\"" +
+                            ":\"CS2102\",\"taskList\":{\"taskList\":[],\"taskCount\":0},\"" +
+                            "scheduleList\":{\"scheduleList\":[]},\"credits\":0,\"gradableTaskList\"" +
+                            ":{\"taskList\":[],\"taskCount\":0,\"gradableTaskList\":[]}},{\"letterGrade\"" +
+                            ":null,\"moduleName\":\"CS2112\",\"taskList\":{\"taskList\":[],\"taskCount\":0}," +
+                            "\"scheduleList\":{\"scheduleList\":[]},\"credits\":0,\"gradableTaskList\"" +
+                            ":{\"taskList\":[],\"taskCount\":0,\"gradableTaskList\":[]}},{\"letterGrade\"" +
+                            ":null,\"moduleName\":\"CS2132\",\"taskList\":{\"taskList\":[],\"taskCount\":0}," +
+                            "\"scheduleList\":{\"scheduleList\":[]},\"credits\":0,\"gradableTaskList\"" +
+                            ":{\"taskList\":[],\"taskCount\":0,\"gradableTaskList\":[]}}]}",
                     fileContent);
         } catch (IOException e) {
             fail(e.getMessage());

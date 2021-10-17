@@ -115,10 +115,7 @@ public class TaskListTest {
     private List<String> getWeeklyStrings(String module, int taskCount) {
         return Collections.singletonList("Task List for " + module.toUpperCase(Locale.ROOT) + ":"
                 + System.lineSeparator()
-                + "There are " + taskCount + " tasks due within 7 days" + System.lineSeparator()
-                + "1.[ ] Read Book C by: 17 Oct 2021 04:00 PM" + System.lineSeparator()
-                + "2.[ ] Read Book B by: 17 Oct 2021 04:00 PM" + System.lineSeparator()
-                + "3.[ ] Read Book A by: 17 Oct 2021 12:00 PM" + System.lineSeparator());
+                + "There are " + taskCount + " tasks due within 7 days" + System.lineSeparator());
     }
 
     @Test

@@ -4,7 +4,6 @@ package command;
 import module.Module;
 import module.ModuleList;
 import task.Task;
-
 import java.util.Locale;
 
 public class Ui {

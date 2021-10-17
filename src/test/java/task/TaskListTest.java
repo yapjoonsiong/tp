@@ -220,3 +220,4 @@ public class TaskListTest {
         assertLinesMatch(expectedLines, actualLines);
     }
 }
+

@@ -2,7 +2,6 @@ package command;
 
 import command.storage.StorageDecoder;
 import module.ModuleList;
-
 import java.util.Scanner;
 
 public class NoCap {

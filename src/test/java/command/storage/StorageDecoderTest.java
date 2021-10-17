@@ -5,9 +5,17 @@ import module.ModuleList;
 import module.Schedule;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class StorageDecoderTest {
+    private static final String ROOT = System.getProperty("user.dir");
+    private static final Path FILE_PATH = Paths.get(ROOT, "data", "data.json");
 
     @Test
     public void decodeModuleList_normalModuleList_success() {
@@ -31,6 +39,20 @@ class StorageDecoderTest {
         StorageEncoder.encodeAndSaveModuleListToJson(modules);
         ModuleList loadedModules = StorageDecoder.decodeJsonToModuleList();
         assertEquals(loadedModules.toString(), modules.toString());
+    }
+
+    @Test
+    public void decodeModuleList_noFile_success() {
+        try {
+            if (Files.exists(FILE_PATH)) {
+                Files.delete(FILE_PATH);
+            }
+        } catch (IOException e) {
+            fail(e);
+        }
+        ModuleList loadedModules = StorageDecoder.decodeJsonToModuleList();
+        assertEquals(loadedModules.toString(), new ModuleList().toString());
+
     }
 
 }

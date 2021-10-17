@@ -34,9 +34,6 @@ public class StorageDecoder {
             modules = objectMapper.readValue(new File(FILE_PATH.toString()), ModuleList.class);
             Ui.loadFileSuccessful();
             logger.log(Level.INFO,"Load file successful");
-        } catch (DatabindException e) {
-            System.out.println("Save file is corrupted, creating new template");
-            logger.log(Level.INFO,"Load file successful");
         } catch (IOException e) {
             System.out.println("Error reading save file, creating new template");
         } catch (Exception e) {

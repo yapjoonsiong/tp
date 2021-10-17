@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
-
 
 public class TaskListTest {
     private static final LocalDateTime refDate = LocalDateTime.now().withHour(0);
@@ -194,7 +192,7 @@ public class TaskListTest {
                 + "2.[ ] Read Book B by: " + DateParser.dateStringOutput(DateParser.parseDate(dateB))
                 + System.lineSeparator()
                 + "3.[ ] Read Book A by: " + DateParser.dateStringOutput(DateParser.parseDate(dateA))
-                +System.lineSeparator()
+                + System.lineSeparator()
                 + "4.[ ] Read Book E by: " + DateParser.dateStringOutput(DateParser.parseDate(dateE))
                 + System.lineSeparator());
     }

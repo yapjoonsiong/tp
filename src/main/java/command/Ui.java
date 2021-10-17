@@ -4,11 +4,9 @@ package command;
 import module.Module;
 import module.ModuleList;
 import task.Task;
-
 import java.util.Locale;
 
 public class Ui {
-    private static final String logo = "NoCap Logo";
 
     public static void printHelpMessage() {
         System.out.println("Display help messages: help");
@@ -36,7 +34,7 @@ public class Ui {
     }
 
     public static void printStartMessage() {
-        System.out.println("Welcome to NoCap" + System.lineSeparator());
+        System.out.println("Welcome to NoCap");
     }
 
     public static void printEndMessage() {

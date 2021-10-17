@@ -115,15 +115,17 @@ public class TaskListTest {
     private List<String> getWeeklyStrings(String module, int taskCount) {
         return Collections.singletonList("Task List for " + module.toUpperCase(Locale.ROOT) + ":"
                 + System.lineSeparator()
+
                 + "There are " + taskCount + " tasks due within 7 days" + System.lineSeparator());
+
     }
 
     @Test
     void showAllWeekly_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010", "Read Book C /by 17/10/2021 1600");
-        a.addTask("cs1010", "Read Book B /by 17/10/2021 1600");
-        a.addTask("cs1010", "Read Book A /by 17/10/2021 1200");
+        a.addTask("cs1010", "Read Book C /by 18/10/2021 1600");
+        a.addTask("cs1010", "Read Book B /by 18/10/2021 1600");
+        a.addTask("cs1010", "Read Book A /by 18/10/2021 1200");
         a.addTask("cs1010", "Read Book D /by 30/10/2021 1100");
         // Create a stream to hold the output
         String module = "moduleName";

@@ -2,6 +2,8 @@ package module;
 
 
 import command.storage.StorageDecoder;
+import task.GradableTask;
+import task.GradableTaskList;
 import task.Task;
 import task.TaskList;
 
@@ -17,6 +19,7 @@ public class Module {
     public TaskList taskList;
     private ArrayList<Schedule> scheduleList;
     protected int credits;
+    protected GradableTaskList gradableTaskList;
     private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
 
     public Module(String moduleName) {
@@ -26,6 +29,7 @@ public class Module {
         this.scheduleList = new ArrayList<Schedule>();
         this.credits = 0;
         this.taskList = new TaskList();
+        this.gradableTaskList = new GradableTaskList();
     }
 
     /**
@@ -75,6 +79,14 @@ public class Module {
         this.scheduleList = scheduleList;
     }
 
+    public GradableTaskList getGradableTaskList() {
+        return this.gradableTaskList;
+    }
+
+    public void addGradableTask(String userInput) {
+        this.gradableTaskList.addGradableTask(this.moduleName, userInput);
+    }
+
     public int getCredits() {
         return credits;
     }
@@ -111,7 +123,7 @@ public class Module {
         assert scheduleInfo.length == 4;
         Schedule schedule = new Schedule(scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
         this.scheduleList.add(schedule);
-        logger.log(Level.INFO,"Schedule added successfully");
+        logger.log(Level.INFO, "Schedule added successfully");
     }
 
     public void deleteClass() {
@@ -137,7 +149,7 @@ public class Module {
     }
 
     public String schedulePrint() {
-        int index  = 1;
+        int index = 1;
         String schedulePrint = "";
         for (Schedule s : scheduleList) {
             if (s != null) {
@@ -158,6 +170,7 @@ public class Module {
                 + "\nSCHEDULE: \n" + schedulePrint()
                 + "--------------------------- "
                 + "\nGRADE: " + letterGrade
-                + "\nTASKS: " + taskList;
+                + "\nTASKS: " + taskList
+                + "\nBREAKDOWN: \n" + gradableTaskList;
     }
 }

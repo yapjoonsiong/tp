@@ -70,7 +70,7 @@ public class Ui {
 
     public static void addModuleClassMessage(Module module) {
         System.out.println("Module Class successfully added: ");
-        System.out.println(module.schedulePrint());
+        System.out.println(module.getScheduleList());
     }
 
     public static void addTaskMessage(Task task, String moduleName) {

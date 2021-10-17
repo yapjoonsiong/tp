@@ -29,6 +29,7 @@ public class Parser {
     public static final String DONE = "done";
     public static final String INFO = "info";
     public static final String START_OF_DATE = "/by";
+    public static final String START_OF_WEIGHTAGE = "/w";
     public static final String SORT_BY_DATE = "sortbydate";
     public static final String SORT_BY_STATUS = "sortbystatus";
     public static final String SHOW_WEEK = "w";

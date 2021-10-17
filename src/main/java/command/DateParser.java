@@ -33,7 +33,7 @@ public class DateParser {
 
     public static String dateStringOutput(LocalDateTime dateTime) throws NullPointerException {
         try {
-           return dateTime.format(outputFormatter);
+            return dateTime.format(outputFormatter);
         } catch (NullPointerException e) {
             Ui.invalidDate();
         }

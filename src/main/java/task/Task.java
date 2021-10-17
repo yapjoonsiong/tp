@@ -65,7 +65,7 @@ public class Task {
         this.deadline = DateParser.parseDate(date);
     }
 
-    private String getDeadline() {
+    protected String getDeadline() {
         return DateParser.dateStringOutput(this.deadline);
     }
 

@@ -3,12 +3,13 @@ package command;
 import command.storage.StorageEncoder;
 import module.Module;
 import task.Task;
+
 import java.util.Locale;
 import java.util.logging.Logger;
 
 public class Parser {
 
-    private static final String EMPTY_STRING = "";
+    public static final String EMPTY_STRING = "";
     private static final String SPACE_STRING = " ";
     public static final String TASK = "task";
     public static final String MODULE = "module";
@@ -56,42 +57,42 @@ public class Parser {
     public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {
-            case HELP:
-                Ui.printHelpMessage();
+        case HELP:
+            Ui.printHelpMessage();
+            break;
+        case ADD:
+            if (isEmptyDescription(taskDescription) | isDuplicateModule(taskDescription)) {
                 break;
-            case ADD:
-                if (isEmptyDescription(taskDescription) | isDuplicateModule(taskDescription)) {
-                    break;
-                }
-                NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
-                Ui.addModuleNameMessage(NoCap.moduleList);
-                StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            }
+            NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
+            Ui.addModuleNameMessage(NoCap.moduleList);
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            break;
+        case DELETE:
+            if (isEmptyDescription(taskDescription)) {
                 break;
-            case DELETE:
-                if (isEmptyDescription(taskDescription)) {
-                    break;
-                }
-                NoCap.moduleList.delete(taskDescription);
-                StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
-                break;
-            case LIST:
-                list.listParser(taskDescription);
-                break;
-            case TIMETABLE:
-                NoCap.moduleList.printTimeTable();
-                break;
-            case EXIT:
-                Ui.printExitMessage();
-                StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
-                this.isExit = true;
-                break;
-            case MODULETYPE:
-                moduleParser(taskDescription);
-                StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
-                break;
-            default:
-                System.out.println("Invalid Input!");
-                break;
+            }
+            NoCap.moduleList.delete(taskDescription);
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            break;
+        case LIST:
+            list.listParser(taskDescription);
+            break;
+        case TIMETABLE:
+            NoCap.moduleList.printTimeTable();
+            break;
+        case EXIT:
+            Ui.printExitMessage();
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            this.isExit = true;
+            break;
+        case MODULETYPE:
+            moduleParser(taskDescription);
+            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            break;
+        default:
+            System.out.println("Invalid Input!");
+            break;
         }
     }
 
@@ -119,56 +120,56 @@ public class Parser {
         splitInput(taskDescription);
 
         switch (taskType) {
-            case ADDCLASS:
-                if (isEmptyDescription(taskDescription)) {
-                    break;
-                }
-                module.addClass(taskDescription);
-                Ui.addModuleClassMessage(module);
+        case ADDCLASS:
+            if (isEmptyDescription(taskDescription)) {
                 break;
-            case ADDTASK:
-                if (isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription)) {
-                    break;
-                }
-                module.addTask(taskDescription);
+            }
+            module.addClass(taskDescription);
+            Ui.addModuleClassMessage(module);
+            break;
+        case ADDTASK:
+            if (isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription)) {
                 break;
-            case DONE:
-                if (isEmptyDescription(taskDescription)) {
-                    break;
-                }
-                getTaskFromIndex(taskDescription).markDone();
+            }
+            module.addTask(taskDescription);
+            break;
+        case DONE:
+            if (isEmptyDescription(taskDescription)) {
                 break;
-            case ADDGRADE:
-                if (isEmptyDescription(taskDescription)) {
-                    break;
-                }
-                module.addGrade(taskDescription);
-                Ui.addModuleGradeMessage(module);
+            }
+            getTaskFromIndex(taskDescription).markDone();
+            break;
+        case ADDGRADE:
+            if (isEmptyDescription(taskDescription)) {
                 break;
-            case ADDCREDIT:
-                if (isEmptyDescription(taskDescription)) {
-                    break;
-                }
-                module.addCredits(Integer.parseInt(taskDescription));
-                Ui.addModuleCreditsMessage(module);
+            }
+            module.addGrade(taskDescription);
+            Ui.addModuleGradeMessage(module);
+            break;
+        case ADDCREDIT:
+            if (isEmptyDescription(taskDescription)) {
                 break;
-            case DELETECLASS:
-                module.deleteClass();
+            }
+            module.addCredits(Integer.parseInt(taskDescription));
+            Ui.addModuleCreditsMessage(module);
+            break;
+        case DELETECLASS:
+            module.deleteClass();
+            break;
+        case DELETETASK:
+            if (isEmptyDescription(taskDescription)) {
                 break;
-            case DELETETASK:
-                if (isEmptyDescription(taskDescription)) {
-                    break;
-                }
-                module.deleteTask(getTaskFromIndex(taskDescription));
-                break;
-            case DELETEGRADE:
-                module.deleteGrade();
-                break;
-            case INFO:
-                module.showInformation();
-                break;
-            default:
-                break;
+            }
+            module.deleteTask(getTaskFromIndex(taskDescription));
+            break;
+        case DELETEGRADE:
+            module.deleteGrade();
+            break;
+        case INFO:
+            module.showInformation();
+            break;
+        default:
+            break;
         }
     }
 

@@ -9,6 +9,7 @@ import java.util.Locale;
 
 public class Ui {
     private static final String logo = "NoCap Logo";
+
     public static void printHelpMessage() {
         System.out.println("Display help messages: help");
         System.out.println("Add Module: add <module>");
@@ -35,9 +36,7 @@ public class Ui {
     }
 
     public static void printStartMessage() {
-        System.out.println(logo);
-        System.out.println("Welcome to NoCap" + System.lineSeparator()
-        + "User:");
+        System.out.println("Welcome to NoCap");
     }
 
     public static void printEndMessage() {

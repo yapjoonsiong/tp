@@ -69,8 +69,8 @@ class ModuleTest {
                 + "Day: WED\n" + "Start Time: 0800\n" + "Location: E1-01\n" + "Comments: tut\n" + "2.\n"
                 + "Day: TUE\n" + "Start Time: 0800\n" + "Location: E1-01\n" + "Comments: lect\n" + "3.\n"
                 + "Day: MON\n" + "Start Time: 1000\n" + "Location: E1-01\n" + "Comments: lect\n"
-                + "--------------------------- \n" + "GRADE: A+\n" +
-                "TASKS: [[ ] read by: 11 Nov 2021 07:00 PM, [ ] do tutorial by: 12 Nov 2021 08:00 PM]\n"
+                + "--------------------------- \n" + "GRADE: A+\n"
+                + "TASKS: [[ ] read by: 11 Nov 2021 07:00 PM, [ ] do tutorial by: 12 Nov 2021 08:00 PM]\n"
                 + "BREAKDOWN: \n1.\n" + "Assignment by: 12 Dec 2021 04:00 PM Weightage 30% [ ] \n"
                 + "2.\n" + "Finals by: 15 Dec 2021 04:00 PM Weightage 50% [ ] \n";
         assertEquals(exp, m.toString());

@@ -5,7 +5,6 @@ import command.storage.StorageDecoder;
 import task.Task;
 import task.TaskList;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +14,7 @@ public class Module {
     protected String moduleName;
     protected Schedule schedule;
     public TaskList taskList;
-    private ArrayList<Schedule> scheduleList;
+    private ScheduleList scheduleList;
     protected int credits;
     private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
 
@@ -23,7 +22,7 @@ public class Module {
         assert !moduleName.equals("");
         this.moduleName = moduleName;
         this.letterGrade = null;
-        this.scheduleList = new ArrayList<Schedule>();
+        this.scheduleList = new ScheduleList();
         this.credits = 0;
         this.taskList = new TaskList();
     }
@@ -51,13 +50,13 @@ public class Module {
         this.moduleName = moduleName;
     }
 
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
-    }
+    //    public Schedule getSchedule() {
+    //        return schedule;
+    //    }
+    //
+    //    public void setSchedule(Schedule schedule) {
+    //        this.schedule = schedule;
+    //    }
 
     public TaskList getTaskList() {
         return taskList;
@@ -67,11 +66,11 @@ public class Module {
         this.taskList = taskList;
     }
 
-    public ArrayList<Schedule> getScheduleList() {
-        return scheduleList;
+    public ScheduleList getScheduleList() {
+        return this.scheduleList;
     }
 
-    public void setScheduleList(ArrayList<Schedule> scheduleList) {
+    public void setScheduleList(ScheduleList scheduleList) {
         this.scheduleList = scheduleList;
     }
 
@@ -90,7 +89,7 @@ public class Module {
 
     public Schedule get(int index) {
         assert index >= 0;
-        return this.scheduleList.get(index);
+        return this.scheduleList.getSchedule(index);
     }
 
     public void addGrade(String letterGrade) {
@@ -102,7 +101,7 @@ public class Module {
     }
 
     public void addClass(Schedule schedule) {
-        this.scheduleList.add(schedule);
+        this.scheduleList.addClass(schedule);
     }
 
     //overloading to take in String input * Added by jiexiong to keep Parser clean
@@ -110,14 +109,12 @@ public class Module {
         String[] scheduleInfo = input.split("/");
         assert scheduleInfo.length == 4;
         Schedule schedule = new Schedule(scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
-        this.scheduleList.add(schedule);
+        this.scheduleList.addClass(schedule);
         logger.log(Level.INFO,"Schedule added successfully");
     }
 
     public void deleteClass() {
-        while (this.scheduleList.size() != 0) {
-            this.scheduleList.remove(scheduleList.get(0));
-        }
+        this.scheduleList.deleteClass();
     }
 
     public void addTask(String userInput) {
@@ -136,26 +133,13 @@ public class Module {
         System.out.println(toString());
     }
 
-    public String schedulePrint() {
-        int index  = 1;
-        String schedulePrint = "";
-        for (Schedule s : scheduleList) {
-            if (s != null) {
-                schedulePrint = schedulePrint + String.valueOf(index) + ".\n";
-                schedulePrint = schedulePrint + s.toString() + "\n";
-                index++;
-            }
-        }
-        return schedulePrint;
-    }
-
     @Override
     public String toString() {
 
         return "Module name: " + moduleName
                 + "\nCREDITS: " + credits
                 + "\n--------------------------- "
-                + "\nSCHEDULE: \n" + schedulePrint()
+                + "\nSCHEDULE: \n" + scheduleList
                 + "--------------------------- "
                 + "\nGRADE: " + letterGrade
                 + "\nTASKS: " + taskList;

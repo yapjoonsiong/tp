@@ -2,6 +2,7 @@ package task;
 
 import command.DateParser;
 import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
@@ -10,14 +11,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
+
 
 public class TaskListTest {
     private static final LocalDateTime refDate = LocalDateTime.now().withHour(0);
     private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
     private static final String dateA = refDate.plusDays(1).plusHours(10).format(format);
-    private static final  String dateB = refDate.plusDays(6).plusHours(12).format(format);
+    private static final String dateB = refDate.plusDays(6).plusHours(12).format(format);
     private static final String dateC = refDate.plusDays(13).plusHours(15).format(format);
     private static final String dateD = refDate.plusYears(2).plusHours(15).format(format);
     private static final String dateE = refDate.plusMonths(2).plusHours(15).format(format);
@@ -113,10 +116,10 @@ public class TaskListTest {
         a.printTasks(a.taskList);
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
-                  "1.[ ] Read Book C by: 14 Dec 2021 04:00 PM" + System.lineSeparator()
-                + "2.[ ] Read Book B by: 13 Dec 2021 04:00 PM" + System.lineSeparator()
-                + "3.[ ] Read Book A by: 12 Dec 2021 04:00 PM" + System.lineSeparator()
-                + "4.[ ] Read Book D by: 12 Dec 2021 11:00 AM" + System.lineSeparator());
+                "1.[ ] Read Book C by: 14 Dec 2021 04:00 PM" + System.lineSeparator()
+                        + "2.[ ] Read Book B by: 13 Dec 2021 04:00 PM" + System.lineSeparator()
+                        + "3.[ ] Read Book A by: 12 Dec 2021 04:00 PM" + System.lineSeparator()
+                        + "4.[ ] Read Book D by: 12 Dec 2021 11:00 AM" + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 
@@ -137,6 +140,7 @@ public class TaskListTest {
         a.addTask("cs1010", "Read Book B /by " + dateB);
         a.addTask("cs1010", "Read Book A /by " + dateA);
         a.addTask("cs1010", "Read Book C /by " + dateC);
+
         // Create a stream to hold the output
         String module = "moduleName";
         ByteArrayOutputStream read = new ByteArrayOutputStream();

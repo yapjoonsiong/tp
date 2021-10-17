@@ -18,6 +18,7 @@ class StorageEncoderTest {
 
     private static final String ROOT = System.getProperty("user.dir");
     private static final Path FILE_PATH = Paths.get(ROOT, "data", "data.json");
+    private static final Path DIRECTORY_PATH = Paths.get(ROOT, "data");
 
     @Test
     public void encodeModuleList_normalModuleList_success() {
@@ -53,5 +54,20 @@ class StorageEncoderTest {
         } catch (IOException e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void encodeModuleList_noFile_success() {
+        try {
+            if (Files.exists(DIRECTORY_PATH)) {
+                Files.delete(FILE_PATH);
+                Files.delete(DIRECTORY_PATH);
+            }
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
+        ModuleList modules = new ModuleList();
+        StorageEncoder.encodeAndSaveModuleListToJson(modules);
+        assertTrue(Files.exists(FILE_PATH));
     }
 }

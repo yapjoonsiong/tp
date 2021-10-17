@@ -37,8 +37,7 @@ public class Ui {
 
     public static void printStartMessage() {
         System.out.println(logo);
-        System.out.println("Welcome to NoCap" + System.lineSeparator()
-                + "User:");
+        System.out.println("Welcome to NoCap" + System.lineSeparator());
     }
 
     public static void printEndMessage() {

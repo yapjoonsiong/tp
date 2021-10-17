@@ -18,7 +18,7 @@ public class TaskTest {
         Task task = new Task("Submit Assignment 1", "19/09/2021 1600");
         task.markDone();
         task.createStatusIcon();
-        assertEquals("[X] ", task.createStatusIcon());
+        assertEquals("[X]", task.createStatusIcon());
     }
 
     @Test

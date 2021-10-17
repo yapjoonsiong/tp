@@ -1,6 +1,8 @@
 package command;
 
 import module.Module;
+import task.TaskList;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,49 +23,55 @@ public class List {
 
     private void sortByDate(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                module.taskList.sortTaskListByDate(module.getModuleName());
+                list.sortTaskListByDate(module.getModuleName());
             }
         }
     }
 
     private void sortByStatus(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                module.taskList.sortTaskListByStatus(module.getModuleName());
+                list.sortTaskListByStatus(module.getModuleName());
             }
         }
     }
 
     private void listWeekly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                module.taskList.showAllWeekly(module.getModuleName());
+                list.showAllWeekly(module.getModuleName());
             }
         }
     }
 
-    private  void listAll(ArrayList<Module> moduleList) {
+    private void listAll(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                Ui.printTaskList(module.getModuleName(), module.taskList.getTaskCount());
-                module.taskList.printTasks(module.taskList.getTaskList());
+                Ui.printTaskList(module.getModuleName(), list.getTaskCount());
+                list.printTasks(list.getTaskList());
             }
         }
     }
 
     private void listMonthly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                module.taskList.showAllMonthly(module.getModuleName());
+                list.showAllMonthly(module.getModuleName());
             }
         }
     }
 
-    private  void listYearly(ArrayList<Module> moduleList) {
+    private void listYearly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                module.taskList.showAllYearly(module.getModuleName());
+                list.showAllYearly(module.getModuleName());
             }
         }
     }

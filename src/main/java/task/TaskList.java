@@ -2,6 +2,8 @@ package task;
 
 import command.Parser;
 import command.Ui;
+
+import java.lang.reflect.Array;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
@@ -86,7 +88,6 @@ public class TaskList {
      * @param userInput task description input by user
      */
     public void addTask(String module, String userInput) throws DateTimeException {
-        logger.log(Level.INFO, "Successfully added task");
         String date = getDate(userInput);
         if (date.isBlank()) {
             Ui.missingDate();
@@ -97,6 +98,7 @@ public class TaskList {
                 this.taskList.add(taskCount, newTask);
                 this.taskCount = taskList.size();
                 Ui.addTaskMessage(newTask, module);
+                logger.log(Level.INFO, "Successfully added task");
             } catch (DateTimeException e) {
                 Ui.wrongDateTimeFormat();
             }
@@ -119,25 +121,25 @@ public class TaskList {
         LocalDate date = LocalDate.now();
         Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day > 0 && day <= DAYS_IN_A_WEEK;
+        return day <= DAYS_IN_A_WEEK;
     }
 
     private boolean isMonthly(Task t) {
         LocalDate date = LocalDate.now();
         Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day >= 0 && day <= DAYS_IN_A_MONTH;
+        return day <= DAYS_IN_A_MONTH;
     }
 
     private boolean isYearly(Task t) {
         LocalDate date = LocalDate.now();
         Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day >= 0 && day <= DAYS_IN_A_YEAR;
+        return day <= DAYS_IN_A_YEAR;
     }
 
     public void showAllWeekly(String module) {
-        logger.log(Level.INFO, "Printing weekly tasks list...");
+        //  logger.log(Level.INFO, "Printing weekly tasks list...");
         ArrayList<Task> list = new ArrayList<>(weeklyTaskList());
         Ui.printWeeklyTaskList(module, list.size());
         printTasks(list);
@@ -194,6 +196,7 @@ public class TaskList {
         int index = 1;
         for (Task task : taskList) {
             if (task != null) {
+                task.updateOverdue();
                 System.out.print(index + ".");
                 System.out.println(task);
                 index++;

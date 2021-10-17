@@ -139,6 +139,7 @@ public class TaskListTest {
         a.addTask("cs1010", "Read Book B /by " + dateB);
         a.addTask("cs1010", "Read Book A /by " + dateA);
         a.addTask("cs1010", "Read Book C /by " + dateC);
+
         // Create a stream to hold the output
         String module = "moduleName";
         ByteArrayOutputStream read = new ByteArrayOutputStream();

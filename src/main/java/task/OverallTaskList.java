@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class OverallTaskList extends TaskList{
+public class OverallTaskList extends TaskList {
     private static final Logger logger = Logger.getLogger(OverallTaskList.class.getName());
     private static final int DAYS_IN_A_WEEK = 7;
     private static final int DAYS_IN_A_MONTH = 31;
@@ -64,7 +64,7 @@ public class OverallTaskList extends TaskList{
                 .filter(this::isWithinWeek)
                 .collect(Collectors.toList());
         Ui.printOverallWeeklyTasks(newTaskList);
-        logger.log(Level.INFO,"print overall weekly tasks");
+        logger.log(Level.INFO, "print overall weekly tasks");
     }
 
     private boolean isWithinWeek(OverallTask task) {
@@ -80,7 +80,7 @@ public class OverallTaskList extends TaskList{
                 .filter(this::isWithinMonth)
                 .collect(Collectors.toList());
         Ui.printOverallMonthlyTasks(newTaskList);
-        logger.log(Level.INFO,"print overall monthly tasks");
+        logger.log(Level.INFO, "print overall monthly tasks");
     }
 
     private boolean isWithinMonth(OverallTask task) {
@@ -96,7 +96,7 @@ public class OverallTaskList extends TaskList{
                 .filter(this::isWithinYear)
                 .collect(Collectors.toList());
         Ui.printOverallYearlyTasks(newTaskList);
-        logger.log(Level.INFO,"print overall yearly tasks");
+        logger.log(Level.INFO, "print overall yearly tasks");
     }
 
     private boolean isWithinYear(OverallTask task) {
@@ -123,7 +123,6 @@ public class OverallTaskList extends TaskList{
         }
         return out.toString();
     }
-
 
 
 }

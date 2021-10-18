@@ -49,7 +49,7 @@ class OverallTaskTest {
         OverallTask task1 = new OverallTask("Assignment", "19/09/2021 1600", "CS2113", true);
         OverallTask task2 = new OverallTask("Assignment", "19/09/2021 1600", "CS2113", false);
         int result = OverallTask.statusComparator.compare(task1, task2);
-        assertTrue (result < 0);
+        assertTrue(result < 0);
     }
 
     @Test
@@ -57,7 +57,7 @@ class OverallTaskTest {
         OverallTask task1 = new OverallTask("Assignment", "19/09/2021 1600", "CS2113", false);
         OverallTask task2 = new OverallTask("Assignment", "19/09/2021 1600", "CS2113", true);
         int result = OverallTask.statusComparator.compare(task1, task2);
-        assertTrue (result > 0);
+        assertTrue(result > 0);
     }
 
 

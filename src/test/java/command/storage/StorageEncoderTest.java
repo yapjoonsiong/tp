@@ -34,6 +34,7 @@ class StorageEncoderTest {
         modules.get(0).addClass(new Schedule("Tuesday", "12pm", "D3", "Bad"));
         StorageEncoder.encodeAndSaveModuleListToJson(modules);
         assertTrue(Files.exists(FILE_PATH));
+
         final String expectedOutput = "{\"moduleList\":[{\"letterGrade\":null,\"points\":0.0,\"moduleName"
                 + "\":\"CS2102\",\"taskList\":{\"taskList\":[{\"description\""
                 + ":\"sleep\",\"date\":\"21/08/2022 1600\",\"deadline\":[2022,8,"

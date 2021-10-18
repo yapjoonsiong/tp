@@ -34,9 +34,7 @@ class StorageEncoderTest {
         modules.get(0).addClass(new Schedule("Tuesday", "12pm", "D3", "Bad"));
         StorageEncoder.encodeAndSaveModuleListToJson(modules);
         assertTrue(Files.exists(FILE_PATH));
-        try {
-            String fileContent = Files.readString(FILE_PATH);
-            assertEquals("{\"moduleList\":[{\"letterGrade\":null,\"points\":0.0,\"moduleName"
+        final String expectedOutput = {\"moduleList\":[{\"letterGrade\":null,\"points\":0.0,\"moduleName"
                             + "\":\"CS2102\",\"taskList\":{\"taskList\":[{\"description\""
                             + ":\"sleep\",\"date\":\"21/08/2022 1600\",\"deadline\":[2022,8,"
                             + "21,16,0],\"done\":false}],\"taskCount\":1},\""
@@ -53,8 +51,10 @@ class StorageEncoderTest {
                             + "\"scheduleList\":{\"scheduleList\":[{\"startTime\":\"12pm\",\""
                             + "location\":\"E3\",\"day\":\"Monday\",\"comment\":\"Bad\"}]},\""
                             + "credits\":0,\"gradableTaskList\":{\"taskList\":[],\"taskCount\":0"
-                            + ",\"gradableTaskList\":[]}}]}",
-                    fileContent);
+                            + ",\"gradableTaskList\":[]}}]}";
+        try {
+            String fileContent = Files.readString(FILE_PATH);
+            assertEquals(expectedOutput, fileContent);
         } catch (IOException e) {
             fail(e.getMessage());
         }

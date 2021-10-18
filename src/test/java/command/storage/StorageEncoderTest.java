@@ -53,6 +53,7 @@ class StorageEncoderTest {
                 + "location\":\"E3\",\"day\":\"Monday\",\"comment\":\"Bad\"}]},\""
                 + "credits\":0,\"gradableTaskList\":{\"taskList\":[],\"taskCount\":0"
                 + ",\"gradableTaskList\":[]}}]}";
+
         try {
             String fileContent = Files.readString(FILE_PATH);
             assertEquals(expectedOutput, fileContent);

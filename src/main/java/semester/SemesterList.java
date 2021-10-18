@@ -45,7 +45,7 @@ public class SemesterList {
     public void visualiseCap() {
         System.out.print("Cumulative CAP: " + getCap());
         for (Semester semester : semesterList) {
-            System.out.println(semester.getSemester() + ": " + semester.getCap());
+            System.out.println(semester.getSem() + ": " + semester.getCap());
         }
         /*for (int i = 0; i < 35; i++) {
             for (int j = 0; j < 50; j++) {

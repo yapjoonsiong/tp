@@ -46,6 +46,10 @@ public class Semester {
         cap = points / credits;
     }
 
+    public void updateSemester() {
+        updateCap();
+    }
+
     public int getCredits() {
         updateCredits();
         return credits;
@@ -61,7 +65,7 @@ public class Semester {
         return cap;
     }
 
-    public String getSemester() {
+    public String getSem() {
         return this.semester;
     }
 }

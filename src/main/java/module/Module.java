@@ -107,6 +107,7 @@ public class Module {
 
     public void addGrade(String letterGrade) {
         this.letterGrade = letterGrade;
+        updatePoints();
     }
 
     public void deleteGrade() {
@@ -152,7 +153,6 @@ public class Module {
     }
 
     public double getPoints() {
-        updatePoints();
         return points;
     }
 

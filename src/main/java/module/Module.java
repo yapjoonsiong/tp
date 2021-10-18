@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 public class Module {
     protected String letterGrade;
+    protected double points;
     protected String moduleName;
     protected Schedule schedule;
     public TaskList taskList;
@@ -112,6 +113,48 @@ public class Module {
         this.letterGrade = null;
     }
 
+    private void updatePoints() {
+        switch (letterGrade) {
+        case "A+":
+        case "A":
+            points = 5;
+            break;
+        case "A-":
+            points = 4.5;
+            break;
+        case "B+":
+            points = 4.0;
+            break;
+        case "B":
+            points = 3.5;
+            break;
+        case "B-":
+            points = 3.0;
+            break;
+        case "C+":
+            points = 2.5;
+            break;
+        case "C":
+            points = 2.0;
+            break;
+        case "D+":
+            points = 1.5;
+            break;
+        case "D":
+            points = 1.0;
+            break;
+        case "F":
+            points = 0;
+            break;
+        default:
+            break;
+        }
+    }
+
+    public double getPoints() {
+        updatePoints();
+        return points;
+    }
     public void addClass(Schedule schedule) {
         this.scheduleList.addClass(schedule);
     }

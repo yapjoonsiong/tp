@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class NoCap {
     public static ModuleList moduleList = StorageDecoder.decodeJsonToModuleList();
 
+
     private void run() {
         Ui.printStartMessage();
         Parser parse = new Parser();

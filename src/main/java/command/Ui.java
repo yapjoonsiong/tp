@@ -3,8 +3,10 @@ package command;
 
 import module.Module;
 import module.ModuleList;
+import task.OverallTask;
 import task.Task;
 
+import java.util.List;
 import java.util.Locale;
 
 public class Ui {
@@ -159,4 +161,38 @@ public class Ui {
         System.out.println("Invalid Module name!");
     }
 
+    public static void printOverallListOrderedByDate(List<OverallTask> newTaskList) {
+        System.out.println("Tasks sorted by date: ");
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void printOverallListOrderedByStatus(List<OverallTask> newTaskList) {
+        System.out.println("Tasks sorted by status: ");
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void printOverallWeeklyTasks(List<OverallTask> newTaskList) {
+        System.out.println("Weekly tasks: ");
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void printOverallMonthlyTasks(List<OverallTask> newTaskList) {
+        System.out.println("Monthly tasks: ");
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void printOverallYearlyTasks(List<OverallTask> newTaskList) {
+        System.out.println("Yearly tasks: ");
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
 }

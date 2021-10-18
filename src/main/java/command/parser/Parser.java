@@ -141,7 +141,7 @@ public class Parser {
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
-            Task tobeDone= parserSearch.getTaskFromIndex(taskDescription,module.taskList.getTaskList());
+            Task tobeDone = parserSearch.getTaskFromIndex(taskDescription, module.taskList.getTaskList());
             if (tobeDone != null) {
                 tobeDone.markDone();
             }

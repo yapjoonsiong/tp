@@ -1,13 +1,7 @@
-package Semester;
+package semester;
 
-import command.storage.StorageDecoder;
 import module.ModuleList;
 import module.Module;
-
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Semester {
     protected int credits;

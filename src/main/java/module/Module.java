@@ -155,6 +155,7 @@ public class Module {
         updatePoints();
         return points;
     }
+
     public void addClass(Schedule schedule) {
         this.scheduleList.addClass(schedule);
     }

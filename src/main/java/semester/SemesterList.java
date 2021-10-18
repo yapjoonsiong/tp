@@ -1,4 +1,4 @@
-package Semester;
+package semester;
 
 import java.util.ArrayList;
 

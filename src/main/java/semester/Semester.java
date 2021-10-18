@@ -17,6 +17,7 @@ public class Semester {
         this.cap = 0;
         this.moduleList = new ModuleList();
     }
+
     /**
      * For deserialization from JSON file.
      */

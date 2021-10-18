@@ -1,6 +1,8 @@
 package command;
 
 
+import module.Module;
+import module.ModuleList;
 import task.Task;
 
 import java.util.Locale;
@@ -47,6 +49,26 @@ public class Ui {
     public static void wrongDateTimeFormat() {
         System.out.println("Wrong date format input!");
         System.out.println("Format: dd/MM/yyyy hhmm");
+    }
+
+    public static void addModuleNameMessage(ModuleList moduleList) {
+        System.out.println("Module successfully added: ");
+        moduleList.printModules();
+    }
+
+    public static void addModuleGradeMessage(Module module) {
+        System.out.println("Module grade successfully added: ");
+        System.out.println(module);
+    }
+
+    public static void addModuleCreditsMessage(Module module) {
+        System.out.println("Module credits successfully added: ");
+        System.out.println(module);
+    }
+
+    public static void addModuleClassMessage(Module module) {
+        System.out.println("Module Class successfully added: ");
+        System.out.println(module.getScheduleList());
     }
 
     public static void addTaskMessage(Task task, String moduleName) {
@@ -104,6 +126,18 @@ public class Ui {
         System.out.println("Task with the specified index not found!");
     }
 
+    public static void printInvalidKeyword() {
+        System.out.println("Task with the specified keyword not found!");
+    }
+
+    public static void printTaskFound() {
+        System.out.println("The following task(s) are found:");
+    }
+
+    public static void printSelectIndex() {
+        System.out.println("Please choose a task to perform the action:");
+    }
+
     public static void printMarkDoneMessage(Task task) {
         System.out.println("Task is completed:" + System.lineSeparator() + task);
     }
@@ -117,5 +151,12 @@ public class Ui {
         System.out.println("This module already exists!");
     }
 
+    public static void printInvalidInputMessage() {
+        System.out.println("Invalid Input!");
+    }
+
+    public static void printInvalidModuleNameMessage() {
+        System.out.println("Invalid Module name!");
+    }
 
 }

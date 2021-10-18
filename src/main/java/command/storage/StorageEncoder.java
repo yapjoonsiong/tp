@@ -2,6 +2,7 @@ package command.storage;
 
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import exceptions.ExceptionMessages;
 import exceptions.NoCapExceptions;
 import module.ModuleList;
@@ -26,6 +27,7 @@ public class StorageEncoder {
 
     public static void encodeAndSaveModuleListToJson(ModuleList moduleList) {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         try {
             if (!Files.exists(DIRECTORY_PATH)) {
                 createDataDirectory();

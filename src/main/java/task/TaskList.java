@@ -1,6 +1,6 @@
 package task;
 
-import command.Parser;
+import command.parser.Parser;
 import command.Ui;
 
 import java.time.DateTimeException;

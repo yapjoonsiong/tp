@@ -1,14 +1,16 @@
-package command;
+package command.parser;
 
+import command.NoCap;
+import command.Ui;
 import module.Module;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class List {
-    private static final Logger logger = Logger.getLogger(List.class.getName());
+public class ListParser {
+    private static final Logger logger = Logger.getLogger(ListParser.class.getName());
 
-    public List() {
+    public ListParser() {
     }
 
     boolean isEmpty(Module module) {

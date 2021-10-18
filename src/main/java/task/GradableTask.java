@@ -14,6 +14,6 @@ public class GradableTask extends Task {
 
     @Override
     public String toString() {
-        return getDescription() + " by: " + getDeadline() + " Weightage " + this.weightage + "% " + createStatusIcon();
+        return getDescription() + " by: " + createFormattedDeadline() + " Weightage " + this.weightage + "% " + createStatusIcon();
     }
 }

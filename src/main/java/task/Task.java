@@ -1,5 +1,7 @@
 package task;
 
+
+
 import command.parser.DateParser;
 import command.Ui;
 
@@ -24,7 +26,7 @@ public class Task {
         setDescription(description);
         setDate(date);
         setDone(false);
-        setDeadline(date);
+        setDeadline(DateParser.parseDate(date));
     }
 
     /**
@@ -46,6 +48,13 @@ public class Task {
         return isDone;
     }
 
+    /**
+     * Needed for serialization of data
+     * */
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
     //Setters
     public void setDescription(String description) {
         this.description = description;
@@ -59,12 +68,13 @@ public class Task {
         this.date = date;
     }
 
-    public void setDeadline(String date) {
-        logger.log(Level.INFO, "Successfully set Task deadline...");
-        this.deadline = DateParser.parseDate(date);
-    }
 
-    public String getDeadline() {
+    public void setDeadline(LocalDateTime date) {
+        logger.log(Level.INFO, "Successfully set Task deadline...");
+        this.deadline = date;
+    }
+    
+    public String createFormattedDeadline() {
         return DateParser.dateStringOutput(this.deadline);
     }
 
@@ -79,7 +89,7 @@ public class Task {
     }
 
     public String toString() {
-        return  createStatusIcon() + getDescription() + " by: "  + getDeadline();
+        return  createStatusIcon() + getDescription() + " by: "  + createFormattedDeadline();
         //the original line fails the tests?
         //return  createStatusIcon() + getDescription() + " by: " + "(" + getDeadline() + ")";
     }

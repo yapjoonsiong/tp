@@ -126,6 +126,18 @@ public class Ui {
         System.out.println("Task with the specified index not found!");
     }
 
+    public static void printInvalidKeyword() {
+        System.out.println("Task with the specified keyword not found!");
+    }
+
+    public static void printTaskFound() {
+        System.out.println("The following task(s) are found:");
+    }
+
+    public static void printSelectIndex() {
+        System.out.println("Please choose a task to perform the action:");
+    }
+
     public static void printMarkDoneMessage(Task task) {
         System.out.println("Task is completed:" + System.lineSeparator() + task);
     }
@@ -139,5 +151,12 @@ public class Ui {
         System.out.println("This module already exists!");
     }
 
+    public static void printInvalidInputMessage() {
+        System.out.println("Invalid Input!");
+    }
+
+    public static void printInvalidModuleNameMessage() {
+        System.out.println("Invalid Module name!");
+    }
 
 }

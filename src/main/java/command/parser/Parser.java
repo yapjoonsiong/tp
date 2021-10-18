@@ -1,11 +1,13 @@
-package command;
+package command.parser;
 
+import command.NoCap;
+import command.Ui;
 import command.storage.StorageEncoder;
 import module.Module;
 import task.Task;
 
+import java.util.ArrayList;
 import java.util.Locale;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
@@ -40,7 +42,8 @@ public class Parser {
 
     static String taskType;
     static String taskDescription;
-    private final List list = new List();
+    private final ListParser list = new ListParser();
+    private final ParserSearch parserSearch = new ParserSearch(this);
     protected String moduleName;
     public Module module;
     protected boolean isExit;
@@ -92,7 +95,7 @@ public class Parser {
             StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
             break;
         default:
-            System.out.println("Invalid Input!");
+            Ui.printInvalidInputMessage();
             break;
         }
     }
@@ -111,7 +114,7 @@ public class Parser {
         try {
             module = NoCap.moduleList.find(moduleName);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("invalid Module name!");
+            Ui.printInvalidModuleNameMessage();
             return;
         }
 
@@ -138,7 +141,10 @@ public class Parser {
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
-            getTaskFromIndex(taskDescription).markDone();
+            Task tobeDone= parserSearch.getTaskFromIndex(taskDescription,module.taskList.getTaskList());
+            if (tobeDone != null) {
+                tobeDone.markDone();
+            }
             break;
         case ADDGRADE:
             if (isEmptyDescription(taskDescription)) {
@@ -161,7 +167,10 @@ public class Parser {
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
-            module.deleteTask(getTaskFromIndex(taskDescription));
+            Task tobeDeleted = parserSearch.getTaskFromKeyword(taskDescription, module.taskList.getTaskList());
+            if (tobeDeleted != null) {
+                module.deleteTask(tobeDeleted);
+            }
             break;
         case DELETEGRADE:
             module.deleteGrade();
@@ -170,32 +179,10 @@ public class Parser {
             module.showInformation();
             break;
         default:
+            Ui.printInvalidInputMessage();
             break;
         }
     }
-
-    private Task getTaskFromIndex(String input) {
-        int index;
-        Task task = null;
-        try {
-            index = Integer.parseInt(input) - 1;
-            if (isValidIndex(index)) {
-                task = module.taskList.get(index);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            Ui.printInvalidIndex();
-        }
-        return task;
-    }
-
-    private boolean isValidIndex(int index) {
-        if (index < 0) {
-            Ui.printInvalidIndex();
-            return false;
-        }
-        return true;
-    }
-
 
     //split string on first space
     static void splitInput(String input) {

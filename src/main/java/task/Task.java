@@ -49,7 +49,7 @@ public class Task {
     }
 
     /**
-     * Needed for serialization of data
+     * Needed for serialization of data.
      * */
     public LocalDateTime getDeadline() {
         return deadline;

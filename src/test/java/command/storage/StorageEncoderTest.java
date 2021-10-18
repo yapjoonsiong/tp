@@ -34,27 +34,27 @@ class StorageEncoderTest {
         modules.get(0).addClass(new Schedule("Tuesday", "12pm", "D3", "Bad"));
         StorageEncoder.encodeAndSaveModuleListToJson(modules);
         assertTrue(Files.exists(FILE_PATH));
+        final String expectedOutput = "{\"moduleList\":[{\"letterGrade\":null,\"points\":0.0,\"moduleName"
+                + "\":\"CS2102\",\"taskList\":{\"taskList\":[{\"description\""
+                + ":\"sleep\",\"date\":\"21/08/2022 1600\",\"deadline\":[2022,8,"
+                + "21,16,0],\"done\":false}],\"taskCount\":1},\""
+                + "scheduleList\":{\"scheduleList\":[{\"startTime\":\"12pm\",\""
+                + "location\":\"D3\",\"day\":\"Monday\",\"comment\":\"Bad\"},"
+                + "{\"startTime\":\"12pm\",\"location\":\"D3\",\"day\":\"Tuesday"
+                + "\",\"comment\":\"Bad\"}]},\"credits\":4,\"gradableTaskList\":{"
+                + "\"taskList\":[],\"taskCount\":0,\"gradableTaskList\":[]}},"
+                + "{\"letterGrade\":null,\"points\":0.0,\"moduleName\":\"CS2112\",\"taskList\":{\""
+                + "taskList\":[],\"taskCount\":0},\"scheduleList\":{\"scheduleList"
+                + "\":[]},\"credits\":0,\"gradableTaskList\":{\"taskList\":[],\"task"
+                + "Count\":0,\"gradableTaskList\":[]}},{\"letterGrade\":null,\"points\":0.0,\"module"
+                + "Name\":\"CS2132\",\"taskList\":{\"taskList\":[],\"taskCount\":0},"
+                + "\"scheduleList\":{\"scheduleList\":[{\"startTime\":\"12pm\",\""
+                + "location\":\"E3\",\"day\":\"Monday\",\"comment\":\"Bad\"}]},\""
+                + "credits\":0,\"gradableTaskList\":{\"taskList\":[],\"taskCount\":0"
+                + ",\"gradableTaskList\":[]}}]}";
         try {
             String fileContent = Files.readString(FILE_PATH);
-            assertEquals("{\"moduleList\":[{\"letterGrade\":null,\"points\":0.0,\"moduleName"
-                            + "\":\"CS2102\",\"taskList\":{\"taskList\":[{\"description\""
-                            + ":\"sleep\",\"date\":\"21/08/2022 1600\",\"deadline\":[2022,8,"
-                            + "21,16,0],\"done\":false}],\"taskCount\":1},\""
-                            + "scheduleList\":{\"scheduleList\":[{\"startTime\":\"12pm\",\""
-                            + "location\":\"D3\",\"day\":\"Monday\",\"comment\":\"Bad\"},"
-                            + "{\"startTime\":\"12pm\",\"location\":\"D3\",\"day\":\"Tuesday"
-                            + "\",\"comment\":\"Bad\"}]},\"credits\":4,\"gradableTaskList\":{"
-                            + "\"taskList\":[],\"taskCount\":0,\"gradableTaskList\":[]}},"
-                            + "{\"letterGrade\":null,\"points\":0.0,\"moduleName\":\"CS2112\",\"taskList\":{\""
-                            + "taskList\":[],\"taskCount\":0},\"scheduleList\":{\"scheduleList"
-                            + "\":[]},\"credits\":0,\"gradableTaskList\":{\"taskList\":[],\"task"
-                            + "Count\":0,\"gradableTaskList\":[]}},{\"letterGrade\":null,\"points\":0.0,\"module"
-                            + "Name\":\"CS2132\",\"taskList\":{\"taskList\":[],\"taskCount\":0},"
-                            + "\"scheduleList\":{\"scheduleList\":[{\"startTime\":\"12pm\",\""
-                            + "location\":\"E3\",\"day\":\"Monday\",\"comment\":\"Bad\"}]},\""
-                            + "credits\":0,\"gradableTaskList\":{\"taskList\":[],\"taskCount\":0"
-                            + ",\"gradableTaskList\":[]}}]}",
-                    fileContent);
+            assertEquals(expectedOutput, fileContent);
         } catch (IOException e) {
             fail(e.getMessage());
         }

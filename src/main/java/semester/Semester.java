@@ -66,6 +66,10 @@ public class Semester {
         return cap;
     }
 
+    public ModuleList getModuleList() {
+        return this.moduleList;
+    }
+
     public String getSem() {
         return this.semester;
     }

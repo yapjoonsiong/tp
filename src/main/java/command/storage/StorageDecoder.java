@@ -2,9 +2,10 @@ package command.storage;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import command.Ui;
-import module.ModuleList;
+import semester.SemesterList;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,25 +24,25 @@ public class StorageDecoder {
     //Logger object
     private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
 
-    public static ModuleList decodeJsonToModuleList() {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public static SemesterList decodeJsonToSemesterList() {
+        ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.registerModule(new JavaTimeModule());
-        ModuleList modules = new ModuleList();
-        if (!Files.exists(FILE_PATH)) {
-            Ui.printNoSaveFileMessage();
-            assert modules.getModuleList().size() == 0;
-            return modules;
-        }
+        SemesterList semesters = new SemesterList();
         try {
-            modules = objectMapper.readValue(new File(FILE_PATH.toString()), ModuleList.class);
+            if (!Files.exists(FILE_PATH)) {
+                Ui.printNoSaveFileMessage();
+                assert semesters.toString().equals(new SemesterList().toString());
+                return semesters;
+            }
+            semesters = objectMapper.readValue(new File(FILE_PATH.toString()), SemesterList.class);
             Ui.loadFileSuccessful();
-            logger.log(Level.INFO,"Load file successful");
+            logger.log(Level.INFO, "Load file successful");
         } catch (IOException e) {
             System.out.println(e.getMessage());
             System.out.println("Error reading save file, creating new template");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return modules;
+        return semesters;
     }
 }

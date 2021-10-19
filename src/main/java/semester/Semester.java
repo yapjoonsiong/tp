@@ -25,7 +25,7 @@ public class Semester {
     public Semester() {
     }
 
-    private void updateCredits() {
+    protected void updateCredits() {
         int c = 0;
         for (Module module : moduleList.getModuleList()) {
             c += module.getCredits();
@@ -33,7 +33,7 @@ public class Semester {
         credits = c;
     }
 
-    private void updatePoints() {
+    protected void updatePoints() {
         double p = 0;
         for (Module module : moduleList.getModuleList()) {
             p += module.getCredits() * module.getPoints();
@@ -41,7 +41,7 @@ public class Semester {
         points = p;
     }
 
-    private void updateCap() {
+    protected void updateCap() {
         updateCredits();
         updatePoints();
         cap = points / credits;
@@ -52,17 +52,14 @@ public class Semester {
     }
 
     public int getCredits() {
-        updateCredits();
         return credits;
     }
 
     public double getPoints() {
-        updatePoints();
         return points;
     }
 
     public double getCap() {
-        updateCap();
         return cap;
     }
 
@@ -70,7 +67,16 @@ public class Semester {
         return this.moduleList;
     }
 
-    public String getSem() {
+    public String getSemester() {
         return this.semester;
+    }
+
+    @Override
+    public String toString() {
+        return "Credits: " + this.credits + System.lineSeparator()
+                + "Points: " + this.points + System.lineSeparator()
+                + "CAP: " + (this.cap) + System.lineSeparator()
+                + "Semester: " + this.semester + System.lineSeparator()
+                + "Modules: " + this.moduleList + System.lineSeparator();
     }
 }

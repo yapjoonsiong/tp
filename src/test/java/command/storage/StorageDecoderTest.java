@@ -4,6 +4,7 @@ import module.Module;
 import module.ModuleList;
 import module.Schedule;
 import org.junit.jupiter.api.Test;
+import semester.SemesterList;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,31 +19,38 @@ class StorageDecoderTest {
     private static final Path FILE_PATH = Paths.get(ROOT, "data", "data.json");
 
     @Test
-    public void decodeModuleList_normalModuleList_success() {
-        ModuleList modules = new ModuleList();
+    public void decodeSemesterList_normalSemesterList_success() {
+        SemesterList semesters = new SemesterList();
+        ModuleList modules = semesters.extractAccessedSemester().getModuleList();
         modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
-        modules.add(new Module("CS2132"));
         modules.get(0).addTask("sleep /by 21/08/2022 1600");
+        //Change semester index
+        semesters.setAccessedSemesterIndex(1);
+        modules = semesters.extractAccessedSemester().getModuleList();
+        modules.add(new Module("CS2112"));
         modules.get(0).addCredits(4);
-        modules.get(2).addClass(new Schedule("Monday", "12pm", "E3", "Bad"));
+        modules.get(0).addClass(new Schedule("Monday", "12pm", "E3", "Bad"));
+        //Change semester index
+        semesters.setAccessedSemesterIndex(2);
+        modules = semesters.extractAccessedSemester().getModuleList();
+        modules.add(new Module("CS2132"));
         modules.get(0).addClass(new Schedule("Monday", "12pm", "D3", "Bad"));
         modules.get(0).addClass(new Schedule("Tuesday", "12pm", "D3", "Bad"));
-        StorageEncoder.encodeAndSaveModuleListToJson(modules);
-        ModuleList loadedModules = StorageDecoder.decodeJsonToModuleList();
-        assertEquals(modules.toString(), loadedModules.toString());
+        StorageEncoder.encodeAndSaveSemesterListToJson(semesters);
+        SemesterList loadedSemesters = StorageDecoder.decodeJsonToSemesterList();
+        assertEquals(semesters.toString(), loadedSemesters.toString());
     }
 
     @Test
-    public void decodeModuleList_emptyModuleList_success() {
-        ModuleList modules = new ModuleList();
-        StorageEncoder.encodeAndSaveModuleListToJson(modules);
-        ModuleList loadedModules = StorageDecoder.decodeJsonToModuleList();
-        assertEquals(loadedModules.toString(), modules.toString());
+    public void decodeSemesterList_emptyModuleList_success() {
+        SemesterList modules = new SemesterList();
+        StorageEncoder.encodeAndSaveSemesterListToJson(modules);
+        SemesterList loadedSemesters = StorageDecoder.decodeJsonToSemesterList();
+        assertEquals(loadedSemesters.toString(), modules.toString());
     }
 
     @Test
-    public void decodeModuleList_noFile_success() {
+    public void decodeSemesterList_noFile_success() {
         try {
             if (Files.exists(FILE_PATH)) {
                 Files.delete(FILE_PATH);
@@ -50,8 +58,8 @@ class StorageDecoderTest {
         } catch (IOException e) {
             fail(e);
         }
-        ModuleList loadedModules = StorageDecoder.decodeJsonToModuleList();
-        assertEquals(loadedModules.toString(), new ModuleList().toString());
+        SemesterList loadedSemesters = StorageDecoder.decodeJsonToSemesterList();
+        assertEquals(loadedSemesters.toString(), new SemesterList().toString());
 
     }
 

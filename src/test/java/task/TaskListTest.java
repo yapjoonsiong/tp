@@ -1,8 +1,8 @@
 package task;
 
-import command.DateParser;
-import org.junit.jupiter.api.Test;
 
+import command.parser.DateParser;
+import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;

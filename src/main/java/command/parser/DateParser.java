@@ -1,4 +1,4 @@
-package command;
+package command.parser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,12 +28,7 @@ public class DateParser {
         return LocalDateTime.parse(str, inputFormatter);
     }
 
-    public static String dateStringOutput(LocalDateTime dateTime) throws NullPointerException {
-        try {
-            return dateTime.format(outputFormatter);
-        } catch (NullPointerException e) {
-            Ui.invalidDate();
-        }
-        return Parser.EMPTY_STRING;
+    public static String dateStringOutput(LocalDateTime dateTime) {
+        return dateTime.format(outputFormatter);
     }
 }

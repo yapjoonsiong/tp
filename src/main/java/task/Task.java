@@ -1,6 +1,8 @@
 package task;
 
-import command.DateParser;
+
+
+import command.parser.DateParser;
 import command.Ui;
 import java.time.LocalDateTime;
 import java.util.logging.Level;
@@ -24,7 +26,7 @@ public class Task {
         setDescription(description);
         setDate(date);
         setDone(false);
-        setDeadline(date);
+        setDeadline(DateParser.parseDate(date));
     }
 
     /**
@@ -46,6 +48,13 @@ public class Task {
         return isDone;
     }
 
+    /**
+     * Needed for serialization of data.
+     * */
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
     //Setters
     public void setDescription(String description) {
         this.description = description;
@@ -59,12 +68,12 @@ public class Task {
         this.date = date;
     }
 
-    private void setDeadline(String date) {
+    public void setDeadline(LocalDateTime date) {
         logger.log(Level.INFO, "Successfully set Task deadline...");
-        this.deadline = DateParser.parseDate(date);
+        this.deadline = date;
     }
-
-    protected String getDeadline() {
+    
+    public String createFormattedDeadline() {
         return DateParser.dateStringOutput(this.deadline);
     }
 
@@ -79,8 +88,6 @@ public class Task {
     }
 
     public String toString() {
-        return  createStatusIcon() + getDescription() + " by: "  + getDeadline();
-        //the original line fails the tests?
-        //return  createStatusIcon() + getDescription() + " by: " + "(" + getDeadline() + ")";
+        return  createStatusIcon() + getDescription() + " by: "  + createFormattedDeadline();
     }
 }

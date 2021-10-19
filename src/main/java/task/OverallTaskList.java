@@ -107,12 +107,8 @@ public class OverallTaskList extends TaskList {
     }
 
 
-    public void printList() {
-        int taskNumber = 1;
-        for (OverallTask task : overallTaskList) {
-            System.out.println(taskNumber + ". " + task);
-            taskNumber++;
-        }
+    public void printAllTasks() {
+        Ui.printAllOverallTasks(overallTaskList);
     }
 
     @Override

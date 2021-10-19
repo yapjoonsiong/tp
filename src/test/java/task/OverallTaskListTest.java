@@ -40,12 +40,10 @@ class OverallTaskListTest {
         modules.get(1).addTask("sleep /by 21/08/2022 1600");
         modules.get(2).addTask("sleep /by 21/08/2022 1600");
         OverallTaskList taskList = new OverallTaskList(modules);
-        // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);
-        // Tell Java to use your special stream
         System.setOut(save);
-        taskList.printList();
+        taskList.printAllTasks();
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
                 "1. [CS2102] [ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator()
@@ -64,10 +62,8 @@ class OverallTaskListTest {
         modules.get(1).addTask("sleep /by 21/08/2022 1600");
         modules.get(2).addTask("sleep /by 20/08/2022 1600");
         OverallTaskList taskList = new OverallTaskList(modules);
-        // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);
-        // Tell Java to use your special stream
         System.setOut(save);
         taskList.sortByDateAndPrint();
         List<String> actualLines = List.of(read.toString().split("/n"));
@@ -90,10 +86,8 @@ class OverallTaskListTest {
         modules.get(2).addTask("sleep /by 20/08/2022 1600");
         modules.get(1).getTaskList().taskList.get(0).markDone();
         OverallTaskList taskList = new OverallTaskList(modules);
-        // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);
-        // Tell Java to use your special stream
         System.setOut(save);
         taskList.sortByStatusAndPrint();
         List<String> actualLines = List.of(read.toString().split("/n"));
@@ -116,10 +110,8 @@ class OverallTaskListTest {
         modules.get(2).addTask("sleep /by 20/11/2021 1600");
         modules.get(2).addTask("sleep /by 21/11/2021 1600");
         OverallTaskList taskList = new OverallTaskList(modules);
-        // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);
-        // Tell Java to use your special stream
         System.setOut(save);
         taskList.printWeeklyTasks();
         List<String> actualLines = List.of(read.toString().split("/n"));
@@ -140,10 +132,8 @@ class OverallTaskListTest {
         modules.get(2).addTask("sleep /by 12/11/2021 1600");
         modules.get(2).addTask("sleep /by 10/11/2021 1600");
         OverallTaskList taskList = new OverallTaskList(modules);
-        // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);
-        // Tell Java to use your special stream
         System.setOut(save);
         taskList.printMonthlyTasks();
         List<String> actualLines = List.of(read.toString().split("/n"));
@@ -166,10 +156,8 @@ class OverallTaskListTest {
         modules.get(2).addTask("sleep /by 20/11/2021 1600");
         modules.get(2).addTask("sleep /by 21/11/2021 1600");
         OverallTaskList taskList = new OverallTaskList(modules);
-        // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);
-        // Tell Java to use your special stream
         System.setOut(save);
         taskList.printYearlyTasks();
         List<String> actualLines = List.of(read.toString().split("/n"));

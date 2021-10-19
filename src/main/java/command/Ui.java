@@ -6,6 +6,7 @@ import module.ModuleList;
 import task.OverallTask;
 import task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -193,6 +194,15 @@ public class Ui {
         System.out.println("Yearly tasks: ");
         for (int i = 0; i < newTaskList.size(); i++) {
             System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void printAllOverallTasks(ArrayList<OverallTask> overallTaskList) {
+        System.out.println("All tasks: ");
+        int taskNumber = 1;
+        for (OverallTask task : overallTaskList) {
+            System.out.println(taskNumber + ". " + task);
+            taskNumber++;
         }
     }
 }

@@ -3,6 +3,7 @@ package task;
 
 import command.parser.DateParser;
 import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
@@ -19,11 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 public class TaskListTest {
     private static final LocalDateTime refDate = LocalDateTime.now().withHour(0);
     private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
-    private static final String dateA = refDate.plusDays(1).plusHours(10).format(format);
-    private static final String dateB = refDate.plusDays(6).plusHours(12).format(format);
-    private static final String dateC = refDate.plusDays(13).plusHours(15).format(format);
-    private static final String dateD = refDate.plusYears(2).plusHours(15).format(format);
-    private static final String dateE = refDate.plusMonths(2).plusHours(15).format(format);
+    private static final String DATE_A = refDate.plusDays(1).plusHours(10).format(format);
+    private static final String DATE_B = refDate.plusDays(6).plusHours(12).format(format);
+    private static final String DATE_C = refDate.plusDays(13).plusHours(15).format(format);
+    private static final String DATE_D = refDate.plusYears(2).plusHours(15).format(format);
+    private static final String DATE_E = refDate.plusMonths(2).plusHours(15).format(format);
+    private static final String DATE_OVERDUE = refDate.minusMonths(2).plusHours(15).format(format);
 
     @Test
     void get_success() {
@@ -127,9 +129,9 @@ public class TaskListTest {
         return Collections.singletonList("Task List for " + module.toUpperCase(Locale.ROOT) + ":"
                 + System.lineSeparator()
                 + "There are " + taskCount + " tasks due within 7 days" + System.lineSeparator()
-                + "1.[ ] Read Book B by: " + DateParser.dateStringOutput(DateParser.parseDate(dateB))
+                + "1.[ ] Read Book B by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_B))
                 + System.lineSeparator()
-                + "2.[ ] Read Book A by: " + DateParser.dateStringOutput(DateParser.parseDate(dateA))
+                + "2.[ ] Read Book A by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_A))
                 + System.lineSeparator());
     }
 
@@ -137,9 +139,9 @@ public class TaskListTest {
     void showAllWeekly_success() {
         TaskList a = new TaskList();
         //a.addTask("cs1010", "Read Book C /by ");
-        a.addTask("cs1010", "Read Book B /by " + dateB);
-        a.addTask("cs1010", "Read Book A /by " + dateA);
-        a.addTask("cs1010", "Read Book C /by " + dateC);
+        a.addTask("cs1010", "Read Book B /by " + DATE_B);
+        a.addTask("cs1010", "Read Book A /by " + DATE_A);
+        a.addTask("cs1010", "Read Book C /by " + DATE_C);
 
         // Create a stream to hold the output
         String module = "moduleName";
@@ -158,22 +160,22 @@ public class TaskListTest {
         return Collections.singletonList("Task List for " + module.toUpperCase(Locale.ROOT) + ":"
                 + System.lineSeparator()
                 + "There are " + taskCount + " tasks due within a month" + System.lineSeparator()
-                + "1.[ ] Read Book B by: " + DateParser.dateStringOutput(DateParser.parseDate(dateB))
+                + "1.[ ] Read Book B by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_B))
                 + System.lineSeparator()
-                + "2.[ ] Read Book A by: " + DateParser.dateStringOutput(DateParser.parseDate(dateA))
+                + "2.[ ] Read Book A by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_A))
                 + System.lineSeparator()
-                + "3.[ ] Read Book C by: " + DateParser.dateStringOutput(DateParser.parseDate(dateC))
+                + "3.[ ] Read Book C by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_C))
                 + System.lineSeparator());
     }
 
     @Test
     void showAllMonthly_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010", "Read Book B /by " + dateB);
-        a.addTask("cs1010", "Read Book A /by " + dateA);
-        a.addTask("cs1010", "Read Book D /by " + dateD);
-        a.addTask("cs1010", "Read Book C /by " + dateC);
-        a.addTask("cs1010", "Read Book E /by " + dateE);
+        a.addTask("cs1010", "Read Book B /by " + DATE_B);
+        a.addTask("cs1010", "Read Book A /by " + DATE_A);
+        a.addTask("cs1010", "Read Book D /by " + DATE_D);
+        a.addTask("cs1010", "Read Book C /by " + DATE_C);
+        a.addTask("cs1010", "Read Book E /by " + DATE_E);
         // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);
@@ -191,24 +193,27 @@ public class TaskListTest {
         return Collections.singletonList("Task List for " + module.toUpperCase(Locale.ROOT) + ":"
                 + System.lineSeparator()
                 + "There are " + taskCount + " tasks due within a year" + System.lineSeparator()
-                + "1.[ ] Read Book C by: " + DateParser.dateStringOutput(DateParser.parseDate(dateC))
+                + "1.[ ] Read Book C by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_C))
                 + System.lineSeparator()
-                + "2.[ ] Read Book B by: " + DateParser.dateStringOutput(DateParser.parseDate(dateB))
+                + "2.[ ] Read Book B by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_B))
                 + System.lineSeparator()
-                + "3.[ ] Read Book A by: " + DateParser.dateStringOutput(DateParser.parseDate(dateA))
+                + "3.[ ] Read Book A by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_A))
                 + System.lineSeparator()
-                + "4.[ ] Read Book E by: " + DateParser.dateStringOutput(DateParser.parseDate(dateE))
+                + "4.[ ] Read Book E by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_E))
+                + System.lineSeparator()
+                + "5.[LATE][ ] Read Book F by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_OVERDUE))
                 + System.lineSeparator());
     }
 
     @Test
     void showAllYearly_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010", "Read Book C /by " + dateC);
-        a.addTask("cs1010", "Read Book B /by " + dateB);
-        a.addTask("cs1010", "Read Book A /by " + dateA);
-        a.addTask("cs1010", "Read Book D /by " + dateD);
-        a.addTask("cs1010", "Read Book E /by " + dateE);
+        a.addTask("cs1010", "Read Book C /by " + DATE_C);
+        a.addTask("cs1010", "Read Book B /by " + DATE_B);
+        a.addTask("cs1010", "Read Book A /by " + DATE_A);
+        a.addTask("cs1010", "Read Book D /by " + DATE_D);
+        a.addTask("cs1010", "Read Book E /by " + DATE_E);
+        a.addTask("cs1010", "Read Book F /by " + DATE_OVERDUE);
         // Create a stream to hold the output
         ByteArrayOutputStream read = new ByteArrayOutputStream();
         PrintStream save = new PrintStream(read);

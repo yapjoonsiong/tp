@@ -4,6 +4,7 @@ package task;
 
 import command.parser.DateParser;
 import command.Ui;
+
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,8 +12,13 @@ import java.util.logging.Logger;
 
 public class Task {
     private static final Logger logger = Logger.getLogger(Task.class.getName());
+    private static final String LATE_SYMBOL = "[LATE]";
+    private static final String DONE_SYMBOL = "[X]";
+    private static final String EMPTY_SYMBOL = "[ ]";
+    private static final String EMPTY_SPACE = " ";
     protected String description;
     protected boolean isDone;
+    protected boolean isLate;
     protected String date;
     protected LocalDateTime deadline;
 
@@ -79,15 +85,36 @@ public class Task {
 
     public void markDone() {
         logger.log(Level.INFO, "Successfully marked Task as done...");
+        setDone(true);
         Ui.printMarkDoneMessage(this);
-        this.isDone = true;
+
+    }
+
+    public void setLate(boolean isLate) {
+        this.isLate = isLate;
+    }
+
+    public void updateOverdue() throws NullPointerException {
+        try {
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            if (!(this.isDone) && currentDateTime.isAfter(this.deadline)) {
+                this.isLate = true;
+            }
+        } catch (NullPointerException e) {
+            Ui.printInvalidIndex();
+        }
+    }
+
+    private String createLateIcon() {
+        return this.isLate ? LATE_SYMBOL : "";
     }
 
     public String createStatusIcon() {
-        return "[" + (this.isDone ? "X" : " ") + "] ";
+        return this.isDone ? DONE_SYMBOL : EMPTY_SYMBOL;
     }
 
     public String toString() {
-        return  createStatusIcon() + getDescription() + " by: "  + createFormattedDeadline();
+        return  createLateIcon() + createStatusIcon() + EMPTY_SPACE + getDescription()
+                + " by: "  + createFormattedDeadline();
     }
 }

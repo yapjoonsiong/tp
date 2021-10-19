@@ -46,7 +46,8 @@ class OverallTaskListTest {
         taskList.printAllTasks();
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
-                "1. [CS2102] [ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator()
+                "All tasks: " + System.lineSeparator()
+                        + "1. [CS2102] [ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator()
                         + "2. [CS2112] [ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator()
                         + "3. [CS2132] [ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);

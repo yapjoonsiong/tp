@@ -29,13 +29,13 @@ class StorageDecoderTest {
         modules = semesters.extractAccessedSemester().getModuleList();
         modules.add(new Module("CS2112"));
         modules.get(0).addCredits(4);
-        modules.get(0).addClass(new Schedule("Monday", "12pm", "E3", "Bad"));
+        modules.get(0).addClass(new Schedule("WED", "1200", "E3", "Tutorial"));
         //Change semester index
         semesters.setAccessedSemesterIndex(2);
         modules = semesters.extractAccessedSemester().getModuleList();
         modules.add(new Module("CS2132"));
-        modules.get(0).addClass(new Schedule("Monday", "12pm", "D3", "Bad"));
-        modules.get(0).addClass(new Schedule("Tuesday", "12pm", "D3", "Bad"));
+        modules.get(0).addClass(new Schedule("MON", "1200", "D3", "Lecture"));
+        modules.get(0).addClass(new Schedule("TUE", "1200", "D3", "Lecture"));
         StorageEncoder.encodeAndSaveSemesterListToJson(semesters);
         SemesterList loadedSemesters = StorageDecoder.decodeJsonToSemesterList();
         assertEquals(semesters.toString(), loadedSemesters.toString());

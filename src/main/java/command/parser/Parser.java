@@ -13,6 +13,7 @@ public class Parser {
 
     public static final String EMPTY_STRING = "";
     private static final String SPACE_STRING = " ";
+    public static final String SWITCH = "switch";
     public static final String TASK = "task";
     public static final String MODULE = "module";
     public static final String HELP = "help";
@@ -63,6 +64,12 @@ public class Parser {
     public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {
+        case SWITCH:
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            NoCap.semesterList.setAccessedSemesterIndex(Integer.parseInt(taskDescription));
+            break;
         case HELP:
             Ui.printHelpMessage();
             break;

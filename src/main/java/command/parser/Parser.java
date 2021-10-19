@@ -7,6 +7,7 @@ import module.Module;
 import task.Task;
 
 import java.util.Locale;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
@@ -50,7 +51,7 @@ public class Parser {
     protected String moduleName;
     public Module module;
     protected boolean isExit;
-    private static Logger logger = Logger.getLogger(Parser.class.getName());
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public Parser() {
         this.isExit = false;
@@ -62,6 +63,7 @@ public class Parser {
      * @param line User input
      */
     public void chooseTask(String line) {
+        logger.log(Level.INFO, "Successfully marked Task as done...");
         splitInput(line);
         switch (taskType) {
         case SWITCH:

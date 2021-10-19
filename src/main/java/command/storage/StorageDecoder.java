@@ -21,7 +21,7 @@ public class StorageDecoder {
     private static final Path FILE_PATH = Paths.get(ROOT, "data", "data.json");
 
     //Logger object
-    private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static ModuleList decodeJsonToModuleList() {
         ObjectMapper objectMapper = new ObjectMapper();

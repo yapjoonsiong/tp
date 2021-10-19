@@ -3,7 +3,7 @@ package task;
 import java.util.Comparator;
 
 public class OverallTask extends Task {
-    private String moduleName;
+    private final String moduleName;
 
     public OverallTask(String description, String date, String moduleName, Boolean done) {
         super(description, date);

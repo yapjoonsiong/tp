@@ -14,10 +14,6 @@ import java.util.stream.Collectors;
 
 public class OverallTaskList extends TaskList {
     private static final Logger logger = Logger.getLogger(OverallTaskList.class.getName());
-    private static final int DAYS_IN_A_WEEK = 7;
-    private static final int DAYS_IN_A_MONTH = 31;
-    private static final int DAYS_IN_A_YEAR = 366;
-
 
     protected ArrayList<OverallTask> overallTaskList;
 
@@ -61,58 +57,32 @@ public class OverallTaskList extends TaskList {
     public void printWeeklyTasks() {
         List<OverallTask> newTaskList = overallTaskList
                 .stream()
-                .filter(this::isWithinWeek)
+                .filter(this::isWeekly)
                 .collect(Collectors.toList());
         Ui.printOverallWeeklyTasks(newTaskList);
         logger.log(Level.INFO, "print overall weekly tasks");
     }
 
-    private boolean isWithinWeek(OverallTask task) {
-        LocalDate date = LocalDate.now();
-        Period p = Period.between(date, task.deadline.toLocalDate()).normalized();
-        int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day > 0 && day <= DAYS_IN_A_WEEK;
-    }
-
     public void printMonthlyTasks() {
         List<OverallTask> newTaskList = overallTaskList
                 .stream()
-                .filter(this::isWithinMonth)
+                .filter(this::isMonthly)
                 .collect(Collectors.toList());
         Ui.printOverallMonthlyTasks(newTaskList);
         logger.log(Level.INFO, "print overall monthly tasks");
     }
 
-    private boolean isWithinMonth(OverallTask task) {
-        LocalDate date = LocalDate.now();
-        Period p = Period.between(date, task.deadline.toLocalDate()).normalized();
-        int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day >= 0 && day <= DAYS_IN_A_MONTH;
-    }
-
     public void printYearlyTasks() {
         List<OverallTask> newTaskList = overallTaskList
                 .stream()
-                .filter(this::isWithinYear)
+                .filter(this::isYearly)
                 .collect(Collectors.toList());
         Ui.printOverallYearlyTasks(newTaskList);
         logger.log(Level.INFO, "print overall yearly tasks");
     }
 
-    private boolean isWithinYear(OverallTask task) {
-        LocalDate date = LocalDate.now();
-        Period p = Period.between(date, task.deadline.toLocalDate()).normalized();
-        int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
-        return day >= 0 && day <= DAYS_IN_A_YEAR;
-    }
-
-
-    public void printList() {
-        int taskNumber = 1;
-        for (OverallTask task : overallTaskList) {
-            System.out.println(taskNumber + ". " + task);
-            taskNumber++;
-        }
+    public void printAllTasks() {
+        Ui.printAllOverallTasks(overallTaskList);
     }
 
     @Override

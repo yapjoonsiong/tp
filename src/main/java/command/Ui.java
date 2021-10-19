@@ -6,10 +6,12 @@ import module.ModuleList;
 import task.OverallTask;
 import task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class Ui {
+    private static final String logo = "NoCap Logo";
 
     public static void printHelpMessage() {
         System.out.println("Display help messages: help");
@@ -163,36 +165,73 @@ public class Ui {
 
     public static void printOverallListOrderedByDate(List<OverallTask> newTaskList) {
         System.out.println("Tasks sorted by date: ");
+        if (newTaskList.isEmpty()) {
+            System.out.println("You have no tasks");
+            return;
+        }
         for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
 
     public static void printOverallListOrderedByStatus(List<OverallTask> newTaskList) {
         System.out.println("Tasks sorted by status: ");
+        if (newTaskList.isEmpty()) {
+            System.out.println("You have no tasks");
+            return;
+        }
         for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
 
     public static void printOverallWeeklyTasks(List<OverallTask> newTaskList) {
         System.out.println("Weekly tasks: ");
+        if (newTaskList.isEmpty()) {
+            System.out.println("You have no weekly tasks");
+            return;
+        }
         for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
 
     public static void printOverallMonthlyTasks(List<OverallTask> newTaskList) {
         System.out.println("Monthly tasks: ");
+        if (newTaskList.isEmpty()) {
+            System.out.println("You have no monthly tasks");
+            return;
+        }
         for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
 
     public static void printOverallYearlyTasks(List<OverallTask> newTaskList) {
         System.out.println("Yearly tasks: ");
+        if (newTaskList.isEmpty()) {
+            System.out.println("You have no yearly tasks");
+            return;
+        }
         for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void printAllOverallTasks(ArrayList<OverallTask> overallTaskList) {
+        System.out.println("All tasks: ");
+        if (overallTaskList.isEmpty()) {
+            System.out.println("You have no tasks");
+            return;
+        }
+        for (int i = 0; i < overallTaskList.size(); i++) {
+            overallTaskList.get(i).updateOverdue();
+            System.out.println((i + 1) + ". " + overallTaskList.get(i));
         }
     }
 }

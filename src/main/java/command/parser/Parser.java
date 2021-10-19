@@ -6,13 +6,12 @@ import command.storage.StorageEncoder;
 import module.Module;
 import task.Task;
 
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Logger;
 
 public class Parser {
 
-    private static final String EMPTY_STRING = "";
+    public static final String EMPTY_STRING = "";
     private static final String SPACE_STRING = " ";
     public static final String TASK = "task";
     public static final String MODULE = "module";
@@ -100,6 +99,7 @@ public class Parser {
         }
     }
 
+
     /**
      * First separate the input into two parts. The first part is saved as moduleName.
      * The next part is split again to obtain the new taskType and taskDescription
@@ -107,9 +107,7 @@ public class Parser {
      * @param input String to be separated
      */
     void moduleParser(String input) {
-
         splitInput(input);
-
         moduleName = taskType.toUpperCase(Locale.ROOT);
         try {
             module = NoCap.moduleList.find(moduleName);
@@ -244,6 +242,4 @@ public class Parser {
         Ui.invalidDate();
         return false;
     }
-
-
 }

@@ -5,12 +5,12 @@ import module.Module;
 import module.ModuleList;
 import task.OverallTask;
 import task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class Ui {
+    private static final String logo = "NoCap Logo";
 
     public static void printHelpMessage() {
         System.out.println("Display help messages: help");

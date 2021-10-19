@@ -4,7 +4,6 @@ package task;
 
 import command.parser.DateParser;
 import command.Ui;
-
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +15,7 @@ public class Task {
     protected boolean isDone;
     protected String date;
     protected LocalDateTime deadline;
+
 
     /**
      * temp message.
@@ -68,7 +68,6 @@ public class Task {
         this.date = date;
     }
 
-
     public void setDeadline(LocalDateTime date) {
         logger.log(Level.INFO, "Successfully set Task deadline...");
         this.deadline = date;
@@ -90,7 +89,5 @@ public class Task {
 
     public String toString() {
         return  createStatusIcon() + getDescription() + " by: "  + createFormattedDeadline();
-        //the original line fails the tests?
-        //return  createStatusIcon() + getDescription() + " by: " + "(" + getDeadline() + ")";
     }
 }

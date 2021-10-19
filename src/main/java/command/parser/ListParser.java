@@ -23,7 +23,7 @@ public class ListParser {
         return false;
     }
 
-    void sortByDate(ArrayList<Module> moduleList) {
+    private void sortByDate(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 module.taskList.sortTaskListByDate(module.getModuleName());
@@ -31,7 +31,7 @@ public class ListParser {
         }
     }
 
-    void sortByStatus(ArrayList<Module> moduleList) {
+    private void sortByStatus(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 module.taskList.sortTaskListByStatus(module.getModuleName());
@@ -39,7 +39,7 @@ public class ListParser {
         }
     }
 
-    void listWeekly(ArrayList<Module> moduleList) {
+    private void listWeekly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 module.taskList.showAllWeekly(module.getModuleName());
@@ -47,7 +47,7 @@ public class ListParser {
         }
     }
 
-    void listAll(ArrayList<Module> moduleList) {
+    private  void listAll(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 Ui.printTaskList(module.getModuleName(), module.taskList.getTaskCount());
@@ -56,7 +56,7 @@ public class ListParser {
         }
     }
 
-    void listMonthly(ArrayList<Module> moduleList) {
+    private void listMonthly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 module.taskList.showAllMonthly(module.getModuleName());
@@ -64,7 +64,7 @@ public class ListParser {
         }
     }
 
-    void listYearly(ArrayList<Module> moduleList) {
+    private  void listYearly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
             if (!isEmpty(module)) {
                 module.taskList.showAllYearly(module.getModuleName());
@@ -72,7 +72,7 @@ public class ListParser {
         }
     }
 
-    void listParser(String input) {
+    public void listParser(String input) {
         Parser.splitInput(input);
         if (Parser.taskType.equals(Parser.MODULE)) {
             NoCap.moduleList.printModules();

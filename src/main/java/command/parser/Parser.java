@@ -70,7 +70,8 @@ public class Parser {
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
-            NoCap.semesterList.setAccessedSemesterIndex(Integer.parseInt(taskDescription));
+            int semesterIndex = Integer.parseInt(taskDescription) - 1;
+            NoCap.semesterList.setAccessedSemesterIndex(semesterIndex);
             break;
         case HELP:
             Ui.printHelpMessage();
@@ -81,14 +82,14 @@ public class Parser {
             }
             NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
             Ui.addModuleNameMessage(NoCap.moduleList);
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         case DELETE:
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
             NoCap.moduleList.delete(taskDescription);
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         case LIST:
             list.listParser(taskDescription);
@@ -98,12 +99,12 @@ public class Parser {
             break;
         case EXIT:
             Ui.printExitMessage();
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             this.isExit = true;
             break;
         case MODULETYPE:
             moduleParser(taskDescription);
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         default:
             Ui.printInvalidInputMessage();

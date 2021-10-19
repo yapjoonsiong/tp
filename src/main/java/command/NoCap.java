@@ -6,11 +6,13 @@ import module.ModuleList;
 import semester.SemesterList;
 import semester.Semester;
 import java.util.Scanner;
+import command.Logger;
 
 public class NoCap {
     //public static ModuleList moduleList = StorageDecoder.decodeJsonToModuleList();
     public static SemesterList semesterList = new SemesterList();
     public static ModuleList moduleList;
+    private final Logger logger = new Logger();
 
     private void run() {
         Ui.printStartMessage();

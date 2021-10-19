@@ -22,7 +22,7 @@ public class Module {
     private ScheduleList scheduleList;
     protected int credits;
     protected GradableTaskList gradableTaskList;
-    private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
+    private static final Logger logger = command.Logger.logger;
 
     public Module(String moduleName) {
         assert !moduleName.equals("");

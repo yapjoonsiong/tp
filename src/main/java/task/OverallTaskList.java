@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class OverallTaskList extends TaskList {
-    private static final Logger logger = Logger.getLogger(OverallTaskList.class.getName());
+    private static final Logger logger = command.Logger.logger;
 
     protected ArrayList<OverallTask> overallTaskList;
 

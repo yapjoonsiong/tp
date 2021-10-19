@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class GradableTaskList extends TaskList {
     protected ArrayList<GradableTask> gradableTaskList;
-    private static final Logger logger = Logger.getLogger(GradableTaskList.class.getName());
+    private static final Logger logger = command.Logger.logger;
 
     public GradableTaskList() {
         this.gradableTaskList = new ArrayList<>();

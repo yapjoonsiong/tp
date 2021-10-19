@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ModuleList {
-    private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
+    private static final Logger logger = command.Logger.logger;
 
     private static final int HEIGHT = 33;
     private static final int LENGTH = 207;

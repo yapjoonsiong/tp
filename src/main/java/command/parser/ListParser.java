@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ListParser {
-    private static final Logger logger = Logger.getLogger(ListParser.class.getName());
+    private static final Logger logger = command.Logger.logger;
 
     public ListParser() {
     }

@@ -106,8 +106,8 @@ public class ListParser {
                 //listYearly(moduleList);
                 break;
             default:
-                allTaskList.printList();
-                System.out.println("Showing all tasks");
+                allTaskList.printAllTasks();
+                //System.out.println("Showing all tasks");
                 //listAll(moduleList);
                 break;
             }

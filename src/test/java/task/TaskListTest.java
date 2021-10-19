@@ -116,17 +116,17 @@ public class TaskListTest {
         return Collections.singletonList("Task List for " + module.toUpperCase(Locale.ROOT) + ":"
                 + System.lineSeparator()
                 + "There are " + taskCount + " tasks due within 7 days" + System.lineSeparator()
-                + "1.[ ] Read Book C by: 19 Oct 2021 04:00 PM" + System.lineSeparator()
-                + "2.[ ] Read Book B by: 19 Oct 2021 04:00 PM" + System.lineSeparator()
-                + "3.[ ] Read Book A by: 19 Oct 2021 12:00 PM" + System.lineSeparator());
+                + "1.[ ] Read Book C by: 23 Oct 2021 04:00 PM" + System.lineSeparator()
+                + "2.[ ] Read Book B by: 23 Oct 2021 04:00 PM" + System.lineSeparator()
+                + "3.[ ] Read Book A by: 23 Oct 2021 12:00 PM" + System.lineSeparator());
     }
 
     @Test
     void showAllWeekly_success() {
         TaskList a = new TaskList();
-        a.addTask("cs1010", "Read Book C /by 19/10/2021 1600");
-        a.addTask("cs1010", "Read Book B /by 19/10/2021 1600");
-        a.addTask("cs1010", "Read Book A /by 19/10/2021 1200");
+        a.addTask("cs1010", "Read Book C /by 23/10/2021 1600");
+        a.addTask("cs1010", "Read Book B /by 23/10/2021 1600");
+        a.addTask("cs1010", "Read Book A /by 23/10/2021 1200");
         a.addTask("cs1010", "Read Book D /by 30/10/2021 1100");
         // Create a stream to hold the output
         String module = "moduleName";

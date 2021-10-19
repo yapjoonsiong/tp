@@ -5,7 +5,6 @@ import command.storage.StorageDecoder;
 import module.ModuleList;
 import semester.SemesterList;
 import semester.Semester;
-
 import java.util.Scanner;
 
 public class NoCap {

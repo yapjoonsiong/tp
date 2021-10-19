@@ -4,6 +4,7 @@ import command.NoCap;
 import command.Ui;
 import module.Module;
 import task.OverallTaskList;
+import task.TaskList;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -23,56 +24,62 @@ public class ListParser {
         return false;
     }
 
-    void sortByDate(ArrayList<Module> moduleList) {
+    private void sortByDate(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                module.taskList.sortTaskListByDate(module.getModuleName());
+                list.sortTaskListByDate(module.getModuleName());
             }
         }
     }
 
-    void sortByStatus(ArrayList<Module> moduleList) {
+    private void sortByStatus(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                module.taskList.sortTaskListByStatus(module.getModuleName());
+                list.sortTaskListByStatus(module.getModuleName());
             }
         }
     }
 
-    void listWeekly(ArrayList<Module> moduleList) {
+    private void listWeekly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                module.taskList.showAllWeekly(module.getModuleName());
+                list.showAllWeekly(module.getModuleName());
             }
         }
     }
 
-    void listAll(ArrayList<Module> moduleList) {
+    private void listAll(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                Ui.printTaskList(module.getModuleName(), module.taskList.getTaskCount());
-                module.taskList.printTasks(module.taskList.getTaskList());
+                Ui.printTaskList(module.getModuleName(), list.getTaskCount());
+                list.printTasks(list.getTaskList());
             }
         }
     }
 
-    void listMonthly(ArrayList<Module> moduleList) {
+    private void listMonthly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                module.taskList.showAllMonthly(module.getModuleName());
+                list.showAllMonthly(module.getModuleName());
             }
         }
     }
 
-    void listYearly(ArrayList<Module> moduleList) {
+    private void listYearly(ArrayList<Module> moduleList) {
         for (Module module : moduleList) {
+            TaskList list = module.getTaskList();
             if (!isEmpty(module)) {
-                module.taskList.showAllYearly(module.getModuleName());
+                list.showAllYearly(module.getModuleName());
             }
         }
     }
 
-    void listParser(String input) {
+    public void listParser(String input) {
         Parser.splitInput(input);
         if (Parser.taskType.equals(Parser.MODULE)) {
             NoCap.moduleList.printModules();
@@ -106,8 +113,8 @@ public class ListParser {
                 //listYearly(moduleList);
                 break;
             default:
-                allTaskList.printList();
-                System.out.println("Showing all tasks");
+                allTaskList.printAllTasks();
+                //System.out.println("Showing all tasks");
                 //listAll(moduleList);
                 break;
             }

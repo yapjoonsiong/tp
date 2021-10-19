@@ -85,7 +85,6 @@ public class Task {
 
     public void markDone() {
         logger.log(Level.INFO, "Successfully marked Task as done...");
-<<<<<<< HEAD
         this.isDone = true;
         Ui.printMarkDoneMessage(this);
     }
@@ -94,10 +93,6 @@ public class Task {
         logger.log(Level.INFO, "Successfully marked Task as not done...");
         this.isDone = false;
         Ui.printMarkNotDoneMessage(this);
-=======
-        setDone(true);
-        Ui.printMarkDoneMessage(this);
-
     }
 
     public void setLate(boolean isLate) {
@@ -117,7 +112,6 @@ public class Task {
 
     private String createLateIcon() {
         return this.isLate ? LATE_SYMBOL : "";
->>>>>>> master
     }
 
     public String createStatusIcon() {

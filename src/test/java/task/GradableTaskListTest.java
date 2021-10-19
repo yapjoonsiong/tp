@@ -2,10 +2,13 @@ package task;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class GradableTaskListTest {
+class GradableTaskListTest extends TaskListTest {
 
     @Test
     void getGradableTaskList() {
@@ -23,8 +26,8 @@ class GradableTaskListTest {
         GradableTaskList gradableTaskList = new GradableTaskList();
         gradableTaskList.addGradableTask("cs1010", "Assignment /by 12/12/2021 1600 /w 30");
         gradableTaskList.addGradableTask("cs1010", "Finals /by 12/12/2021 1600 /w 50");
-        String expected = "1.\n" + "Assignment by: 12 Dec 2021 04:00 PM Weightage 30% [ ] \n"
-                + "2.\n" + "Finals by: 12 Dec 2021 04:00 PM Weightage 50% [ ] \n";
+        String expected = "1.\n" + "Assignment by: 12 Dec 2021 04:00 PM Weightage 30% [ ]\n"
+                + "2.\n" + "Finals by: 12 Dec 2021 04:00 PM Weightage 50% [ ]\n";
         assertEquals(expected, gradableTaskList.toString());
     }
 }

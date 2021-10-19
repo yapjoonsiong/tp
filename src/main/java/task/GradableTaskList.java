@@ -20,20 +20,11 @@ public class GradableTaskList extends TaskList {
         return gradableTaskList;
     }
 
-    private static String getDate(String description) {
+    protected static String getDate(String description) {
         try {
             int datePos = description.indexOf(Parser.START_OF_DATE);
             int weightagePos = description.indexOf(Parser.START_OF_WEIGHTAGE);
             return description.substring(datePos, weightagePos).replace(Parser.START_OF_DATE, "").trim();
-        } catch (StringIndexOutOfBoundsException e) {
-            return "";
-        }
-    }
-
-    private static String removeDate(String description) {
-        try {
-            int datePos = description.indexOf(Parser.START_OF_DATE);
-            return description.substring(0, datePos).trim();
         } catch (StringIndexOutOfBoundsException e) {
             return "";
         }

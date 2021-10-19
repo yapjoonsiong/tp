@@ -25,7 +25,7 @@ public class OverallTask extends Task {
 
     @Override
     public String toString() {
-        return "[" + moduleName + "] " + super.toString();
+        return "[" + moduleName + "]" + super.toString();
     }
 
 }

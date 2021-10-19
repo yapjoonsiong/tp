@@ -170,6 +170,7 @@ public class Ui {
             return;
         }
         for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
@@ -181,6 +182,7 @@ public class Ui {
             return;
         }
         for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
@@ -192,6 +194,7 @@ public class Ui {
             return;
         }
         for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
@@ -203,6 +206,7 @@ public class Ui {
             return;
         }
         for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
@@ -214,6 +218,7 @@ public class Ui {
             return;
         }
         for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
@@ -225,6 +230,7 @@ public class Ui {
             return;
         }
         for (int i = 0; i < overallTaskList.size(); i++) {
+            overallTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + overallTaskList.get(i));
         }
     }

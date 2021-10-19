@@ -1,7 +1,6 @@
 package task;
 
 
-
 import command.parser.DateParser;
 import command.Ui;
 
@@ -32,6 +31,7 @@ public class Task {
         setDescription(description);
         setDate(date);
         setDone(false);
+        setLate(false);
         setDeadline(DateParser.parseDate(date));
     }
 
@@ -56,7 +56,7 @@ public class Task {
 
     /**
      * Needed for serialization of data.
-     * */
+     */
     public LocalDateTime getDeadline() {
         return deadline;
     }
@@ -78,7 +78,7 @@ public class Task {
         logger.log(Level.INFO, "Successfully set Task deadline...");
         this.deadline = date;
     }
-    
+
     public String createFormattedDeadline() {
         return DateParser.dateStringOutput(this.deadline);
     }
@@ -114,7 +114,7 @@ public class Task {
     }
 
     public String toString() {
-        return  createLateIcon() + createStatusIcon() + EMPTY_SPACE + getDescription()
-                + " by: "  + createFormattedDeadline();
+        return createLateIcon() + createStatusIcon() + EMPTY_SPACE + getDescription()
+                + " by: " + createFormattedDeadline();
     }
 }

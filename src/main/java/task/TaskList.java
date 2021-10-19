@@ -13,11 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class TaskList {
-    private static final String EMPTY_STRING = "";
-    private static final int DAYS_IN_A_WEEK = 7;
-    private static final int DAYS_IN_A_MONTH = 31;
-    private static final int DAYS_IN_A_YEAR = 366;
-    private static final Logger logger = Logger.getLogger(TaskList.class.getName());
+    protected static final String EMPTY_STRING = "";
+    protected static final int DAYS_IN_A_WEEK = 7;
+    protected static final int DAYS_IN_A_MONTH = 31;
+    protected static final int DAYS_IN_A_YEAR = 366;
+    protected static final Logger logger = Logger.getLogger(TaskList.class.getName());
     protected ArrayList<Task> taskList;
     protected int taskCount;
 
@@ -64,7 +64,7 @@ public class TaskList {
         this.taskCount = taskList.size();
     }
 
-    private static String getDate(String description) {
+    protected static String getDate(String description) {
         try {
             int datePos = description.indexOf(Parser.START_OF_DATE);
             return description.substring(datePos).replace(Parser.START_OF_DATE, EMPTY_STRING).trim();
@@ -73,7 +73,7 @@ public class TaskList {
         }
     }
 
-    private static String removeDate(String description) {
+    protected static String removeDate(String description) {
         try {
             int datePos = description.indexOf(Parser.START_OF_DATE);
             return description.substring(0, datePos).trim();
@@ -105,9 +105,9 @@ public class TaskList {
         }
     }
 
-    private static final Comparator<Task> sortByDate = Comparator.comparing(t -> t.deadline);
+    protected static final Comparator<Task> sortByDate = Comparator.comparing(t -> t.deadline);
 
-    private static final Comparator<Task> sortByStatus = (t1, t2) -> {
+    protected static final Comparator<Task> sortByStatus = (t1, t2) -> {
         if (t1.isDone && !t2.isDone) {
             return -1;
         }
@@ -117,24 +117,24 @@ public class TaskList {
         return 0;
     };
 
-    private boolean isWeekly(Task t) {
+    protected boolean isWeekly(Task t) {
         LocalDate date = LocalDate.now();
         Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
-        int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
+        int day = p.getYears() * DAYS_IN_A_YEAR + p.getMonths() * DAYS_IN_A_MONTH + p.getDays();
         return day <= DAYS_IN_A_WEEK;
     }
 
-    private boolean isMonthly(Task t) {
+    protected boolean isMonthly(Task t) {
         LocalDate date = LocalDate.now();
         Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
-        int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
+        int day = p.getYears() * DAYS_IN_A_YEAR + p.getMonths() * DAYS_IN_A_MONTH + p.getDays();
         return day <= DAYS_IN_A_MONTH;
     }
 
-    private boolean isYearly(Task t) {
+    protected boolean isYearly(Task t) {
         LocalDate date = LocalDate.now();
         Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
-        int day = p.getYears() * 366 + p.getMonths() * 31 + p.getDays();
+        int day = p.getYears() * DAYS_IN_A_YEAR + p.getMonths() * DAYS_IN_A_MONTH + p.getDays();
         return day <= DAYS_IN_A_YEAR;
     }
 

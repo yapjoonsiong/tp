@@ -18,14 +18,14 @@ import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
 
 public class TaskListTest {
-    private static final LocalDateTime refDate = LocalDateTime.now().withHour(0);
-    private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
-    private static final String DATE_A = refDate.plusDays(1).plusHours(10).format(format);
-    private static final String DATE_B = refDate.plusDays(6).plusHours(12).format(format);
-    private static final String DATE_C = refDate.plusDays(13).plusHours(15).format(format);
-    private static final String DATE_D = refDate.plusYears(2).plusHours(15).format(format);
-    private static final String DATE_E = refDate.plusMonths(2).plusHours(15).format(format);
-    private static final String DATE_OVERDUE = refDate.minusMonths(2).plusHours(15).format(format);
+    protected static final LocalDateTime refDate = LocalDateTime.now().withHour(0);
+    protected static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
+    protected static final String DATE_A = refDate.plusDays(1).plusHours(10).format(format);
+    protected static final String DATE_B = refDate.plusDays(6).plusHours(12).format(format);
+    protected static final String DATE_C = refDate.plusDays(13).plusHours(15).format(format);
+    protected static final String DATE_D = refDate.plusYears(2).plusHours(15).format(format);
+    protected static final String DATE_E = refDate.plusMonths(2).plusHours(15).format(format);
+    protected static final String DATE_OVERDUE = refDate.minusMonths(2).plusHours(15).format(format);
 
     @Test
     void get_success() {

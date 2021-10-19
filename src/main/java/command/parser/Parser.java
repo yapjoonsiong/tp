@@ -51,8 +51,7 @@ public class Parser {
     protected String moduleName;
     public Module module;
     protected boolean isExit;
-    //private static Logger logger = java.util.logging.Logger.getLogger(command.Logger.GLOBAL_LOGGER_NAME);
-    private static Logger logger = command.Logger.logger;
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public Parser() {
         this.isExit = false;

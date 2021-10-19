@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 
 public class Task {
-    private static final Logger logger = command.Logger.logger;
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String LATE_SYMBOL = "[LATE]";
     private static final String DONE_SYMBOL = "[X]";
     private static final String EMPTY_SYMBOL = "[ ]";

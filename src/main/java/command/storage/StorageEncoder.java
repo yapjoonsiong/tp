@@ -23,7 +23,7 @@ public class StorageEncoder {
     private static final Path DIRECTORY_PATH = Paths.get(ROOT, "data");
 
     //Logger object
-    private static final Logger logger = command.Logger.logger;
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static void encodeAndSaveModuleListToJson(ModuleList moduleList) {
         ObjectMapper objectMapper = new ObjectMapper();

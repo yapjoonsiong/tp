@@ -26,7 +26,6 @@ public class SemesterList {
             int year = (i / 2) + 1;
             int sem = (i % 2) + 1;
             String semesterDescription = "Y" + year + "S" + sem;
-            //Semester semester = new Semester(semesterDescription);
             add(semesterDescription);
         }
     }

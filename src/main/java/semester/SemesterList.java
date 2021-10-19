@@ -21,12 +21,11 @@ public class SemesterList {
         setUp();
     }
 
-    private void setUp () {
-        for (int i = 0; i < 10; i ++) {
+    private void setUp() {
+        for (int i = 0; i < 10; i++) {
             int year = (i / 2) + 1;
             int sem = (i % 2) + 1;
             String semesterDescription = "Y" + year + "S" + sem;
-            //Semester semester = new Semester(semesterDescription);
             add(semesterDescription);
         }
     }
@@ -44,7 +43,7 @@ public class SemesterList {
         int i = 1;
         for (Semester semester : semesterList) {
             System.out.println(i + " : " + semester.getSem());
-            i ++;
+            i++;
         }
     }
 

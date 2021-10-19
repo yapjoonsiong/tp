@@ -30,6 +30,9 @@ public class Parser {
     public static final String DELETECLASS = "deleteclass";
     public static final String DELETETASK = "deletetask";
     public static final String DELETEGRADE = "deletegrade";
+    public static final String EDITDESCRIPTION = "editdesc";
+    public static final String EDITDEADLINE = "editdate";
+    public static final String NOTDONE = "notdone";
     public static final String DONE = "done";
     public static final String INFO = "info";
     public static final String START_OF_DATE = "/by";
@@ -128,6 +131,7 @@ public class Parser {
         }
         splitInput(taskDescription);
 
+        Task selectedTask;
         switch (taskType) {
         case ADDCLASS:
             if (isEmptyDescription(taskDescription)) {
@@ -146,9 +150,18 @@ public class Parser {
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
-            Task tobeDone = parserSearch.getTaskFromIndex(taskDescription, module.taskList.getTaskList());
-            if (tobeDone != null) {
-                tobeDone.markDone();
+            selectedTask = parserSearch.getTaskFromIndex(taskDescription, module.taskList.getTaskList());
+            if (selectedTask != null) {
+                selectedTask.markDone();
+            }
+            break;
+        case NOTDONE:
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            selectedTask = parserSearch.getTaskFromIndex(taskDescription, module.taskList.getTaskList());
+            if (selectedTask != null) {
+                selectedTask.markNotDone();
             }
             break;
         case ADDGRADE:
@@ -172,9 +185,35 @@ public class Parser {
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
-            Task tobeDeleted = parserSearch.getTaskFromKeyword(taskDescription, module.taskList.getTaskList());
-            if (tobeDeleted != null) {
-                module.deleteTask(tobeDeleted);
+            selectedTask = parserSearch.getTaskFromKeyword(taskDescription, module.taskList.getTaskList());
+            if (selectedTask != null) {
+                module.deleteTask(selectedTask);
+            }
+            break;
+        case EDITDESCRIPTION:
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            splitInput(taskDescription);
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            selectedTask = parserSearch.getTaskFromIndex(taskType, module.taskList.getTaskList());
+            if (selectedTask != null) {
+                selectedTask.setDescription(taskDescription);
+            }
+            break;
+        case EDITDEADLINE:
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            splitInput(taskDescription);
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            selectedTask = parserSearch.getTaskFromIndex(taskType, module.taskList.getTaskList());
+            if (selectedTask != null) {
+                selectedTask.setDate(taskDescription);
             }
             break;
         case DELETEGRADE:

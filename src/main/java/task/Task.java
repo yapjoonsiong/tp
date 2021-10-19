@@ -85,9 +85,14 @@ public class Task {
 
     public void markDone() {
         logger.log(Level.INFO, "Successfully marked Task as done...");
-        setDone(true);
+        this.isDone = true;
         Ui.printMarkDoneMessage(this);
+    }
 
+    public void markNotDone() {
+        logger.log(Level.INFO, "Successfully marked Task as not done...");
+        this.isDone = false;
+        Ui.printMarkNotDoneMessage(this);
     }
 
     public void setLate(boolean isLate) {

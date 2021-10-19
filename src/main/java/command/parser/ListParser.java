@@ -1,14 +1,18 @@
-package command;
+package command.parser;
 
+import command.NoCap;
+import command.Ui;
 import module.Module;
+import task.OverallTaskList;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class List {
-    private static final Logger logger = Logger.getLogger(List.class.getName());
+public class ListParser {
+    private static final Logger logger = Logger.getLogger(ListParser.class.getName());
 
-    public List() {
+    public ListParser() {
     }
 
     boolean isEmpty(Module module) {
@@ -73,31 +77,38 @@ public class List {
         if (Parser.taskType.equals(Parser.MODULE)) {
             NoCap.moduleList.printModules();
         } else if (Parser.taskType.equals(Parser.TASK)) {
-            ArrayList<Module> moduleList = new ArrayList<>(NoCap.moduleList.getModuleList());
+            //ArrayList<Module> moduleList = new ArrayList<Module>(NoCap.moduleList.getModuleList());
+            OverallTaskList allTaskList = new OverallTaskList(NoCap.moduleList);
             switch (Parser.taskDescription) {
             case Parser.SORT_BY_DATE:
                 logger.log(Level.INFO, "Sort TaskList by date");
-                sortByDate(moduleList);
+                allTaskList.sortByDateAndPrint();
+                //sortByDate(moduleList);
                 break;
             case Parser.SORT_BY_STATUS:
                 logger.log(Level.INFO, "Sort TaskList by status");
-                sortByStatus(moduleList);
+                allTaskList.sortByStatusAndPrint();
+                //sortByStatus(moduleList);
                 break;
             case Parser.SHOW_WEEK:
                 logger.log(Level.INFO, "Print weekly TaskList");
-                listWeekly(moduleList);
+                allTaskList.printWeeklyTasks();
+                //listWeekly(moduleList);
                 break;
             case Parser.SHOW_MONTH:
                 logger.log(Level.INFO, "Print monthly TaskList");
-                listMonthly(moduleList);
+                allTaskList.printMonthlyTasks();
+                //listMonthly(moduleList);
                 break;
             case Parser.SHOW_YEAR:
+                allTaskList.printYearlyTasks();
                 logger.log(Level.INFO, "Print yearly TaskList");
-                listYearly(moduleList);
+                //listYearly(moduleList);
                 break;
             default:
+                allTaskList.printList();
                 System.out.println("Showing all tasks");
-                listAll(moduleList);
+                //listAll(moduleList);
                 break;
             }
         } else {

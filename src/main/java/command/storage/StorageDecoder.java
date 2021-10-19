@@ -1,7 +1,8 @@
 package command.storage;
 
-import com.fasterxml.jackson.databind.DatabindException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import command.Ui;
 import module.ModuleList;
 
@@ -24,6 +25,7 @@ public class StorageDecoder {
 
     public static ModuleList decodeJsonToModuleList() {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         ModuleList modules = new ModuleList();
         if (!Files.exists(FILE_PATH)) {
             Ui.printNoSaveFileMessage();
@@ -35,6 +37,7 @@ public class StorageDecoder {
             Ui.loadFileSuccessful();
             logger.log(Level.INFO,"Load file successful");
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             System.out.println("Error reading save file, creating new template");
         } catch (Exception e) {
             System.out.println(e.getMessage());

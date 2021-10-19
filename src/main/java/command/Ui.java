@@ -3,12 +3,15 @@ package command;
 
 import module.Module;
 import module.ModuleList;
+import task.OverallTask;
 import task.Task;
 
+import java.util.List;
 import java.util.Locale;
 
 public class Ui {
     private static final String logo = "NoCap Logo";
+
     public static void printHelpMessage() {
         System.out.println("Display help messages: help");
         System.out.println("Add Module: add <module>");
@@ -37,7 +40,7 @@ public class Ui {
     public static void printStartMessage() {
         System.out.println(logo);
         System.out.println("Welcome to NoCap" + System.lineSeparator()
-        + "User:");
+                + "User:");
     }
 
     public static void printEndMessage() {
@@ -128,6 +131,18 @@ public class Ui {
         System.out.println("Task with the specified index not found!");
     }
 
+    public static void printInvalidKeyword() {
+        System.out.println("Task with the specified keyword not found!");
+    }
+
+    public static void printTaskFound() {
+        System.out.println("The following task(s) are found:");
+    }
+
+    public static void printSelectIndex() {
+        System.out.println("Please choose a task to perform the action:");
+    }
+
     public static void printMarkDoneMessage(Task task) {
         System.out.println("Task is completed:" + System.lineSeparator() + task);
     }
@@ -141,5 +156,46 @@ public class Ui {
         System.out.println("This module already exists!");
     }
 
+    public static void printInvalidInputMessage() {
+        System.out.println("Invalid Input!");
+    }
 
+    public static void printInvalidModuleNameMessage() {
+        System.out.println("Invalid Module name!");
+    }
+
+    public static void printOverallListOrderedByDate(List<OverallTask> newTaskList) {
+        System.out.println("Tasks sorted by date: ");
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void printOverallListOrderedByStatus(List<OverallTask> newTaskList) {
+        System.out.println("Tasks sorted by status: ");
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void printOverallWeeklyTasks(List<OverallTask> newTaskList) {
+        System.out.println("Weekly tasks: ");
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void printOverallMonthlyTasks(List<OverallTask> newTaskList) {
+        System.out.println("Monthly tasks: ");
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void printOverallYearlyTasks(List<OverallTask> newTaskList) {
+        System.out.println("Yearly tasks: ");
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
 }

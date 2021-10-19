@@ -145,6 +145,10 @@ public class Ui {
         System.out.println("Task is completed:" + System.lineSeparator() + task);
     }
 
+    public static void printMarkNotDoneMessage(Task task) {
+        System.out.println("Task is marked not complete:" + System.lineSeparator() + task);
+    }
+
     public static void printExitMessage() {
         System.out.println("Thank you for using NoCap!");
         System.out.println("Have a nice day!");

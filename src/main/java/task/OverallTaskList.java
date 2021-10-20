@@ -33,6 +33,7 @@ public class OverallTaskList extends TaskList {
                 overallTaskList.add(new OverallTask(task.getDescription(), task.getDate(), moduleName, task.isDone));
             }
         }
+        assert(!overallTaskList.isEmpty() || moduleList.getModuleList().isEmpty());
         logger.log(Level.INFO, "Add all tasks from module list to overall task list");
     }
 

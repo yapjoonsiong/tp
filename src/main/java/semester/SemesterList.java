@@ -1,8 +1,5 @@
 package semester;
 
-import exceptions.ExceptionMessages;
-import exceptions.NoCapExceptions;
-
 import java.util.ArrayList;
 
 public class SemesterList {
@@ -43,16 +40,16 @@ public class SemesterList {
         }
     }
 
-    public void add(Semester semester) {
+    private void add(Semester semester) {
         this.semesterList.add(semester);
     }
 
-    public void add(String semesterDescription) {
+    private void add(String semesterDescription) {
         Semester semester = new Semester(semesterDescription);
         this.semesterList.add(semester);
     }
 
-    public void listSemesters() {
+    public void printSemesters() {
         int i = 1;
         for (Semester semester : semesterList) {
             System.out.println(i + " : " + semester.getSemester());
@@ -82,7 +79,7 @@ public class SemesterList {
         points = p;
     }
 
-    private void updateCap() {
+    public void updateCap() {
         updateCredits();
         updatePoints();
         cap = points / credits;
@@ -98,6 +95,11 @@ public class SemesterList {
 
     public int getAccessedSemesterIndex() {
         return accessedSemesterIndex;
+    }
+
+    public Semester get(int index) {
+        assert index >= 0;
+        return this.semesterList.get(index);
     }
 
     public void visualiseCap() {

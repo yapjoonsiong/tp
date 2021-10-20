@@ -8,10 +8,7 @@ import java.util.Scanner;
 
 public class ParserSearch {
 
-    private final Parser parser;
-
-    public ParserSearch(Parser parser) {
-        this.parser = parser;
+    public ParserSearch() {
     }
 
     public Task getTaskFromIndex(String input, ArrayList<Task> taskList) {

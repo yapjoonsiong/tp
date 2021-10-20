@@ -44,12 +44,11 @@ public class Parser {
     public static final String SHOW_MONTH = "m";
     public static final String SHOW_YEAR = "y";
 
-    static String taskType;
-    static String taskDescription;
-    private final ListParser list = new ListParser();
-    private final ParserSearch parserSearch = new ParserSearch(this);
-    protected String moduleName;
-    public Module module;
+    public static String taskType;
+    public static String taskDescription;
+    private Module module;
+    private ListParser list = new ListParser();
+    private ParserSearch parserSearch = new ParserSearch();
     protected boolean isExit;
     private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -63,7 +62,6 @@ public class Parser {
      * @param line User input
      */
     public void chooseTask(String line) {
-        logger.log(Level.INFO, "Successfully marked Task as done...");
         splitInput(line);
         switch (taskType) {
         case SWITCH:
@@ -114,16 +112,15 @@ public class Parser {
 
 
     /**
-     * First separate the input into two parts. The first part is saved as moduleName.
+     * First separate the input into two parts. The first part is saved as module.
      * The next part is split again to obtain the new taskType and taskDescription
      *
      * @param input String to be separated
      */
     void moduleParser(String input) {
         splitInput(input);
-        moduleName = taskType.toUpperCase(Locale.ROOT);
         try {
-            module = NoCap.moduleList.find(moduleName);
+            module = NoCap.moduleList.find(taskType.toUpperCase(Locale.ROOT));
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printInvalidModuleNameMessage();
             return;
@@ -246,10 +243,6 @@ public class Parser {
 
     public boolean isExit() {
         return this.isExit;
-    }
-
-    public String getModuleName() {
-        return this.moduleName;
     }
 
     public String getTaskType() {

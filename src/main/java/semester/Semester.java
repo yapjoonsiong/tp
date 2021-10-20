@@ -41,14 +41,10 @@ public class Semester {
         points = p;
     }
 
-    protected void updateCap() {
+    public void updateCap() {
         updateCredits();
         updatePoints();
         cap = points / credits;
-    }
-
-    public void updateSemester() {
-        updateCap();
     }
 
     public int getCredits() {
@@ -69,6 +65,7 @@ public class Semester {
 
     public String getSemester() {
         return this.semester;
+
     }
 
     @Override

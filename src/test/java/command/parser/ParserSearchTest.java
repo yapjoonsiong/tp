@@ -11,8 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ParserSearchTest {
 
-    Parser testParser = new Parser();
-    ParserSearch testParserSearch = new ParserSearch(testParser);
+    ParserSearch testParserSearch = new ParserSearch();
 
     @Test
     public void getTaskFromIndex_invalidIndex_returnNull() {

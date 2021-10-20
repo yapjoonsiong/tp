@@ -4,6 +4,7 @@ import command.NoCap;
 import command.Ui;
 import command.storage.StorageEncoder;
 import module.Module;
+import semester.Semester;
 import task.Task;
 
 import java.util.Locale;
@@ -15,6 +16,9 @@ public class Parser {
     public static final String EMPTY_STRING = "";
     private static final String SPACE_STRING = " ";
     public static final String SWITCH = "switch";
+    public static final String SEMESTERS = "semesters";
+    public static final String CAP = "cap";
+    public static final String ALLCAP = "allcap";
     public static final String TASK = "task";
     public static final String MODULE = "module";
     public static final String HELP = "help";
@@ -44,12 +48,11 @@ public class Parser {
     public static final String SHOW_MONTH = "m";
     public static final String SHOW_YEAR = "y";
 
-    static String taskType;
-    static String taskDescription;
-    private final ListParser list = new ListParser();
-    private final ParserSearch parserSearch = new ParserSearch(this);
-    protected String moduleName;
-    public Module module;
+    public static String taskType;
+    public static String taskDescription;
+    private Module module;
+    private ListParser list = new ListParser();
+    private ParserSearch parserSearch = new ParserSearch();
     protected boolean isExit;
     private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -63,15 +66,27 @@ public class Parser {
      * @param line User input
      */
     public void chooseTask(String line) {
-        logger.log(Level.INFO, "Successfully marked Task as done...");
         splitInput(line);
         switch (taskType) {
         case SWITCH:
-            if (isEmptyDescription(taskDescription)) {
+            if (isEmptyDescription(taskDescription) || isNotInteger(taskDescription)) {
                 break;
             }
             int semesterIndex = Integer.parseInt(taskDescription) - 1;
             NoCap.semesterList.setAccessedSemesterIndex(semesterIndex);
+            Ui.switchSemesterMessage(NoCap.semesterList.get(semesterIndex).getSemester());
+            break;
+        case CAP:
+            int index = NoCap.semesterList.getAccessedSemesterIndex();
+            System.out.println(index);
+            System.out.println("This semester's CAP: " + NoCap.semester.getCap());
+            System.out.println("Cumulative CAP: " + NoCap.semesterList.getCap());
+            break;
+        case ALLCAP:
+            for (Semester semester : NoCap.semesterList.getSemesterList()) {
+                System.out.println(semester.getSemester() + " CAP: " + semester.getCap());
+            }
+            System.out.println("Cumulative CAP: " + NoCap.semesterList.getCap());
             break;
         case HELP:
             Ui.printHelpMessage();
@@ -114,16 +129,15 @@ public class Parser {
 
 
     /**
-     * First separate the input into two parts. The first part is saved as moduleName.
+     * First separate the input into two parts. The first part is saved as module.
      * The next part is split again to obtain the new taskType and taskDescription
      *
      * @param input String to be separated
      */
     void moduleParser(String input) {
         splitInput(input);
-        moduleName = taskType.toUpperCase(Locale.ROOT);
         try {
-            module = NoCap.moduleList.find(moduleName);
+            module = NoCap.moduleList.find(taskType.toUpperCase(Locale.ROOT));
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printInvalidModuleNameMessage();
             return;
@@ -172,6 +186,8 @@ public class Parser {
                 break;
             }
             module.addGrade(taskDescription);
+            NoCap.semester.updateCap();
+            NoCap.semesterList.updateCap();
             Ui.addModuleGradeMessage(module);
             break;
         case ADDCREDIT:
@@ -179,6 +195,8 @@ public class Parser {
                 break;
             }
             module.addCredits(Integer.parseInt(taskDescription));
+            NoCap.semester.updateCap();
+            NoCap.semesterList.updateCap();
             Ui.addModuleCreditsMessage(module);
             break;
         case DELETECLASS:
@@ -221,6 +239,8 @@ public class Parser {
             break;
         case DELETEGRADE:
             module.deleteGrade();
+            NoCap.semester.updateCap();
+            NoCap.semesterList.updateCap();
             break;
         case INFO:
             module.showInformation();
@@ -246,10 +266,6 @@ public class Parser {
 
     public boolean isExit() {
         return this.isExit;
-    }
-
-    public String getModuleName() {
-        return this.moduleName;
     }
 
     public String getTaskType() {
@@ -289,6 +305,20 @@ public class Parser {
             return true;
         }
         Ui.invalidDate();
+        return false;
+    }
+
+    boolean isNotInteger(String input) {
+        if (input == null) {
+            Ui.inputNotInteger();
+            return true;
+        }
+        try {
+            int in = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            Ui.inputNotInteger();
+            return true;
+        }
         return false;
     }
 }

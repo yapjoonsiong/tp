@@ -1,10 +1,9 @@
 package module;
 
 
-import command.Ui;
-import command.parser.Parser;
-import command.storage.StorageDecoder;
-import task.GradableTask;
+import command.NoCap;
+import schedule.Schedule;
+import schedule.ScheduleList;
 import task.GradableTaskList;
 import task.Task;
 import task.TaskList;
@@ -110,10 +109,14 @@ public class Module {
     public void addGrade(String letterGrade) {
         this.letterGrade = letterGrade;
         updatePoints();
+        NoCap.semester.updateCap();
+        NoCap.semesterList.updateCap();
     }
 
     public void deleteGrade() {
         this.letterGrade = null;
+        NoCap.semester.updateCap();
+        NoCap.semesterList.updateCap();
     }
 
     private void updatePoints() {
@@ -185,6 +188,8 @@ public class Module {
 
     public void addCredits(int credits) {
         this.credits = credits;
+        NoCap.semester.updateCap();
+        NoCap.semesterList.updateCap();
     }
 
     public void showInformation() {

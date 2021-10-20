@@ -4,6 +4,7 @@ import command.NoCap;
 import command.Ui;
 import command.storage.StorageEncoder;
 import module.Module;
+import semester.Semester;
 import task.Task;
 
 import java.util.Locale;
@@ -14,7 +15,10 @@ public class Parser {
 
     public static final String EMPTY_STRING = "";
     private static final String SPACE_STRING = " ";
-    public static final String SWITCH = "switch";
+    public static final String SWITCHSEMESTER = "switch";
+    public static final String SEMESTERS = "semesters";
+    public static final String CAP = "cap";
+    public static final String ALLCAP = "allcap";
     public static final String TASK = "task";
     public static final String MODULE = "module";
     public static final String HELP = "help";
@@ -65,12 +69,28 @@ public class Parser {
     public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {
-        case SWITCH:
-            if (isEmptyDescription(taskDescription)) {
+        case SWITCHSEMESTER:
+            if (isEmptyDescription(taskDescription) || isNotInteger(taskDescription)) {
                 break;
             }
+            //move to SemesterList
             int semesterIndex = Integer.parseInt(taskDescription) - 1;
             NoCap.semesterList.setAccessedSemesterIndex(semesterIndex);
+            Ui.switchSemesterMessage(NoCap.semesterList.get(semesterIndex).getSemester());
+            break;
+        case CAP:
+            //move to SemesterList
+            int index = NoCap.semesterList.getAccessedSemesterIndex();
+            System.out.println(index);
+            System.out.println("This semester's CAP: " + NoCap.semester.getCap());
+            System.out.println("Cumulative CAP: " + NoCap.semesterList.getCap());
+            break;
+        case ALLCAP:
+            //move to SemesterList
+            for (Semester semester : NoCap.semesterList.getSemesterList()) {
+                System.out.println(semester.getSemester() + " CAP: " + semester.getCap());
+            }
+            System.out.println("Cumulative CAP: " + NoCap.semesterList.getCap());
             break;
         case HELP:
             Ui.printHelpMessage();
@@ -289,6 +309,20 @@ public class Parser {
             return true;
         }
         Ui.invalidDate();
+        return false;
+    }
+
+    boolean isNotInteger(String input) {
+        if (input == null) {
+            Ui.inputNotInteger();
+            return true;
+        }
+        try {
+            int in = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            Ui.inputNotInteger();
+            return true;
+        }
         return false;
     }
 

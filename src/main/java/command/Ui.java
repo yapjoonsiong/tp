@@ -55,6 +55,15 @@ public class Ui {
         System.out.println("Format: dd/MM/yyyy hhmm");
     }
 
+    public static void inputNotInteger() {
+        System.out.println("Input must be an integer!");
+    }
+
+    public static void switchSemesterMessage(String semester) {
+        System.out.println("Semester successfully switched");
+        System.out.println("You are now accessing semester: " + semester);
+    }
+
     public static void addModuleNameMessage(ModuleList moduleList) {
         System.out.println("Module successfully added: ");
         moduleList.printModules();
@@ -144,6 +153,10 @@ public class Ui {
 
     public static void printMarkDoneMessage(Task task) {
         System.out.println("Task is completed:" + System.lineSeparator() + task);
+    }
+
+    public static void printMarkNotDoneMessage(Task task) {
+        System.out.println("Task is marked not complete:" + System.lineSeparator() + task);
     }
 
     public static void printExitMessage() {

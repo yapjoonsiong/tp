@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ListParser {
-    private static final Logger logger = Logger.getLogger(ListParser.class.getName());
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public ListParser() {
     }
@@ -83,6 +83,8 @@ public class ListParser {
         Parser.splitInput(input);
         if (Parser.taskType.equals(Parser.MODULE)) {
             NoCap.moduleList.printModules();
+        } else if (Parser.taskType.equals(Parser.SEMESTERS)) {
+            NoCap.semesterList.printSemesters();
         } else if (Parser.taskType.equals(Parser.TASK)) {
             //ArrayList<Module> moduleList = new ArrayList<Module>(NoCap.moduleList.getModuleList());
             OverallTaskList allTaskList = new OverallTaskList(NoCap.moduleList);

@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class OverallTaskList extends TaskList {
-    private static final Logger logger = Logger.getLogger(OverallTaskList.class.getName());
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     protected ArrayList<OverallTask> overallTaskList;
 
@@ -33,6 +33,7 @@ public class OverallTaskList extends TaskList {
                 overallTaskList.add(new OverallTask(task.getDescription(), task.getDate(), moduleName, task.isDone));
             }
         }
+        assert (!overallTaskList.isEmpty() || moduleList.getModuleList().isEmpty());
         logger.log(Level.INFO, "Add all tasks from module list to overall task list");
     }
 

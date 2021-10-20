@@ -26,6 +26,7 @@ public class Parser {
     public static final String MODULETYPE = "/m";
     public static final String ADDCLASS = "addclass";
     public static final String ADDTASK = "addtask";
+    public static final String ADDGRADABLE = "addgradable";
     public static final String ADDGRADE = "addgrade";
     public static final String ADDCREDIT = "addcredit";
     public static final String DELETECLASS = "deleteclass";
@@ -145,6 +146,12 @@ public class Parser {
                 break;
             }
             module.addTask(taskDescription);
+            break;
+        case ADDGRADABLE:
+            if (isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription) | !hasWeightageDescription(taskDescription)) {
+                break;
+            }
+            module.addGradableTask(taskDescription);
             break;
         case DONE:
             if (isEmptyDescription(taskDescription)) {
@@ -284,4 +291,15 @@ public class Parser {
         Ui.invalidDate();
         return false;
     }
+
+    boolean hasWeightageDescription(String input) {
+        int typePos = input.indexOf(START_OF_DATE);
+        String secondPart = input.substring(typePos);
+        if (secondPart.contains(START_OF_WEIGHTAGE)) {
+            return true;
+        }
+        Ui.invalidWeightage();
+        return false;
+    }
+
 }

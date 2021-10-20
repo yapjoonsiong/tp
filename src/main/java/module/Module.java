@@ -185,7 +185,7 @@ public class Module {
     public void addCredits(int credits) {
         this.credits = credits;
     }
-
+    
     public void showInformation() {
         System.out.println(toString());
     }

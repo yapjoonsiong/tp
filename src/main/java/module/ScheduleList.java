@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class ScheduleList {
     protected ArrayList<Schedule> scheduleList;
-    private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public ScheduleList() {
         this.scheduleList = new ArrayList<Schedule>();

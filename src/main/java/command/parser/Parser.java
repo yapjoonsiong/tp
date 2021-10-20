@@ -7,6 +7,7 @@ import module.Module;
 import task.Task;
 
 import java.util.Locale;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
@@ -30,6 +31,9 @@ public class Parser {
     public static final String DELETECLASS = "deleteclass";
     public static final String DELETETASK = "deletetask";
     public static final String DELETEGRADE = "deletegrade";
+    public static final String EDITDESCRIPTION = "editdesc";
+    public static final String EDITDEADLINE = "editdate";
+    public static final String NOTDONE = "notdone";
     public static final String DONE = "done";
     public static final String INFO = "info";
     public static final String START_OF_DATE = "/by";
@@ -47,7 +51,7 @@ public class Parser {
     protected String moduleName;
     public Module module;
     protected boolean isExit;
-    private static Logger logger = Logger.getLogger(Parser.class.getName());
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public Parser() {
         this.isExit = false;
@@ -59,13 +63,15 @@ public class Parser {
      * @param line User input
      */
     public void chooseTask(String line) {
+        logger.log(Level.INFO, "Successfully marked Task as done...");
         splitInput(line);
         switch (taskType) {
         case SWITCH:
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
-            NoCap.semesterList.setAccessedSemesterIndex(Integer.parseInt(taskDescription));
+            int semesterIndex = Integer.parseInt(taskDescription) - 1;
+            NoCap.semesterList.setAccessedSemesterIndex(semesterIndex);
             break;
         case HELP:
             Ui.printHelpMessage();
@@ -76,14 +82,14 @@ public class Parser {
             }
             NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
             Ui.addModuleNameMessage(NoCap.moduleList);
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         case DELETE:
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
             NoCap.moduleList.delete(taskDescription);
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         case LIST:
             list.listParser(taskDescription);
@@ -93,12 +99,12 @@ public class Parser {
             break;
         case EXIT:
             Ui.printExitMessage();
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             this.isExit = true;
             break;
         case MODULETYPE:
             moduleParser(taskDescription);
-            StorageEncoder.encodeAndSaveModuleListToJson(NoCap.moduleList);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         default:
             Ui.printInvalidInputMessage();
@@ -128,6 +134,7 @@ public class Parser {
         }
         splitInput(taskDescription);
 
+        Task selectedTask;
         switch (taskType) {
         case ADDCLASS:
             if (isEmptyDescription(taskDescription)) {
@@ -146,9 +153,18 @@ public class Parser {
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
-            Task tobeDone = parserSearch.getTaskFromIndex(taskDescription, module.taskList.getTaskList());
-            if (tobeDone != null) {
-                tobeDone.markDone();
+            selectedTask = parserSearch.getTaskFromIndex(taskDescription, module.taskList.getTaskList());
+            if (selectedTask != null) {
+                selectedTask.markDone();
+            }
+            break;
+        case NOTDONE:
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            selectedTask = parserSearch.getTaskFromIndex(taskDescription, module.taskList.getTaskList());
+            if (selectedTask != null) {
+                selectedTask.markNotDone();
             }
             break;
         case ADDGRADE:
@@ -172,9 +188,35 @@ public class Parser {
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
-            Task tobeDeleted = parserSearch.getTaskFromKeyword(taskDescription, module.taskList.getTaskList());
-            if (tobeDeleted != null) {
-                module.deleteTask(tobeDeleted);
+            selectedTask = parserSearch.getTaskFromKeyword(taskDescription, module.taskList.getTaskList());
+            if (selectedTask != null) {
+                module.deleteTask(selectedTask);
+            }
+            break;
+        case EDITDESCRIPTION:
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            splitInput(taskDescription);
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            selectedTask = parserSearch.getTaskFromIndex(taskType, module.taskList.getTaskList());
+            if (selectedTask != null) {
+                selectedTask.setDescription(taskDescription);
+            }
+            break;
+        case EDITDEADLINE:
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            splitInput(taskDescription);
+            if (isEmptyDescription(taskDescription)) {
+                break;
+            }
+            selectedTask = parserSearch.getTaskFromIndex(taskType, module.taskList.getTaskList());
+            if (selectedTask != null) {
+                selectedTask.setDate(taskDescription);
             }
             break;
         case DELETEGRADE:

@@ -1,6 +1,8 @@
 package module;
 
 
+import command.Ui;
+import command.parser.Parser;
 import command.storage.StorageDecoder;
 import task.GradableTask;
 import task.GradableTaskList;
@@ -20,7 +22,7 @@ public class Module {
     private ScheduleList scheduleList;
     protected int credits;
     protected GradableTaskList gradableTaskList;
-    private static final Logger logger = Logger.getLogger(StorageDecoder.class.getName());
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public Module(String moduleName) {
         assert !moduleName.equals("");

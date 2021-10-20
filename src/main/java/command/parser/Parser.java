@@ -198,6 +198,8 @@ public class Parser {
             }
             module.addGrade(taskDescription);
             Ui.addModuleGradeMessage(module);
+            NoCap.semester.updateCap();
+            NoCap.semesterList.updateCap();
             break;
         case ADDCREDIT:
             if (isEmptyDescription(taskDescription)) {
@@ -205,6 +207,8 @@ public class Parser {
             }
             module.addCredits(Integer.parseInt(taskDescription));
             Ui.addModuleCreditsMessage(module);
+            NoCap.semester.updateCap();
+            NoCap.semesterList.updateCap();
             break;
         case DELETECLASS:
             module.deleteClass();
@@ -246,6 +250,8 @@ public class Parser {
             break;
         case DELETEGRADE:
             module.deleteGrade();
+            NoCap.semester.updateCap();
+            NoCap.semesterList.updateCap();
             break;
         case INFO:
             module.showInformation();

@@ -109,14 +109,10 @@ public class Module {
     public void addGrade(String letterGrade) {
         this.letterGrade = letterGrade;
         updatePoints();
-        NoCap.semester.updateCap();
-        NoCap.semesterList.updateCap();
     }
 
     public void deleteGrade() {
         this.letterGrade = null;
-        NoCap.semester.updateCap();
-        NoCap.semesterList.updateCap();
     }
 
     private void updatePoints() {
@@ -188,8 +184,6 @@ public class Module {
 
     public void addCredits(int credits) {
         this.credits = credits;
-        NoCap.semester.updateCap();
-        NoCap.semesterList.updateCap();
     }
 
     public void showInformation() {

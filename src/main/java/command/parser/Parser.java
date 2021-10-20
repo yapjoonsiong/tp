@@ -168,7 +168,8 @@ public class Parser {
             module.addTask(taskDescription);
             break;
         case ADDGRADABLE:
-            if (isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription) | !hasWeightageDescription(taskDescription)) {
+            if (isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription)
+                    | !hasWeightageDescription(taskDescription)) {
                 break;
             }
             module.addGradableTask(taskDescription);

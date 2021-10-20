@@ -49,6 +49,7 @@ public class Ui {
     public static void invalidDate() {
         System.out.println("Missing /by");
     }
+
     public static void invalidWeightage() {
         System.out.println("Missing /w");
     }

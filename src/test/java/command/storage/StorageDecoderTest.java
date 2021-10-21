@@ -2,7 +2,7 @@ package command.storage;
 
 import module.Module;
 import module.ModuleList;
-import module.Schedule;
+import schedule.Schedule;
 import org.junit.jupiter.api.Test;
 import semester.SemesterList;
 

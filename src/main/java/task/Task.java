@@ -4,6 +4,7 @@ package task;
 import command.parser.DateParser;
 import command.Ui;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,8 +71,13 @@ public class Task {
         isDone = done;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDate(String date) throws DateTimeException {
+        try {
+            this.date = date;
+            setDeadline(DateParser.parseDate(date));
+        } catch (DateTimeException e) {
+            Ui.invalidDate();
+        }
     }
 
     public void setDeadline(LocalDateTime date) {

@@ -47,8 +47,13 @@ public class Ui {
     }
 
     public static void invalidDate() {
-        System.out.println("Wrong date format input");
+        System.out.println("Missing /by");
     }
+
+    public static void invalidWeightage() {
+        System.out.println("Missing /w");
+    }
+
 
     public static void wrongDateTimeFormat() {
         System.out.println("Wrong date format input!");

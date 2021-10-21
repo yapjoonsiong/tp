@@ -4,6 +4,7 @@ import command.NoCap;
 import command.Ui;
 import module.Module;
 import task.OverallTaskList;
+import task.Task;
 import task.TaskList;
 
 import java.util.ArrayList;
@@ -24,69 +25,56 @@ public class ListParser {
         return false;
     }
 
-    private void sortByDate(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            TaskList list = module.getTaskList();
-            if (!isEmpty(module)) {
-                list.sortTaskListByDate(module.getModuleName());
-            }
+    private void sortByDate(Module module) {
+        TaskList list = module.getTaskList();
+        if (!isEmpty(module)) {
+            list.sortTaskListByDate(module.getModuleName());
         }
     }
 
-    private void sortByStatus(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            TaskList list = module.getTaskList();
-            if (!isEmpty(module)) {
-                list.sortTaskListByStatus(module.getModuleName());
-            }
+    private void sortByStatus(Module module) {
+        TaskList list = module.getTaskList();
+        if (!isEmpty(module)) {
+            list.sortTaskListByStatus(module.getModuleName());
         }
     }
 
-    private void listWeekly(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            TaskList list = module.getTaskList();
-            if (!isEmpty(module)) {
-                list.showAllWeekly(module.getModuleName());
-            }
+    private void listWeekly(Module module) {
+        TaskList list = module.getTaskList();
+        if (!isEmpty(module)) {
+            list.showAllWeekly(module.getModuleName());
         }
     }
 
-    private void listAll(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            TaskList list = module.getTaskList();
-            if (!isEmpty(module)) {
-                Ui.printTaskList(module.getModuleName(), list.getTaskCount());
-                list.printTasks(list.getTaskList());
-            }
+    private void listAll(Module module) {
+        TaskList list = module.getTaskList();
+        if (!isEmpty(module)) {
+            Ui.printTaskList(module.getModuleName(), list.getTaskCount());
+            list.printTasks(list.getTaskList());
         }
     }
 
-    private void listMonthly(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            TaskList list = module.getTaskList();
-            if (!isEmpty(module)) {
-                list.showAllMonthly(module.getModuleName());
-            }
+    private void listMonthly(Module module) {
+        TaskList list = module.getTaskList();
+        if (!isEmpty(module)) {
+            list.showAllMonthly(module.getModuleName());
         }
     }
 
-    private void listYearly(ArrayList<Module> moduleList) {
-        for (Module module : moduleList) {
-            TaskList list = module.getTaskList();
-            if (!isEmpty(module)) {
-                list.showAllYearly(module.getModuleName());
-            }
+    private void listYearly(Module module) {
+        TaskList list = module.getTaskList();
+        if (!isEmpty(module)) {
+            list.showAllYearly(module.getModuleName());
         }
     }
 
-    public void listParser(String input) {
+    public void overallListParser(String input) {
         Parser.splitInput(input);
         if (Parser.taskType.equals(Parser.MODULE)) {
             NoCap.moduleList.printModules();
         } else if (Parser.taskType.equals(Parser.SEMESTERS)) {
             NoCap.semesterList.printSemesters();
         } else if (Parser.taskType.equals(Parser.TASK)) {
-            //ArrayList<Module> moduleList = new ArrayList<Module>(NoCap.moduleList.getModuleList());
             OverallTaskList allTaskList = new OverallTaskList(NoCap.moduleList);
             switch (Parser.taskDescription) {
             case Parser.SORT_BY_DATE:
@@ -122,6 +110,29 @@ public class ListParser {
             }
         } else {
             Ui.printInvalidListFormat();
+        }
+    }
+
+    public void moduleListParser(Module module, String input) {
+        switch (input) {
+        case Parser.SORT_BY_DATE:
+            sortByDate(module);
+            break;
+        case Parser.SORT_BY_STATUS:
+            sortByStatus(module);
+            break;
+        case Parser.SHOW_WEEK:
+            listWeekly(module);
+            break;
+        case Parser.SHOW_MONTH:
+            listMonthly(module);
+            break;
+        case Parser.SHOW_YEAR:
+            listYearly(module);
+            break;
+        default:
+            listAll(module);
+            break;
         }
     }
 }

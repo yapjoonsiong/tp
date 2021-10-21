@@ -163,11 +163,7 @@ public class Module {
 
     //overloading to take in String input * Added by jiexiong to keep Parser clean
     public void addClass(String input) {
-        String[] scheduleInfo = input.split("/");
-        assert scheduleInfo.length == 4;
-        Schedule schedule = new Schedule(scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
-        this.scheduleList.addClass(schedule);
-        logger.log(Level.INFO,"Schedule added successfully");
+        this.scheduleList.addClass(input);
     }
 
     public void deleteClass() {

@@ -70,6 +70,19 @@ Third party libraries:
 # [**Implementation**](https://se-education.org/addressbook-level3/DeveloperGuide.html#implementation)
 
 
+# Semester
+
+**API** : `semester`
+
+The Semester component stores all NoCap data i.e., all Semester objects and cummula average point (CAP) (which are contained in a SemesterList object)
+
+
+
+* It consists of 2 utility classes SemesterList and Semester
+* SemesterList is used to compute and store the cumulative CAP of all semesters and also stores 10 fixed Semester objects
+* Each Semester object stores and computes the individual CAP for the semester, while also storing a moduleList of the modules taken during the semester
+* The computation of the CAP for both SemesterList and Semester is automatically done when a grade/credit as added to a module within any semester
+
 # Module List
 
 **API** : module

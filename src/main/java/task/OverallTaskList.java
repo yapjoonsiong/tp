@@ -28,9 +28,12 @@ public class OverallTaskList extends TaskList {
 
     public void addAllModuleListTasks(ModuleList moduleList) {
         for (Module module : moduleList.getModuleList()) {
+            String moduleName = module.getModuleName();
             for (Task task : module.getTaskList().taskList) {
-                String moduleName = module.getModuleName();
-                overallTaskList.add(new OverallTask(task.getDescription(), task.getDate(), moduleName, task.isDone));
+                overallTaskList.add(new OverallTask(task, moduleName));
+            }
+            for (GradableTask gradableTask : module.getGradableTaskList().gradableTaskList) {
+                overallTaskList.add(new OverallTask(gradableTask, moduleName));
             }
         }
         assert (!overallTaskList.isEmpty() || moduleList.getModuleList().isEmpty());

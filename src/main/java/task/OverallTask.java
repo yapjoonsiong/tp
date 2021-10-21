@@ -4,11 +4,22 @@ import java.util.Comparator;
 
 public class OverallTask extends Task {
     private final String moduleName;
+    private final boolean gradable;
+    private int weightage;
 
-    public OverallTask(String description, String date, String moduleName, Boolean done) {
-        super(description, date);
-        this.isDone = done;
+    public OverallTask(Task task, String moduleName) {
+        super(task.description, task.date);
+        this.isDone = task.isDone;
         this.moduleName = moduleName;
+        this.gradable = false;
+    }
+
+    public OverallTask(GradableTask task, String moduleName) {
+        super(task.description, task.date);
+        this.isDone = task.isDone;
+        this.moduleName = moduleName;
+        this.gradable = true;
+        this.weightage = task.weightage;
     }
 
     public static Comparator<OverallTask> dateComparator = Comparator.comparing(t -> t.deadline);
@@ -23,9 +34,17 @@ public class OverallTask extends Task {
         }
     };
 
+    private String getGradableString() {
+        return gradable ? "[G]" : "[ ]";
+    }
+
+    private String getWeightageString() {
+        return gradable ? "[Weightage: " + this.weightage + "%]" : "";
+    }
+
     @Override
     public String toString() {
-        return "[" + moduleName + "]" + super.toString();
+        return "[" + moduleName + "]" + getGradableString() + super.toString() + " " + getWeightageString();
     }
 
 }

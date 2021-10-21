@@ -234,7 +234,7 @@ public class Parser {
             }
             selectedTask = parserSearch.getTaskFromIndex(taskType, module.taskList.getTaskList());
             if (selectedTask != null) {
-                selectedTask.setDate(taskDescription);
+                selectedTask.setDeadline(taskDescription);
             }
             break;
         case DELETEGRADE:

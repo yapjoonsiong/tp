@@ -25,9 +25,9 @@ class OverallTaskListTest extends TaskListTest {
         modules.get(1).addTask("sleep /by 21/08/2022 1600");
         modules.get(2).addTask("sleep /by 21/08/2022 1600");
         OverallTaskList taskList = new OverallTaskList(modules);
-        String expected = "[CS2102][ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator()
-                + "[CS2112][ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator()
-                + "[CS2132][ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator();
+        String expected = "[CS2102][ ][ ] sleep by: 21 Aug 2022 04:00 PM " + System.lineSeparator()
+                + "[CS2112][ ][ ] sleep by: 21 Aug 2022 04:00 PM " + System.lineSeparator()
+                + "[CS2132][ ][ ] sleep by: 21 Aug 2022 04:00 PM " + System.lineSeparator();
         assertEquals(expected, taskList.toString());
     }
 
@@ -48,9 +48,9 @@ class OverallTaskListTest extends TaskListTest {
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
                 "All tasks: " + System.lineSeparator()
-                        + "1. [CS2102][ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator()
-                        + "2. [CS2112][ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator()
-                        + "3. [CS2132][ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator());
+                        + "1. [CS2102][ ][ ] sleep by: 21 Aug 2022 04:00 PM " + System.lineSeparator()
+                        + "2. [CS2112][ ][ ] sleep by: 21 Aug 2022 04:00 PM " + System.lineSeparator()
+                        + "3. [CS2132][ ][ ] sleep by: 21 Aug 2022 04:00 PM " + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 
@@ -71,9 +71,9 @@ class OverallTaskListTest extends TaskListTest {
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
                 "Tasks sorted by date: " + System.lineSeparator()
-                        + "1. [CS2132][ ] sleep by: 20 Aug 2022 04:00 PM" + System.lineSeparator()
-                        + "2. [CS2112][ ] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator()
-                        + "3. [CS2102][ ] sleep by: 23 Aug 2022 04:00 PM" + System.lineSeparator());
+                        + "1. [CS2132][ ][ ] sleep by: 20 Aug 2022 04:00 PM " + System.lineSeparator()
+                        + "2. [CS2112][ ][ ] sleep by: 21 Aug 2022 04:00 PM " + System.lineSeparator()
+                        + "3. [CS2102][ ][ ] sleep by: 23 Aug 2022 04:00 PM " + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 
@@ -95,9 +95,9 @@ class OverallTaskListTest extends TaskListTest {
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
                 "Tasks sorted by status: " + System.lineSeparator()
-                        + "1. [CS2102][ ] sleep by: 23 Aug 2022 04:00 PM" + System.lineSeparator()
-                        + "2. [CS2132][ ] sleep by: 20 Aug 2022 04:00 PM" + System.lineSeparator()
-                        + "3. [CS2112][X] sleep by: 21 Aug 2022 04:00 PM" + System.lineSeparator());
+                        + "1. [CS2102][ ][ ] sleep by: 23 Aug 2022 04:00 PM " + System.lineSeparator()
+                        + "2. [CS2132][ ][ ] sleep by: 20 Aug 2022 04:00 PM " + System.lineSeparator()
+                        + "3. [CS2112][ ][X] sleep by: 21 Aug 2022 04:00 PM " + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 
@@ -119,7 +119,7 @@ class OverallTaskListTest extends TaskListTest {
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
                 "Weekly tasks: " + System.lineSeparator()
-                        + "1. [CS2112][ ] sleep by: 21 Oct 2021 04:00 PM" + System.lineSeparator());
+                        + "1. [CS2112][ ][LATE][ ] sleep by: 21 Oct 2021 04:00 PM " + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 
@@ -141,9 +141,9 @@ class OverallTaskListTest extends TaskListTest {
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
                 "Monthly tasks: " + System.lineSeparator()
-                        + "1. [CS2112][ ] sleep by: 21 Oct 2021 04:00 PM" + System.lineSeparator()
-                        + "2. [CS2132][ ] sleep by: 12 Nov 2021 04:00 PM" + System.lineSeparator()
-                        + "3. [CS2132][ ] sleep by: 10 Nov 2021 04:00 PM" + System.lineSeparator());
+                        + "1. [CS2112][ ][LATE][ ] sleep by: 21 Oct 2021 04:00 PM " + System.lineSeparator()
+                        + "2. [CS2132][ ][ ] sleep by: 12 Nov 2021 04:00 PM " + System.lineSeparator()
+                        + "3. [CS2132][ ][ ] sleep by: 10 Nov 2021 04:00 PM " + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 
@@ -165,9 +165,9 @@ class OverallTaskListTest extends TaskListTest {
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
                 "Yearly tasks: " + System.lineSeparator()
-                        + "1. [CS2112][ ] sleep by: 21 Oct 2021 04:00 PM" + System.lineSeparator()
-                        + "2. [CS2132][ ] sleep by: 20 Nov 2021 04:00 PM" + System.lineSeparator()
-                        + "3. [CS2132][ ] sleep by: 21 Nov 2021 04:00 PM" + System.lineSeparator());
+                        + "1. [CS2112][ ][LATE][ ] sleep by: 21 Oct 2021 04:00 PM " + System.lineSeparator()
+                        + "2. [CS2132][ ][ ] sleep by: 20 Nov 2021 04:00 PM " + System.lineSeparator()
+                        + "3. [CS2132][ ][ ] sleep by: 21 Nov 2021 04:00 PM " + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 }

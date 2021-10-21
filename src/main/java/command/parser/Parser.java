@@ -8,14 +8,13 @@ import semester.Semester;
 import task.Task;
 
 import java.util.Locale;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
 
     public static final String EMPTY_STRING = "";
     private static final String SPACE_STRING = " ";
-    public static final String SWITCH = "switch";
+    public static final String SWITCHSEMESTER = "switch";
     public static final String SEMESTERS = "semesters";
     public static final String CAP = "cap";
     public static final String ALLCAP = "allcap";
@@ -30,6 +29,7 @@ public class Parser {
     public static final String MODULETYPE = "/m";
     public static final String ADDCLASS = "addclass";
     public static final String ADDTASK = "addtask";
+    public static final String ADDGRADABLE = "addgradable";
     public static final String ADDGRADE = "addgrade";
     public static final String ADDCREDIT = "addcredit";
     public static final String DELETECLASS = "deleteclass";
@@ -68,21 +68,24 @@ public class Parser {
     public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {
-        case SWITCH:
+        case SWITCHSEMESTER:
             if (isEmptyDescription(taskDescription) || isNotInteger(taskDescription)) {
                 break;
             }
+            //move to SemesterList
             int semesterIndex = Integer.parseInt(taskDescription) - 1;
             NoCap.semesterList.setAccessedSemesterIndex(semesterIndex);
             Ui.switchSemesterMessage(NoCap.semesterList.get(semesterIndex).getSemester());
             break;
         case CAP:
+            //move to SemesterList
             int index = NoCap.semesterList.getAccessedSemesterIndex();
             System.out.println(index);
             System.out.println("This semester's CAP: " + NoCap.semester.getCap());
             System.out.println("Cumulative CAP: " + NoCap.semesterList.getCap());
             break;
         case ALLCAP:
+            //move to SemesterList
             for (Semester semester : NoCap.semesterList.getSemesterList()) {
                 System.out.println(semester.getSemester() + " CAP: " + semester.getCap());
             }
@@ -107,7 +110,7 @@ public class Parser {
             StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         case LIST:
-            list.listParser(taskDescription);
+            list.overallListParser(taskDescription);
             break;
         case TIMETABLE:
             NoCap.moduleList.printTimeTable();
@@ -150,6 +153,9 @@ public class Parser {
 
         Task selectedTask;
         switch (taskType) {
+        case LIST:
+            list.moduleListParser(module,taskDescription);
+            break;
         case ADDCLASS:
             if (isEmptyDescription(taskDescription)) {
                 break;
@@ -162,6 +168,13 @@ public class Parser {
                 break;
             }
             module.addTask(taskDescription);
+            break;
+        case ADDGRADABLE:
+            if (isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription)
+                    | !hasWeightageDescription(taskDescription)) {
+                break;
+            }
+            module.addGradableTask(taskDescription);
             break;
         case DONE:
             if (isEmptyDescription(taskDescription)) {
@@ -186,18 +199,18 @@ public class Parser {
                 break;
             }
             module.addGrade(taskDescription);
+            Ui.addModuleGradeMessage(module);
             NoCap.semester.updateCap();
             NoCap.semesterList.updateCap();
-            Ui.addModuleGradeMessage(module);
             break;
         case ADDCREDIT:
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
             module.addCredits(Integer.parseInt(taskDescription));
+            Ui.addModuleCreditsMessage(module);
             NoCap.semester.updateCap();
             NoCap.semesterList.updateCap();
-            Ui.addModuleCreditsMessage(module);
             break;
         case DELETECLASS:
             module.deleteClass();
@@ -321,4 +334,15 @@ public class Parser {
         }
         return false;
     }
+
+    boolean hasWeightageDescription(String input) {
+        int typePos = input.indexOf(START_OF_DATE);
+        String secondPart = input.substring(typePos);
+        if (secondPart.contains(START_OF_WEIGHTAGE)) {
+            return true;
+        }
+        Ui.invalidWeightage();
+        return false;
+    }
+
 }

@@ -8,7 +8,6 @@ import semester.Semester;
 import task.Task;
 
 import java.util.Locale;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
@@ -111,7 +110,7 @@ public class Parser {
             StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         case LIST:
-            list.listParser(taskDescription);
+            list.overallListParser(taskDescription);
             break;
         case TIMETABLE:
             NoCap.moduleList.printTimeTable();
@@ -154,6 +153,9 @@ public class Parser {
 
         Task selectedTask;
         switch (taskType) {
+        case LIST:
+            list.moduleListParser(module,taskDescription);
+            break;
         case ADDCLASS:
             if (isEmptyDescription(taskDescription)) {
                 break;

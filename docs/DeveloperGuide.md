@@ -59,21 +59,43 @@ Third party libraries:
 
 **API** : <code>command.parser </code>
 
-Classes in parser components
+The Parser classes is responsible for receiving user input and converting it into commands which are directly passed to respective classes.
+
+The class diagram below is an overview of relationship between Parser classes and other classes.
 
 ![alt_text](media/ParserClassDiagram.jpg)
 
 How the parsing works:
-* `NoCap` passes the user input to `Parser` which separates the input into useful information such as taskType, taskDescription, Module, etc. This information is used to call the corresponding commands in `ModuleList`, `Module` and `OverallTaskList`.
-* When commands include task selection, `ParserSearch` methods `getTaskFromIndex()` and `getTaskFromKeyword()` are called. The corresponding task is returned if found.
-* When commands include listing tasks, the taskDescription is passed to `ListParser` which determines the method of sorting and calls `OverallTaskList` methods accordingly.
-* `DateParser` handles parsing String into LocalDateTime format and displaying LocalDateTime as String
+* `NoCap` passes the user input to `Parser` which separates the input into useful information such as taskType, taskDescription, Module, etc. 
+* This information is used to call the corresponding commands in `ModuleList`, `Module` , `SemesterList`, `Semester` and `OverallTaskList`.
+* When commands include **task selection**, `ParserSearch#getTaskFromIndex()` and `ParserSearch#getTaskFromKeyword()` are called. The corresponding task is returned if found.
+* When commands include **listing tasks**, the taskDescription is passed to `ListParser` which determines the method of sorting and calls `OverallTaskList` methods accordingly.
+* `DateParser` handles parsing String into LocalDateTime format and displaying LocalDateTime as String. It is utilized by `Task`.
 
-The Sequence Diagram below illustrates the interactions for the `list task sortbydate `user input.
+Below is a step by step example of how the parser receives and decipher a user input. In this example, the user enters `list task sortbydate`.   
 
+The Sequence Diagram below illustrates the process
 ![alt_text](media/ParserSequenceDiagram.png)
+**Note**: The alternate paths are omitted from the diagram for clarity.
 
-When splitString() is called the first time, taskType is set to “list”. The remaining string is stored as taskDescription and passed to `ListParser` where splitString() is called a second time, setting taskType to “task” and taskDescription to “sortbydate”.The corresponding method in `OverallTaskList` sortByDateAndPrint() is then called.
+Step 1)  
+`NoCap` creates a new `Parser` instance through the constructor. The parser class creates a `ListParser`.
+
+Step 2)  
+User enters `list task sortbydate`. `NoCap` passes the input to `Parser` through `chooseTask()` method.
+
+Step 3)  
+`splitInput` is called for the first time and splits the user input into `list` and `task sortbydate`. `list` matches a possible command String, calling `listParser()`.  
+
+Step 4)  
+`splitInput` is called a second time and splits the second part of user input into `task` and `sortbydate`. An instance of `OverallTask` is constructed.  
+
+Step 5)  
+`task` and `sortbydate` both matches possible command Strings, calling `sortByDateAndPrint`. 
+
+The diagram below illustrates the `splitString` process.  
+
+![alt_text](media/splitStringDiagram.jpg)
 
 
 # [Storage component](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)

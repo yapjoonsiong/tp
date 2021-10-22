@@ -42,3 +42,116 @@ Third party libraries:
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+
+
+-
+# [**Acknowledgements**](https://se-education.org/addressbook-level3/DeveloperGuide.html#acknowledgements)
+-
+# [**Setting up, getting started**](https://se-education.org/addressbook-level3/DeveloperGuide.html#setting-up-getting-started)
+-
+# [**Design**](https://se-education.org/addressbook-level3/DeveloperGuide.html#design)
+
+-
+# [Architecture](https://se-education.org/addressbook-level3/DeveloperGuide.html#architecture)
+-
+# [Parser component](https://se-education.org/addressbook-level3/DeveloperGuide.html#ui-component)
+
+**API** : <code>command.parser </code>
+
+Classes in parser components
+
+![alt_text](media/ParserClassDiagram.jpg)
+
+How the parsing works:
+* `NoCap` passes the user input to `Parser` which separates the input into useful information such as taskType, taskDescription, Module, etc. This information is used to call the corresponding commands in `ModuleList`, `Module` and `OverallTaskList`.
+* When commands include task selection, `ParserSearch` methods `getTaskFromIndex()` and `getTaskFromKeyword()` are called. The corresponding task is returned if found.
+* When commands include listing tasks, the taskDescription is passed to `ListParser` which determines the method of sorting and calls `OverallTaskList` methods accordingly.
+* `DateParser` handles parsing String into LocalDateTime format and displaying LocalDateTime as String
+
+The Sequence Diagram below illustrates the interactions for the `list task sortbydate `user input.
+
+![alt_text](media/ParserSequenceDiagram.png)
+
+When splitString() is called the first time, taskType is set to “list”. The remaining string is stored as taskDescription and passed to `ListParser` where splitString() is called a second time, setting taskType to “task” and taskDescription to “sortbydate”.The corresponding method in `OverallTaskList` sortByDateAndPrint() is then called.
+
+
+# [Storage component](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
+-
+# [semester component](https://se-education.org/addressbook-level3/DeveloperGuide.html#model-component)
+-
+# [module component](https://se-education.org/addressbook-level3/DeveloperGuide.html#storage-component)
+-
+# [schedule component](https://se-education.org/addressbook-level3/DeveloperGuide.html#common-classes)
+-
+# [task component]
+-
+# [**Implementation**](https://se-education.org/addressbook-level3/DeveloperGuide.html#implementation)
+
+
+# Semester
+
+**API** : `semester`
+
+The Semester component stores all NoCap data i.e., all Semester objects and cummula average point (CAP) (which are contained in a SemesterList object)
+
+
+
+* It consists of 2 utility classes SemesterList and Semester
+* SemesterList is used to compute and store the cumulative CAP of all semesters and also stores 10 fixed Semester objects
+* Each Semester object stores and computes the individual CAP for the semester, while also storing a moduleList of the modules taken during the semester
+* The computation of the CAP for both SemesterList and Semester is automatically done when a grade/credit as added to a module within any semester
+
+# Module List
+
+**API** : module
+
+Data from all the modules are stored in the ModuleList class. This includes:
+
+1. moduleName
+2. letterGrade
+3. credits
+4. points
+5. TaskList
+6. GradableTaskList
+7. ScheduleList
+
+The modules are stored in an ArrayList and ModuleList uses the Module.get(int index) method to access the target Module.
+
+- ModuleList is responsible for printing the Time Table. It accesses different schedules of different mods before constructing a Time Table.
+- ModuleList contains getter method find(String input) which returns a module by the same name as the input.
+
+How printing a timetable works:
+
+1. ModuleList first extracts day of week and timeslot information from different schedules.
+2. It then prints out the Timetable one line at a time. At the same time it checks if the day of week and the timeslot corresponds to the schedule.
+
+- If day of week and timeslot corresponds, venue and comments information is printed out
+- If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead.
+
+# ScheduleList
+
+**API** : schedule
+
+ScheduleList consists of all data for the schedule for the module.
+
+This includes:
+
+day of week
+
+timeslot
+
+venue
+
+comments
+
+How ScheduleList works:
+
+1. An empty ScheduleList is created when a module is constructed.
+2. When addClass is called in module , ScheduleList parses the input from the user and splits the information into the relevant information. The information is then used to generate a new instance of Schedule which is then added to the list.
+3. toString() prints out all relevant schedule information in a list format. This is done by going through the list and printing Schedule one after another.
+
+Notes about ScheduleList
+
+- ScheduleList checks that the input for the day of the week is only from the list of possible days: MON, TUE, WED, THU, FRI, SAT ,SUN. All other inputs will result in an exception being thrown.
+- When a new Schedule class is called, ScheduleList ensures that the length of venue and comments are less than 16 characters in length. This is to ensure that it fits within its time slot within the Timetable when printed.

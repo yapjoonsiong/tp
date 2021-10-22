@@ -1,5 +1,6 @@
 package command.storage;
 
+import exceptions.NoCapExceptions;
 import module.Module;
 import module.ModuleList;
 import schedule.Schedule;
@@ -31,9 +32,21 @@ class StorageEncoderTest {
         modules.add(new Module("CS2132"));
         modules.get(0).addTask("sleep /by 21/08/2022 1600");
         modules.get(0).addCredits(4);
-        modules.get(2).addClass(new Schedule("Monday", "12pm", "E3", "Bad"));
-        modules.get(0).addClass(new Schedule("Monday", "12pm", "D3", "Bad"));
-        modules.get(0).addClass(new Schedule("Tuesday", "12pm", "D3", "Bad"));
+        try {
+            modules.get(2).addClass(new Schedule("Monday", "12pm", "E3", "Bad"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.get(0).addClass(new Schedule("Monday", "12pm", "D3", "Bad"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.get(0).addClass(new Schedule("Tuesday", "12pm", "D3", "Bad"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         StorageEncoder.encodeAndSaveSemesterListToJson(semesters);
         assertTrue(Files.exists(FILE_PATH));
         try {

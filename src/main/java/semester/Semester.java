@@ -1,5 +1,6 @@
 package semester;
 
+import command.NoCap;
 import module.ModuleList;
 import module.Module;
 
@@ -65,9 +66,11 @@ public class Semester {
 
     public String getSemester() {
         return this.semester;
-
     }
 
+    public void printCap() {
+        System.out.println("This semester's CAP: " + getCap());
+    }
     @Override
     public String toString() {
         return "Credits: " + this.credits + System.lineSeparator()

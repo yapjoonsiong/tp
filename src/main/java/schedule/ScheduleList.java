@@ -1,5 +1,7 @@
 package schedule;
 
+import exceptions.NoCapExceptions;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,9 +18,11 @@ public class ScheduleList {
         this.scheduleList.add(schedule);
     }
 
-    public void addClass(String input) {
+    public void addClass(String input) throws NoCapExceptions {
         String[] scheduleInfo = input.split("/");
-        assert scheduleInfo.length == 4;
+        if (scheduleInfo.length != 4) {
+            throw new NoCapExceptions("Please key in 4 variables for class details");
+        }
         Schedule schedule = new Schedule(scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
         this.scheduleList.add(schedule);
         logger.log(Level.INFO, "Schedule added successfully");

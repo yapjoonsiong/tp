@@ -3,6 +3,7 @@ package command.parser;
 import command.NoCap;
 import command.Ui;
 import command.storage.StorageEncoder;
+import exceptions.NoCapExceptions;
 import module.Module;
 import semester.Semester;
 import task.Task;
@@ -72,24 +73,20 @@ public class Parser {
             if (isEmptyDescription(taskDescription) || isNotInteger(taskDescription)) {
                 break;
             }
-            //move to SemesterList
-            int semesterIndex = Integer.parseInt(taskDescription) - 1;
-            NoCap.semesterList.setAccessedSemesterIndex(semesterIndex);
-            Ui.switchSemesterMessage(NoCap.semesterList.get(semesterIndex).getSemester());
+            try {
+                NoCap.semesterList.setAccessedSemesterIndex(Integer.parseInt(taskDescription) - 1);
+                Ui.switchSemesterMessage(NoCap.semesterList.get(Integer.parseInt(taskDescription) - 1).getSemester());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(e.getMessage());
+                return;
+            }
+
             break;
         case CAP:
-            //move to SemesterList
-            int index = NoCap.semesterList.getAccessedSemesterIndex();
-            System.out.println(index);
-            System.out.println("This semester's CAP: " + NoCap.semester.getCap());
-            System.out.println("Cumulative CAP: " + NoCap.semesterList.getCap());
+            NoCap.semester.printCap();
             break;
         case ALLCAP:
-            //move to SemesterList
-            for (Semester semester : NoCap.semesterList.getSemesterList()) {
-                System.out.println(semester.getSemester() + " CAP: " + semester.getCap());
-            }
-            System.out.println("Cumulative CAP: " + NoCap.semesterList.getCap());
+            NoCap.semesterList.printAllCap();
             break;
         case HELP:
             Ui.printHelpMessage();
@@ -103,11 +100,16 @@ public class Parser {
             StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         case DELETE:
-            if (isEmptyDescription(taskDescription)) {
+            if (isEmptyDescription(taskDescription) || isNotInteger(taskDescription)) {
                 break;
             }
-            NoCap.moduleList.delete(taskDescription);
-            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
+            try {
+                NoCap.moduleList.delete(taskDescription);
+                StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Invalid number value");
+            }
+
             break;
         case LIST:
             list.overallListParser(taskDescription);
@@ -160,8 +162,12 @@ public class Parser {
             if (isEmptyDescription(taskDescription)) {
                 break;
             }
-            module.addClass(taskDescription);
-            Ui.addModuleClassMessage(module);
+            try {
+                module.addClass(taskDescription);
+                Ui.addModuleClassMessage(module);
+            } catch (NoCapExceptions e) {
+                System.out.println(e.getMessage());
+            }
             break;
         case ADDTASK:
             if (isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription)) {

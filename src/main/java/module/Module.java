@@ -2,6 +2,7 @@ package module;
 
 
 import command.NoCap;
+import exceptions.NoCapExceptions;
 import schedule.Schedule;
 import schedule.ScheduleList;
 import task.GradableTaskList;
@@ -162,7 +163,7 @@ public class Module {
     }
 
     //overloading to take in String input * Added by jiexiong to keep Parser clean
-    public void addClass(String input) {
+    public void addClass(String input) throws NoCapExceptions {
         this.scheduleList.addClass(input);
     }
 

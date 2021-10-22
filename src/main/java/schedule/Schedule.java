@@ -1,5 +1,7 @@
 package schedule;
 
+import exceptions.NoCapExceptions;
+
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -10,14 +12,24 @@ public class Schedule {
     protected String day;
     protected String comment;
 
-    public Schedule(String day, String startTime, String location, String comment) {
-        assert location.length() <= 16;
-        assert comment.length() <= 16;
-
+    public Schedule(String day, String startTime, String location, String comment) throws NoCapExceptions {
+        if (location.length() > 16 || comment.length() > 16) {
+            throw new NoCapExceptions("location and comment must be less than 17 characters");
+        }
+        if (!isCorrectDayFormat(day)) {
+            throw new NoCapExceptions("Wrong day format");
+        }
+        if (!isCorrectTimeFormat(startTime)) {
+            throw new NoCapExceptions("Wrong time format");
+        }
         this.day = day;
         this.startTime = startTime;
         this.location = location;
         this.comment = comment;
+    }
+
+    private boolean isCorrectTimeFormat(String time) {
+        return time.length() == 4 && time.substring(2).equals("00") && Integer.parseInt(time.substring(0, 2)) < 24;
     }
 
     private boolean isCorrectDayFormat(String day) {

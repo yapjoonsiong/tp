@@ -1,5 +1,6 @@
 package command.storage;
 
+import exceptions.NoCapExceptions;
 import module.Module;
 import module.ModuleList;
 import schedule.Schedule;
@@ -31,9 +32,21 @@ class StorageEncoderTest {
         modules.add(new Module("CS2132"));
         modules.get(0).addTask("sleep /by 21/08/2022 1600");
         modules.get(0).addCredits(4);
-        modules.get(2).addClass(new Schedule("Monday", "12pm", "E3", "Bad"));
-        modules.get(0).addClass(new Schedule("Monday", "12pm", "D3", "Bad"));
-        modules.get(0).addClass(new Schedule("Tuesday", "12pm", "D3", "Bad"));
+        try {
+            modules.get(2).addClass(new Schedule("MON", "1200", "E3", "Bad"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.get(0).addClass(new Schedule("MON", "1200", "D3", "Bad"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.get(0).addClass(new Schedule("TUE", "1200", "D3", "Bad"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         StorageEncoder.encodeAndSaveSemesterListToJson(semesters);
         assertTrue(Files.exists(FILE_PATH));
         try {
@@ -64,14 +77,14 @@ class StorageEncoderTest {
                     + "        },\n"
                     + "        \"scheduleList\" : {\n"
                     + "          \"scheduleList\" : [ {\n"
-                    + "            \"startTime\" : \"12pm\",\n"
+                    + "            \"startTime\" : \"1200\",\n"
                     + "            \"location\" : \"D3\",\n"
-                    + "            \"day\" : \"Monday\",\n"
+                    + "            \"day\" : \"MON\",\n"
                     + "            \"comment\" : \"Bad\"\n"
                     + "          }, {\n"
-                    + "            \"startTime\" : \"12pm\",\n"
+                    + "            \"startTime\" : \"1200\",\n"
                     + "            \"location\" : \"D3\",\n"
-                    + "            \"day\" : \"Tuesday\",\n"
+                    + "            \"day\" : \"TUE\",\n"
                     + "            \"comment\" : \"Bad\"\n"
                     + "          } ]\n"
                     + "        },\n"
@@ -108,9 +121,9 @@ class StorageEncoderTest {
                     + "        },\n"
                     + "        \"scheduleList\" : {\n"
                     + "          \"scheduleList\" : [ {\n"
-                    + "            \"startTime\" : \"12pm\",\n"
+                    + "            \"startTime\" : \"1200\",\n"
                     + "            \"location\" : \"E3\",\n"
-                    + "            \"day\" : \"Monday\",\n"
+                    + "            \"day\" : \"MON\",\n"
                     + "            \"comment\" : \"Bad\"\n"
                     + "          } ]\n"
                     + "        },\n"

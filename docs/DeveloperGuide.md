@@ -59,21 +59,43 @@ Third party libraries:
 
 **API** : <code>command.parser </code>
 
-Classes in parser components
+The Parser classes is responsible for receiving user input and converting it into commands which are directly passed to respective classes.
+
+The class diagram below is an overview of relationship between Parser classes and other classes.
 
 ![alt_text](media/ParserClassDiagram.jpg)
 
 How the parsing works:
-* `NoCap` passes the user input to `Parser` which separates the input into useful information such as taskType, taskDescription, Module, etc. This information is used to call the corresponding commands in `ModuleList`, `Module` and `OverallTaskList`.
-* When commands include task selection, `ParserSearch` methods `getTaskFromIndex()` and `getTaskFromKeyword()` are called. The corresponding task is returned if found.
-* When commands include listing tasks, the taskDescription is passed to `ListParser` which determines the method of sorting and calls `OverallTaskList` methods accordingly.
-* `DateParser` handles parsing String into LocalDateTime format and displaying LocalDateTime as String
+* `NoCap` passes the user input to `Parser` which separates the input into useful information such as taskType, taskDescription, Module, etc. 
+* This information is used to call the corresponding commands in `ModuleList`, `Module` , `SemesterList`, `Semester` and `OverallTaskList`.
+* When commands include **task selection**, `ParserSearch#getTaskFromIndex()` and `ParserSearch#getTaskFromKeyword()` are called. The corresponding task is returned if found.
+* When commands include **listing tasks**, the taskDescription is passed to `ListParser` which determines the method of sorting and calls `OverallTaskList` methods accordingly.
+* `DateParser` handles parsing String into LocalDateTime format and displaying LocalDateTime as String. It is utilized by `Task`.
 
-The Sequence Diagram below illustrates the interactions for the `list task sortbydate `user input.
+Below is a step by step example of how the parser receives and decipher a user input. In this example, the user enters `list task sortbydate`.   
 
-![alt_text](media/ParserSequenceDiagram.png)
+The Sequence Diagram below illustrates the process
+![alt_text](media/ParserSequenceDiagram.png)  
+**Note**: The alternate paths are omitted from the diagram for clarity.
 
-When splitString() is called the first time, taskType is set to “list”. The remaining string is stored as taskDescription and passed to `ListParser` where splitString() is called a second time, setting taskType to “task” and taskDescription to “sortbydate”.The corresponding method in `OverallTaskList` sortByDateAndPrint() is then called.
+Step 1)  
+`NoCap` creates a new `Parser` instance through the constructor. The parser class creates a `ListParser`.
+
+Step 2)  
+User enters `list task sortbydate`. `NoCap` passes the input to `Parser` through `chooseTask()` method.
+
+Step 3)  
+`splitInput` is called for the first time and splits the user input into `list` and `task sortbydate`. `list` matches a possible command String, calling `listParser()`.  
+
+Step 4)  
+`splitInput` is called a second time and splits the second part of user input into `task` and `sortbydate`. An instance of `OverallTask` is constructed.  
+
+Step 5)  
+`task` and `sortbydate` both matches possible command Strings, calling `sortByDateAndPrint`. 
+
+The diagram below illustrates the `splitString` process.  
+
+![alt_text](media/splitStringDiagram.JPG)
 
 
 # [Storage component](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
@@ -155,3 +177,43 @@ Notes about ScheduleList
 
 - ScheduleList checks that the input for the day of the week is only from the list of possible days: MON, TUE, WED, THU, FRI, SAT ,SUN. All other inputs will result in an exception being thrown.
 - When a new Schedule class is called, ScheduleList ensures that the length of venue and comments are less than 16 characters in length. This is to ensure that it fits within its time slot within the Timetable when printed.
+
+# TaskList
+
+**API** : `task.tasklist`
+
+How the `TaskList` component works:
+
+
+
+1. `TaskList` stores all tasks in an `ArrayList&lt;Task>`.
+2. When the `addTask()` method is called, the `getDate()` and `removeDate()` return the `date` and `description` component of the user input respectively and store it as a local variable of a `String` type.
+3. The `String` variables will then be passed to instantialize a new `Task` object.
+4. This `Task` object will then be stored in the `ArrayList` in the `TaskList` object.
+5. The methods `weeklyTaskList()`, `monthlyTaskList` and `yearlyTaskList()` returns an `ArrayList` which contains the `Task` objects of deadline within a week, a month and a year respectively.
+6. The methods `sortTaskListByDate()`  and `sortTaskListByStatus()` will sort the current `TaskList` object by ascending order of `Deadline` and completion status.
+7. The `ArrayList` returned by the above methods can then be passed to `printTasks()` which will call `toString()` in each `Task` object and print to the `Output Stream`.
+
+
+# Task
+
+**API** : `task.task`
+
+`Task` object stores the following for each task:
+
+
+
+1. `description`
+2. `Date`
+3. `isDone`
+4. `isLate`
+5. `deadline`
+
+How the `Task` component works:
+
+
+
+1. Whenever the `Task` object is instantiated, the `attributes` listed above will be initialized by the `setter` methods: `setDescription()`,  `setDate()`,  `setDone()`, `setLate()` and `setDeadline()`.
+2. When calling `printAllTask()`, `printWeeklyTask()`, `printMonthlyTask()` in `OverallTaskList` the method  `updateOverdue()`will be called which checks for the truth value of the `boolean` attribute `isDone` and also whether the current date and time of the system clock is after  the `deadline` of the `Task` object.
+3. If `isDone` is `FALSE` and the `deadline` is later than the current date and time, `updateOverdue()` will set the attribute `isLate` of the current `Task` object to `TRUE`.
+4. Calling the `toString()` method of the` Task` object will call `createLateIcon()` ,` createStatusIcon()` , 

@@ -154,7 +154,7 @@ public class Parser {
         Task selectedTask;
         switch (taskType) {
         case LIST:
-            list.moduleListParser(module,taskDescription);
+            list.moduleListParser(module, taskDescription);
             break;
         case ADDCLASS:
             if (isEmptyDescription(taskDescription)) {
@@ -247,7 +247,7 @@ public class Parser {
             }
             selectedTask = parserSearch.getTaskFromIndex(taskType, module.taskList.getTaskList());
             if (selectedTask != null) {
-                selectedTask.setDate(taskDescription);
+                selectedTask.parseDeadline(taskDescription);
             }
             break;
         case DELETEGRADE:

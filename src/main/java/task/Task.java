@@ -84,8 +84,13 @@ public class Task {
         }
     }
 
-    public String createFormattedDeadline() {
-        return DateParser.dateStringOutput(this.deadline);
+    public String createFormattedDeadline() throws NullPointerException {
+        try {
+            return DateParser.dateStringOutput(this.deadline);
+        } catch (NullPointerException e) {
+            Ui.invalidDate();
+        }
+        return "";
     }
 
     public void markDone() {

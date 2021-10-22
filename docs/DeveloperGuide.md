@@ -56,7 +56,26 @@ Third party libraries:
 # [Architecture](https://se-education.org/addressbook-level3/DeveloperGuide.html#architecture)
 -
 # [Parser component](https://se-education.org/addressbook-level3/DeveloperGuide.html#ui-component)
--
+
+**API** : <code>command.parser </code>
+
+Classes in parser components
+
+![alt_text](media/ParserClassDiagram.jpg)
+
+How the parsing works:
+* `NoCap` passes the user input to `Parser` which separates the input into useful information such as taskType, taskDescription, Module, etc. This information is used to call the corresponding commands in `ModuleList`, `Module` and `OverallTaskList`.
+* When commands include task selection, `ParserSearch` methods `getTaskFromIndex()` and `getTaskFromKeyword()` are called. The corresponding task is returned if found.
+* When commands include listing tasks, the taskDescription is passed to `ListParser` which determines the method of sorting and calls `OverallTaskList` methods accordingly.
+* `DateParser` handles parsing String into LocalDateTime format and displaying LocalDateTime as String
+
+The Sequence Diagram below illustrates the interactions for the `list task sortbydate `user input.
+
+![alt_text](media/ParserSequenceDiagram.png)
+
+When splitString() is called the first time, taskType is set to “list”. The remaining string is stored as taskDescription and passed to `ListParser` where splitString() is called a second time, setting taskType to “task” and taskDescription to “sortbydate”.The corresponding method in `OverallTaskList` sortByDateAndPrint() is then called.
+
+
 # [Storage component](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
 -
 # [semester component](https://se-education.org/addressbook-level3/DeveloperGuide.html#model-component)
@@ -69,6 +88,19 @@ Third party libraries:
 -
 # [**Implementation**](https://se-education.org/addressbook-level3/DeveloperGuide.html#implementation)
 
+
+# Semester
+
+**API** : `semester`
+
+The Semester component stores all NoCap data i.e., all Semester objects and cummula average point (CAP) (which are contained in a SemesterList object)
+
+
+
+* It consists of 2 utility classes SemesterList and Semester
+* SemesterList is used to compute and store the cumulative CAP of all semesters and also stores 10 fixed Semester objects
+* Each Semester object stores and computes the individual CAP for the semester, while also storing a moduleList of the modules taken during the semester
+* The computation of the CAP for both SemesterList and Semester is automatically done when a grade/credit as added to a module within any semester
 
 # Module List
 

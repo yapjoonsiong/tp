@@ -1,0 +1,51 @@
+title Parser
+
+actor Actor
+participant NoCap
+participant parse Parser
+participant list ListParser
+participant allTaskList OverallTaskList
+
+activate NoCap
+NoCap->*parse Parser:Parser()
+activate parse Parser
+parse Parser->*list ListParser:ListParser()
+activate list ListParser
+parse Parser<--list ListParser:
+deactivate list ListParser
+parse Parser-->NoCap:
+deactivate parse Parser
+
+Actor->NoCap: Input
+loop !parse.isExit()
+NoCap->parse Parser:chooseTask()
+activate parse Parser
+
+parse Parser->parse Parser:splitInput()
+activate parse Parser
+parse Parser-->parse Parser:
+deactivate parse Parser
+
+parse Parser->list ListParser:listParser()
+activate list ListParser
+list ListParser->parse Parser:splitInput()
+activate parse Parser
+parse Parser-->list ListParser:
+deactivate parse Parser
+
+list ListParser->*allTaskList OverallTaskList:OverallTaskList()
+activate allTaskList OverallTaskList
+list ListParser<--allTaskList OverallTaskList:
+deactivate allTaskList OverallTaskList
+
+list ListParser->allTaskList OverallTaskList:sortByDateAndPrint()
+activate allTaskList OverallTaskList
+list ListParser<--allTaskList OverallTaskList:
+deactivate allTaskList OverallTaskList
+
+list ListParser-->parse Parser:
+deactivate list ListParser
+parse Parser-->NoCap:
+deactivate parse Parser
+
+end

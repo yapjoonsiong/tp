@@ -75,7 +75,7 @@ How the parsing works:
 Below is a step by step example of how the parser receives and decipher a user input. In this example, the user enters `list task sortbydate`.   
 
 The Sequence Diagram below illustrates the process
-![alt_text](media/ParserSequenceDiagram.png)
+![alt_text](media/ParserSequenceDiagram.png)  
 **Note**: The alternate paths are omitted from the diagram for clarity.
 
 Step 1)  
@@ -95,7 +95,7 @@ Step 5)
 
 The diagram below illustrates the `splitString` process.  
 
-![alt_text](media/splitStringDiagram.jpg)
+![alt_text](media/splitStringDiagram.JPG)
 
 
 # [Storage component](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)

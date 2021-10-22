@@ -72,7 +72,7 @@ public class Task {
     }
 
     public void setDate(String date) {
-            this.date = date;
+        this.date = date;
     }
 
     public void setDeadline(String date) throws DateTimeException {

@@ -33,7 +33,7 @@ public class Task {
         setDate(date);
         setDone(false);
         setLate(false);
-        setDeadline(date);
+        parseDeadline(date);
     }
 
     /**
@@ -62,6 +62,10 @@ public class Task {
         return deadline;
     }
 
+    private void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
+
     //Setters
     public void setDescription(String description) {
         this.description = description;
@@ -75,10 +79,10 @@ public class Task {
         this.date = date;
     }
 
-    public void setDeadline(String date) throws DateTimeException {
+    public void parseDeadline(String date) throws DateTimeException {
         try {
             logger.log(Level.INFO, "Successfully set Task deadline...");
-            this.deadline = DateParser.parseDate(date);
+            setDeadline(DateParser.parseDate(date));
         } catch (DateTimeException e) {
             Ui.invalidDate();
         }

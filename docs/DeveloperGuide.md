@@ -155,3 +155,43 @@ Notes about ScheduleList
 
 - ScheduleList checks that the input for the day of the week is only from the list of possible days: MON, TUE, WED, THU, FRI, SAT ,SUN. All other inputs will result in an exception being thrown.
 - When a new Schedule class is called, ScheduleList ensures that the length of venue and comments are less than 16 characters in length. This is to ensure that it fits within its time slot within the Timetable when printed.
+
+# TaskList
+
+**API** : `task.tasklist`
+
+How the `TaskList` component works:
+
+
+
+1. `TaskList` stores all tasks in an `ArrayList&lt;Task>`.
+2. When the `addTask()` method is called, the `getDate()` and `removeDate()` return the `date` and `description` component of the user input respectively and store it as a local variable of a `String` type.
+3. The `String` variables will then be passed to instantialize a new `Task` object.
+4. This `Task` object will then be stored in the `ArrayList` in the `TaskList` object.
+5. The methods `weeklyTaskList()`, `monthlyTaskList` and `yearlyTaskList()` returns an `ArrayList` which contains the `Task` objects of deadline within a week, a month and a year respectively.
+6. The methods `sortTaskListByDate()`  and `sortTaskListByStatus()` will sort the current `TaskList` object by ascending order of `Deadline` and completion status.
+7. The `ArrayList` returned by the above methods can then be passed to `printTasks()` which will call `toString()` in each `Task` object and print to the `Output Stream`.
+
+
+# Task
+
+**API** : `task.task`
+
+`Task` object stores the following for each task:
+
+
+
+1. `description`
+2. `Date`
+3. `isDone`
+4. `isLate`
+5. `deadline`
+
+How the `Task` component works:
+
+
+
+1. Whenever the `Task` object is instantiated, the `attributes` listed above will be initialized by the `setter` methods: `setDescription()`,  `setDate()`,  `setDone()`, `setLate()` and `setDeadline()`.
+2. When calling `printAllTask()`, `printWeeklyTask()`, `printMonthlyTask()` in `OverallTaskList` the method  `updateOverdue()`will be called which checks for the truth value of the `boolean` attribute `isDone` and also whether the current date and time of the system clock is after  the `deadline` of the `Task` object.
+3. If `isDone` is `FALSE` and the `deadline` is later than the current date and time, `updateOverdue()` will set the attribute `isLate` of the current `Task` object to `TRUE`.
+4. Calling the `toString()` method of the` Task` object will call `createLateIcon()` ,` createStatusIcon()` , 

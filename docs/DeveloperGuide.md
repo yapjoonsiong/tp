@@ -100,6 +100,35 @@ The diagram below illustrates the `splitString` process.
 
 # [Storage component](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
 -
+**API** : `command.storage`
+
+The Storage component saves data of NoCap into JSON format, and reads them back into corresponding objects when needed using a 3rd party library Jackson Databind.
+
+It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object `SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
+
+How StorageEncoder works:
+
+
+![alt_text](images/image3.png "image_tooltip")
+
+
+1. The static method `encodeAndSaveSemesterListToJson() `is called when NoCap data needs to be saved
+2. If the save file directory has not been created, it is first created in order to store the save file
+3. Similarly, an empty file is created to store the data if it has not been created yet
+4. The parent object `SemesterList` is passed to the method to be converted into json format with an `ObjectMapper` object from the  `jackson-databind` library
+
+How StorageDecoder works:
+
+
+
+![alt_text](images/image4.png "image_tooltip")
+
+
+
+
+1. The static method `DecodeJsonToSemesterList() `is called when NoCap data needs to be loaded from the save file
+2. If there is no save file available, a new `SemesterList `object is created and returned to the caller
+3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the json save file into a SemesterList object to be returned to the caller
 # [semester component](https://se-education.org/addressbook-level3/DeveloperGuide.html#model-component)
 -
 # [module component](https://se-education.org/addressbook-level3/DeveloperGuide.html#storage-component)

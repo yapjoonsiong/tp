@@ -4,33 +4,36 @@ import command.NoCap;
 import command.Ui;
 import command.storage.StorageEncoder;
 import exceptions.NoCapExceptions;
+import module.Module;
 import task.Task;
 
 import java.util.Locale;
 
 public class Command {
 
-    private final Parser parser;
-    private final ParserSearch parserSearch = new ParserSearch();
+    public static Module module;
+    private final ParserChecks parserChecks = new ParserChecks();
 
-    public Command(Parser parser) {
-        this.parser = parser;
+    public Command() {
     }
 
     void commandSwitchSemester() {
-        if (parser.isEmptyDescription(Parser.taskDescription) || parser.isNotInteger(Parser.taskDescription)) {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)
+                | parserChecks.isNotInteger(Parser.taskDescription)) {
             return;
         }
         try {
             NoCap.semesterList.setAccessedSemesterIndex(Integer.parseInt(Parser.taskDescription) - 1);
-            Ui.switchSemesterMessage(NoCap.semesterList.get(Integer.parseInt(Parser.taskDescription) - 1).getSemester());
+            Ui.switchSemesterMessage(NoCap.semesterList
+                    .get(Integer.parseInt(Parser.taskDescription) - 1).getSemester());
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    void commandDeleteModule(Parser parser) {
-        if (parser.isEmptyDescription(Parser.taskDescription) || parser.isNotInteger(Parser.taskDescription)) {
+    void commandDeleteModule() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)
+                | parserChecks.isNotInteger(Parser.taskDescription)) {
             return;
         }
         try {
@@ -41,8 +44,9 @@ public class Command {
         }
     }
 
-    void commandAddModule(Parser parser) {
-        if (parser.isEmptyDescription(Parser.taskDescription) | parser.isDuplicateModule(Parser.taskDescription)) {
+    void commandAddModule() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)
+                | parserChecks.isDuplicateModule(Parser.taskDescription)) {
             return;
         }
         NoCap.moduleList.add(Parser.taskDescription.toUpperCase(Locale.ROOT));
@@ -63,125 +67,122 @@ public class Command {
     }
 
     void commandShowInfo() {
-        Parser.module.showInformation();
+        module.showInformation();
     }
 
-    void commandAddClass(Parser parser) {
-        if (parser.isEmptyDescription(Parser.taskDescription)) {
+    void commandAddClass() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
         }
         try {
-            Parser.module.addClass(Parser.taskDescription);
-            Ui.addModuleClassMessage(Parser.module);
+            module.addClass(Parser.taskDescription);
+            Ui.addModuleClassMessage(module);
         } catch (NoCapExceptions e) {
             System.out.println(e.getMessage());
         }
     }
 
-    void commandAddTask(Parser parser) {
-        if (parser.isEmptyDescription(Parser.taskDescription) | !parser.hasDateDescription(Parser.taskDescription)) {
+    void commandAddTask() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)
+                | !parserChecks.hasDateDescription(Parser.taskDescription)) {
             return;
         }
-        Parser.module.addTask(Parser.taskDescription);
+        module.addTask(Parser.taskDescription);
     }
 
-    void commandAddGradable(Parser parser) {
-        if (parser.isEmptyDescription(Parser.taskDescription) | !parser.hasDateDescription(Parser.taskDescription)
-                | !parser.hasWeightageDescription(Parser.taskDescription)) {
+    void commandAddGradable() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)
+                | !parserChecks.hasDateDescription(Parser.taskDescription)
+                | !parserChecks.hasWeightageDescription(Parser.taskDescription)) {
             return;
         }
-        Parser.module.addGradableTask(Parser.taskDescription);
+        module.addGradableTask(Parser.taskDescription);
     }
 
-    void commandMarkDone(Parser parser) {
-        Task selectedTask;
-        if (parser.isEmptyDescription(Parser.taskDescription)) {
+    void commandMarkDone() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
         }
-        selectedTask = parserSearch.getTaskFromIndex(Parser.taskDescription, Parser.module.taskList.getTaskList());
+        Task selectedTask = parserChecks.getTaskFromIndex(Parser.taskDescription, module.taskList.getTaskList());
         if (selectedTask != null) {
             selectedTask.markDone();
         }
     }
 
-    void commandMarkNotDone(Parser parser) {
-        Task selectedTask;
-        if (parser.isEmptyDescription(Parser.taskDescription)) {
+    void commandMarkNotDone() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
         }
-        selectedTask = parserSearch.getTaskFromIndex(Parser.taskDescription, Parser.module.taskList.getTaskList());
+        Task selectedTask = parserChecks.getTaskFromIndex(Parser.taskDescription, module.taskList.getTaskList());
         if (selectedTask != null) {
             selectedTask.markNotDone();
         }
     }
 
-    void commandAddGrade(Parser parser) {
-        if (parser.isEmptyDescription(Parser.taskDescription)) {
+    void commandAddGrade() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
         }
-        Parser.module.addGrade(Parser.taskDescription);
-        Ui.addModuleGradeMessage(Parser.module);
+        module.addGrade(Parser.taskDescription);
+        Ui.addModuleGradeMessage(module);
         NoCap.semester.updateCap();
         NoCap.semesterList.updateCap();
     }
 
-    void commandAddCredit(Parser parser) {
-        if (parser.isEmptyDescription(Parser.taskDescription)) {
+    void commandAddCredit() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
         }
-        Parser.module.addCredits(Integer.parseInt(Parser.taskDescription));
-        Ui.addModuleCreditsMessage(Parser.module);
+        module.addCredits(Integer.parseInt(Parser.taskDescription));
+        Ui.addModuleCreditsMessage(module);
         NoCap.semester.updateCap();
         NoCap.semesterList.updateCap();
     }
 
     void commandDeleteClass() {
-        Parser.module.deleteClass();
+        module.deleteClass();
     }
 
-    void commandDeleteTask(Parser parser) {
-        Task selectedTask;
-        if (parser.isEmptyDescription(Parser.taskDescription)) {
+    void commandDeleteTask() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
         }
-        selectedTask = parserSearch.getTaskFromKeyword(Parser.taskDescription, Parser.module.taskList.getTaskList());
+        Task selectedTask = parserChecks.getTaskFromKeyword(Parser.taskDescription, module.taskList.getTaskList());
         if (selectedTask != null) {
-            Parser.module.deleteTask(selectedTask);
+            module.deleteTask(selectedTask);
         }
     }
 
-    void commandEditDescription(Parser parser) {
-        Task selectedTask;
-        if (parser.isEmptyDescription(Parser.taskDescription)) {
+    void commandEditDescription() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
         }
         Parser.splitInput(Parser.taskDescription);
-        if (parser.isEmptyDescription(Parser.taskDescription)) {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
         }
-        selectedTask = parserSearch.getTaskFromIndex(Parser.taskType, Parser.module.taskList.getTaskList());
+        Task selectedTask = parserChecks.getTaskFromIndex(Parser.taskType, module.taskList.getTaskList());
         if (selectedTask != null) {
             selectedTask.setDescription(Parser.taskDescription);
         }
     }
 
-    void commandEditDeadline(Parser parser) {
-        Task selectedTask;
-        if (parser.isEmptyDescription(Parser.taskDescription)) {
+    void commandEditDeadline() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
         }
         Parser.splitInput(Parser.taskDescription);
-        if (parser.isEmptyDescription(Parser.taskDescription)) {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
         }
-        selectedTask = parserSearch.getTaskFromIndex(Parser.taskType, Parser.module.taskList.getTaskList());
+        Task selectedTask = parserChecks.getTaskFromIndex(Parser.taskType, module.taskList.getTaskList());
         if (selectedTask != null) {
             selectedTask.parseDeadline(Parser.taskDescription);
         }
     }
 
     void commandDeleteGrade() {
-        Parser.module.deleteGrade();
+        module.deleteGrade();
         NoCap.semester.updateCap();
         NoCap.semesterList.updateCap();
     }

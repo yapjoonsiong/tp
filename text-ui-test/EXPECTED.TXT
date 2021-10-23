@@ -1,3 +1,4 @@
+No save file found, starting with an empty template
 Welcome to NoCap
 Invalid Input!
 Thank you for using NoCap!

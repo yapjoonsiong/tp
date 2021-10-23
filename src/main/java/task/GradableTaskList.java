@@ -1,7 +1,7 @@
 package task;
 
-import command.parser.Parser;
 import command.Ui;
+import command.parser.ParserChecks;
 
 import java.time.DateTimeException;
 import java.util.ArrayList;
@@ -22,9 +22,9 @@ public class GradableTaskList extends TaskList {
 
     protected static String getDate(String description) {
         try {
-            int datePos = description.indexOf(Parser.START_OF_DATE);
-            int weightagePos = description.indexOf(Parser.START_OF_WEIGHTAGE);
-            return description.substring(datePos, weightagePos).replace(Parser.START_OF_DATE, "").trim();
+            int datePos = description.indexOf(ParserChecks.START_OF_DATE);
+            int weightagePos = description.indexOf(ParserChecks.START_OF_WEIGHTAGE);
+            return description.substring(datePos, weightagePos).replace(ParserChecks.START_OF_DATE, "").trim();
         } catch (StringIndexOutOfBoundsException e) {
             return "";
         }
@@ -32,8 +32,9 @@ public class GradableTaskList extends TaskList {
 
     private static int getWeightage(String description) {
         try {
-            int weightagePos = description.indexOf(Parser.START_OF_WEIGHTAGE);
-            return Integer.parseInt(description.substring(weightagePos).replace(Parser.START_OF_WEIGHTAGE, "").trim());
+            int weightagePos = description.indexOf(ParserChecks.START_OF_WEIGHTAGE);
+            return Integer.parseInt(description.substring(weightagePos)
+                    .replace(ParserChecks.START_OF_WEIGHTAGE, "").trim());
         } catch (StringIndexOutOfBoundsException e) {
             return 0;
         }

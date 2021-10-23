@@ -3,13 +3,8 @@ package command.parser;
 import command.NoCap;
 import command.Ui;
 import command.storage.StorageEncoder;
-import exceptions.NoCapExceptions;
-import module.Module;
-import semester.Semester;
-import task.Task;
 
 import java.util.Locale;
-import java.util.logging.Logger;
 
 public class Parser {
 
@@ -26,8 +21,8 @@ public class Parser {
     public static final String DELETE = "delete";
     public static final String LIST = "list";
     public static final String TIMETABLE = "timetable";
-    public static final String EXIT = "bye";
     public static final String MODULETYPE = "/m";
+    public static final String EXIT = "bye";
     public static final String ADDCLASS = "addclass";
     public static final String ADDTASK = "addtask";
     public static final String ADDGRADABLE = "addgradable";
@@ -41,21 +36,14 @@ public class Parser {
     public static final String NOTDONE = "notdone";
     public static final String DONE = "done";
     public static final String INFO = "info";
-    public static final String START_OF_DATE = "/by";
-    public static final String START_OF_WEIGHTAGE = "/w";
-    public static final String SORT_BY_DATE = "sortbydate";
-    public static final String SORT_BY_STATUS = "sortbystatus";
-    public static final String SHOW_WEEK = "w";
-    public static final String SHOW_MONTH = "m";
-    public static final String SHOW_YEAR = "y";
 
     public static String taskType;
     public static String taskDescription;
-    private Module module;
-    private ListParser list = new ListParser();
-    private ParserSearch parserSearch = new ParserSearch();
+
+    private final Command command = new Command();
+    private final ListParser list = new ListParser();
+
     protected boolean isExit;
-    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public Parser() {
         this.isExit = false;
@@ -69,62 +57,38 @@ public class Parser {
     public void chooseTask(String line) {
         splitInput(line);
         switch (taskType) {
-        case SWITCHSEMESTER:
-            if (isEmptyDescription(taskDescription) || isNotInteger(taskDescription)) {
-                break;
-            }
-            try {
-                NoCap.semesterList.setAccessedSemesterIndex(Integer.parseInt(taskDescription) - 1);
-                Ui.switchSemesterMessage(NoCap.semesterList.get(Integer.parseInt(taskDescription) - 1).getSemester());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println(e.getMessage());
-                return;
-            }
-
-            break;
-        case CAP:
-            NoCap.semester.printCap();
-            break;
-        case ALLCAP:
-            NoCap.semesterList.printAllCap();
-            break;
         case HELP:
             Ui.printHelpMessage();
             break;
+        case SWITCHSEMESTER:
+            command.commandSwitchSemester();
+            break;
+        case CAP:
+            command.commandPrintCap();
+            break;
+        case ALLCAP:
+            command.commandPrintAllCap();
+            break;
         case ADD:
-            if (isEmptyDescription(taskDescription) | isDuplicateModule(taskDescription)) {
-                break;
-            }
-            NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
-            Ui.addModuleNameMessage(NoCap.moduleList);
-            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
+            command.commandAddModule();
             break;
         case DELETE:
-            if (isEmptyDescription(taskDescription) || isNotInteger(taskDescription)) {
-                break;
-            }
-            try {
-                NoCap.moduleList.delete(taskDescription);
-                StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Invalid number value");
-            }
-
+            command.commandDeleteModule();
+            break;
+        case TIMETABLE:
+            command.commandPrintTimeTable();
             break;
         case LIST:
             list.overallListParser(taskDescription);
             break;
-        case TIMETABLE:
-            NoCap.moduleList.printTimeTable();
+        case MODULETYPE:
+            moduleParser(taskDescription);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         case EXIT:
             Ui.printExitMessage();
             StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             this.isExit = true;
-            break;
-        case MODULETYPE:
-            moduleParser(taskDescription);
-            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         default:
             Ui.printInvalidInputMessage();
@@ -140,129 +104,59 @@ public class Parser {
      * @param input String to be separated
      */
     void moduleParser(String input) {
+
         splitInput(input);
         try {
-            module = NoCap.moduleList.find(taskType.toUpperCase(Locale.ROOT));
+            Command.module = NoCap.moduleList.find(taskType.toUpperCase(Locale.ROOT));
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printInvalidModuleNameMessage();
             return;
         }
 
-        if (isEmptyDescription(taskDescription)) {
-            return;
-        }
         splitInput(taskDescription);
 
-        Task selectedTask;
         switch (taskType) {
         case LIST:
-            list.moduleListParser(module, taskDescription);
+            list.moduleListParser(Command.module, taskDescription);
             break;
         case ADDCLASS:
-            if (isEmptyDescription(taskDescription)) {
-                break;
-            }
-            try {
-                module.addClass(taskDescription);
-                Ui.addModuleClassMessage(module);
-            } catch (NoCapExceptions e) {
-                System.out.println(e.getMessage());
-            }
+            command.commandAddClass();
             break;
         case ADDTASK:
-            if (isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription)) {
-                break;
-            }
-            module.addTask(taskDescription);
+            command.commandAddTask();
             break;
         case ADDGRADABLE:
-            if (isEmptyDescription(taskDescription) | !hasDateDescription(taskDescription)
-                    | !hasWeightageDescription(taskDescription)) {
-                break;
-            }
-            module.addGradableTask(taskDescription);
+            command.commandAddGradable();
             break;
         case DONE:
-            if (isEmptyDescription(taskDescription)) {
-                break;
-            }
-            selectedTask = parserSearch.getTaskFromIndex(taskDescription, module.taskList.getTaskList());
-            if (selectedTask != null) {
-                selectedTask.markDone();
-            }
+            command.commandMarkDone();
             break;
         case NOTDONE:
-            if (isEmptyDescription(taskDescription)) {
-                break;
-            }
-            selectedTask = parserSearch.getTaskFromIndex(taskDescription, module.taskList.getTaskList());
-            if (selectedTask != null) {
-                selectedTask.markNotDone();
-            }
+            command.commandMarkNotDone();
             break;
         case ADDGRADE:
-            if (isEmptyDescription(taskDescription)) {
-                break;
-            }
-            module.addGrade(taskDescription);
-            Ui.addModuleGradeMessage(module);
-            NoCap.semester.updateCap();
-            NoCap.semesterList.updateCap();
+            command.commandAddGrade();
             break;
         case ADDCREDIT:
-            if (isEmptyDescription(taskDescription)) {
-                break;
-            }
-            module.addCredits(Integer.parseInt(taskDescription));
-            Ui.addModuleCreditsMessage(module);
-            NoCap.semester.updateCap();
-            NoCap.semesterList.updateCap();
+            command.commandAddCredit();
             break;
         case DELETECLASS:
-            module.deleteClass();
+            command.commandDeleteClass();
             break;
         case DELETETASK:
-            if (isEmptyDescription(taskDescription)) {
-                break;
-            }
-            selectedTask = parserSearch.getTaskFromKeyword(taskDescription, module.taskList.getTaskList());
-            if (selectedTask != null) {
-                module.deleteTask(selectedTask);
-            }
+            command.commandDeleteTask();
             break;
         case EDITDESCRIPTION:
-            if (isEmptyDescription(taskDescription)) {
-                break;
-            }
-            splitInput(taskDescription);
-            if (isEmptyDescription(taskDescription)) {
-                break;
-            }
-            selectedTask = parserSearch.getTaskFromIndex(taskType, module.taskList.getTaskList());
-            if (selectedTask != null) {
-                selectedTask.setDescription(taskDescription);
-            }
+            command.commandEditDescription();
             break;
         case EDITDEADLINE:
-            if (isEmptyDescription(taskDescription)) {
-                break;
-            }
-            splitInput(taskDescription);
-            if (isEmptyDescription(taskDescription)) {
-                break;
-            }
-            selectedTask = parserSearch.getTaskFromIndex(taskType, module.taskList.getTaskList());
-            if (selectedTask != null) {
-                selectedTask.parseDeadline(taskDescription);
-            }
+            command.commandEditDeadline();
             break;
         case DELETEGRADE:
-            module.deleteGrade();
-            NoCap.semester.updateCap();
-            NoCap.semesterList.updateCap();
+            command.commandDeleteGrade();
             break;
         case INFO:
-            module.showInformation();
+            command.commandShowInfo();
             break;
         default:
             Ui.printInvalidInputMessage();
@@ -293,62 +187,6 @@ public class Parser {
 
     public String getTaskDescription() {
         return taskDescription;
-    }
-
-    /**
-     * Used in add to verify module does not exist. Prevent duplicate module entries.
-     *
-     * @param input moduleName to be checked against.
-     * @return true if input is existing module.
-     */
-    boolean isDuplicateModule(String input) {
-        try {
-            module = NoCap.moduleList.find(input.toUpperCase(Locale.ROOT));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-        Ui.duplicateModuleError();
-        return true;
-    }
-
-    boolean isEmptyDescription(String input) {
-        if (input.isEmpty()) {
-            Ui.missingDescription();
-            return true;
-        }
-        return false;
-    }
-
-    boolean hasDateDescription(String input) {
-        if (input.contains(START_OF_DATE)) {
-            return true;
-        }
-        Ui.invalidDate();
-        return false;
-    }
-
-    boolean isNotInteger(String input) {
-        if (input == null) {
-            Ui.inputNotInteger();
-            return true;
-        }
-        try {
-            int in = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            Ui.inputNotInteger();
-            return true;
-        }
-        return false;
-    }
-
-    boolean hasWeightageDescription(String input) {
-        int typePos = input.indexOf(START_OF_DATE);
-        String secondPart = input.substring(typePos);
-        if (secondPart.contains(START_OF_WEIGHTAGE)) {
-            return true;
-        }
-        Ui.invalidWeightage();
-        return false;
     }
 
 }

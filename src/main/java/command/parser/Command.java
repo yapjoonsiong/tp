@@ -31,17 +31,20 @@ public class Command {
         }
     }
 
-    void commandDeleteModule() {
-        if (parserChecks.isEmptyDescription(Parser.taskDescription)
-                | parserChecks.isNotInteger(Parser.taskDescription)) {
-            return;
-        }
-        try {
-            NoCap.moduleList.delete(Parser.taskDescription);
-            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid number value");
-        }
+    void commandPrintCap() {
+        NoCap.semester.printCap();
+    }
+
+    void commandPrintAllCap() {
+        NoCap.semesterList.printAllCap();
+    }
+
+    void commandPrintTimeTable() {
+        NoCap.moduleList.printTimeTable();
+    }
+
+    void commandShowInfo() {
+        module.showInformation();
     }
 
     void commandAddModule() {
@@ -54,22 +57,6 @@ public class Command {
         StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
     }
 
-    void commandPrintAllCap() {
-        NoCap.semesterList.printAllCap();
-    }
-
-    void commandPrintCap() {
-        NoCap.semester.printCap();
-    }
-
-    void commandPrintTimeTable() {
-        NoCap.moduleList.printTimeTable();
-    }
-
-    void commandShowInfo() {
-        module.showInformation();
-    }
-
     void commandAddClass() {
         if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
@@ -77,6 +64,7 @@ public class Command {
         try {
             module.addClass(Parser.taskDescription);
             Ui.addModuleClassMessage(module);
+            //**can you explain this
         } catch (NoCapExceptions e) {
             System.out.println(e.getMessage());
         }
@@ -99,26 +87,6 @@ public class Command {
         module.addGradableTask(Parser.taskDescription);
     }
 
-    void commandMarkDone() {
-        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
-            return;
-        }
-        Task selectedTask = parserChecks.getTaskFromIndex(Parser.taskDescription, module.taskList.getTaskList());
-        if (selectedTask != null) {
-            selectedTask.markDone();
-        }
-    }
-
-    void commandMarkNotDone() {
-        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
-            return;
-        }
-        Task selectedTask = parserChecks.getTaskFromIndex(Parser.taskDescription, module.taskList.getTaskList());
-        if (selectedTask != null) {
-            selectedTask.markNotDone();
-        }
-    }
-
     void commandAddGrade() {
         if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
             return;
@@ -139,6 +107,19 @@ public class Command {
         NoCap.semesterList.updateCap();
     }
 
+    void commandDeleteModule() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)
+                | parserChecks.isNotInteger(Parser.taskDescription)) {
+            return;
+        }
+        try {
+            NoCap.moduleList.delete(Parser.taskDescription);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid number value");
+        }
+    }
+
     void commandDeleteClass() {
         module.deleteClass();
     }
@@ -151,6 +132,12 @@ public class Command {
         if (selectedTask != null) {
             module.deleteTask(selectedTask);
         }
+    }
+
+    void commandDeleteGrade() {
+        module.deleteGrade();
+        NoCap.semester.updateCap();
+        NoCap.semesterList.updateCap();
     }
 
     void commandEditDescription() {
@@ -181,9 +168,23 @@ public class Command {
         }
     }
 
-    void commandDeleteGrade() {
-        module.deleteGrade();
-        NoCap.semester.updateCap();
-        NoCap.semesterList.updateCap();
+    void commandMarkDone() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
+            return;
+        }
+        Task selectedTask = parserChecks.getTaskFromIndex(Parser.taskDescription, module.taskList.getTaskList());
+        if (selectedTask != null) {
+            selectedTask.markDone();
+        }
+    }
+
+    void commandMarkNotDone() {
+        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
+            return;
+        }
+        Task selectedTask = parserChecks.getTaskFromIndex(Parser.taskDescription, module.taskList.getTaskList());
+        if (selectedTask != null) {
+            selectedTask.markNotDone();
+        }
     }
 }

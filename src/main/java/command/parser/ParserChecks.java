@@ -30,14 +30,6 @@ public class ParserChecks {
         return task;
     }
 
-    boolean isValidIndex(int index) {
-        if (index < 0) {
-            Ui.printInvalidIndex();
-            return false;
-        }
-        return true;
-    }
-
     public Task getTaskFromKeyword(String keyword, ArrayList<Task> allTaskList) {
         Task task = null;
         ArrayList<Task> taskList = new ArrayList<Task>();
@@ -68,6 +60,14 @@ public class ParserChecks {
         return task;
     }
 
+    boolean isValidIndex(int index) {
+        if (index < 0) {
+            Ui.printInvalidIndex();
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Used in add to verify module does not exist. Prevent duplicate module entries.
      *
@@ -92,14 +92,6 @@ public class ParserChecks {
         return false;
     }
 
-    boolean hasDateDescription(String input) {
-        if (input.contains(START_OF_DATE)) {
-            return true;
-        }
-        Ui.invalidDate();
-        return false;
-    }
-
     boolean isNotInteger(String input) {
         if (input == null) {
             Ui.inputNotInteger();
@@ -111,6 +103,14 @@ public class ParserChecks {
             Ui.inputNotInteger();
             return true;
         }
+        return false;
+    }
+
+    boolean hasDateDescription(String input) {
+        if (input.contains(START_OF_DATE)) {
+            return true;
+        }
+        Ui.invalidDate();
         return false;
     }
 

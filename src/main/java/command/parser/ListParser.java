@@ -84,32 +84,25 @@ public class ListParser {
             case SORT_BY_DATE:
                 logger.log(Level.INFO, "Sort TaskList by date");
                 allTaskList.sortByDateAndPrint();
-                //sortByDate(moduleList);
                 break;
             case SORT_BY_STATUS:
                 logger.log(Level.INFO, "Sort TaskList by status");
                 allTaskList.sortByStatusAndPrint();
-                //sortByStatus(moduleList);
                 break;
             case SHOW_WEEK:
                 logger.log(Level.INFO, "Print weekly TaskList");
                 allTaskList.printWeeklyTasks();
-                //listWeekly(moduleList);
                 break;
             case SHOW_MONTH:
                 logger.log(Level.INFO, "Print monthly TaskList");
                 allTaskList.printMonthlyTasks();
-                //listMonthly(moduleList);
                 break;
             case SHOW_YEAR:
                 allTaskList.printYearlyTasks();
                 logger.log(Level.INFO, "Print yearly TaskList");
-                //listYearly(moduleList);
                 break;
             default:
                 allTaskList.printAllTasks();
-                //System.out.println("Showing all tasks");
-                //listAll(moduleList);
                 break;
             }
         } else {

@@ -15,6 +15,7 @@ public class GradableTaskList extends TaskList {
 
     public GradableTaskList() {
         this.gradableTaskList = new ArrayList<>();
+        logger.setLevel(Level.OFF);
     }
 
     public ArrayList<GradableTask> getGradableTaskList() {
@@ -67,6 +68,10 @@ public class GradableTaskList extends TaskList {
         return this.gradableTaskList.get(index);
     }
 
+    public int size() {
+        logger.log(Level.INFO, "Get size of task list");
+        return this.gradableTaskList.size();
+    }
 
     @Override
     public String toString() {

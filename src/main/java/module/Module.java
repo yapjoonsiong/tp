@@ -2,6 +2,7 @@ package module;
 
 
 import command.NoCap;
+import command.VisualiseGradable;
 import schedule.Schedule;
 import schedule.ScheduleList;
 import task.GradableTaskList;
@@ -20,7 +21,7 @@ public class Module {
     public TaskList taskList;
     private ScheduleList scheduleList;
     protected int credits;
-    protected GradableTaskList gradableTaskList;
+    public GradableTaskList gradableTaskList;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public Module(String moduleName) {

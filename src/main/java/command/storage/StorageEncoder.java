@@ -28,6 +28,14 @@ public class StorageEncoder {
     //Logger object
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
+    /**
+     * Takes in a SemesterList object and converts it into json format.
+     * Then, stores it in a specified file path. If the specified directory does
+     * not exist, this method will attempt to create the directory first before saving the
+     * SemesterList object
+     *
+     * @param semesterList The SemesterList object to be converted into json format.
+     */
     public static void encodeAndSaveSemesterListToJson(SemesterList semesterList) {
         ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.registerModule(new JavaTimeModule());

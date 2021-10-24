@@ -1,10 +1,12 @@
 package task;
 
 import command.Ui;
+import command.parser.DateParser;
 import command.parser.ParserChecks;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -92,6 +94,7 @@ public class TaskList {
             Ui.missingDate();
         } else {
             try {
+                DateParser.parseDate(date);
                 String description = removeDate(userInput);
                 Task newTask = new Task(description, date);
                 this.taskList.add(taskCount, newTask);

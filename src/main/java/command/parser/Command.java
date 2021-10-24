@@ -5,6 +5,7 @@ import command.Ui;
 import command.storage.StorageEncoder;
 import exceptions.NoCapExceptions;
 import module.Module;
+import task.GradableTask;
 import task.Task;
 
 import java.util.Locale;
@@ -48,7 +49,7 @@ public class Command {
 
     void commandAddModule(String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
-                | parserChecks.isDuplicateModule(taskDescription)) {
+                || parserChecks.isDuplicateModule(taskDescription)) {
             return;
         }
         NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
@@ -70,8 +71,7 @@ public class Command {
     }
 
     void commandAddTask(Module module, String taskDescription) {
-        if (parserChecks.isEmptyDescription(taskDescription)
-                | !parserChecks.hasDateDescription(taskDescription)) {
+        if (parserChecks.isEmptyDescription(taskDescription) || !parserChecks.hasDateDescription(taskDescription)) {
             return;
         }
         module.addTask(taskDescription);
@@ -79,8 +79,8 @@ public class Command {
 
     void commandAddGradable(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
-                | !parserChecks.hasDateDescription(taskDescription)
-                | !parserChecks.hasWeightageDescription(taskDescription)) {
+                || !parserChecks.hasDateDescription(taskDescription)
+                || !parserChecks.hasWeightageDescription(taskDescription)) {
             return;
         }
         module.addGradableTask(taskDescription);
@@ -108,7 +108,7 @@ public class Command {
 
     void commandDeleteModule(String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
-                | parserChecks.isNotInteger(taskDescription)) {
+                || parserChecks.isNotInteger(taskDescription)) {
             return;
         }
         try {
@@ -140,14 +140,6 @@ public class Command {
     }
 
     void commandEditDescription(Module module, String taskType, String taskDescription) {
-        /*
-        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
-            return;
-        }
-        Parser.splitInput(Parser.taskDescription);
-        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
-            return;
-        }*/
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
         if (selectedTask != null) {
             selectedTask.setDescription(taskDescription);
@@ -155,14 +147,6 @@ public class Command {
     }
 
     void commandEditDeadline(Module module, String taskType, String taskDescription) {
-        /*
-        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
-            return;
-        }
-        Parser.splitInput(Parser.taskDescription);
-        if (parserChecks.isEmptyDescription(Parser.taskDescription)) {
-            return;
-        }*/
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
         if (selectedTask != null) {
             selectedTask.parseDeadline(taskDescription);
@@ -184,6 +168,26 @@ public class Command {
             return;
         }
         Task selectedTask = parserChecks.getTaskFromIndex(taskDescription, module.taskList.getTaskList());
+        if (selectedTask != null) {
+            selectedTask.markNotDone();
+        }
+    }
+
+    void commandMarkGradableDone(Module module, String taskDescription) {
+        if (parserChecks.isEmptyDescription(taskDescription)) {
+            return;
+        }
+        GradableTask selectedTask = parserChecks.getGradableTaskFromIndex(taskDescription, module.gradableTaskList.getGradableTaskList());
+        if (selectedTask != null) {
+            selectedTask.markDone();
+        }
+    }
+
+    void commandMarkGradableNotDone(Module module, String taskDescription) {
+        if (parserChecks.isEmptyDescription(taskDescription)) {
+            return;
+        }
+        GradableTask selectedTask = parserChecks.getGradableTaskFromIndex(taskDescription, module.gradableTaskList.getGradableTaskList());
         if (selectedTask != null) {
             selectedTask.markNotDone();
         }

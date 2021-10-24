@@ -2,6 +2,7 @@ package command.parser;
 
 import command.NoCap;
 import command.Ui;
+import task.GradableTask;
 import task.Task;
 
 import java.util.ArrayList;
@@ -19,6 +20,20 @@ public class ParserChecks {
     public Task getTaskFromIndex(String input, ArrayList<Task> taskList) {
         int index;
         Task task = null;
+        try {
+            index = Integer.parseInt(input) - 1;
+            if (isValidIndex(index)) {
+                task = taskList.get(index);
+            }
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            Ui.printInvalidIndex();
+        }
+        return task;
+    }
+
+    public GradableTask getGradableTaskFromIndex(String input, ArrayList<GradableTask> taskList) {
+        int index;
+        GradableTask task = null;
         try {
             index = Integer.parseInt(input) - 1;
             if (isValidIndex(index)) {

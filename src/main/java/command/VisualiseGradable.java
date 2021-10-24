@@ -131,6 +131,7 @@ public class VisualiseGradable {
     }
 
     public void print() {
+        System.out.println("BREAKDOWN:");
         System.out.println(printTopBar());
         System.out.println(printMidBar());
         System.out.println(printBottomBar());

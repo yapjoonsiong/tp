@@ -31,7 +31,8 @@ class VisualiseGradableTest {
         v.print();
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
-                "<==10%===><=====15%=====><=========================55%=========================>"
+                "BREAKDOWN:"+ System.lineSeparator()
+                        + "<==10%===><=====15%=====><=========================55%=========================>"
                         + "<=====15%=====><5%=>" + System.lineSeparator()
                         + "##########@@@@@@@@@@@@@@@&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                         + "&&&&&&&&&+++++++++++++++#####" + System.lineSeparator()

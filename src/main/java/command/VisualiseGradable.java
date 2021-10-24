@@ -118,11 +118,11 @@ public class VisualiseGradable {
             }
         }
         List<GradableTask> undone = sorted.subList(0, count);
-        List<GradableTask> done = sorted.subList(count, sorted.size());
         System.out.println("Uncompleted:");
         for (GradableTask g : undone) {
             System.out.println(g);
         }
+        List<GradableTask> done = sorted.subList(count, sorted.size());
         System.out.println("Completed:");
         for (GradableTask g : done) {
             System.out.println(g);

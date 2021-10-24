@@ -1,0 +1,45 @@
+title StorageDecoder
+
+
+participant "<<Class>> \n StorageDecoder" as StorageDecoder
+
+participant ":ObjectMapper" as ObjectMapper
+
+participant ":SemesterList" as SemesterList
+
+StorageDecoder<-[: DecodeJsonToSemesterList()
+
+activate StorageDecoder
+
+alt No save file found
+StorageDecoder->*SemesterList: SemesterList()
+activate SemesterList
+SemesterList-->StorageDecoder:
+deactivate SemesterList
+StorageDecoder-->[: new semester list
+
+else else
+StorageDecoder->*ObjectMapper:ObjectMapper()
+activate ObjectMapper
+ObjectMapper-->StorageDecoder:
+deactivate ObjectMapper
+
+StorageDecoder->ObjectMapper:readValue()
+activate ObjectMapper
+ObjectMapper-->StorageDecoder:decoded semester list
+deactivate ObjectMapper
+destroyafter ObjectMapper
+StorageDecoder-->[: decoded semester list
+end 
+deactivateafter StorageDecoder
+
+
+
+
+
+
+
+
+
+
+

@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
 class VisualiseGradableTest {
 
@@ -31,9 +31,12 @@ class VisualiseGradableTest {
         v.print();
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
-                "<==10%===><=====15%=====><=========================55%=========================><=====15%=====><5%=>" + System.lineSeparator()
-                        + "##########@@@@@@@@@@@@@@@&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&+++++++++++++++#####" + System.lineSeparator()
-                        +  "|---1----||------2------||--------------------------3--------------------------||------4------||-5-|" + System.lineSeparator()
+                "<==10%===><=====15%=====><=========================55%=========================>"
+                        + "<=====15%=====><5%=>" + System.lineSeparator()
+                        + "##########@@@@@@@@@@@@@@@&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        + "&&&&&&&&&+++++++++++++++#####" + System.lineSeparator()
+                        +  "|---1----||------2------||--------------------------3------------------"
+                        + "--------||------4------||-5-|" + System.lineSeparator()
                         + "1: lecture quizzes" + System.lineSeparator()
                         + "2: classPart" + System.lineSeparator()
                         + "3: Finals" + System.lineSeparator()

@@ -178,7 +178,8 @@ public class Command {
         if (parserChecks.isEmptyDescription(taskDescription)) {
             return;
         }
-        GradableTask selectedTask = parserChecks.getGradableTaskFromIndex(taskDescription, module.gradableTaskList.getGradableTaskList());
+        GradableTask selectedTask = parserChecks.getGradableTaskFromIndex(taskDescription,
+                module.gradableTaskList.getGradableTaskList());
         if (selectedTask != null) {
             selectedTask.markDone();
         }
@@ -188,7 +189,8 @@ public class Command {
         if (parserChecks.isEmptyDescription(taskDescription)) {
             return;
         }
-        GradableTask selectedTask = parserChecks.getGradableTaskFromIndex(taskDescription, module.gradableTaskList.getGradableTaskList());
+        GradableTask selectedTask = parserChecks.getGradableTaskFromIndex(taskDescription,
+                module.gradableTaskList.getGradableTaskList());
         if (selectedTask != null) {
             selectedTask.markNotDone();
         }

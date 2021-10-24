@@ -89,11 +89,11 @@ public class CommandTest {
         parser.chooseTask("/m cs1010 deleteclass");
         parser.chooseTask("timetable");*/
 
-        //parser.chooseTask("/m CS10112312 addtask test1 /by 10 10 10");
-        //parser.chooseTask("/m CS1010 addtask dssd /by 10-10-10");
+        parser.chooseTask("/m CS1010 addtask test1 /by 10 10 10");
+        parser.chooseTask("/m CS1010 addtask dssd /by 10-10-10");
 
-        parser.chooseTask("/m cs1010 addgradable finalss dasda sda asdasd /by 10/10/10 /w 70");
-        parser.chooseTask("/m cs1010 addgradable assignment /by 10/10/10 /w 70");
+        //parser.chooseTask("/m cs1010 addgradable finalss dasda sda asdasd /by 10/10/10 /w 70");
+        //parser.chooseTask("/m cs1010 addgradable assignment /by 10/10/10 /w 70");
         parser.chooseTask("list task");
 
 

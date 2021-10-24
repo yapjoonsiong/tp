@@ -38,6 +38,10 @@ public class OverallTask extends Task {
         this.weightage = task.weightage;
     }
 
+    public boolean isGradable() {
+        return gradable;
+    }
+
     /**
      * Comparator used to compare deadline between OverallTask objects.
      */

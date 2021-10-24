@@ -115,6 +115,18 @@ public class OverallTaskList extends TaskList {
     }
 
     /**
+     * Prints all gradable tasks in the task list.
+     */
+    public void printGradableTasks() {
+        List<OverallTask> newTaskList = overallTaskList
+                .stream()
+                .filter(OverallTask::isGradable)
+                .collect(Collectors.toList());
+        Ui.printGradableTasks(newTaskList);
+        logger.log(Level.INFO, "print gradable tasks");
+    }
+
+    /**
      * Prints all the tasks in the task list without any sorting.
      */
     public void printAllTasks() {

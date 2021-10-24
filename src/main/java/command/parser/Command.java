@@ -74,6 +74,7 @@ public class Command {
         if (parserChecks.isEmptyDescription(taskDescription) || !parserChecks.hasDateDescription(taskDescription)) {
             return;
         }
+        System.out.println((taskDescription));
         module.addTask(taskDescription);
     }
 

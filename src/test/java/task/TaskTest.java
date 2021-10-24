@@ -31,6 +31,7 @@ public class TaskTest {
     void getDate_success() {
         Task task = new Task("Submit Assignment 1", "19/09/2021 1600");
         assertEquals("19/09/2021 1600", task.getDate());
+
     }
 
     @Test

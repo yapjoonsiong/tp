@@ -2,7 +2,11 @@ package module;
 
 
 import command.NoCap;
+
 import command.VisualiseGradable;
+
+import exceptions.NoCapExceptions;
+
 import schedule.Schedule;
 import schedule.ScheduleList;
 import task.GradableTaskList;
@@ -155,12 +159,8 @@ public class Module {
     }
 
     //overloading to take in String input * Added by jiexiong to keep Parser clean
-    public void addClass(String input) {
-        String[] scheduleInfo = input.split("/");
-        assert scheduleInfo.length == 4;
-        Schedule schedule = new Schedule(scheduleInfo[0], scheduleInfo[1], scheduleInfo[2], scheduleInfo[3]);
-        this.scheduleList.addClass(schedule);
-        logger.log(Level.INFO,"Schedule added successfully");
+    public void addClass(String input) throws NoCapExceptions {
+        this.scheduleList.addClass(input);
     }
 
     public void deleteClass() {

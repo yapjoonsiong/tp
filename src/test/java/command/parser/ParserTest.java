@@ -24,6 +24,15 @@ public class ParserTest {
     }
 
     @Test
+    public void splitInput_EmptyString_success() {
+        Parser testParser = new Parser();
+        testParser.chooseTask("");
+        assertEquals("", testParser.getTaskType());
+        assertEquals("", testParser.getTaskDescription());
+    }
+
+
+    @Test
     public void getTaskFromKeyword_keywordNotFound_printError() {
         TaskList a = new TaskList();
         a.addTask("cs1010", "Read Book A /by 12/12/2021 1600");

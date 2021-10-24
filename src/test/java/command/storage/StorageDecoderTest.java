@@ -1,5 +1,6 @@
 package command.storage;
 
+import exceptions.NoCapExceptions;
 import module.Module;
 import module.ModuleList;
 import schedule.Schedule;
@@ -29,13 +30,25 @@ class StorageDecoderTest {
         modules = semesters.extractAccessedSemester().getModuleList();
         modules.add(new Module("CS2112"));
         modules.get(0).addCredits(4);
-        modules.get(0).addClass(new Schedule("WED", "1200", "E3", "Tutorial"));
+        try {
+            modules.get(0).addClass(new Schedule("WED", "1200", "E3", "Tutorial"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         //Change semester index
         semesters.setAccessedSemesterIndex(2);
         modules = semesters.extractAccessedSemester().getModuleList();
         modules.add(new Module("CS2132"));
-        modules.get(0).addClass(new Schedule("MON", "1200", "D3", "Lecture"));
-        modules.get(0).addClass(new Schedule("TUE", "1200", "D3", "Lecture"));
+        try {
+            modules.get(0).addClass(new Schedule("MON", "1200", "D3", "Lecture"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.get(0).addClass(new Schedule("TUE", "1200", "D3", "Lecture"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         StorageEncoder.encodeAndSaveSemesterListToJson(semesters);
         SemesterList loadedSemesters = StorageDecoder.decodeJsonToSemesterList();
         assertEquals(semesters.toString(), loadedSemesters.toString());

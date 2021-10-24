@@ -8,6 +8,7 @@ public final class Logger {
     public static java.util.logging.Logger myLogger;
     private static LogManager logManager;
 
+
     public Logger() {
         myLogger = java.util.logging.Logger.getLogger(GLOBAL_LOGGER_NAME);
         logManager = LogManager.getLogManager();

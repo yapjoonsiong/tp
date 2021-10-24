@@ -1,7 +1,7 @@
 package task;
 
-import command.parser.Parser;
 import command.Ui;
+import command.parser.ParserChecks;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -65,8 +65,8 @@ public class TaskList {
 
     protected static String getDate(String description) {
         try {
-            int datePos = description.indexOf(Parser.START_OF_DATE);
-            return description.substring(datePos).replace(Parser.START_OF_DATE, EMPTY_STRING).trim();
+            int datePos = description.indexOf(ParserChecks.START_OF_DATE);
+            return description.substring(datePos).replace(ParserChecks.START_OF_DATE, EMPTY_STRING).trim();
         } catch (StringIndexOutOfBoundsException e) {
             return EMPTY_STRING;
         }
@@ -74,7 +74,7 @@ public class TaskList {
 
     protected static String removeDate(String description) {
         try {
-            int datePos = description.indexOf(Parser.START_OF_DATE);
+            int datePos = description.indexOf(ParserChecks.START_OF_DATE);
             return description.substring(0, datePos).trim();
         } catch (StringIndexOutOfBoundsException e) {
             return EMPTY_STRING;

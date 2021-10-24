@@ -4,14 +4,18 @@ import command.NoCap;
 import command.Ui;
 import module.Module;
 import task.OverallTaskList;
-import task.Task;
 import task.TaskList;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ListParser {
+
+    public static final String SORT_BY_DATE = "sortbydate";
+    public static final String SORT_BY_STATUS = "sortbystatus";
+    public static final String SHOW_WEEK = "w";
+    public static final String SHOW_MONTH = "m";
+    public static final String SHOW_YEAR = "y";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public ListParser() {
@@ -68,68 +72,65 @@ public class ListParser {
         }
     }
 
-    public void overallListParser(String input) {
-        Parser.splitInput(input);
-        if (Parser.taskType.equals(Parser.MODULE)) {
+    public void overallListParser(String taskType, String taskDescription) {
+        switch (taskType) {
+        case Parser.MODULE:
             NoCap.moduleList.printModules();
-        } else if (Parser.taskType.equals(Parser.SEMESTERS)) {
+            break;
+        case Parser.SEMESTERS:
             NoCap.semesterList.printSemesters();
-        } else if (Parser.taskType.equals(Parser.TASK)) {
+            break;
+        case Parser.TASK:
             OverallTaskList allTaskList = new OverallTaskList(NoCap.moduleList);
-            switch (Parser.taskDescription) {
-            case Parser.SORT_BY_DATE:
+            switch (taskDescription) {
+            case SORT_BY_DATE:
                 logger.log(Level.INFO, "Sort TaskList by date");
                 allTaskList.sortByDateAndPrint();
-                //sortByDate(moduleList);
                 break;
-            case Parser.SORT_BY_STATUS:
+            case SORT_BY_STATUS:
                 logger.log(Level.INFO, "Sort TaskList by status");
                 allTaskList.sortByStatusAndPrint();
-                //sortByStatus(moduleList);
                 break;
-            case Parser.SHOW_WEEK:
+            case SHOW_WEEK:
                 logger.log(Level.INFO, "Print weekly TaskList");
                 allTaskList.printWeeklyTasks();
-                //listWeekly(moduleList);
                 break;
-            case Parser.SHOW_MONTH:
+            case SHOW_MONTH:
                 logger.log(Level.INFO, "Print monthly TaskList");
                 allTaskList.printMonthlyTasks();
-                //listMonthly(moduleList);
                 break;
-            case Parser.SHOW_YEAR:
+            case SHOW_YEAR:
                 allTaskList.printYearlyTasks();
                 logger.log(Level.INFO, "Print yearly TaskList");
-                //listYearly(moduleList);
                 break;
                 case Parser.GRADABLE:
 
             default:
                 allTaskList.printAllTasks();
-                //System.out.println("Showing all tasks");
-                //listAll(moduleList);
                 break;
             }
-        } else {
+            break;
+        default:
             Ui.printInvalidListFormat();
+            break;
         }
     }
 
     public void moduleListParser(Module module, String input) {
         switch (input) {
-        case Parser.SORT_BY_DATE:
+        case SORT_BY_DATE:
             sortByDate(module);
             break;
-        case Parser.SORT_BY_STATUS:
+        case SORT_BY_STATUS:
             sortByStatus(module);
             break;
-        case Parser.SHOW_WEEK:
+        case SHOW_WEEK:
             listWeekly(module);
             break;
-        case Parser.SHOW_MONTH:
+        case SHOW_MONTH:
             listMonthly(module);
             break;
-        case Parser.SHOW_YEAR:
+        case SHOW_YEAR:
             listYearly(module);
             break;
         default:

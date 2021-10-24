@@ -86,6 +86,9 @@ public class SemesterList {
     }
 
     public void setAccessedSemesterIndex(int i) {
+        if (i < 0 || i > 9) {
+            throw new ArrayIndexOutOfBoundsException("Please key in a number from 1-10");
+        }
         this.accessedSemesterIndex = i;
     }
 
@@ -98,37 +101,17 @@ public class SemesterList {
     }
 
     public Semester get(int index) {
-        assert index >= 0;
+        if (index < 0 || index > 9) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         return this.semesterList.get(index);
     }
 
-    public void visualiseCap() {
-        updateCap();
+    public void printAllCap() {
         System.out.print("Cumulative CAP: " + getCap());
         for (Semester semester : semesterList) {
-            semester.updateCap();
             System.out.println(semester.getSemester() + ": " + semester.getCap());
         }
-        /*for (int i = 0; i < 35; i++) {
-            for (int j = 0; j < 50; j++) {
-                if (j < 3) {
-                    if (i >= 5 && i <= 30 && i % 5 == 0) {
-                        System.out.print((6 - (5/ i)) + ".00");
-                    } else {
-                        System.out.print("    ");
-                    }
-                    j += 3;
-                }
-                if (j == 4 && i <= 30 || i == 30 && j > 4) {
-                    System.out.print("#");
-                }
-                if (i == 31 && j % 5 == 0) {
-                    //print semester label
-                }
-
-            }
-        }*/
-
     }
 
     @Override

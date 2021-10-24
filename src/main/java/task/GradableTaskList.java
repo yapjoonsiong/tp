@@ -42,9 +42,14 @@ public class GradableTaskList extends TaskList {
     private static int getWeightage(String description) {
         try {
             int weightagePos = description.indexOf(ParserChecks.START_OF_WEIGHTAGE);
-            return Integer.parseInt(description.substring(weightagePos)
+            int weightage = Integer.parseInt(description.substring(weightagePos)
                     .replace(ParserChecks.START_OF_WEIGHTAGE, "").trim());
-        } catch (StringIndexOutOfBoundsException e) {
+            if (weightage <= 0 || weightage > 100) {
+                throw new NoCapExceptions("");
+            }
+            return weightage;
+        } catch (NumberFormatException | NoCapExceptions e) {
+            Ui.wrongWeightage();
             return 0;
         }
     }
@@ -59,13 +64,14 @@ public class GradableTaskList extends TaskList {
         return total <= 100;
     }
 
-    public void addGradableTask(String module, String userInput) throws DateTimeException {
+    public void addGradableTask(String module, String userInput) {
         logger.log(Level.INFO, "Successfully added task");
         String date = getDate(userInput);
         int weightage = getWeightage(userInput);
-        if (weightage <= 0 || weightage > 100) {
-            Ui.wrongWeightage();
-        } else if (!checkTotalWeightage(weightage)) {
+        if (weightage == 0) {
+            return;
+        }
+        if (!checkTotalWeightage(weightage)) {
             Ui.wrongWeightageSplits();
         } else if (date.isBlank()) {
             Ui.missingDate();
@@ -121,7 +127,7 @@ public class GradableTaskList extends TaskList {
         for (GradableTask g : gradableTaskList) {
             if (g != null) {
                 gradableTaskPrint = gradableTaskPrint + String.valueOf(index) + " ";
-                gradableTaskPrint = gradableTaskPrint + g.toString() + "\n";
+                gradableTaskPrint = gradableTaskPrint + g.toString() + "\r\n";
                 index++;
             }
         }

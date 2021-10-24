@@ -32,10 +32,11 @@ class GradableTaskListTest extends TaskListTest {
     }
 
     @Test
-    void testGet(){
+    void testGet() {
         GradableTaskList gradableTaskList = new GradableTaskList();
         gradableTaskList.addGradableTask("cs1010", "Assignment /by 12/12/2021 1600 /w 30");
         gradableTaskList.addGradableTask("cs1010", "Finals /by 12/12/2021 1600 /w 50");
-        assertEquals("Assignment by: 12 Dec 2021 04:00 PM Weightage 30% [ ]" ,gradableTaskList.getGradableTask(0).toString());
+        assertEquals("Assignment by: 12 Dec 2021 04:00 PM Weightage 30% [ ]",
+                gradableTaskList.getGradableTask(0).toString());
     }
 }

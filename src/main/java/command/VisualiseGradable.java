@@ -8,8 +8,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class VisualiseGradable {
-    String[] signs = new String[]{ "#", "@", "&", "+" };
-    
+    String[] signs = new String[]{"#", "@", "&", "+"};
+
     public GradableTaskList gradableTaskList;
 
     public VisualiseGradable(GradableTaskList gl) {
@@ -117,17 +117,16 @@ public class VisualiseGradable {
                 count++;
             }
         }
-//        List<GradableTask> undone = sorted.subList(0,count);
-//        List<GradableTask> done = sorted.subList(count, sorted.size());
-//
-//        System.out.println("Uncompleted:");
-//        for(GradableTask g : undone){
-//            System.out.println(g);
-//        }
-//        System.out.println("Completed:");
-//        for(GradableTask g : done){
-//            System.out.println(g);
-//        }
+        List<GradableTask> undone = sorted.subList(0, count);
+        List<GradableTask> done = sorted.subList(count, sorted.size());
+        System.out.println("Uncompleted:");
+        for (GradableTask g : undone) {
+            System.out.println(g);
+        }
+        System.out.println("Completed:");
+        for (GradableTask g : done) {
+            System.out.println(g);
+        }
     }
 
     public void print() {

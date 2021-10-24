@@ -12,6 +12,10 @@ public class GradableTask extends Task {
         return this.weightage;
     }
 
+    public boolean isDone(){
+        return isDone;
+    }
+
     @Override
     public String toString() {
         return getDescription() + " by: " + createFormattedDeadline() + " Weightage "

@@ -3,9 +3,12 @@ package task;
 import command.VisualiseGradable;
 import command.parser.Parser;
 import command.Ui;
+import exceptions.NoCapExceptions;
 
+import java.net.StandardSocketOptions;
 import java.time.DateTimeException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,10 +48,10 @@ public class GradableTaskList extends TaskList {
         logger.log(Level.INFO, "Successfully added task");
         String date = getDate(userInput);
         int weightage = getWeightage(userInput);
-        if (date.isBlank()) {
-            Ui.missingDate();
+        if (weightage <= 0 || weightage > 100) {
+            Ui.wrongWeightage();
         }
-        if (weightage == 0) {
+        if (date.isBlank()) {
             Ui.missingDate();
         } else {
             try {

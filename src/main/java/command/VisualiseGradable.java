@@ -3,6 +3,10 @@ package command;
 import task.GradableTask;
 import task.GradableTaskList;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class VisualiseGradable {
     String[] signs = new String[]{
             "#", "@", "&","+"
@@ -36,27 +40,34 @@ public class VisualiseGradable {
 
     private String printBottomBar(){
         StringBuilder bottomLine = new StringBuilder();
+        StringBuilder legend = new StringBuilder();
         int count = 0;
         try{
             while (count < this.gradableTaskList.size()) {
                 StringBuilder bottomLinePart = new StringBuilder();
                 int descriptionLength = this.gradableTaskList.getGradableTask(count).getDescription().length();
                 int weightageLength = getLength(this.gradableTaskList.getGradableTask(count));
-                int dashLength = (weightageLength - 2 - descriptionLength) / 2;
+                int dashLength = (weightageLength - 3) / 2;
                 bottomLinePart.append("|");
                 bottomLinePart.append("-".repeat(Math.max(0, (dashLength))));
-                bottomLinePart.append(this.gradableTaskList.getGradableTask(count).getDescription());
+                bottomLinePart.append(count + 1);
                 bottomLinePart.append("-".repeat(Math.max(0, (dashLength))));
                 while(bottomLinePart.toString().length() < weightageLength - 1){
                     bottomLinePart.append("-");
                 }
                 bottomLinePart.append("|");
                 bottomLine.append(bottomLinePart.toString());
+                legend.append(count + 1);
+                legend.append(": ");
+                legend.append(this.gradableTaskList.getGradableTask(count).getDescription());
+                legend.append("\n");
                 count++;
             }
         }catch (IndexOutOfBoundsException e){
             System.out.println(e);
         }
+        bottomLine.append("\n");
+        bottomLine.append(legend);
         return bottomLine.toString();
     }
 
@@ -86,10 +97,44 @@ public class VisualiseGradable {
         return topLine.toString();
     }
 
+    private List<GradableTask> sortByDone() {
+        List<GradableTask> sorted = new ArrayList<GradableTask>();
+        sorted.addAll(this.gradableTaskList.getGradableTaskList());
+        sorted.sort(new Comparator<GradableTask>() {
+            @Override
+            public int compare(GradableTask o1, GradableTask o2) {
+                return Boolean.compare(o1.isDone(), o2.isDone());
+            }
+        });
+
+        return sorted;
+    }
+
+    private void showByDone(){
+        List<GradableTask> sorted = sortByDone();
+        int count = 0;
+        while(!sorted.get(count).isDone()){
+            count ++;
+        }
+
+        List<GradableTask> undone = sorted.subList(0,count);
+        List<GradableTask> done = sorted.subList(count, sorted.size());
+
+        System.out.println("Uncompleted:");
+        for(GradableTask g : undone){
+            System.out.println(g);
+        }
+        System.out.println("Completed:");
+        for(GradableTask g : done){
+            System.out.println(g);
+        }
+    }
+
     public void print(){
         System.out.println(printTopBar());
         System.out.println(printMidBar());
         System.out.println(printBottomBar());
+        showByDone();
     }
 
 }

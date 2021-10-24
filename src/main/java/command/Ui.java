@@ -258,4 +258,8 @@ public class Ui {
         VisualiseGradable v = new VisualiseGradable(gl);
         v.print();
     }
+
+    public static void wrongWeightage(){
+        System.out.println("Invalid Weihtage, must be between 0 and 100 inclusive");
+    }
 }

@@ -64,9 +64,15 @@ public class OverallTask extends Task {
         return gradable ? "[Weightage: " + this.weightage + "%]" : "";
     }
 
+    private String getModuleNameString() {
+        return "[" + moduleName + "]";
+    }
+
     @Override
     public String toString() {
-        return "[" + moduleName + "]" + getGradableString() + super.toString() + " " + getWeightageString();
+        return getModuleNameString() + getGradableString() + super.toString() + " " + getWeightageString();
     }
+
+
 
 }

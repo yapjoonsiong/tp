@@ -33,7 +33,7 @@ class VisualiseGradableTest {
                 "BREAKDOWN:" + System.lineSeparator()
                         + "<==10%===><=====15%=====><=========================55%=========================>"
                         + "<=====15%=====><5%=>" + System.lineSeparator()
-                         + "##########@@@@@@@@@@@@@@@&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        + "##########@@@@@@@@@@@@@@@&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                         + "&&&&&&&&&+++++++++++++++#####" + System.lineSeparator()
                         + "|---1----||------2------||--------------------------3------------------"
                         + "--------||------4------||-5-|" + System.lineSeparator()
@@ -47,7 +47,7 @@ class VisualiseGradableTest {
                         + "2 classPart by: 12 Dec 2021 04:00 PM Weightage 15% [X]\r\n"
                         + "3 Finals by: 12 Dec 2021 04:00 PM Weightage 55% [X]\r\n"
                         + "4 att by: 12 Dec 2021 04:00 PM Weightage 15% [ ]\r\n"
-                        + "5 labs by: 12 Dec 2021 04:00 PM Weightage 5% [ ]" );
+                        + "5 labs by: 12 Dec 2021 04:00 PM Weightage 5% [ ]");
         assertLinesMatch(actualLines, actualLines);
     }
 }

@@ -127,7 +127,7 @@ public class GradableTaskList extends TaskList {
         for (GradableTask g : gradableTaskList) {
             if (g != null) {
                 gradableTaskPrint = gradableTaskPrint + String.valueOf(index) + " ";
-                gradableTaskPrint = gradableTaskPrint + g.toString() + "\n";
+                gradableTaskPrint = gradableTaskPrint + g.toString() + "\r\n";
                 index++;
             }
         }

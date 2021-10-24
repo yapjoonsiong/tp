@@ -64,11 +64,11 @@ public class GradableTaskList extends TaskList {
         return total <= 100;
     }
 
-    public void addGradableTask(String module, String userInput){
+    public void addGradableTask(String module, String userInput) {
         logger.log(Level.INFO, "Successfully added task");
         String date = getDate(userInput);
         int weightage = getWeightage(userInput);
-        if(weightage == 0){
+        if (weightage == 0) {
             return;
         }
         if (!checkTotalWeightage(weightage)) {

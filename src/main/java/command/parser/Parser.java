@@ -40,8 +40,10 @@ public class Parser {
     public static final String DELETEGRADE = "deletegrade";
     public static final String EDITDESCRIPTION = "editdesc";
     public static final String EDITDEADLINE = "editdate";
-    public static final String NOTDONE = "notdone";
     public static final String DONE = "done";
+    public static final String NOTDONE = "notdone";
+    public static final String GRADABLEDONE = "gradabledone";
+    public static final String GRADABLENOTDONE = "gradablenotdone";
     public static final String INFO = "info";
 
     private String taskType;
@@ -163,6 +165,12 @@ public class Parser {
             break;
         case NOTDONE:
             command.commandMarkNotDone(module, taskDescription);
+            break;
+        case GRADABLEDONE:
+            command.commandMarkGradableDone(module, taskDescription);
+            break;
+        case GRADABLENOTDONE:
+            command.commandMarkGradableNotDone(module, taskDescription);
             break;
         case INFO:
             command.commandShowInfo(module);

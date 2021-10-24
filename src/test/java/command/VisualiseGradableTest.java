@@ -31,19 +31,19 @@ class VisualiseGradableTest {
         v.print();
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
-                "BREAKDOWN:"+ System.lineSeparator()
+                "BREAKDOWN:" + System.lineSeparator()
                         + "<==10%===><=====15%=====><=========================55%=========================>"
                         + "<=====15%=====><5%=>" + System.lineSeparator()
                         + "##########@@@@@@@@@@@@@@@&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                         + "&&&&&&&&&+++++++++++++++#####" + System.lineSeparator()
-                        +  "|---1----||------2------||--------------------------3------------------"
+                        + "|---1----||------2------||--------------------------3------------------"
                         + "--------||------4------||-5-|" + System.lineSeparator()
                         + "1: lecture quizzes" + System.lineSeparator()
                         + "2: classPart" + System.lineSeparator()
                         + "3: Finals" + System.lineSeparator()
                         + "4: att" + System.lineSeparator()
                         + "5: labs" + System.lineSeparator()
-                        +  System.lineSeparator()
+                        + System.lineSeparator()
                         + "1 lecture quizzes by: 12 Dec 2021 04:00 PM Weightage 10% [ ]" + System.lineSeparator()
                         + "2 classPart by: 12 Dec 2021 04:00 PM Weightage 15% [X]" + System.lineSeparator()
                         + "3 Finals by: 12 Dec 2021 04:00 PM Weightage 55% [X]" + System.lineSeparator()

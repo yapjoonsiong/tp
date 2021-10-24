@@ -118,25 +118,24 @@ public class VisualiseGradable {
                 count++;
             }
         }
-
-        List<GradableTask> undone = sorted.subList(0,count);
-        List<GradableTask> done = sorted.subList(count, sorted.size());
-
-        System.out.println("Uncompleted:");
-        for(GradableTask g : undone){
-            System.out.println(g);
-        }
-        System.out.println("Completed:");
-        for(GradableTask g : done){
-            System.out.println(g);
-        }
+//        List<GradableTask> undone = sorted.subList(0,count);
+//        List<GradableTask> done = sorted.subList(count, sorted.size());
+//
+//        System.out.println("Uncompleted:");
+//        for(GradableTask g : undone){
+//            System.out.println(g);
+//        }
+//        System.out.println("Completed:");
+//        for(GradableTask g : done){
+//            System.out.println(g);
+//        }
     }
 
     public void print(){
         System.out.println(printTopBar());
         System.out.println(printMidBar());
         System.out.println(printBottomBar());
-        showByDone();
+        System.out.print(this.gradableTaskList);
     }
 
 }

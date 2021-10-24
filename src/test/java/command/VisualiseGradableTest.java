@@ -40,13 +40,11 @@ class VisualiseGradableTest {
                         + "4: att" + System.lineSeparator()
                         + "5: labs" + System.lineSeparator()
                         +  System.lineSeparator()
-                        + "Uncompleted:" + System.lineSeparator()
-                        + "lecture quizzes by: 12 Dec 2021 04:00 PM Weightage 10% [ ]" + System.lineSeparator()
-                        + "att by: 12 Dec 2021 04:00 PM Weightage 15% [ ]" + System.lineSeparator()
-                        + "labs by: 12 Dec 2021 04:00 PM Weightage 5% [ ]" + System.lineSeparator()
-                        + "Completed:" + System.lineSeparator()
-                        + "classPart by: 12 Dec 2021 04:00 PM Weightage 15% [X]" + System.lineSeparator()
-                        + "Finals by: 12 Dec 2021 04:00 PM Weightage 55% [X]" + System.lineSeparator());
+                        + "1 lecture quizzes by: 12 Dec 2021 04:00 PM Weightage 10% [ ]" + System.lineSeparator()
+                        + "2 classPart by: 12 Dec 2021 04:00 PM Weightage 15% [X]" + System.lineSeparator()
+                        + "3 Finals by: 12 Dec 2021 04:00 PM Weightage 55% [X]" + System.lineSeparator()
+                        + "4 att by: 12 Dec 2021 04:00 PM Weightage 15% [ ]" + System.lineSeparator()
+                        + "5 labs by: 12 Dec 2021 04:00 PM Weightage 5% [ ]" + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 }

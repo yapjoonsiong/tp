@@ -5,6 +5,7 @@ import command.Ui;
 import command.storage.StorageEncoder;
 import module.Module;
 import semester.Semester;
+import task.GradableTask;
 import task.Task;
 
 import java.util.Locale;
@@ -19,6 +20,7 @@ public class Parser {
     public static final String CAP = "cap";
     public static final String ALLCAP = "allcap";
     public static final String TASK = "task";
+    public static final String GRADABLE = "gradable";
     public static final String MODULE = "module";
     public static final String HELP = "help";
     public static final String ADD = "add";
@@ -149,7 +151,6 @@ public class Parser {
             return;
         }
         splitInput(taskDescription);
-
         Task selectedTask;
         switch (taskType) {
         case LIST:

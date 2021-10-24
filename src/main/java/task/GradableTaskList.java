@@ -89,13 +89,35 @@ public class GradableTaskList extends TaskList {
         return this.gradableTaskList.size();
     }
 
+    public GradableTask getGradableTaskFromIndex(String input) {
+        int index;
+        GradableTask g = null;
+        try {
+            index = Integer.parseInt(input) - 1;
+            if (isValidIndex(index)) {
+                g = gradableTaskList.get(index);
+            }
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            Ui.printInvalidIndex();
+        }
+        return g;
+    }
+
+    boolean isValidIndex(int index) {
+        if (index < 0) {
+            Ui.printInvalidIndex();
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         int index = 1;
         String gradableTaskPrint = "";
         for (GradableTask g : gradableTaskList) {
             if (g != null) {
-                gradableTaskPrint = gradableTaskPrint + String.valueOf(index) + ".\n";
+                gradableTaskPrint = gradableTaskPrint + String.valueOf(index) + " ";
                 gradableTaskPrint = gradableTaskPrint + g.toString() + "\n";
                 index++;
             }

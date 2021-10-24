@@ -102,6 +102,8 @@ public class ListParser {
                 logger.log(Level.INFO, "Print yearly TaskList");
                 //listYearly(moduleList);
                 break;
+                case Parser.GRADABLE:
+
             default:
                 allTaskList.printAllTasks();
                 //System.out.println("Showing all tasks");

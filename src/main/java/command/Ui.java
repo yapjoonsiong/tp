@@ -266,16 +266,16 @@ public class Ui {
         }
     }
 
-    public static void visualiseGradableTask(GradableTaskList gl){
+    public static void visualiseGradableTask(GradableTaskList gl) {
         VisualiseGradable v = new VisualiseGradable(gl);
         v.print();
     }
 
-    public static void wrongWeightage(){
+    public static void wrongWeightage() {
         System.out.println("Invalid Weightage, must be between 0 and 100 inclusive");
     }
 
-    public static void wrongWeightageSplits(){
+    public static void wrongWeightageSplits() {
         System.out.println("Sum of all weightages cannot exceed 100%");
     }
 

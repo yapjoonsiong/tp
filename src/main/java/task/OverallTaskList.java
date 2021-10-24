@@ -44,9 +44,11 @@ public class OverallTaskList extends TaskList {
         for (Module module : moduleList.getModuleList()) {
             String moduleName = module.getModuleName();
             for (Task task : module.getTaskList().taskList) {
+                task.updateOverdue();
                 overallTaskList.add(new OverallTask(task, moduleName));
             }
             for (GradableTask gradableTask : module.getGradableTaskList().gradableTaskList) {
+                gradableTask.updateOverdue();
                 overallTaskList.add(new OverallTask(gradableTask, moduleName));
             }
         }

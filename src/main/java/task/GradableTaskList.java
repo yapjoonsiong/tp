@@ -49,9 +49,9 @@ public class GradableTaskList extends TaskList {
         }
     }
 
-    private boolean checkTotalWeightage(int w){
+    private boolean checkTotalWeightage(int w) {
         int total = 0;
-        for(GradableTask g : gradableTaskList){
+        for (GradableTask g : gradableTaskList) {
             total += g.getWeightage();
         }
         total += w;
@@ -65,13 +65,11 @@ public class GradableTaskList extends TaskList {
         int weightage = getWeightage(userInput);
         if (weightage <= 0 || weightage > 100) {
             Ui.wrongWeightage();
-        }
-        else if(!checkTotalWeightage(weightage)){
+        } else if (!checkTotalWeightage(weightage)) {
             Ui.wrongWeightageSplits();
-        }
-        else if (date.isBlank()) {
+        } else if (date.isBlank()) {
             Ui.missingDate();
-        }else {
+        } else {
             try {
                 String description = removeDate(userInput);
                 GradableTask newGradableTask = new GradableTask(description, date, weightage);

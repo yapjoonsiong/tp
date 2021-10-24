@@ -76,7 +76,7 @@ public class ParserChecks {
      */
     boolean isDuplicateModule(String input) {
         try {
-            Command.module = NoCap.moduleList.find(input.toUpperCase(Locale.ROOT));
+            NoCap.moduleList.find(input.toUpperCase(Locale.ROOT));
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }

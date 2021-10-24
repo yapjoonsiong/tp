@@ -3,6 +3,8 @@ package command.parser;
 import command.NoCap;
 import command.Ui;
 import command.storage.StorageEncoder;
+import module.Module;
+import semester.SemesterList;
 
 import java.util.Locale;
 
@@ -37,8 +39,8 @@ public class Parser {
     public static final String DONE = "done";
     public static final String INFO = "info";
 
-    public static String taskType;
-    public static String taskDescription;
+    private String taskType;
+    private String taskDescription;
 
     private final Command command = new Command();
     private final ListParser list = new ListParser();
@@ -61,7 +63,7 @@ public class Parser {
             Ui.printHelpMessage();
             break;
         case SWITCHSEMESTER:
-            command.commandSwitchSemester();
+            command.commandSwitchSemester(taskDescription);
             break;
         case CAP:
             command.commandPrintCap();
@@ -70,16 +72,17 @@ public class Parser {
             command.commandPrintAllCap();
             break;
         case ADD:
-            command.commandAddModule();
+            command.commandAddModule(taskDescription);
             break;
         case DELETE:
-            command.commandDeleteModule();
+            command.commandDeleteModule(taskDescription);
             break;
         case TIMETABLE:
             command.commandPrintTimeTable();
             break;
         case LIST:
-            list.overallListParser(taskDescription);
+            splitInput(taskDescription);
+            list.overallListParser(taskType, taskDescription);
             break;
         case MODULETYPE:
             moduleParser(taskDescription);
@@ -104,10 +107,10 @@ public class Parser {
      * @param input String to be separated
      */
     void moduleParser(String input) {
-
+        Module module;
         splitInput(input);
         try {
-            Command.module = NoCap.moduleList.find(taskType.toUpperCase(Locale.ROOT));
+            module = NoCap.moduleList.find(taskType.toUpperCase(Locale.ROOT));
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printInvalidModuleNameMessage();
             return;
@@ -117,46 +120,48 @@ public class Parser {
 
         switch (taskType) {
         case LIST:
-            list.moduleListParser(Command.module, taskDescription);
+            list.moduleListParser(module, taskDescription);
             break;
         case ADDCLASS:
-            command.commandAddClass();
+            command.commandAddClass(module, taskDescription);
             break;
         case ADDTASK:
-            command.commandAddTask();
+            command.commandAddTask(module, taskDescription);
             break;
         case ADDGRADABLE:
-            command.commandAddGradable();
-            break;
-        case DONE:
-            command.commandMarkDone();
-            break;
-        case NOTDONE:
-            command.commandMarkNotDone();
+            command.commandAddGradable(module, taskDescription);
             break;
         case ADDGRADE:
-            command.commandAddGrade();
+            command.commandAddGrade(module, taskDescription);
             break;
         case ADDCREDIT:
-            command.commandAddCredit();
+            command.commandAddCredit(module, taskDescription);
             break;
         case DELETECLASS:
-            command.commandDeleteClass();
+            command.commandDeleteClass(module);
             break;
         case DELETETASK:
-            command.commandDeleteTask();
-            break;
-        case EDITDESCRIPTION:
-            command.commandEditDescription();
-            break;
-        case EDITDEADLINE:
-            command.commandEditDeadline();
+            command.commandDeleteTask(module, taskDescription);
             break;
         case DELETEGRADE:
-            command.commandDeleteGrade();
+            command.commandDeleteGrade(module);
+            break;
+        case EDITDESCRIPTION:
+            splitInput(taskDescription);
+            command.commandEditDescription(module,taskType,taskDescription);
+            break;
+        case EDITDEADLINE:
+            splitInput(taskDescription);
+            command.commandEditDeadline(module,taskType,taskDescription);
+            break;
+        case DONE:
+            command.commandMarkDone(module, taskDescription);
+            break;
+        case NOTDONE:
+            command.commandMarkNotDone(module, taskDescription);
             break;
         case INFO:
-            command.commandShowInfo();
+            command.commandShowInfo(module);
             break;
         default:
             Ui.printInvalidInputMessage();
@@ -165,7 +170,7 @@ public class Parser {
     }
 
     //split string on first space
-    static void splitInput(String input) {
+    void splitInput(String input) {
         try {
             int typePos = input.indexOf(SPACE_STRING);
             taskType = input.substring(0, typePos);

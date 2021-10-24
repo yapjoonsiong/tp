@@ -44,9 +44,11 @@ public class OverallTaskList extends TaskList {
         for (Module module : moduleList.getModuleList()) {
             String moduleName = module.getModuleName();
             for (Task task : module.getTaskList().taskList) {
+                task.updateOverdue();
                 overallTaskList.add(new OverallTask(task, moduleName));
             }
             for (GradableTask gradableTask : module.getGradableTaskList().gradableTaskList) {
+                gradableTask.updateOverdue();
                 overallTaskList.add(new OverallTask(gradableTask, moduleName));
             }
         }
@@ -112,6 +114,18 @@ public class OverallTaskList extends TaskList {
                 .collect(Collectors.toList());
         Ui.printOverallYearlyTasks(newTaskList);
         logger.log(Level.INFO, "print overall yearly tasks");
+    }
+
+    /**
+     * Prints all gradable tasks in the task list.
+     */
+    public void printGradableTasks() {
+        List<OverallTask> newTaskList = overallTaskList
+                .stream()
+                .filter(OverallTask::isGradable)
+                .collect(Collectors.toList());
+        Ui.printGradableTasks(newTaskList);
+        logger.log(Level.INFO, "print gradable tasks");
     }
 
     /**

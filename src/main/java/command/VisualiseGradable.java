@@ -8,21 +8,20 @@ import java.util.Comparator;
 import java.util.List;
 
 public class VisualiseGradable {
-    String[] signs = new String[]{
-            "#", "@", "&","+"
-    };
+    String[] signs = new String[]{ "#", "@", "&", "+" };
+    
     public GradableTaskList gradableTaskList;
 
-    public VisualiseGradable(GradableTaskList gl){
-        assert(gl != null);
+    public VisualiseGradable(GradableTaskList gl) {
+        assert (gl != null);
         this.gradableTaskList = gl;
     }
 
-    private int getLength(GradableTask gradableTask){
+    private int getLength(GradableTask gradableTask) {
         return gradableTask.getWeightage();
     }
 
-    private String printMidBar(){
+    private String printMidBar() {
         StringBuilder midLine = new StringBuilder();
         int count = 0;
         try {
@@ -32,17 +31,17 @@ public class VisualiseGradable {
                 }
                 count++;
             }
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(e);
         }
         return midLine.toString();
     }
 
-    private String printBottomBar(){
+    private String printBottomBar() {
         StringBuilder bottomLine = new StringBuilder();
         StringBuilder legend = new StringBuilder();
         int count = 0;
-        try{
+        try {
             while (count < this.gradableTaskList.size()) {
                 StringBuilder bottomLinePart = new StringBuilder();
                 int descriptionLength = this.gradableTaskList.getGradableTask(count).getDescription().length();
@@ -52,7 +51,7 @@ public class VisualiseGradable {
                 bottomLinePart.append("-".repeat(Math.max(0, (dashLength))));
                 bottomLinePart.append(count + 1);
                 bottomLinePart.append("-".repeat(Math.max(0, (dashLength))));
-                while(bottomLinePart.toString().length() < weightageLength - 1){
+                while (bottomLinePart.toString().length() < weightageLength - 1) {
                     bottomLinePart.append("-");
                 }
                 bottomLinePart.append("|");
@@ -63,7 +62,7 @@ public class VisualiseGradable {
                 legend.append("\n");
                 count++;
             }
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(e);
         }
         bottomLine.append("\n");
@@ -71,10 +70,10 @@ public class VisualiseGradable {
         return bottomLine.toString();
     }
 
-    private String printTopBar(){
+    private String printTopBar() {
         StringBuilder topLine = new StringBuilder();
         int count = 0;
-        try{
+        try {
             while (count < this.gradableTaskList.size()) {
                 StringBuilder linePart = new StringBuilder();
                 int weightageLength = getLength(this.gradableTaskList.getGradableTask(count));
@@ -84,14 +83,14 @@ public class VisualiseGradable {
                 linePart.append(this.gradableTaskList.getGradableTask(count).getWeightage());
                 linePart.append("%");
                 linePart.append("=".repeat(Math.max(0, (dashLength))));
-                while(linePart.toString().length() < weightageLength-1){
+                while (linePart.toString().length() < weightageLength - 1) {
                     linePart.append("=");
                 }
                 linePart.append(">");
                 topLine.append(linePart);
                 count++;
             }
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(e);
         }
         return topLine.toString();
@@ -110,10 +109,10 @@ public class VisualiseGradable {
         return sorted;
     }
 
-    private void showByDone(){
+    private void showByDone() {
         List<GradableTask> sorted = sortByDone();
         int count = 0;
-        for(GradableTask g : sorted) {
+        for (GradableTask g : sorted) {
             if (!g.isDone()) {
                 count++;
             }
@@ -131,7 +130,7 @@ public class VisualiseGradable {
 //        }
     }
 
-    public void print(){
+    public void print() {
         System.out.println(printTopBar());
         System.out.println(printMidBar());
         System.out.println(printBottomBar());

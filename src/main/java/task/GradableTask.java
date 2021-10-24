@@ -12,7 +12,7 @@ public class GradableTask extends Task {
         return this.weightage;
     }
 
-    public boolean isDone(){
+    public boolean isDone() {
         return isDone;
     }
 

@@ -254,6 +254,18 @@ public class Ui {
         }
     }
 
+    public static void printGradableTasks(List<OverallTask> newTaskList) {
+        System.out.println("Gradable tasks: ");
+        if (newTaskList.isEmpty()) {
+            System.out.println("You have no gradable tasks");
+            return;
+        }
+        for (int i = 0; i < newTaskList.size(); i++) {
+            newTaskList.get(i).updateOverdue();
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
     public static void visualiseGradableTask(GradableTaskList gl) {
         VisualiseGradable v = new VisualiseGradable(gl);
         v.print();
@@ -266,4 +278,6 @@ public class Ui {
     public static void wrongWeightageSplits() {
         System.out.println("Sum of all weightages cannot exceed 100%");
     }
+
+
 }

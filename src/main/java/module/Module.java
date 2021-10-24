@@ -57,14 +57,6 @@ public class Module {
         this.moduleName = moduleName;
     }
 
-    //    public Schedule getSchedule() {
-    //        return schedule;
-    //    }
-    //
-    //    public void setSchedule(Schedule schedule) {
-    //        this.schedule = schedule;
-    //    }
-
     public TaskList getTaskList() {
         return taskList;
     }

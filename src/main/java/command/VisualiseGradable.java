@@ -56,7 +56,7 @@ public class VisualiseGradable {
                     bottomLinePart.append("-");
                 }
                 bottomLinePart.append("|");
-                bottomLine.append(bottomLinePart.toString());
+                bottomLine.append(bottomLinePart);
                 legend.append(count + 1);
                 legend.append(": ");
                 legend.append(this.gradableTaskList.getGradableTask(count).getDescription());
@@ -88,7 +88,7 @@ public class VisualiseGradable {
                     linePart.append("=");
                 }
                 linePart.append(">");
-                topLine.append(linePart.toString());
+                topLine.append(linePart);
                 count++;
             }
         }catch (IndexOutOfBoundsException e){
@@ -113,8 +113,10 @@ public class VisualiseGradable {
     private void showByDone(){
         List<GradableTask> sorted = sortByDone();
         int count = 0;
-        while(!sorted.get(count).isDone()){
-            count ++;
+        for(GradableTask g : sorted) {
+            if (!g.isDone()) {
+                count++;
+            }
         }
 
         List<GradableTask> undone = sorted.subList(0,count);

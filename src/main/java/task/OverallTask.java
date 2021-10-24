@@ -22,6 +22,7 @@ public class OverallTask extends Task {
         this.isDone = task.isDone;
         this.moduleName = moduleName;
         this.gradable = false;
+        this.isLate = task.isLate;
     }
 
     /**

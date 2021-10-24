@@ -1,10 +1,12 @@
 package module;
 
+import exceptions.NoCapExceptions;
 import schedule.Schedule;
 import task.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class ModuleTest {
 
@@ -27,14 +29,23 @@ class ModuleTest {
         m.addTask("read /by 1800");
         TaskList taskList = new TaskList();
         taskList.addTask("cs2113T", "read /by 1800");
+
         assertEquals(taskList.toString(), m.getTaskList().toString());
     }
 
     @Test
     void getScheduleList() {
         Module m = new Module("cs2113T");
-        m.addClass("WED/0800/E1-01/tut");
-        assertEquals(new Schedule("WED", "0800", "E1-01", "tut").toString(), m.get(0).toString());
+        try {
+            m.addClass("WED/0800/E1-01/tut");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            assertEquals(new Schedule("WED", "0800", "E1-01", "tut").toString(), m.get(0).toString());
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -45,11 +56,24 @@ class ModuleTest {
     }
 
     @Test
+
     void size() {
         Module m = new Module("cs2113T");
-        m.addClass("WED/0800/E1-01/tut");
-        m.addClass("TUE/0800/E1-01/lect");
-        m.addClass("MON/1000/E1-01/lect");
+        try {
+            m.addClass("WED/0800/E1-01/tut");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            m.addClass("TUE/0800/E1-01/lect");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            m.addClass("MON/1000/E1-01/lect");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         assertEquals(3, m.size());
     }
 
@@ -58,9 +82,21 @@ class ModuleTest {
         Module m = new Module("cs2113T");
         m.addGrade("A+");
         m.addCredits(4);
-        m.addClass("WED/0800/E1-01/tut");
-        m.addClass("TUE/0800/E1-01/lect");
-        m.addClass("MON/1000/E1-01/lect");
+        try {
+            m.addClass("WED/0800/E1-01/tut");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            m.addClass("TUE/0800/E1-01/lect");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            m.addClass("MON/1000/E1-01/lect");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         m.addTask("read /by 11/11/2021 1900");
         m.addTask("do tutorial /by 12/11/2021 2000");
         m.addGradableTask("Assignment /by 12/12/2021 1600 /w 30");
@@ -72,8 +108,9 @@ class ModuleTest {
                 + "Day: MON\n" + "Start Time: 1000\n" + "Location: E1-01\n" + "Comments: lect\n"
                 + "--------------------------- \n" + "GRADE: A+\n"
                 + "TASKS: [[ ] read by: 11 Nov 2021 07:00 PM, [ ] do tutorial by: 12 Nov 2021 08:00 PM]\n"
-                + "BREAKDOWN: \n1.\n" + "Assignment by: 12 Dec 2021 04:00 PM Weightage 30% [ ]\n"
-                + "2.\n" + "Finals by: 15 Dec 2021 04:00 PM Weightage 50% [ ]\n";
+                + "BREAKDOWN: \n1 " + "Assignment by: 12 Dec 2021 04:00 PM Weightage 30% [ ]\n"
+                + "2 " + "Finals by: 15 Dec 2021 04:00 PM Weightage 50% [ ]\n";
         assertEquals(exp, m.toString());
+
     }
 }

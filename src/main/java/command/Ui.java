@@ -3,6 +3,7 @@ package command;
 
 import module.Module;
 import module.ModuleList;
+import task.GradableTaskList;
 import task.OverallTask;
 import task.Task;
 
@@ -188,7 +189,6 @@ public class Ui {
             return;
         }
         for (int i = 0; i < newTaskList.size(); i++) {
-            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
@@ -200,7 +200,6 @@ public class Ui {
             return;
         }
         for (int i = 0; i < newTaskList.size(); i++) {
-            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
@@ -212,7 +211,6 @@ public class Ui {
             return;
         }
         for (int i = 0; i < newTaskList.size(); i++) {
-            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
@@ -224,7 +222,6 @@ public class Ui {
             return;
         }
         for (int i = 0; i < newTaskList.size(); i++) {
-            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
@@ -236,7 +233,6 @@ public class Ui {
             return;
         }
         for (int i = 0; i < newTaskList.size(); i++) {
-            newTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + newTaskList.get(i));
         }
     }
@@ -248,8 +244,33 @@ public class Ui {
             return;
         }
         for (int i = 0; i < overallTaskList.size(); i++) {
-            overallTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + overallTaskList.get(i));
         }
     }
+
+    public static void printGradableTasks(List<OverallTask> newTaskList) {
+        System.out.println("Gradable tasks: ");
+        if (newTaskList.isEmpty()) {
+            System.out.println("You have no gradable tasks");
+            return;
+        }
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
+    public static void visualiseGradableTask(GradableTaskList gl) {
+        VisualiseGradable v = new VisualiseGradable(gl);
+        v.print();
+    }
+
+    public static void wrongWeightage() {
+        System.out.println("Invalid Weightage, must be between 0 and 100 inclusive");
+    }
+
+    public static void wrongWeightageSplits() {
+        System.out.println("Sum of all weightages cannot exceed 100%");
+    }
+
+
 }

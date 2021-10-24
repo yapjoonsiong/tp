@@ -8,8 +8,18 @@ public class GradableTask extends Task {
         this.weightage = weightage;
     }
 
+    /**
+     * For deserialization from JSON file.
+     */
+    public GradableTask() {
+    }
+
     public int getWeightage() {
         return this.weightage;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     @Override

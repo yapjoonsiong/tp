@@ -100,6 +100,35 @@ The diagram below illustrates the `splitString` process.
 
 # [Storage component](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
 -
+**API** : `command.storage`
+
+The Storage component saves data of NoCap into JSON format, and reads them back into corresponding objects when needed using a 3rd party library Jackson Databind.
+
+It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object `SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
+
+How StorageEncoder works:
+
+
+![alt_text](media/StorageEncoderSequenceDiagram.png "image_tooltip")
+
+
+1. The static method `encodeAndSaveSemesterListToJson() `is called when NoCap data needs to be saved
+2. If the save file directory has not been created, it is first created in order to store the save file
+3. Similarly, an empty file is created to store the data if it has not been created yet
+4. The parent object `SemesterList` is passed to the method to be converted into json format with an `ObjectMapper` object from the  `jackson-databind` library
+
+How StorageDecoder works:
+
+
+
+![alt_text](media/StorageDecoderSequenceDiagram.png "image_tooltip")
+
+
+
+
+1. The static method `DecodeJsonToSemesterList() `is called when NoCap data needs to be loaded from the save file
+2. If there is no save file available, a new `SemesterList `object is created and returned to the caller
+3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the json save file into a SemesterList object to be returned to the caller
 # [semester component](https://se-education.org/addressbook-level3/DeveloperGuide.html#model-component)
 -
 # [module component](https://se-education.org/addressbook-level3/DeveloperGuide.html#storage-component)
@@ -217,3 +246,56 @@ How the `Task` component works:
 2. When calling `printAllTask()`, `printWeeklyTask()`, `printMonthlyTask()` in `OverallTaskList` the method  `updateOverdue()`will be called which checks for the truth value of the `boolean` attribute `isDone` and also whether the current date and time of the system clock is after  the `deadline` of the `Task` object.
 3. If `isDone` is `FALSE` and the `deadline` is later than the current date and time, `updateOverdue()` will set the attribute `isLate` of the current `Task` object to `TRUE`.
 4. Calling the `toString()` method of the` Task` object will call `createLateIcon()` ,` createStatusIcon()` , 
+
+
+# OverallTaskList
+
+**API** : `task.OverallTasklist`
+
+The OverallTaskList class is instantiated from ListParser only when the end user needs to list available tasks in a `Semester`. 
+
+How the Overall`TaskList` class works:
+1. `OverallTask` objects (explained further under `OverallTask`) are stored in an ArrayList `overallTaskList.`
+2. Both `Task` and `GradableTask` objects are converted to OverallTask objects first before being inserted into OverallTaskList.
+3. When the `OverallTaskList` object is instantiated, a `ModuleList `object from a semester is passed to its constructor.
+
+![alt_text](media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
+
+4. The constructor calls the method `addAllModuleListTasks(module list)` which adds all the tasks in the module list into `OverallTaskList`.
+5. Once the object is instantiated, the following methods can be called to sort and print the tasks in the ArrayList `overallTaskList. `All sorting and filtering is done via `Java Streams`, and method details are omitted.
+* `sortByDateAndPrint() - Print all tasks sorted by deadline`
+* `sortByStatusAndPrint() - Print all tasks sorted by status(done)`
+* `printWeeklyTasks() - Print tasks due in a week`
+* `printMonthlyTasks() - Print tasks due in a month`
+* `printYearlyTasks() - Print tasks due in a year`
+* `printAllTasks() - Print all tasks without sorting`
+
+Notes about `OverallTaskList`
+* Once `ListParser` is done using the object, it is deleted and the task list is not stored anywhere. The reason for this is to reduce coupling between objects and remove the need to update separate task lists whenever tasks are added to `Modules`.
+# OverallTask
+
+**API** : `task.OverallTask`
+
+`OverallTask` objects are stored in a OverallTaskList object when the end user needs to list available tasks in a `Semester`. It stores information from `GradableTask/Task `objects together with their module name.
+
+`OverallTask` object stores the following for each task:
+
+1. `description`
+2. `Date`
+3. `isDone`
+4. `isLate`
+5. `Deadline`
+6. `isGradable`
+7. `Weightage `
+8. `moduleName`
+
+
+How the `OverallTask` component works:
+
+1. It inherits from `Task`, with additional attributes `isGradable, Weightage `and `moduleName. `
+2. The attributes `isGradable, Weightage `are added to provide more information for gradable tasks, while `moduleName` is added to display module information.
+3. It can be instantiated with 2 different constructors:
+    * OverallTask(task: Task, moduleName: String) - Instantiates using a `Task` object
+    * OverallTask(gradableTask:GradableTask, moduleName: String) - Instantiates using a `GradableTask `object
+4. During instantiation, information from `Task/GradableTask` objects are added to the `OverallTask` object together with their `moduleName.`
+5. Calling the  `toString()` method` `generates a string containing task information together with its `moduleName.`

@@ -1,0 +1,45 @@
+title StorageEncoder
+
+
+participant "<<Class>> \n StorageEncoder" as StorageEncoder
+
+participant ":ObjectMapper" as ObjectMapper
+
+StorageEncoder<-[: encodeAndSaveSemesterListToJson(semesterList)
+
+activate StorageEncoder
+
+opt [No Data Directory]
+StorageEncoder->StorageEncoder:createDataDirectory()
+activate StorageEncoder
+StorageEncoder<<--StorageEncoder:
+deactivate StorageEncoder
+end
+
+opt [No Data File Found] 
+StorageEncoder->StorageEncoder:createFile()             
+activate StorageEncoder
+StorageEncoder<<--StorageEncoder:
+deactivate StorageEncoder
+end
+
+StorageEncoder->*ObjectMapper:ObjectMapper()
+
+activate ObjectMapper
+ObjectMapper-->StorageEncoder:
+deactivate ObjectMapper
+
+StorageEncoder->ObjectMapper:writeValue(semesterList)
+activate ObjectMapper
+ObjectMapper-->StorageEncoder:
+deactivate ObjectMapper
+destroyafter ObjectMapper
+
+StorageEncoder-->[:
+deactivate StorageEncoder
+
+
+
+
+
+

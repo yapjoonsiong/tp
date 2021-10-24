@@ -24,6 +24,11 @@ public class StorageDecoder {
     //Logger object
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
+    /**
+     * Decodes a json file located at a specified path into a SemesterList object.
+     *
+     * @return A SemesterList containing information from previous runs.
+     */
     public static SemesterList decodeJsonToSemesterList() {
         ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.registerModule(new JavaTimeModule());

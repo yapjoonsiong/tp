@@ -2,6 +2,11 @@ package module;
 
 
 import command.NoCap;
+
+import command.VisualiseGradable;
+
+import exceptions.NoCapExceptions;
+
 import schedule.Schedule;
 import schedule.ScheduleList;
 import task.GradableTaskList;
@@ -20,7 +25,7 @@ public class Module {
     public TaskList taskList;
     private ScheduleList scheduleList;
     protected int credits;
-    protected GradableTaskList gradableTaskList;
+    public GradableTaskList gradableTaskList;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public Module(String moduleName) {
@@ -55,14 +60,6 @@ public class Module {
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }
-
-    //    public Schedule getSchedule() {
-    //        return schedule;
-    //    }
-    //
-    //    public void setSchedule(Schedule schedule) {
-    //        this.schedule = schedule;
-    //    }
 
     public TaskList getTaskList() {
         return taskList;
@@ -162,7 +159,7 @@ public class Module {
     }
 
     //overloading to take in String input * Added by jiexiong to keep Parser clean
-    public void addClass(String input) {
+    public void addClass(String input) throws NoCapExceptions {
         this.scheduleList.addClass(input);
     }
 
@@ -181,7 +178,7 @@ public class Module {
     public void addCredits(int credits) {
         this.credits = credits;
     }
-
+    
     public void showInformation() {
         System.out.println(toString());
     }

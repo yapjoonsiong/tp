@@ -48,6 +48,9 @@ public class ModuleList {
     //overloading to take in String input * Added by jiexiong to keep Parser clean
     public void delete(String input) {
         int moduleIndex = Integer.parseInt(input) - 1;
+        if (moduleIndex < 0 || moduleIndex >= moduleList.size()) {
+            throw new ArrayIndexOutOfBoundsException("Invalid number value");
+        }
         moduleList.remove(get(moduleIndex));
         logger.log(Level.INFO,"Module deleted successfully");
     }
@@ -70,7 +73,7 @@ public class ModuleList {
             }
         }
         if (index == -1) {
-            throw new ArrayIndexOutOfBoundsException("Unable to find task");
+            throw new ArrayIndexOutOfBoundsException();
         }
         logger.log(Level.INFO,"Module found successfully");
         return moduleList.get(index);

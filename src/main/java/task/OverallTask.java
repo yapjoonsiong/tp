@@ -2,18 +2,35 @@ package task;
 
 import java.util.Comparator;
 
+/**
+ * Task class used for listing out all available tasks in a semester.
+ * Inherits from task class but adds a moduleName, weightage and gradable attribute.
+ */
 public class OverallTask extends Task {
     private final String moduleName;
     private final boolean gradable;
     private int weightage;
 
+    /**
+     * Constructor for overall task which takes in a Task object.
+     *
+     * @param task Task object used to construct the OverallTask object
+     * @param moduleName Name of the module of the task
+     */
     public OverallTask(Task task, String moduleName) {
         super(task.description, task.date);
         this.isDone = task.isDone;
         this.moduleName = moduleName;
         this.gradable = false;
+        this.isLate = task.isLate;
     }
 
+    /**
+     * Constructor for overall task which takes in a GradableTask object.
+     *
+     * @param task GradableTask object used to construct the OverallTask object
+     * @param moduleName Name of the module of the task
+     */
     public OverallTask(GradableTask task, String moduleName) {
         super(task.description, task.date);
         this.isDone = task.isDone;
@@ -22,8 +39,18 @@ public class OverallTask extends Task {
         this.weightage = task.weightage;
     }
 
+    public boolean isGradable() {
+        return gradable;
+    }
+
+    /**
+     * Comparator used to compare deadline between OverallTask objects.
+     */
     public static Comparator<OverallTask> dateComparator = Comparator.comparing(t -> t.deadline);
 
+    /**
+     * Comparator used to compare "done" status between OverallTask objects.
+     */
     public static Comparator<OverallTask> statusComparator = (task1, task2) -> {
         if (task1.isDone && !task2.isDone) {
             return -1;
@@ -42,9 +69,15 @@ public class OverallTask extends Task {
         return gradable ? "[Weightage: " + this.weightage + "%]" : "";
     }
 
+    private String getModuleNameString() {
+        return "[" + moduleName + "]";
+    }
+
     @Override
     public String toString() {
-        return "[" + moduleName + "]" + getGradableString() + super.toString() + " " + getWeightageString();
+        return getModuleNameString() + getGradableString() + super.toString() + " " + getWeightageString();
     }
+
+
 
 }

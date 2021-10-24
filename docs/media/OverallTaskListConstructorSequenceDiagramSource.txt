@@ -1,0 +1,12 @@
+title Constructor
+
+participant ":OverallTaskList" as OverallTaskList
+
+[->*OverallTaskList: new OverallTaskList(module list)
+activate OverallTaskList
+OverallTaskList->OverallTaskList:addAllModuleListTasks()
+activate OverallTaskList
+OverallTaskList-->OverallTaskList:
+deactivate OverallTaskList
+OverallTaskList -->[:
+deactivate OverallTaskList

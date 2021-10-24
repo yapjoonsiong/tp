@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 class ModuleTest {
 
     @Test
@@ -28,6 +29,7 @@ class ModuleTest {
         m.addTask("read /by 1800");
         TaskList taskList = new TaskList();
         taskList.addTask("cs2113T", "read /by 1800");
+
         assertEquals(taskList.toString(), m.getTaskList().toString());
     }
 
@@ -54,6 +56,7 @@ class ModuleTest {
     }
 
     @Test
+
     void size() {
         Module m = new Module("cs2113T");
         try {
@@ -108,5 +111,6 @@ class ModuleTest {
                 + "BREAKDOWN: \n1.\n" + "Assignment by: 12 Dec 2021 04:00 PM Weightage 30% [ ]\n"
                 + "2.\n" + "Finals by: 15 Dec 2021 04:00 PM Weightage 50% [ ]\n";
         assertEquals(exp, m.toString());
+
     }
 }

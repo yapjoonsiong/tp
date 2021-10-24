@@ -3,6 +3,7 @@ package command;
 
 import module.Module;
 import module.ModuleList;
+import task.GradableTaskList;
 import task.OverallTask;
 import task.Task;
 
@@ -251,5 +252,18 @@ public class Ui {
             overallTaskList.get(i).updateOverdue();
             System.out.println((i + 1) + ". " + overallTaskList.get(i));
         }
+    }
+
+    public static void visualiseGradableTask(GradableTaskList gl){
+        VisualiseGradable v = new VisualiseGradable(gl);
+        v.print();
+    }
+
+    public static void wrongWeightage(){
+        System.out.println("Invalid Weightage, must be between 0 and 100 inclusive");
+    }
+
+    public static void wrongWeightageSplits(){
+        System.out.println("Sum of all weightages cannot exceed 100%");
     }
 }

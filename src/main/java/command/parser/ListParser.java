@@ -103,6 +103,8 @@ public class ListParser {
                 allTaskList.printYearlyTasks();
                 logger.log(Level.INFO, "Print yearly TaskList");
                 break;
+                case Parser.GRADABLE:
+
             default:
                 allTaskList.printAllTasks();
                 break;

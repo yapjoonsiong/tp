@@ -4,6 +4,10 @@ import command.NoCap;
 import command.Ui;
 import command.storage.StorageEncoder;
 import module.Module;
+
+import semester.Semester;
+import task.GradableTask;
+import task.Task;
 import semester.SemesterList;
 
 import java.util.Locale;
@@ -17,6 +21,7 @@ public class Parser {
     public static final String CAP = "cap";
     public static final String ALLCAP = "allcap";
     public static final String TASK = "task";
+    public static final String GRADABLE = "gradable";
     public static final String MODULE = "module";
     public static final String HELP = "help";
     public static final String ADD = "add";
@@ -99,7 +104,6 @@ public class Parser {
         }
     }
 
-
     /**
      * First separate the input into two parts. The first part is saved as module.
      * The next part is split again to obtain the new taskType and taskDescription
@@ -117,7 +121,7 @@ public class Parser {
         }
 
         splitInput(taskDescription);
-
+      
         switch (taskType) {
         case LIST:
             list.moduleListParser(module, taskDescription);

@@ -2,6 +2,7 @@ package command.parser;
 
 import command.Logger;
 import command.NoCap;
+import module.Module;
 import module.ModuleList;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,10 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class CommandTest {
+
 
     @Test
     public void variousCommands_missingDescription_ErrorMessage() {
@@ -21,17 +25,34 @@ public class CommandTest {
         parser.chooseTask("delete");
         parser.chooseTask("list");
 
-
         parser.chooseTask("/m CS1010 addclass");
         parser.chooseTask("/m CS1010 addtask");
         parser.chooseTask("/m CS1010 addgradable");
         parser.chooseTask("/m CS1010 addgrade");
         parser.chooseTask("/m CS1010 addcredit");
+    }
 
-        parser.chooseTask("");
+    @Test
+    public void commandEdit_success() {
+        NoCap.moduleList = new ModuleList();
+        Command command = new Command();
 
+        command.commandAddModule("cs1010");
+        Module module = NoCap.moduleList.get(0);
 
+        command.commandAddTask(module, "test1 /by 10 10 10");
 
+        command.commandEditDescription(module, "0", "invalid index");
+        assertEquals(module.getTaskList().toString(), "[[ ] test1 by: 10 Oct 2010 12:00 AM]");
+
+        command.commandEditDescription(module, "1", "test2");
+        assertEquals(module.getTaskList().toString(), "[[ ] test2 by: 10 Oct 2010 12:00 AM]");
+
+        command.commandEditDeadline(module, "1", "invalid date");
+        assertEquals(module.getTaskList().toString(), "[[ ] test2 by: 10 Oct 2010 12:00 AM]");
+
+        command.commandEditDeadline(module, "1", "11 11 11");
+        assertEquals(module.getTaskList().toString(), "[[ ] test2 by: 11 Nov 2011 12:00 AM]");
     }
 
 }

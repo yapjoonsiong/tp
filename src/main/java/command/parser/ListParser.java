@@ -72,15 +72,17 @@ public class ListParser {
         }
     }
 
-    public void overallListParser(String input) {
-        Parser.splitInput(input);
-        if (Parser.taskType.equals(Parser.MODULE)) {
+    public void overallListParser(String taskType, String taskDescription) {
+        switch (taskType) {
+        case Parser.MODULE:
             NoCap.moduleList.printModules();
-        } else if (Parser.taskType.equals(Parser.SEMESTERS)) {
+            break;
+        case Parser.SEMESTERS:
             NoCap.semesterList.printSemesters();
-        } else if (Parser.taskType.equals(Parser.TASK)) {
+            break;
+        case Parser.TASK:
             OverallTaskList allTaskList = new OverallTaskList(NoCap.moduleList);
-            switch (Parser.taskDescription) {
+            switch (taskDescription) {
             case SORT_BY_DATE:
                 logger.log(Level.INFO, "Sort TaskList by date");
                 allTaskList.sortByDateAndPrint();
@@ -105,8 +107,10 @@ public class ListParser {
                 allTaskList.printAllTasks();
                 break;
             }
-        } else {
+            break;
+        default:
             Ui.printInvalidListFormat();
+            break;
         }
     }
 

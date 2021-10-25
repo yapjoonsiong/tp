@@ -35,8 +35,9 @@ public class ModuleList {
     }
 
     /**
-     * Overload add method to take in String input
-     * @param input User input for Module name
+     * Overload add method to take in String input.
+     *
+     * @param input User input for Module name.
      */
     public void add(String input) {
         Module module = new Module(input);
@@ -49,8 +50,9 @@ public class ModuleList {
     }
 
     /**
-     * Overload delete method to take in String input
-     * @param input User input for Module name
+     * Overload delete method to take in String input.
+     *
+     * @param input User input for Module name.
      */
     public void delete(String input) {
         int moduleIndex = Integer.parseInt(input) - 1;
@@ -71,11 +73,11 @@ public class ModuleList {
     }
 
     /**
-     * Method to find Module objects by their description
-     * Iterates through every Module object in moduleList and returns Module with a matching description
+     * Method to find Module objects by their description.
+     * Iterates through every Module object in moduleList and returns Module with a matching description.
      *
-     * @param input User input Module description
-     * @return Module object
+     * @param input User input Module description.
+     * @return Module object.
      */
     public Module find(String input) {
         String moduleName = input.trim();
@@ -93,7 +95,7 @@ public class ModuleList {
     }
 
     /**
-     * Method to print all existing Modules and their details in moduleList
+     * Method to print all existing Modules and their details in moduleList.
      */
     public void printModules() {
         for (int i = 0; i < moduleList.size(); i++) {
@@ -177,9 +179,9 @@ public class ModuleList {
     }
 
     /**
-     * Method to print timetable containing classes for every Module
-     * Iterates through each Module and their Schedule to check for existing classes in a timeslot
-     * Prints out class details in the allocated time slot if a class exists in the slot
+     * Method to print timetable containing classes for every Module.
+     * Iterates through each Module and their Schedule to check for existing classes in a timeslot.
+     * Prints out class details in the allocated time slot if a class exists in the slot.
      */
     public void printTimeTable() {
         for (int r = 0; r < HEIGHT; r++) {

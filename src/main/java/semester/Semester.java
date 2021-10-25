@@ -27,8 +27,8 @@ public class Semester {
     }
 
     /**
-     * Method to update number of credits taken in the Semester
-     * Iterates through every Module object in ModuleList and adds up each module's credits
+     * Method to update number of credits taken in the Semester.
+     * Iterates through every Module object in ModuleList and adds up each module's credits.
      */
     protected void updateCredits() {
         int c = 0;
@@ -39,9 +39,9 @@ public class Semester {
     }
 
     /**
-     * Method to update the weighted points earned in the Semester
-     * Iterates through every Module Object in ModuleList to return their grade points
-     * Multiplies grade points with the number of credits to get weighted points earned
+     * Method to update the weighted points earned in the Semester.
+     * Iterates through every Module Object in ModuleList to return their grade points.
+     * Multiplies grade points with the number of credits to get weighted points earned.
      */
     protected void updatePoints() {
         double p = 0;

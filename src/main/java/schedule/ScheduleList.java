@@ -23,11 +23,11 @@ public class ScheduleList {
     }
 
     /**
-     * Overload addClass method to take in String input
-     * Method to add new Class object to scheduleList
+     * Overload addClass method to take in String input.
+     * Method to add new Class object to scheduleList.
      *
-     * @param input User input class details
-     * @throws NoCapExceptions Exception thrown when class already exists in timeslot or wrong formatting of input
+     * @param input User input class details.
+     * @throws NoCapExceptions Exception thrown when class already exists in timeslot or wrong formatting of input.
      */
     public void addClass(String input) throws NoCapExceptions {
         String[] scheduleInfo = input.split("/");
@@ -65,12 +65,12 @@ public class ScheduleList {
     }
 
     /**
-     * Checks for whether a class already exists with the input day and time
-     * Iterates through each module object in the moduleList and each schedule within the scheduleList of each module
+     * Checks for whether a class already exists with the input day and time.
+     * Iterates through each module object in the moduleList and each schedule within the scheduleList of each module.
      *
-     * @param day User input
-     * @param time User input
-     * @return true if a class with matching day and time is found
+     * @param day User input.
+     * @param time User input.
+     * @return true if a class with matching day and time is found.
      */
     private boolean isSlotFilled(String day, String time) {
         for (Module m : NoCap.moduleList.getModuleList()) {

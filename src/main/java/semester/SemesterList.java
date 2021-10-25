@@ -32,7 +32,7 @@ public class SemesterList {
     }
 
     /**
-     * Method to add 10 Semesters to semesterList by default in the constructor
+     * Method to add 10 Semesters to semesterList by default in the constructor.
      */
     private void setUp() {
         for (int i = 0; i < 10; i++) {
@@ -48,9 +48,9 @@ public class SemesterList {
     }
 
     /**
-     * Method to add a Semester to semesterList
+     * Method to add a Semester to semesterList.
      *
-     * @param semesterDescription User input description of the semester
+     * @param semesterDescription User input description of the semester.
      */
     public void add(String semesterDescription) {
         Semester semester = new Semester(semesterDescription);
@@ -58,7 +58,7 @@ public class SemesterList {
     }
 
     /**
-     * Method to print existing semesters in the semesterList
+     * Method to print existing semesters in the semesterList.
      */
     public void printSemesters() {
         int i = 1;
@@ -69,9 +69,9 @@ public class SemesterList {
     }
 
     /**
-     * Method to return the Semester with the corresponding accessedSemesterIndex
+     * Method to return the Semester with the corresponding accessedSemesterIndex.
      *
-     * @return Semester object
+     * @return Semester object.
      */
     public Semester extractAccessedSemester() {
         return this.semesterList.get(getAccessedSemesterIndex());
@@ -96,7 +96,7 @@ public class SemesterList {
     }
 
     /**
-     * Method to update the aggregate CAP of all Semesters in semesterList
+     * Method to update the aggregate CAP of all Semesters in semesterList.
      */
     public void updateCap() {
         updateCredits();
@@ -105,9 +105,9 @@ public class SemesterList {
     }
 
     /**
-     * Method to set accessedSemesterIndex
+     * Method to set accessedSemesterIndex.
      *
-     * @param i User input index
+     * @param i User input index.
      */
     public void setAccessedSemesterIndex(int i) {
         if (i < 0 || i > 9) {
@@ -125,9 +125,10 @@ public class SemesterList {
     }
 
     /**
-     * Method to get the Semester with the corresponding index in semesterList
-     * @param index User input
-     * @return Semester object
+     * Method to get the Semester with the corresponding index in semesterList.
+     *
+     * @param index User input.
+     * @return Semester object.
      */
     public Semester get(int index) {
         if (index < 0 || index > 9) {
@@ -137,7 +138,7 @@ public class SemesterList {
     }
 
     /**
-     * Method to print aggregated CAP and CAP of each Semester
+     * Method to print aggregated CAP and CAP of each Semester.
      */
     public void printAllCap() {
         System.out.println("Cumulative CAP: " + getCap());

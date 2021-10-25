@@ -59,13 +59,13 @@ public class VisualiseGradable {
                 legend.append(count + 1);
                 legend.append(": ");
                 legend.append(this.gradableTaskList.getGradableTask(count).getDescription());
-                legend.append("\n");
+                legend.append(System.lineSeparator());
                 count++;
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e);
         }
-        bottomLine.append("\n");
+        bottomLine.append(System.lineSeparator());
         bottomLine.append(legend);
         return bottomLine.toString();
     }
@@ -130,6 +130,7 @@ public class VisualiseGradable {
     }
 
     public void print() {
+        System.out.println("BREAKDOWN:");
         System.out.println(printTopBar());
         System.out.println(printMidBar());
         System.out.println(printBottomBar());

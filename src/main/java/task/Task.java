@@ -84,7 +84,7 @@ public class Task {
             logger.log(Level.INFO, "Successfully set Task deadline...");
             setDeadline(DateParser.parseDate(date));
         } catch (DateTimeException e) {
-            Ui.invalidDate();
+            Ui.missingDate();
         }
     }
 

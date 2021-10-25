@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandTest {
 
-      /*
+    /*
     @Test
     public void variousCommands_missingDescription_ErrorMessage() {
         NoCap.moduleList = new ModuleList();

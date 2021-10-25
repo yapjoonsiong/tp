@@ -108,7 +108,7 @@ public class SemesterList {
     }
 
     public void printAllCap() {
-        System.out.print("Cumulative CAP: " + getCap());
+        System.out.println("Cumulative CAP: " + getCap());
         for (Semester semester : semesterList) {
             System.out.println(semester.getSemester() + ": " + semester.getCap());
         }

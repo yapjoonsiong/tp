@@ -265,7 +265,7 @@ public class Ui {
     }
 
     public static void wrongWeightage() {
-        System.out.println("Invalid Weightage, must be between 0 and 100 inclusive");
+        System.out.println("Invalid Weightage, must be between 5 and 100 inclusive.");
     }
 
     public static void wrongWeightageSplits() {

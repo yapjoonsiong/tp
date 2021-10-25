@@ -37,6 +37,7 @@ public class OverallTask extends Task {
         this.moduleName = moduleName;
         this.gradable = true;
         this.weightage = task.weightage;
+        this.isLate = task.isLate;
     }
 
     public boolean isGradable() {

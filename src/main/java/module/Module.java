@@ -159,6 +159,14 @@ public class Module {
     }
 
     //overloading to take in String input * Added by jiexiong to keep Parser clean
+
+    /**
+     * Overload addClass method to take in String input
+     * Adds a Class object with corresponding details
+     *
+     * @param input User input class details
+     * @throws NoCapExceptions Throws exception when Class exists in a slot or when input is wrongly formatted
+     */
     public void addClass(String input) throws NoCapExceptions {
         this.scheduleList.addClass(input);
     }

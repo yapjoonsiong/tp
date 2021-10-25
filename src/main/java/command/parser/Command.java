@@ -14,6 +14,7 @@ public class Command {
 
     private final ParserChecks parserChecks = new ParserChecks();
 
+
     public Command() {
     }
 
@@ -196,4 +197,5 @@ public class Command {
             selectedTask.markNotDone();
         }
     }
+
 }

@@ -113,8 +113,8 @@ public class Parser {
      * @param input String to be separated
      */
     void moduleParser(String input) {
-        Module module;
         splitInput(input);
+        Module module;
         try {
             module = NoCap.moduleList.find(taskType.toUpperCase(Locale.ROOT));
         } catch (ArrayIndexOutOfBoundsException e) {

@@ -88,7 +88,7 @@ public class TaskList {
      *
      * @param userInput task description input by user
      */
-    public void addTask(String module, String userInput) throws DateTimeException {
+    public void addTask(String module, String userInput)  {
         String date = getDate(userInput);
         if (date.isBlank()) {
             Ui.missingDate();

@@ -26,12 +26,13 @@ activate parse Parser
 parse Parser-->parse Parser:
 deactivate parse Parser
 
-parse Parser->list ListParser:listParser()
-activate list ListParser
-list ListParser->parse Parser:splitInput()
+parse Parser->parse Parser:splitInput()
 activate parse Parser
-parse Parser-->list ListParser:
+parse Parser-->parse Parser:
 deactivate parse Parser
+
+parse Parser->list ListParser:overallListParser()
+activate list ListParser
 
 list ListParser->*allTaskList OverallTaskList:OverallTaskList()
 activate allTaskList OverallTaskList

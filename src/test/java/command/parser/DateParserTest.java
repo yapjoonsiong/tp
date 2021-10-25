@@ -12,6 +12,7 @@ public class DateParserTest {
         assertEquals("2020-12-01T18:12", DateParser.parseDate("01 12 2020 1812").toString());
         assertEquals("2020-12-01T00:00", DateParser.parseDate("01 12 2020").toString());
         assertEquals("2020-12-01T00:00", DateParser.parseDate("01 12 20").toString());
+        assertEquals("2020-12-01T00:00", DateParser.parseDate("01 12 20").toString());
         assertEquals("2020-12-01T18:12", DateParser.parseDate("01/12/2020 18:12").toString());
         assertEquals("2020-12-01T18:12", DateParser.parseDate("01/12/2020 1812").toString());
         assertEquals("2020-12-01T00:00", DateParser.parseDate("01/12/2020").toString());

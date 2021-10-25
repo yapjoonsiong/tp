@@ -27,6 +27,7 @@ public class ModuleListTest {
         moduleList.add(m);
         assertEquals(1, moduleList.size());
     }
+
     /*
     @Test
     void toString_success() {

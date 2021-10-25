@@ -31,6 +31,9 @@ public class SemesterList {
         return semesterList;
     }
 
+    /**
+     * Method to add 10 Semesters to semesterList by default in the constructor.
+     */
     private void setUp() {
         for (int i = 0; i < 10; i++) {
             int year = (i / 2) + 1;
@@ -44,11 +47,19 @@ public class SemesterList {
         this.semesterList.add(semester);
     }
 
-    private void add(String semesterDescription) {
+    /**
+     * Method to add a Semester to semesterList.
+     *
+     * @param semesterDescription User input description of the semester.
+     */
+    public void add(String semesterDescription) {
         Semester semester = new Semester(semesterDescription);
         this.semesterList.add(semester);
     }
 
+    /**
+     * Method to print existing semesters in the semesterList.
+     */
     public void printSemesters() {
         int i = 1;
         for (Semester semester : semesterList) {
@@ -57,6 +68,11 @@ public class SemesterList {
         }
     }
 
+    /**
+     * Method to return the Semester with the corresponding accessedSemesterIndex.
+     *
+     * @return Semester object.
+     */
     public Semester extractAccessedSemester() {
         return this.semesterList.get(getAccessedSemesterIndex());
     }
@@ -79,12 +95,20 @@ public class SemesterList {
         points = p;
     }
 
+    /**
+     * Method to update the aggregate CAP of all Semesters in semesterList.
+     */
     public void updateCap() {
         updateCredits();
         updatePoints();
         cap = points / credits;
     }
 
+    /**
+     * Method to set accessedSemesterIndex.
+     *
+     * @param i User input index.
+     */
     public void setAccessedSemesterIndex(int i) {
         if (i < 0 || i > 9) {
             throw new ArrayIndexOutOfBoundsException("Please key in a number from 1-10");
@@ -100,6 +124,12 @@ public class SemesterList {
         return accessedSemesterIndex;
     }
 
+    /**
+     * Method to get the Semester with the corresponding index in semesterList.
+     *
+     * @param index User input.
+     * @return Semester object.
+     */
     public Semester get(int index) {
         if (index < 0 || index > 9) {
             throw new ArrayIndexOutOfBoundsException();
@@ -107,8 +137,11 @@ public class SemesterList {
         return this.semesterList.get(index);
     }
 
+    /**
+     * Method to print aggregated CAP and CAP of each Semester.
+     */
     public void printAllCap() {
-        System.out.print("Cumulative CAP: " + getCap());
+        System.out.println("Cumulative CAP: " + getCap());
         for (Semester semester : semesterList) {
             System.out.println(semester.getSemester() + ": " + semester.getCap());
         }

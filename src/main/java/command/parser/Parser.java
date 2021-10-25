@@ -107,14 +107,14 @@ public class Parser {
     }
 
     /**
-     * First separate the input into two parts. The first part is saved as module.
+     * First separate the input int part is saved as module.
      * The next part is split again to obtain the new taskType and taskDescription
      *
      * @param input String to be separated
      */
     void moduleParser(String input) {
-        Module module;
         splitInput(input);
+        Module module;
         try {
             module = NoCap.moduleList.find(taskType.toUpperCase(Locale.ROOT));
         } catch (ArrayIndexOutOfBoundsException e) {

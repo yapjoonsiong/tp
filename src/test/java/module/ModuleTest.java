@@ -1,7 +1,9 @@
 package module;
 
+import command.NoCap;
 import exceptions.NoCapExceptions;
 import schedule.Schedule;
+import semester.SemesterList;
 import task.TaskList;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +37,10 @@ class ModuleTest {
 
     @Test
     void getScheduleList() {
+        NoCap.moduleList = new ModuleList();
+        ModuleList moduleList = NoCap.moduleList;
         Module m = new Module("cs2113T");
+        moduleList.add(m);
         try {
             m.addClass("WED/0800/E1-01/tut");
         } catch (NoCapExceptions e) {
@@ -58,7 +63,10 @@ class ModuleTest {
     @Test
 
     void size() {
+        NoCap.moduleList = new ModuleList();
+        ModuleList moduleList = NoCap.moduleList;
         Module m = new Module("cs2113T");
+        moduleList.add(m);
         try {
             m.addClass("WED/0800/E1-01/tut");
         } catch (NoCapExceptions e) {
@@ -79,7 +87,10 @@ class ModuleTest {
 
     @Test
     void testToString() {
+        NoCap.moduleList = new ModuleList();
+        ModuleList moduleList = NoCap.moduleList;
         Module m = new Module("cs2113T");
+        moduleList.add(m);
         m.addGrade("A+");
         m.addCredits(4);
         try {
@@ -108,8 +119,8 @@ class ModuleTest {
                 + "Day: MON\n" + "Start Time: 1000\n" + "Location: E1-01\n" + "Comments: lect\n"
                 + "--------------------------- \n" + "GRADE: A+\n"
                 + "TASKS: [[ ] read by: 11 Nov 2021 07:00 PM, [ ] do tutorial by: 12 Nov 2021 08:00 PM]\n"
-                + "BREAKDOWN: \n1 " + "Assignment by: 12 Dec 2021 04:00 PM Weightage 30% [ ]\n"
-                + "2 " + "Finals by: 15 Dec 2021 04:00 PM Weightage 50% [ ]\n";
+                + "BREAKDOWN: \n1 " + "Assignment by: 12 Dec 2021 04:00 PM Weightage 30% [ ]\r\n"
+                + "2 " + "Finals by: 15 Dec 2021 04:00 PM Weightage 50% [ ]\r\n";
         assertEquals(exp, m.toString());
 
     }

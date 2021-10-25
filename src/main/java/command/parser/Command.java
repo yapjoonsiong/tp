@@ -14,6 +14,7 @@ public class Command {
 
     private final ParserChecks parserChecks = new ParserChecks();
 
+
     public Command() {
     }
 
@@ -74,6 +75,7 @@ public class Command {
         if (parserChecks.isEmptyDescription(taskDescription) || !parserChecks.hasDateDescription(taskDescription)) {
             return;
         }
+        System.out.println((taskDescription));
         module.addTask(taskDescription);
     }
 
@@ -84,6 +86,7 @@ public class Command {
             return;
         }
         module.addGradableTask(taskDescription);
+        Ui.visualiseGradableTask(module.getGradableTaskList());
     }
 
     void commandAddGrade(Module module, String taskDescription) {
@@ -194,4 +197,5 @@ public class Command {
             selectedTask.markNotDone();
         }
     }
+
 }

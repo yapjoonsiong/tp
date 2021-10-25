@@ -1,5 +1,7 @@
 # Developer Guide
 
+## *Navigation
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -10,52 +12,9 @@ Third party libraries:
 - [Jackson Datatype-jsr310](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310)
 - [Jackson Annotations](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations)
 
-## Design & implementation
+# Design & Implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
-
-## Product scope
-### Target user profile
-
-{Describe the target user profile}
-
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
-
-## User Stories
-
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
-
-## Non-Functional Requirements
-
-{Give non-functional requirements}
-
-## Glossary
-
-* *glossary item* - Definition
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-
-
-
--
-# [**Acknowledgements**](https://se-education.org/addressbook-level3/DeveloperGuide.html#acknowledgements)
--
-# [**Setting up, getting started**](https://se-education.org/addressbook-level3/DeveloperGuide.html#setting-up-getting-started)
--
-# [**Design**](https://se-education.org/addressbook-level3/DeveloperGuide.html#design)
-
--
-# [Architecture](https://se-education.org/addressbook-level3/DeveloperGuide.html#architecture)
--
-# [Parser component](https://se-education.org/addressbook-level3/DeveloperGuide.html#ui-component)
+## [Parser](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
 
 **API** : <code>command.parser </code>
 
@@ -67,39 +26,47 @@ The class diagram below is an overview of relationship between Parser classes an
 
 How the parsing works:
 * `NoCap` passes the user input to `Parser` which separates the input into useful information such as taskType, taskDescription, Module, etc. 
-* This information is used to call the corresponding commands in `ModuleList`, `Module` , `SemesterList`, `Semester` and `OverallTaskList`.
-* When commands include **task selection**, `ParserSearch#getTaskFromIndex()` and `ParserSearch#getTaskFromKeyword()` are called. The corresponding task is returned if found.
-* When commands include **listing tasks**, the taskDescription is passed to `ListParser` which determines the method of sorting and calls `OverallTaskList` methods accordingly.
-* `DateParser` handles parsing String into LocalDateTime format and displaying LocalDateTime as String. It is utilized by `Task`.
+* When commands include **listing tasks**, the taskDescription is passed to `ListParser` which determines the method of sorting and creates filtered `OverallTaskList` and `TaskList` accordingly.
+* Otherwise, the taskDescription is passed to `Command` which calls the corresponding commands in `SemesterList`, `Semester` ,`ModuleList`, `Module` , `Task`, `Gradable Task`. For clarity purposes, associations are shown but dependencies are not.
+* `ParserChecks` is a utility class that handles various error checking and string searching methods such as `ParserSearch#getTaskFromIndex()` and `ParserSearch#getTaskFromKeyword()`. `Command` utilizes these methods to verify the Strings before passing them to other classes. 
+*In NoCap, Parser verifies the validity of input (Whether it exists in the right format). Input content is verified by individual classes for correctness.*
+* `DateParser` handles parsing String into LocalDateTime format and displaying LocalDateTime as String. It is utilized by `Task`. Additional date formats can be added in `DateParser#inputFormatter()`
 
 Below is a step by step example of how the parser receives and decipher a user input. In this example, the user enters `list task sortbydate`.   
 
 The Sequence Diagram below illustrates the process
-![alt_text](media/ParserSequenceDiagram.png)  
+![alt_text](media/ParserSequenceDiagram.png)
 **Note**: The alternate paths are omitted from the diagram for clarity.
 
-Step 1)  
-`NoCap` creates a new `Parser` instance through the constructor. The parser class creates a `ListParser`.
+Step 1: The User launches the application. `NoCap` creates a new `Parser` instance through the constructor and `Parser` creates `ListParser`.
 
-Step 2)  
-User enters `list task sortbydate`. `NoCap` passes the input to `Parser` through `chooseTask()` method.
+Step 2: The application waits for User input. User enters `list task sortbydate`. `NoCap` passes the input to `Parser` through `Parser#chooseTask()`.
 
-Step 3)  
-`splitInput` is called for the first time and splits the user input into `list` and `task sortbydate`. `list` matches a possible command String, calling `listParser()`.  
+Step 3: `splitInput` is called for the first time and splits the user input into `list` and `task sortbydate`. 
 
-Step 4)  
-`splitInput` is called a second time and splits the second part of user input into `task` and `sortbydate`. An instance of `OverallTask` is constructed.  
+> **TaskType** is set to `list`, and **TaskDescription** is set to `task sortbydate`. 
 
-Step 5)  
-`task` and `sortbydate` both matches possible command Strings, calling `sortByDateAndPrint`. 
+**TaskType** matches a possible command String.  
+
+Step 4: `splitInput` is called for the second time and splits the user input into `task` and `sortbydate`.
+
+> **TaskType** is set to `task`, and **TaskDescription** is set to `sortbydate`.
+
+**TaskType** and **TaskDescription** are passed to `ListParser` through `ListParser#overallListParser`.
+
+Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and **TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the name implies, this method sorts all tasks by date and prints them.
+
+> If **TaskType** does not match, then an error message is displayed. If **TaskDescription** does not match, all tasks are printed by default.
+
+Step 6: The full command is carried out and the application returns to NoCap and waits for new User Input.
 
 The diagram below illustrates the `splitString` process.  
 
 ![alt_text](media/splitStringDiagram.JPG)
 
 
-# [Storage component](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
--
+## [Storage](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
+
 **API** : `command.storage`
 
 The Storage component saves data of NoCap into JSON format, and reads them back into corresponding objects when needed using a 3rd party library Jackson Databind.
@@ -140,7 +107,7 @@ How StorageDecoder works:
 # [**Implementation**](https://se-education.org/addressbook-level3/DeveloperGuide.html#implementation)
 
 
-# Semester
+## Semester
 
 **API** : `semester`
 
@@ -153,7 +120,7 @@ The Semester component stores all NoCap data i.e., all Semester objects and cumm
 * Each Semester object stores and computes the individual CAP for the semester, while also storing a moduleList of the modules taken during the semester
 * The computation of the CAP for both SemesterList and Semester is automatically done when a grade/credit as added to a module within any semester
 
-# Module List
+## Module List
 
 **API** : module
 
@@ -180,7 +147,7 @@ How printing a timetable works:
 - If day of week and timeslot corresponds, venue and comments information is printed out
 - If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead.
 
-# ScheduleList
+## ScheduleList
 
 **API** : schedule
 
@@ -207,7 +174,7 @@ Notes about ScheduleList
 - ScheduleList checks that the input for the day of the week is only from the list of possible days: MON, TUE, WED, THU, FRI, SAT ,SUN. All other inputs will result in an exception being thrown.
 - When a new Schedule class is called, ScheduleList ensures that the length of venue and comments are less than 16 characters in length. This is to ensure that it fits within its time slot within the Timetable when printed.
 
-# TaskList
+## TaskList
 
 **API** : `task.tasklist`
 
@@ -224,7 +191,7 @@ How the `TaskList` component works:
 7. The `ArrayList` returned by the above methods can then be passed to `printTasks()` which will call `toString()` in each `Task` object and print to the `Output Stream`.
 
 
-# Task
+## Task
 
 **API** : `task.task`
 
@@ -248,7 +215,7 @@ How the `Task` component works:
 4. Calling the `toString()` method of the` Task` object will call `createLateIcon()` ,` createStatusIcon()` , 
 
 
-# OverallTaskList
+## OverallTaskList
 
 **API** : `task.OverallTasklist`
 
@@ -272,7 +239,7 @@ How the Overall`TaskList` class works:
 
 Notes about `OverallTaskList`
 * Once `ListParser` is done using the object, it is deleted and the task list is not stored anywhere. The reason for this is to reduce coupling between objects and remove the need to update separate task lists whenever tasks are added to `Modules`.
-# OverallTask
+## OverallTask
 
 **API** : `task.OverallTask`
 
@@ -299,3 +266,17 @@ How the `OverallTask` component works:
     * OverallTask(gradableTask:GradableTask, moduleName: String) - Instantiates using a `GradableTask `object
 4. During instantiation, information from `Task/GradableTask` objects are added to the `OverallTask` object together with their `moduleName.`
 5. Calling the  `toString()` method` `generates a string containing task information together with its `moduleName.`
+
+
+{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+
+
+# Appendix A: Product Scope
+
+# Appendix B: User Stories
+
+# Appendix C: Non Functional Requirements
+
+# Appendix D: Glossary
+
+# Appendix E: Instructions for Manual Testing

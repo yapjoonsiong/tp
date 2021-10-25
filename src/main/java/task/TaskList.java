@@ -88,7 +88,7 @@ public class TaskList {
      *
      * @param userInput task description input by user
      */
-    public void addTask(String module, String userInput) throws DateTimeException {
+    public void addTask(String module, String userInput)  {
         String date = getDate(userInput);
         if (date.isBlank()) {
             Ui.missingDate();
@@ -124,6 +124,7 @@ public class TaskList {
         Period p = Period.between(date, t.deadline.toLocalDate()).normalized();
         int day = p.getYears() * DAYS_IN_A_YEAR + p.getMonths() * DAYS_IN_A_MONTH + p.getDays();
         return day <= DAYS_IN_A_WEEK;
+
     }
 
     protected boolean isMonthly(Task t) {

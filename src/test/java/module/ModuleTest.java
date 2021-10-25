@@ -1,7 +1,9 @@
 package module;
 
+import command.NoCap;
 import exceptions.NoCapExceptions;
 import schedule.Schedule;
+import semester.SemesterList;
 import task.TaskList;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +37,10 @@ class ModuleTest {
 
     @Test
     void getScheduleList() {
+        NoCap.moduleList = new ModuleList();
+        ModuleList moduleList = NoCap.moduleList;
         Module m = new Module("cs2113T");
+        moduleList.add(m);
         try {
             m.addClass("WED/0800/E1-01/tut");
         } catch (NoCapExceptions e) {
@@ -58,7 +63,10 @@ class ModuleTest {
     @Test
 
     void size() {
+        NoCap.moduleList = new ModuleList();
+        ModuleList moduleList = NoCap.moduleList;
         Module m = new Module("cs2113T");
+        moduleList.add(m);
         try {
             m.addClass("WED/0800/E1-01/tut");
         } catch (NoCapExceptions e) {
@@ -79,7 +87,10 @@ class ModuleTest {
 
     @Test
     void testToString() {
+        NoCap.moduleList = new ModuleList();
+        ModuleList moduleList = NoCap.moduleList;
         Module m = new Module("cs2113T");
+        moduleList.add(m);
         m.addGrade("A+");
         m.addCredits(4);
         try {

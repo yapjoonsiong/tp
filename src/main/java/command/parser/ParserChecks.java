@@ -122,11 +122,11 @@ public class ParserChecks {
     }
 
     boolean hasDateDescription(String input) {
-        if (input.contains(START_OF_DATE)) {
-            return true;
+        if (!input.contains(START_OF_DATE)) {
+            Ui.invalidDate();
+            return false;
         }
-        Ui.invalidDate();
-        return false;
+        return true;
     }
 
     boolean hasWeightageDescription(String input) {

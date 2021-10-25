@@ -38,7 +38,7 @@ public class ModuleList {
     public void add(String input) {
         Module module = new Module(input);
         this.moduleList.add(module);
-        logger.log(Level.INFO,"Module added successfully");
+        logger.log(Level.INFO, "Module added successfully");
     }
 
     public void delete(Module module) {
@@ -52,7 +52,7 @@ public class ModuleList {
             throw new ArrayIndexOutOfBoundsException("Invalid number value");
         }
         moduleList.remove(get(moduleIndex));
-        logger.log(Level.INFO,"Module deleted successfully");
+        logger.log(Level.INFO, "Module deleted successfully");
     }
 
     public int size() {
@@ -75,7 +75,7 @@ public class ModuleList {
         if (index == -1) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        logger.log(Level.INFO,"Module found successfully");
+        logger.log(Level.INFO, "Module found successfully");
         return moduleList.get(index);
     }
 
@@ -178,7 +178,7 @@ public class ModuleList {
                 }
             }
         }
-        logger.log(Level.INFO,"Timetable printed successfully");
+        logger.log(Level.INFO, "Timetable printed successfully");
     }
 
     private int printTimeColumns(int r, int c, String timeString) {

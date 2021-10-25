@@ -85,6 +85,7 @@ public class Command {
             return;
         }
         module.addGradableTask(taskDescription);
+        Ui.visualiseGradableTask(module.getGradableTaskList());
     }
 
     void commandAddGrade(Module module, String taskDescription) {

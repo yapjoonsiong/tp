@@ -2,6 +2,7 @@ package task;
 
 
 import command.VisualiseGradable;
+import command.parser.DateParser;
 import command.parser.Parser;
 import command.Ui;
 import exceptions.NoCapExceptions;
@@ -44,7 +45,7 @@ public class GradableTaskList extends TaskList {
             int weightagePos = description.indexOf(ParserChecks.START_OF_WEIGHTAGE);
             int weightage = Integer.parseInt(description.substring(weightagePos)
                     .replace(ParserChecks.START_OF_WEIGHTAGE, "").trim());
-            if (weightage <= 0 || weightage > 100) {
+            if (weightage < 5 || weightage > 100) {
                 throw new NoCapExceptions("");
             }
             return weightage;
@@ -78,6 +79,7 @@ public class GradableTaskList extends TaskList {
         } else {
             try {
                 String description = removeDate(userInput);
+                DateParser.parseDate(date);
                 GradableTask newGradableTask = new GradableTask(description, date, weightage);
                 this.gradableTaskList.add(taskCount, newGradableTask);
                 this.taskCount = gradableTaskList.size();

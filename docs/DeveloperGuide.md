@@ -22,7 +22,7 @@ The Parser classes is responsible for receiving user input and converting it int
 
 The class diagram below is an overview of relationship between Parser classes and other classes.
 
-![alt_text](media/ParserClassDiagram.jpg)
+![alt_text](media/ParserClassDiagram.JPG)
 
 How the parsing works:
 * `NoCap` passes the user input to `Parser` which separates the input into useful information such as taskType, taskDescription, Module, etc. 

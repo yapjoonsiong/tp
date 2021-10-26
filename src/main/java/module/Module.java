@@ -26,7 +26,7 @@ public class Module {
     private ScheduleList scheduleList;
     protected int credits;
     public GradableTaskList gradableTaskList;
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = command.Logger.myLogger();
 
     public Module(String moduleName) {
         assert !moduleName.equals("");

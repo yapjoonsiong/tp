@@ -17,7 +17,7 @@ public class ListParser {
     public static final String SHOW_MONTH = "m";
     public static final String SHOW_YEAR = "y";
     public static final String SHOW_GRADABLE = "gradable";
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = command.Logger.myLogger();
 
     public ListParser() {
     }

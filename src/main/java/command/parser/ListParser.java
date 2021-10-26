@@ -108,7 +108,6 @@ public class ListParser {
                 allTaskList.printGradableTasks();
                 logger.log(Level.INFO, "Print gradable TaskList");
                 break;
-
             default:
                 allTaskList.printAllTasks();
                 break;

@@ -215,7 +215,14 @@ How the `Task` component works:
 4. Calling the `toString()` method of the` Task` object will call `createLateIcon()` ,` createStatusIcon()` , 
 
 
+
 ## OverallTaskList
+
+
+![alt_text](media/OverallTaskClassDiagram.png)
+
+
+_Class diagram for OverallTask and OverallTaskList_
 
 **API** : `task.OverallTasklist`
 
@@ -262,8 +269,8 @@ How the `OverallTask` component works:
 1. It inherits from `Task`, with additional attributes `isGradable, Weightage `and `moduleName. `
 2. The attributes `isGradable, Weightage `are added to provide more information for gradable tasks, while `moduleName` is added to display module information.
 3. It can be instantiated with 2 different constructors:
-    * OverallTask(task: Task, moduleName: String) - Instantiates using a `Task` object
-    * OverallTask(gradableTask:GradableTask, moduleName: String) - Instantiates using a `GradableTask `object
+    * `OverallTask(task: Task, moduleName: String)` - Instantiates using a `Task` object
+    * `OverallTask(gradableTask:GradableTask, moduleName: String)` - Instantiates using a `GradableTask `object
 4. During instantiation, information from `Task/GradableTask` objects are added to the `OverallTask` object together with their `moduleName.`
 5. Calling the  `toString()` method` `generates a string containing task information together with its `moduleName.`
 

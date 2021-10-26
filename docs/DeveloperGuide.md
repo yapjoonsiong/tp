@@ -269,8 +269,11 @@ How the `OverallTask` component works:
 1. It inherits from `Task`, with additional attributes `isGradable, Weightage `and `moduleName. `
 2. The attributes `isGradable, Weightage `are added to provide more information for gradable tasks, while `moduleName` is added to display module information.
 3. It can be instantiated with 2 different constructors:
-    * `OverallTask(task: Task, moduleName: String)` - Instantiates using a `Task` object
-    * `OverallTask(gradableTask:GradableTask, moduleName: String)` - Instantiates using a `GradableTask `object
+    * `OverallTask(task: Task, moduleName: String)` - Instantiates using a `Task` object <br/>
+      ![alt_text](media/OverallTaskConstructorTaskSequenceDiagram.png "image_tooltip") 
+    * `OverallTask(gradableTask:GradableTask, moduleName: String)` - Instantiates using a `GradableTask `object <br>
+      ![alt_text](media/OverallTaskConstructorGradableTaskSequenceDiagram.png "image_tooltip") 
+   
 4. During instantiation, information from `Task/GradableTask` objects are added to the `OverallTask` object together with their `moduleName.`
 5. Calling the  `toString()` method` `generates a string containing task information together with its `moduleName.`
 

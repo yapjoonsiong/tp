@@ -19,7 +19,7 @@ deactivate SemesterList
 StorageDecoder-->[: new semester list
 
 else else
-StorageDecoder->*ObjectMapper:ObjectMapper()
+StorageDecoder->*ObjectMapper:new ObjectMapper()
 activate ObjectMapper
 ObjectMapper-->StorageDecoder:
 deactivate ObjectMapper

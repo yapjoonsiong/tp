@@ -23,7 +23,7 @@ StorageEncoder<<--StorageEncoder:
 deactivate StorageEncoder
 end
 
-StorageEncoder->*ObjectMapper:ObjectMapper()
+StorageEncoder->*ObjectMapper:new ObjectMapper()
 
 activate ObjectMapper
 ObjectMapper-->StorageEncoder:

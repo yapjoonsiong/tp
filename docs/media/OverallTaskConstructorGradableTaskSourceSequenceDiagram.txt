@@ -1,0 +1,7 @@
+title OverallTask Constructor
+
+participant ":OverallTask" as OverallTask
+[->*OverallTask: new OverallTask(Gradable Task, Module Name)
+activate OverallTask
+OverallTask -->[:
+deactivate OverallTask

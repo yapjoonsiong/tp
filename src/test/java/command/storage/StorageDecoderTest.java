@@ -3,18 +3,17 @@ package command.storage;
 import exceptions.NoCapExceptions;
 import module.Module;
 import module.ModuleList;
-import org.junit.jupiter.api.function.Executable;
 import schedule.Schedule;
 import org.junit.jupiter.api.Test;
 import semester.SemesterList;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class StorageDecoderTest {
     private static final String ROOT = System.getProperty("user.dir");

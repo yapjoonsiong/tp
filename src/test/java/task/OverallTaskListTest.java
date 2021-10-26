@@ -232,7 +232,8 @@ class OverallTaskListTest extends TaskListTest {
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = Collections.singletonList(
                 "Gradable tasks: " + System.lineSeparator()
-                        + "1. [CS2102][G][ ] assignment by: 23 Dec 2022 12:00 AM [Weightage: 20%]" + System.lineSeparator());
+                        + "1. [CS2102][G][ ] assignment by: 23 Dec 2022 12:00 AM "
+                        + "[Weightage: 20%]" + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 }

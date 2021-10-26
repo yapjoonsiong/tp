@@ -3,17 +3,18 @@ package command.storage;
 import exceptions.NoCapExceptions;
 import module.Module;
 import module.ModuleList;
+import org.junit.jupiter.api.function.Executable;
 import schedule.Schedule;
 import org.junit.jupiter.api.Test;
 import semester.SemesterList;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StorageDecoderTest {
     private static final String ROOT = System.getProperty("user.dir");
@@ -55,7 +56,7 @@ class StorageDecoderTest {
     }
 
     @Test
-    public void decodeSemesterList_emptyModuleList_success() {
+    public void decodeSemesterList_emptyList_success() {
         SemesterList modules = new SemesterList();
         StorageEncoder.encodeAndSaveSemesterListToJson(modules);
         SemesterList loadedSemesters = StorageDecoder.decodeJsonToSemesterList();
@@ -75,5 +76,4 @@ class StorageDecoderTest {
         assertEquals(loadedSemesters.toString(), new SemesterList().toString());
 
     }
-
 }

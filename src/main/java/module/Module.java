@@ -21,7 +21,6 @@ public class Module {
     protected String letterGrade;
     protected double points;
     protected String moduleName;
-    protected Schedule schedule;
     public TaskList taskList;
     private ScheduleList scheduleList;
     protected int credits;

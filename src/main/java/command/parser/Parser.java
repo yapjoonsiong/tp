@@ -123,9 +123,9 @@ public class Parser {
         }
 
         splitInput(taskDescription);
-      
         switch (taskType) {
         case LIST:
+            splitInput(taskDescription);
             list.moduleListParser(module, taskDescription);
             break;
         case ADDCLASS:

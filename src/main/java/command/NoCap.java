@@ -14,7 +14,6 @@ public class NoCap {
     public static SemesterList semesterList = StorageDecoder.decodeJsonToSemesterList();
     public static ModuleList moduleList;
     public static Semester semester;
-    private final Logger logger = new Logger();
 
     private void run() {
         Ui.printStartMessage();

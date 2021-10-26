@@ -19,11 +19,10 @@ import java.util.logging.Logger;
 
 public class GradableTaskList extends TaskList {
     protected ArrayList<GradableTask> gradableTaskList;
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = command.Logger.myLogger();
 
     public GradableTaskList() {
         this.gradableTaskList = new ArrayList<>();
-        logger.setLevel(Level.OFF);
     }
 
     public ArrayList<GradableTask> getGradableTaskList() {

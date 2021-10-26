@@ -55,7 +55,7 @@ class StorageDecoderTest {
     }
 
     @Test
-    public void decodeSemesterList_emptyModuleList_success() {
+    public void decodeSemesterList_emptyList_success() {
         SemesterList modules = new SemesterList();
         StorageEncoder.encodeAndSaveSemesterListToJson(modules);
         SemesterList loadedSemesters = StorageDecoder.decodeJsonToSemesterList();
@@ -75,5 +75,4 @@ class StorageDecoderTest {
         assertEquals(loadedSemesters.toString(), new SemesterList().toString());
 
     }
-
 }

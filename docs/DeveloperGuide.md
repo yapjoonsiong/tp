@@ -35,35 +35,35 @@ How the parsing works:
 Below is a step by step example of how the parser receives and decipher a user input. In this example, the user enters `list task sortbydate`.   
 
 The Sequence Diagram below illustrates the process
-![alt_text](media/ParserSequenceDiagram.png)
-**Note**: The alternate paths are omitted from the diagram for clarity.
+![alt_text](media/ParserSequenceDiagram.png)  
+**Note**: The alternate paths are omitted from the diagram for clarity.<br/><br/>
 
-Step 1: The User launches the application. `NoCap` creates a new `Parser` instance through the constructor and `Parser` creates `ListParser`.
+Step 1: The User launches the application. `NoCap` creates a new `Parser` instance through the constructor and `Parser` creates `ListParser`.<br/><br/>
 
-Step 2: The application waits for User input. User enters `list task sortbydate`. `NoCap` passes the input to `Parser` through `Parser#chooseTask()`.
+Step 2: The application waits for User input. User enters `list task sortbydate`. `NoCap` passes the input to `Parser` through `Parser#chooseTask()`.<br/><br/>
 
-Step 3: `splitInput` is called for the first time and splits the user input into `list` and `task sortbydate`. 
-
+Step 3: `splitInput` is called for the first time and splits the user input into `list` and `task sortbydate`.
 > **TaskType** is set to `list`, and **TaskDescription** is set to `task sortbydate`. 
 
-**TaskType** matches a possible command String.  
+**TaskType** matches a possible command String.
+<br/><br/>
 
 Step 4: `splitInput` is called for the second time and splits the user input into `task` and `sortbydate`.
-
 > **TaskType** is set to `task`, and **TaskDescription** is set to `sortbydate`.
 
 **TaskType** and **TaskDescription** are passed to `ListParser` through `ListParser#overallListParser`.
+<br/><br/>
 
-Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and **TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the name implies, this method sorts all tasks by date and prints them.
+Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and **TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the name implies, this method sorts all tasks by date and prints them. 
+> If **TaskType** does not match, then an error message is displayed.  
+> If **TaskDescription** does not match, all tasks are printed by default. 
 
-> If **TaskType** does not match, then an error message is displayed. If **TaskDescription** does not match, all tasks are printed by default.
+<br/><br/>
+Step 6: The full command is carried out and the application returns to NoCap and waits for new User Input.<br/><br/>
 
-Step 6: The full command is carried out and the application returns to NoCap and waits for new User Input.
-
-The diagram below illustrates the `splitString` process.  
+The diagram below illustrates the `splitString` process:
 
 ![alt_text](media/splitStringDiagram.JPG)
-
 
 ## [Storage](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
 
@@ -284,6 +284,20 @@ How the `OverallTask` component works:
 # Appendix A: Product Scope
 
 # Appendix B: User Stories
+
+|Version| As a ... | I want to ... | So that I can ...|
+|--------|----------|---------------|------------------|
+|v1.0|Forgetful student|have an app to automatically list out my deadlines for each week|prioritise my work.|
+|v1.0|Busy student|be reminded of my tasks|remember all my tasks.|
+|v1.0|Student|see which assignments are completed and which are not|know my progress in this module.|
+|v1.0|User|visualize my timetable|reference it easily.|
+|v1.0|User of a to-do app|see the deadline of each task|prioritise my work.| 
+|v2.0|Student|be able to update module details|update outdated information.|
+|v2.0|Student|easily track my CAP progression|  gauge how well I am doing.|
+|v2.0|Student|have quick access to upcoming gradable assignments|be sure everything is prepared for.|
+|v2.0|Student|be able to know what classes i have up next|  prepare for them in time.|
+|v2.5|University student| see the weightage of the modules| place emphasis/focus on certain work when there is a lack of time.|
+
 
 # Appendix C: Non Functional Requirements
 

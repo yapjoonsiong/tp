@@ -138,4 +138,12 @@ public class ParserChecks {
         Ui.invalidWeightage();
         return false;
     }
+
+    boolean includeSpace(String input) {
+        if (input.trim().contains(Parser.SPACE_STRING)) {
+            Ui.moduleNameHasSpace();
+            return true;
+        }
+        return false;
+    }
 }

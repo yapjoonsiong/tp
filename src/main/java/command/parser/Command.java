@@ -50,7 +50,8 @@ public class Command {
 
     void commandAddModule(String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
-                || parserChecks.isDuplicateModule(taskDescription)) {
+                || parserChecks.isDuplicateModule(taskDescription)
+                || parserChecks.includeSpace(taskDescription)) {
             return;
         }
         NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));

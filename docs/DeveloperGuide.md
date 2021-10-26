@@ -1,10 +1,11 @@
 # Developer Guide
 
-## *Navigation
+## Navigation
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the 
+original source as well}
 <br>
 <br>
 Third party libraries:
@@ -14,33 +15,45 @@ Third party libraries:
 
 # Design & Implementation
 
-## [Parser](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
+## Parser
 
 **API** : <code>command.parser </code>
 
-The Parser classes is responsible for receiving user input and converting it into commands which are directly passed to respective classes.
+The Parser classes is responsible for receiving user input and converting it into commands which are directly passed to 
+respective classes.
 
 The class diagram below is an overview of relationship between Parser classes and other classes.
 
 ![alt_text](media/ParserClassDiagram.jpg)
 
 How the parsing works:
-* `NoCap` passes the user input to `Parser` which separates the input into useful information such as taskType, taskDescription, Module, etc. 
-* When commands include **listing tasks**, the taskDescription is passed to `ListParser` which determines the method of sorting and creates filtered `OverallTaskList` and `TaskList` accordingly.
-* Otherwise, the taskDescription is passed to `Command` which calls the corresponding commands in `SemesterList`, `Semester` ,`ModuleList`, `Module` , `Task`, `Gradable Task`. For clarity purposes, associations are shown but dependencies are not.
-* `ParserChecks` is a utility class that handles various error checking and string searching methods such as `ParserSearch#getTaskFromIndex()` and `ParserSearch#getTaskFromKeyword()`. `Command` utilizes these methods to verify the Strings before passing them to other classes. 
-*In NoCap, Parser verifies the validity of input (Whether it exists in the right format). Input content is verified by individual classes for correctness.*
-* `DateParser` handles parsing String into LocalDateTime format and displaying LocalDateTime as String. It is utilized by `Task`. Additional date formats can be added in `DateParser#inputFormatter()`
+* `NoCap` passes the user input to `Parser` which separates the input into useful information such as taskType, 
+taskDescription, Module, etc. 
+* When commands include **listing tasks**, the taskDescription is passed to `ListParser` which determines the method of 
+sorting and creates filtered `OverallTaskList` and `TaskList` accordingly.
+* Otherwise, the taskDescription is passed to `Command` which calls the corresponding commands in `SemesterList`, 
+`Semester` ,`ModuleList`, `Module` , `Task`, `Gradable Task`. For clarity purposes, associations are shown but 
+dependencies are not.
+* `ParserChecks` is a utility class that handles various error checking and string searching methods such as 
+`ParserSearch#getTaskFromIndex()` and `ParserSearch#getTaskFromKeyword()`. `Command` utilizes these methods to verify 
+the Strings before passing them to other classes. 
+*In NoCap, Parser verifies the validity of input (Whether it exists in the right format). Input content is verified by 
+individual classes for correctness.*
+* `DateParser` handles parsing String into LocalDateTime format and displaying LocalDateTime as String. It is utilized 
+by `Task`. Additional date formats can be added in `DateParser#inputFormatter()`
 
-Below is a step by step example of how the parser receives and decipher a user input. In this example, the user enters `list task sortbydate`.   
+Below is a step by step example of how the parser receives and decipher a user input. In this example, the user enters 
+`list task sortbydate`.   
 
 The Sequence Diagram below illustrates the process
 ![alt_text](media/ParserSequenceDiagram.png)
 **Note**: The alternate paths are omitted from the diagram for clarity.
 
-Step 1: The User launches the application. `NoCap` creates a new `Parser` instance through the constructor and `Parser` creates `ListParser`.
+Step 1: The User launches the application. `NoCap` creates a new `Parser` instance through the constructor and `Parser` 
+creates `ListParser`.
 
-Step 2: The application waits for User input. User enters `list task sortbydate`. `NoCap` passes the input to `Parser` through `Parser#chooseTask()`.
+Step 2: The application waits for User input. User enters `list task sortbydate`. `NoCap` passes the input to `Parser` 
+through `Parser#chooseTask()`.
 
 Step 3: `splitInput` is called for the first time and splits the user input into `list` and `task sortbydate`. 
 
@@ -54,9 +67,12 @@ Step 4: `splitInput` is called for the second time and splits the user input int
 
 **TaskType** and **TaskDescription** are passed to `ListParser` through `ListParser#overallListParser`.
 
-Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and **TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the name implies, this method sorts all tasks by date and prints them.
+Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and 
+**TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the 
+name implies, this method sorts all tasks by date and prints them.
 
-> If **TaskType** does not match, then an error message is displayed. If **TaskDescription** does not match, all tasks are printed by default.
+> If **TaskType** does not match, then an error message is displayed. If **TaskDescription** does not match, all tasks 
+> are printed by default.
 
 Step 6: The full command is carried out and the application returns to NoCap and waits for new User Input.
 
@@ -65,13 +81,15 @@ The diagram below illustrates the `splitString` process.
 ![alt_text](media/splitStringDiagram.JPG)
 
 
-## [Storage](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
+## Storage
 
 **API** : `command.storage`
 
-The Storage component saves data of NoCap into JSON format, and reads them back into corresponding objects when needed using a 3rd party library Jackson Databind.
+The Storage component saves data of NoCap into JSON format, and reads them back into corresponding objects when needed 
+using a 3rd party library Jackson Databind.
 
-It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object `SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
+It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object 
+`SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
 
 How StorageEncoder works:
 
@@ -82,7 +100,8 @@ How StorageEncoder works:
 1. The static method `encodeAndSaveSemesterListToJson() `is called when NoCap data needs to be saved
 2. If the save file directory has not been created, it is first created in order to store the save file
 3. Similarly, an empty file is created to store the data if it has not been created yet
-4. The parent object `SemesterList` is passed to the method to be converted into json format with an `ObjectMapper` object from the  `jackson-databind` library
+4. The parent object `SemesterList` is passed to the method to be converted into json format with an `ObjectMapper` 
+object from the  `jackson-databind` library
 
 How StorageDecoder works:
 
@@ -95,30 +114,27 @@ How StorageDecoder works:
 
 1. The static method `DecodeJsonToSemesterList() `is called when NoCap data needs to be loaded from the save file
 2. If there is no save file available, a new `SemesterList `object is created and returned to the caller
-3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the json save file into a SemesterList object to be returned to the caller
-# [semester component](https://se-education.org/addressbook-level3/DeveloperGuide.html#model-component)
--
-# [module component](https://se-education.org/addressbook-level3/DeveloperGuide.html#storage-component)
--
-# [schedule component](https://se-education.org/addressbook-level3/DeveloperGuide.html#common-classes)
--
-# [task component]
--
-# [**Implementation**](https://se-education.org/addressbook-level3/DeveloperGuide.html#implementation)
-
+3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the json save file 
+into a SemesterList object to be returned to the caller
 
 ## Semester
 
 **API** : `semester`
 
-The Semester component stores all NoCap data i.e., all Semester objects and cummula average point (CAP) (which are contained in a SemesterList object)
+![alt_text](media/SemesterListDiagram.jpg)
 
+The `Semester` component stores all NoCap data i.e., all `Semester` objects and their components and cumulative average point (CAP) (which are contained in a SemesterList object)
+* It consists of 2 utility classes `SemesterList` and `Semester`
+* `SemesterList` is used to compute and store the cumulative CAP of all semesters and also stores 10 `Semester` objects
+* Each `Semester` object stores and computes the individual CAP for the semester, while also storing a `ModuleList` of the `Module` objects taken during the semester
+* The computation of the CAP for both `SemesterList` and `Semester` is automatically done when a grade/credit as added to a `Module` object within any semester
 
+This is how CAP is computed:
 
-* It consists of 2 utility classes SemesterList and Semester
-* SemesterList is used to compute and store the cumulative CAP of all semesters and also stores 10 fixed Semester objects
-* Each Semester object stores and computes the individual CAP for the semester, while also storing a moduleList of the modules taken during the semester
-* The computation of the CAP for both SemesterList and Semester is automatically done when a grade/credit as added to a module within any semester
+![alt_text](media/capComputationSequenceDiagram.png)
+
+* When `commandAddGrade()` or `commandAddCredit()` is called in Parser, `addgrade(description)` or `addCredit(description)` respectively are called in `Module`, setting the module’s `grade`, `points` and `credits` to their corresponding values.
+* Then, `updateCap()` is called in `Semester` with the newly set `grade`/`credits` values in `Module`, followed by `updateCap()` in `SemesterList` with the newly set `points`/`credits` values in `Semester`.
 
 ## Module List
 

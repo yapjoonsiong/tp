@@ -8,7 +8,7 @@ import java.util.Comparator;
  */
 public class OverallTask extends Task {
     private final String moduleName;
-    private final boolean gradable;
+    private final boolean isGradable;
     private int weightage;
 
     /**
@@ -21,7 +21,7 @@ public class OverallTask extends Task {
         super(task.description, task.date);
         this.isDone = task.isDone;
         this.moduleName = moduleName;
-        this.gradable = false;
+        this.isGradable = false;
         this.isLate = task.isLate;
     }
 
@@ -35,13 +35,13 @@ public class OverallTask extends Task {
         super(task.description, task.date);
         this.isDone = task.isDone;
         this.moduleName = moduleName;
-        this.gradable = true;
+        this.isGradable = true;
         this.weightage = task.weightage;
         this.isLate = task.isLate;
     }
 
     public boolean isGradable() {
-        return gradable;
+        return isGradable;
     }
 
     /**
@@ -63,11 +63,11 @@ public class OverallTask extends Task {
     };
 
     private String getGradableString() {
-        return gradable ? "[G]" : "[ ]";
+        return isGradable ? "[G]" : "[ ]";
     }
 
     private String getWeightageString() {
-        return gradable ? "[Weightage: " + this.weightage + "%]" : "";
+        return isGradable ? "[Weightage: " + this.weightage + "%]" : "";
     }
 
     private String getModuleNameString() {

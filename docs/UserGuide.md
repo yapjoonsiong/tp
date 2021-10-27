@@ -69,8 +69,19 @@ Examples:
 * `Switch 2`
 
 ###Adding module: `add <module>`
+Adds a module  
+Format: `add MODULENAME`  
+Examples:
+* `add CS2113T`
+* `add MA1508`
 
-###Delete module: `delete <module>`
+###Delete module: `delete <module index> `
+Deletes a module corresponding to the input index.(refer to `list module` for indexes )
+
+Format: `delete MODULE INDEX`
+Examples:
+* `delete 1`
+* `delete 2`
 
 ###Add class : `/m <module> addclass ***VALID RANGE`
 
@@ -119,7 +130,13 @@ Valid
 * LOCATION and COMMENTS can only take on a maximum of 16 characters and cannot be empty
 * Only one class can be added in any period
 
-###Delete classes: `/m <module> deleteclass`
+###Delete classes: `/m <module> deleteclass <class index>`
+Deletes a module corresponding to the input index.(refer to `/m <module name> info` or `list module` for indexes )
+
+Format: `/m <module> deleteclass <class index>`
+Examples:
+* `/m CS2040C deleteclass 1`
+* `/m CG1112 deleteclass 2` 
 
 ###View Timetable : `timetable `
 
@@ -137,7 +154,7 @@ Example output:
 Note:
 * Timetable can only display classes from 0800 to 1700 periods
 
-###Add task : `/m <module> addtask `
+###Add task : `/m <module> addtask`
 
 ###Add gradable task:`/m <module> addgradable`
 
@@ -207,6 +224,7 @@ Example of usage:
 * `todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
 ###Add grade : `/m <module> addgrade `
+Adds a grade to the module Name 
 
 ###Delete grade: `/m <module> deletegrade`
 

@@ -138,11 +138,22 @@ This is how CAP is computed:
 * Then, `updateCap()` is called in `Semester` with the newly set `grade`/`credits` values in `Module`, followed
   by `updateCap()` in `SemesterList` with the newly set `points`/`credits` values in `Semester`.
 
-## Module List
+# Module
 
 **API** : module
 
-Data from all the modules are stored in the ModuleList class. This includes:
+All data related to module is stored in the module class. An Arraylist of Module is used to store and manage the modules. ModuleList is also responsible for constructing and printing out the Timetable.
+
+![moduleListClassDiagram](media/moduleListClassDiagram.png)
+
+The modules are stored in an ArrayList and ModuleList uses the Module.get(int index) method to access the target Module.
+
+- ModuleList is responsible for printing the Time Table.
+- ModuleList contains the getter method find(String input) which returns a module by the same name as the input.
+- Module contains getter and setter methods to change or access its contents.
+- When Module is constructed, an empty gradableTaskList, taskList and scheduleList wll be instantiated and stored in Module.
+
+Data stored in Module includes:
 
 1. moduleName
 2. letterGrade
@@ -152,6 +163,7 @@ Data from all the modules are stored in the ModuleList class. This includes:
 6. GradableTaskList
 7. ScheduleList
 
+<<<<<<< HEAD
 The modules are stored in an ArrayList and ModuleList uses the Module.get(int index) method to access the target Module.
 
 - ModuleList is responsible for printing the Time Table. It accesses different schedules of different mods before
@@ -166,8 +178,19 @@ How printing a timetable works:
 
 - If day of week and timeslot corresponds, venue and comments information is printed out
 - If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead.
+=======
+# ![modulePrintTimetableSeq](media/modulePrintTimetableSeq.png)
 
-## ScheduleList
+How printing a timetable works:
+
+1. When Timetable is called, ModuleList goes into a loop to print out the timetable. ModuleList iterates through the 207 character long length and the 33 lines which makes up the entire timetable.
+2. Each iteration of the loop can result in 1 of 3 cases:
+1. It is at a border. When this happens a &quot;#&quot; character is printed to the console which denotes a border.
+2. It is empty. When this happens a &quot; &quot;(blank) character is printed to the console.
+3. It contains module information. When this happens, getMoudleName() , getModuleLocation() and getModuleComment() is called. The information is then printed onto the console.
+>>>>>>> master
+
+# ScheduleList
 
 **API** : schedule
 
@@ -179,7 +202,7 @@ day of week
 
 timeslot
 
-venue
+location
 
 comments
 
@@ -198,6 +221,14 @@ Notes about ScheduleList
   FRI, SAT ,SUN. All other inputs will result in an exception being thrown.
 - When a new Schedule class is called, ScheduleList ensures that the length of venue and comments are less than 16
   characters in length. This is to ensure that it fits within its time slot within the Timetable when printed.
+
+![scheduleseq](media/scheduleseq.png)
+
+Adding Schedule to scheduleList
+
+- When addclass() is called, schedule first checks if there is a duplicate schedule currently in the list. This is done by going through the whole list and checking if a schedule has the same time slot. If there exists a schedule in the same time slot, an error message is printed.
+- If it is an empty timeslot, schedule list parses the input and checks for formatting errors within the input.
+- A new instance of Schedule is generated and added to the schedule list.
 
 ## TaskList
 

@@ -31,7 +31,7 @@ public class ScheduleList {
      */
     public void addClass(String input) throws NoCapExceptions {
         String[] scheduleInfo = input.split("/");
-        if (scheduleInfo.length != 4) {
+        if (!checkInput(scheduleInfo)) {
             throw new NoCapExceptions("Please key in 4 variables for class details");
         }
         String day = scheduleInfo[0].toUpperCase(Locale.ROOT);
@@ -50,6 +50,10 @@ public class ScheduleList {
         while (this.scheduleList.size() != 0) {
             this.scheduleList.remove(scheduleList.get(0));
         }
+    }
+
+    private boolean checkInput(String[] input){
+        return input.length == 4;
     }
 
     public int size() {

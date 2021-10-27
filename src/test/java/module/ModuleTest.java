@@ -61,7 +61,6 @@ class ModuleTest {
     }
 
     @Test
-
     void size() {
         NoCap.moduleList = new ModuleList();
         ModuleList moduleList = NoCap.moduleList;

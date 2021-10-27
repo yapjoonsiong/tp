@@ -130,7 +130,8 @@ public class Command {
         if (parserChecks.isEmptyDescription(taskDescription)
                 || parserChecks.isNotInteger(taskDescription)) {
             return;
-        }try {
+        }
+        try {
             module.deleteClass(taskDescription);
             Ui.printRemainingSchedules(module.getScheduleList());
             StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);

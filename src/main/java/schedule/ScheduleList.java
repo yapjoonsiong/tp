@@ -62,7 +62,7 @@ public class ScheduleList {
         return this.scheduleList.get(index);
     }
 
-    private boolean checkInput(String[] input){
+    private boolean checkInput(String[] input) {
         return input.length == 4;
     }
 
@@ -82,7 +82,7 @@ public class ScheduleList {
      * Checks for whether a class already exists with the input day and time.
      * Iterates through each module object in the moduleList and each schedule within the scheduleList of each module.
      *
-     * @param day User input.
+     * @param day  User input.
      * @param time User input.
      * @return true if a class with matching day and time is found.
      */

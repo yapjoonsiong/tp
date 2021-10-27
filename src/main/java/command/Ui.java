@@ -287,22 +287,22 @@ public class Ui {
         System.out.println("Deadline for this task has been updated");
     }
 
-    public static void deleteModuleMessage(Module m){
+    public static void deleteModuleMessage(Module m) {
         System.out.print(m.getModuleName());
         System.out.println(" has been successfully deleted");
     }
 
-    public static void deleteScheduleMessage(Schedule s){
+    public static void deleteScheduleMessage(Schedule s) {
         System.out.println("Class: ");
         System.out.println(s);
         System.out.println("has been successfully deleted");
     }
 
-    public static void printRemainingModules(){
+    public static void printRemainingModules() {
         System.out.println("Remaining Modules are: ");
     }
 
-    public static void printRemainingSchedules(ScheduleList sl){
+    public static void printRemainingSchedules(ScheduleList sl) {
         System.out.println("\nRemaining Classes are: ");
         System.out.println(sl);
     }

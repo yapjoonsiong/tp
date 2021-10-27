@@ -46,7 +46,12 @@ public class ScheduleList {
         this.scheduleList.add(schedule);
         logger.log(Level.INFO, "Schedule added successfully");
     }
-
+    /**
+     * Method to remove a single schedule from schedulelist based on index.
+     *
+     * @param input index of class to be deleted.
+     * @throws ArrayIndexOutOfBoundsException Exception thrown when invalid index is given.
+     */
     public void deleteClass(String input) {
         int scheduleIndex = Integer.parseInt(input) - 1;
         if (scheduleIndex < 0 || scheduleIndex >= scheduleList.size()) {

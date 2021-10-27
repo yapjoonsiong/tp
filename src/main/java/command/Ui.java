@@ -272,5 +272,7 @@ public class Ui {
         System.out.println("Sum of all weightages cannot exceed 100%");
     }
 
-
+    public static void moduleNameHasSpace() {
+        System.out.println("Module name cannot include space.");
+    }
 }

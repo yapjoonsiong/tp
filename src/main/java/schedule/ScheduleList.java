@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class ScheduleList {
     protected ArrayList<Schedule> scheduleList;
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = command.Logger.myLogger();
 
     public ScheduleList() {
         this.scheduleList = new ArrayList<Schedule>();

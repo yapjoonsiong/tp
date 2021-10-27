@@ -12,7 +12,14 @@ public final class Logger {
     public Logger() {
         myLogger = java.util.logging.Logger.getLogger(GLOBAL_LOGGER_NAME);
         logManager = LogManager.getLogManager();
-        logManager.getLogger(GLOBAL_LOGGER_NAME).setLevel(Level.SEVERE);
+        logManager.getLogger(GLOBAL_LOGGER_NAME).setLevel(Level.OFF);
+    }
+
+    public static java.util.logging.Logger myLogger() {
+        myLogger = java.util.logging.Logger.getLogger(GLOBAL_LOGGER_NAME);
+        logManager = LogManager.getLogManager();
+        logManager.getLogger(GLOBAL_LOGGER_NAME).setLevel(Level.OFF);
+        return myLogger;
     }
 
 }

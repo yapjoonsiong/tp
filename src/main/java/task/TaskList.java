@@ -18,7 +18,7 @@ public class TaskList {
     protected static final int DAYS_IN_A_WEEK = 7;
     protected static final int DAYS_IN_A_MONTH = 31;
     protected static final int DAYS_IN_A_YEAR = 366;
-    protected static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = command.Logger.myLogger();
     protected ArrayList<Task> taskList;
     protected int taskCount;
 

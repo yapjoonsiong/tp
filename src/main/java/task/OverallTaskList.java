@@ -4,8 +4,7 @@ import command.Ui;
 import module.Module;
 import module.ModuleList;
 
-import java.time.LocalDate;
-import java.time.Period;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
  * Represents a list of OverallTask objects. Used for listing all tasks in a semester.
  */
 public class OverallTaskList extends TaskList {
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = command.Logger.myLogger();
 
     protected ArrayList<OverallTask> overallTaskList;
 
@@ -31,15 +30,6 @@ public class OverallTaskList extends TaskList {
         addAllModuleListTasks(moduleList);
     }
 
-    /**
-     * Getter for overallTaskList.
-     *
-     * @return ArrayList containing OverallTask objects.
-     */
-    public ArrayList<OverallTask> getOverallTaskList() {
-        return overallTaskList;
-    }
-
     private void addAllModuleListTasks(ModuleList moduleList) {
         for (Module module : moduleList.getModuleList()) {
             String moduleName = module.getModuleName();
@@ -52,7 +42,6 @@ public class OverallTaskList extends TaskList {
                 overallTaskList.add(new OverallTask(gradableTask, moduleName));
             }
         }
-        assert (!overallTaskList.isEmpty() || moduleList.getModuleList().isEmpty());
         logger.log(Level.INFO, "Add all tasks from module list to overall task list");
     }
 

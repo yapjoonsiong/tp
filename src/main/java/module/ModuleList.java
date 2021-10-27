@@ -1,5 +1,6 @@
 package module;
 
+import command.Ui;
 import command.storage.StorageDecoder;
 
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class ModuleList {
         if (moduleIndex < 0 || moduleIndex >= moduleList.size()) {
             throw new ArrayIndexOutOfBoundsException("Invalid number value");
         }
+        Ui.deleteModuleMessage(moduleList.get(moduleIndex));
         moduleList.remove(get(moduleIndex));
         logger.log(Level.INFO, "Module deleted successfully");
     }

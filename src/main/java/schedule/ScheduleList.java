@@ -1,6 +1,7 @@
 package schedule;
 
 import command.NoCap;
+import command.Ui;
 import exceptions.NoCapExceptions;
 import module.Module;
 
@@ -46,10 +47,19 @@ public class ScheduleList {
         logger.log(Level.INFO, "Schedule added successfully");
     }
 
-    public void deleteClass() {
-        while (this.scheduleList.size() != 0) {
-            this.scheduleList.remove(scheduleList.get(0));
+    public void deleteClass(String input) {
+        int scheduleIndex = Integer.parseInt(input) - 1;
+        if (scheduleIndex < 0 || scheduleIndex >= scheduleList.size()) {
+            throw new ArrayIndexOutOfBoundsException("Invalid number value");
         }
+        Ui.deleteScheduleMessage(scheduleList.get(scheduleIndex));
+        scheduleList.remove(get(scheduleIndex));
+        logger.log(Level.INFO, "Schedule deleted successfully");
+    }
+
+    public Schedule get(int index) {
+        assert index >= 0;
+        return this.scheduleList.get(index);
     }
 
     private boolean checkInput(String[] input){

@@ -83,6 +83,21 @@ Examples:
 * `delete 1`
 * `delete 2`
 
+Example output:
+```
+CS2113T has been successfully deleted
+Remaining Modules are: 
+1
+Module name: CS2040C
+CREDITS: 4
+--------------------------- 
+SCHEDULE: 
+--------------------------- 
+GRADE: A
+TASKS: []
+BREAKDOWN: 
+```
+
 ###Add class : `/m <module> addclass ***VALID RANGE`
 
 Adds a class to a module
@@ -137,6 +152,23 @@ Format: `/m <module> deleteclass <class index>`
 Examples:
 * `/m CS2040C deleteclass 1`
 * `/m CG1112 deleteclass 2` 
+
+Example output:
+```
+Class: 
+Day: TUE
+Start Time: 1000
+Location: zoom
+Comments: lect
+has been successfully deleted
+
+Remaining Classes are: 
+1.
+Day: MON
+Start Time: 1000
+Location: zoom
+Comments: lect
+```
 
 ###View Timetable : `timetable `
 
@@ -280,7 +312,9 @@ Format: `bye`
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Simply transfer your data.json file to the data folder of the operating system that you plan to use NoCap on.
+
+> **WARNING**: Replacing data.json file in another NoCap folder results in the  existing data being erased!
 
 ## Command Summary
 

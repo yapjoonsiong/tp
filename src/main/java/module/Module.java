@@ -170,8 +170,8 @@ public class Module {
         this.scheduleList.addClass(input);
     }
 
-    public void deleteClass() {
-        this.scheduleList.deleteClass();
+    public void deleteClass(String input) {
+        this.scheduleList.deleteClass(input);
     }
 
     public void addTask(String userInput) {

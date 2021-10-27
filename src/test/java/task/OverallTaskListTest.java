@@ -187,8 +187,7 @@ class OverallTaskListTest extends TaskListTest {
         List<String> expectedLines = Collections.singletonList(
                 "Monthly tasks: " + System.lineSeparator()
                         + "1. [CS2112][ ][LATE][ ] sleep by: 21 Oct 2021 04:00 PM " + System.lineSeparator()
-                        + "2. [CS2132][ ][ ] sleep by: 12 Nov 2021 04:00 PM " + System.lineSeparator()
-                        + "3. [CS2132][ ][ ] sleep by: 10 Nov 2021 04:00 PM " + System.lineSeparator());
+                        + "2. [CS2132][ ][ ] sleep by: 10 Nov 2021 04:00 PM " + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 
@@ -211,8 +210,7 @@ class OverallTaskListTest extends TaskListTest {
         List<String> expectedLines = Collections.singletonList(
                 "Yearly tasks: " + System.lineSeparator()
                         + "1. [CS2112][ ][LATE][ ] sleep by: 21 Oct 2021 04:00 PM " + System.lineSeparator()
-                        + "2. [CS2132][ ][ ] sleep by: 20 Nov 2021 04:00 PM " + System.lineSeparator()
-                        + "3. [CS2132][ ][ ] sleep by: 21 Nov 2021 04:00 PM " + System.lineSeparator());
+                        + "2. [CS2132][ ][ ] sleep by: 21 Nov 2021 04:00 PM " + System.lineSeparator());
         assertLinesMatch(expectedLines, actualLines);
     }
 

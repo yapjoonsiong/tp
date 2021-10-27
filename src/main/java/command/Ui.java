@@ -275,4 +275,13 @@ public class Ui {
     public static void moduleNameHasSpace() {
         System.out.println("Module name cannot include space.");
     }
+
+    public static void duplicateTaskError() {
+        System.out.println("You are trying to add an existing task!");
+    }
+
+    public static void taskUpdateMessage() {
+        System.out.println("The task you are trying to add already exists");
+        System.out.println("Deadline for this task has been updated");
+    }
 }

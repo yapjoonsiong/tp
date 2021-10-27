@@ -46,6 +46,7 @@ public class ScheduleList {
         this.scheduleList.add(schedule);
         logger.log(Level.INFO, "Schedule added successfully");
     }
+
     /**
      * Method to remove a single schedule from schedulelist based on index.
      *

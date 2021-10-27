@@ -160,10 +160,10 @@ public class TaskList {
 
     protected static final Comparator<Task> sortByStatus = (t1, t2) -> {
         if (t1.isDone && !t2.isDone) {
-            return -1;
+            return 1;
         }
         if (!t1.isDone && t2.isDone) {
-            return 1;
+            return -1;
         }
         return 0;
     };

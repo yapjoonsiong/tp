@@ -1,5 +1,6 @@
 package module;
 
+import command.Ui;
 import command.storage.StorageDecoder;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class ModuleList {
     public void add(String input) {
         Module module = new Module(input);
         this.moduleList.add(module);
-        logger.log(Level.INFO,"Module added successfully");
+        logger.log(Level.INFO, "Module added successfully");
     }
 
     public void delete(Module module) {
@@ -59,8 +60,9 @@ public class ModuleList {
         if (moduleIndex < 0 || moduleIndex >= moduleList.size()) {
             throw new ArrayIndexOutOfBoundsException("Invalid number value");
         }
+        Ui.deleteModuleMessage(moduleList.get(moduleIndex));
         moduleList.remove(get(moduleIndex));
-        logger.log(Level.INFO,"Module deleted successfully");
+        logger.log(Level.INFO, "Module deleted successfully");
     }
 
     public int size() {
@@ -90,7 +92,7 @@ public class ModuleList {
         if (index == -1) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        logger.log(Level.INFO,"Module found successfully");
+        logger.log(Level.INFO, "Module found successfully");
         return moduleList.get(index);
     }
 
@@ -201,7 +203,7 @@ public class ModuleList {
                 }
             }
         }
-        logger.log(Level.INFO,"Timetable printed successfully");
+        logger.log(Level.INFO, "Timetable printed successfully");
     }
 
     private int printTimeColumns(int r, int c, String timeString) {

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -88,23 +89,71 @@ public class TaskList {
      *
      * @param userInput task description input by user
      */
-    public void addTask(String module, String userInput)  {
+    public void addTask(String module, String userInput) {
         String date = getDate(userInput);
         if (date.isBlank()) {
             Ui.missingDate();
-        } else {
-            try {
-                DateParser.parseDate(date);
-                String description = removeDate(userInput);
+            return;
+        }
+        String description = removeDate(userInput);
+        if (description.isBlank()) {
+            Ui.missingDescription();
+            return;
+        }
+        try {
+            LocalDateTime newTaskDeadline = DateParser.parseDate(date);
+            if (hasDuplicateDescription(description) && hasDuplicateDeadline(newTaskDeadline)) {
+                Ui.duplicateTaskError();
+                return;
+            }
+            if (hasDuplicateDescription(description)) {
+                updateTaskDeadline(date, description);
+                Ui.taskUpdateMessage();
+                return;
+            }
+            updateTaskList(module, date, description);
+        } catch (DateTimeException e) {
+            Ui.wrongDateTimeFormat();
+        }
+    }
+
+    private void updateTaskDeadline(String date, String description) {
+        for (Task task : this.taskList) {
+            if (description.toLowerCase(Locale.ROOT).equals(task.getDescription().toLowerCase(Locale.ROOT))) {
+                this.taskList.remove(task);
                 Task newTask = new Task(description, date);
-                this.taskList.add(taskCount, newTask);
-                this.taskCount = taskList.size();
-                Ui.addTaskMessage(newTask, module);
-                logger.log(Level.INFO, "Successfully added task");
-            } catch (DateTimeException e) {
-                Ui.wrongDateTimeFormat();
+                this.taskList.add(newTask);
+                return;
             }
         }
+    }
+
+    private void updateTaskList(String module, String date, String description) {
+        Task newTask = new Task(description, date);
+        this.taskList.add(taskCount, newTask);
+        this.taskCount = taskList.size();
+        Ui.addTaskMessage(newTask, module);
+        logger.log(Level.INFO, "Successfully added task");
+    }
+
+    private boolean hasDuplicateDescription(String newTaskDescription) {
+        for (Task task : this.taskList) {
+            String taskDescription = task.getDescription().toLowerCase(Locale.ROOT);
+            if (newTaskDescription.equals(taskDescription)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasDuplicateDeadline(LocalDateTime newTaskDate) {
+        for (Task task : this.taskList) {
+            LocalDateTime taskDate = task.getDeadline();
+            if (newTaskDate.equals(taskDate)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected static final Comparator<Task> sortByDate = Comparator.comparing(t -> t.deadline);

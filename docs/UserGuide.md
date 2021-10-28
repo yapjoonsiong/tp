@@ -23,11 +23,11 @@ Adds a new item to the list of todo items.
 
 Shows a list of all tasks
 
-Format: `list task <OPTIONAL ARGUMENT>`
+Format: `list task <optional argument>`
 
 By default, all tasks in the current semester are listed, but this can be customised by adding optional arguments.
 
-&lt;OPTIONAL ARGUMENT> includes:
+&lt;optional argument> includes:
 
 
 

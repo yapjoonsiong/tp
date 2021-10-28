@@ -299,15 +299,66 @@ Comments: lect
 
 ### Add grade to module: `/m <module> addgrade <grade letter>`
 
-Adds a grade to the module.
+Adds a grade to a module
+
+Examples:
+* `/m CS2113 addgrade A`
+* `/m MA1508 addgrade B-`
+
+Example output:
+```/m cs2040c addgrade A
+Module grade successfully added: 
+Module name: CS2040C
+CREDITS: 4
+--------------------------- 
+SCHEDULE: 
+--------------------------- 
+GRADE: A
+TASKS: []
+BREAKDOWN: 
+```
 
 ### Delete grade from module: `/m <module> deletegrade`
 
 Deletes the grade, if any.
 
+Examples:
+* `/m CS2113 deletegrade`
+* `/m MA1511 deletegrade`
+
+Example output:
+```
+Module grade has been successfully deleted
+Module name: CS1010
+CREDITS: 0
+--------------------------- 
+SCHEDULE: 
+--------------------------- 
+GRADE: null
+TASKS: []
+BREAKDOWN: 
+```
+
 ### Add credit to module: `/m <module> addcredit `
 
-Assign a credit number to the module.
+Adds credits to a module.
+
+Examples:
+* `/m CS2113 addcredit 4`
+* `/m MA1511 addcredit 2`
+
+Example output:
+```
+Module credits successfully added:
+Module name: CS2040C
+CREDITS: 4
+--------------------------- 
+SCHEDULE:
+--------------------------- 
+GRADE: A
+TASKS: []
+BREAKDOWN:
+```
 
 ### View Timetable : `timetable `
 

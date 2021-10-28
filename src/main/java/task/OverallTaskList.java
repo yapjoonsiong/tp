@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * Represents a list of OverallTask objects. Used for listing all tasks in a semester.
  */
 public class OverallTaskList extends TaskList {
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = command.Logger.myLogger();
 
     protected ArrayList<OverallTask> overallTaskList;
 

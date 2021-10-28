@@ -5,6 +5,8 @@ import command.Ui;
 import command.storage.StorageEncoder;
 import exceptions.NoCapExceptions;
 import module.Module;
+import schedule.Schedule;
+import schedule.ScheduleList;
 import task.GradableTask;
 import task.Task;
 
@@ -50,7 +52,8 @@ public class Command {
 
     void commandAddModule(String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
-                || parserChecks.isDuplicateModule(taskDescription)) {
+                || parserChecks.isDuplicateModule(taskDescription)
+                || parserChecks.includeSpace(taskDescription)) {
             return;
         }
         NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
@@ -75,7 +78,6 @@ public class Command {
         if (parserChecks.isEmptyDescription(taskDescription) || !parserChecks.hasDateDescription(taskDescription)) {
             return;
         }
-        System.out.println((taskDescription));
         module.addTask(taskDescription);
     }
 
@@ -116,14 +118,26 @@ public class Command {
         }
         try {
             NoCap.moduleList.delete(taskDescription);
+            Ui.printRemainingModules();
+            NoCap.moduleList.printModules();
             StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Invalid number value");
         }
     }
 
-    void commandDeleteClass(Module module) {
-        module.deleteClass();
+    void commandDeleteClass(Module module, String taskDescription) {
+        if (parserChecks.isEmptyDescription(taskDescription)
+                || parserChecks.isNotInteger(taskDescription)) {
+            return;
+        }
+        try {
+            module.deleteClass(taskDescription);
+            Ui.printRemainingSchedules(module.getScheduleList());
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid number value");
+        }
     }
 
     void commandDeleteTask(Module module, String taskDescription) {

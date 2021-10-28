@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
 
@@ -224,6 +225,149 @@ public class TaskListTest {
         a.showAllYearly(module);
         List<String> actualLines = List.of(read.toString().split("/n"));
         List<String> expectedLines = getYearlyStrings(module, a.yearlyTaskList().size());
+        assertLinesMatch(expectedLines, actualLines);
+    }
+
+    @Test
+    void sortByDate_equal_success() {
+        Task t1 = new Task("Assignment", DATE_E);
+        Task t2 = new Task("Quiz", DATE_E);
+        int result = TaskList.sortByDate.compare(t1, t2);
+        assertEquals(result, 0);
+    }
+
+    @Test
+    void sortByDate_leftHeavy_success() {
+        Task t1 = new Task("Assignment", DATE_E);
+        Task t2 = new Task("Quiz", DATE_D);
+        int result = TaskList.sortByDate.compare(t1, t2);
+        assertTrue(result < 0);
+    }
+
+    @Test
+    void sortByDate_rightHeavy_success() {
+        Task t1 = new Task("Assignment", DATE_D);
+        Task t2 = new Task("Quiz", DATE_E);
+        int result = TaskList.sortByDate.compare(t1, t2);
+        assertTrue(result > 0);
+    }
+
+    @Test
+    void sortByStatus_bothDone_success() {
+        Task t1 = new Task("Assignment", DATE_A);
+        Task t2 = new Task("Homework", DATE_A);
+        t1.markDone();
+        t2.markDone();
+        int result = TaskList.sortByStatus.compare(t1, t2);
+        assertEquals(result, 0);
+    }
+
+    @Test
+    void sortByStatus_bothNotDone_success() {
+        Task t1 = new Task("Assignment", DATE_A);
+        Task t2 = new Task("Homework", DATE_A);
+        int result = TaskList.sortByStatus.compare(t1, t2);
+        assertEquals(result, 0);
+    }
+
+    @Test
+    void sortByStatus_leftHeavy_success() {
+        Task t1 = new Task("Assignment", DATE_A);
+        Task t2 = new Task("Homework", DATE_A);
+        t1.markDone();
+        int result = TaskList.sortByStatus.compare(t1, t2);
+        assertTrue(result > 0);
+    }
+
+    @Test
+    void sortByStatus_rightHeavy_success() {
+        Task t1 = new Task("Assignment", DATE_A);
+        Task t2 = new Task("Homework", DATE_A);
+        t2.markDone();
+        int result = TaskList.sortByStatus.compare(t1, t2);
+        assertTrue(result < 0);
+    }
+
+    private List<String> getSortedDateStrings(String module) {
+        return Collections.singletonList(module.toUpperCase(Locale.ROOT) + " successfully sorted by date"
+                + System.lineSeparator()
+                + "1.[LATE][ ] Read Book F by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_OVERDUE))
+                + System.lineSeparator()
+                + "2.[ ] Read Book A by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_A))
+                + System.lineSeparator()
+                + "3.[ ] Read Book B by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_B))
+                + System.lineSeparator()
+                + "4.[ ] Read Book C by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_C))
+                + System.lineSeparator()
+                + "5.[ ] Read Book E by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_E))
+                + System.lineSeparator()
+                + "6.[ ] Read Book D by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_D))
+                + System.lineSeparator());
+    }
+
+    @Test
+    void printTaskListSortedByDate_success() {
+        TaskList a = new TaskList();
+        a.addTask("cs1010", "Read Book C /by " + DATE_C);
+        a.addTask("cs1010", "Read Book B /by " + DATE_B);
+        a.addTask("cs1010", "Read Book A /by " + DATE_A);
+        a.addTask("cs1010", "Read Book D /by " + DATE_D);
+        a.addTask("cs1010", "Read Book E /by " + DATE_E);
+        a.addTask("cs1010", "Read Book F /by " + DATE_OVERDUE);
+        // Create a stream to hold the output
+        ByteArrayOutputStream read = new ByteArrayOutputStream();
+        PrintStream save = new PrintStream(read);
+        // Tell Java to use your special stream
+        System.setOut(save);
+        // Print some output: goes to your special stream
+        String module = "moduleName";
+        a.sortTaskListByDate(module);
+        a.printTasks(a.getTaskList());
+        List<String> actualLines = List.of(read.toString().split("/n"));
+        List<String> expectedLines = getSortedDateStrings(module);
+        assertLinesMatch(expectedLines, actualLines);
+    }
+
+    private List<String> getSortedStatusStrings(String module) {
+        return Collections.singletonList(module.toUpperCase(Locale.ROOT) + " successfully sorted by status"
+                + System.lineSeparator()
+                + "1.[ ] Read Book D by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_D))
+                + System.lineSeparator()
+                + "2.[ ] Read Book E by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_E))
+                + System.lineSeparator()
+                + "3.[LATE][ ] Read Book F by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_OVERDUE))
+                + System.lineSeparator()
+                + "4.[X] Read Book C by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_C))
+                + System.lineSeparator()
+                + "5.[X] Read Book B by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_B))
+                + System.lineSeparator()
+                + "6.[X] Read Book A by: " + DateParser.dateStringOutput(DateParser.parseDate(DATE_A))
+                + System.lineSeparator());
+    }
+
+    @Test
+    void printTaskListSortedByStatus_success() {
+        TaskList a = new TaskList();
+        a.addTask("cs1010", "Read Book C /by " + DATE_C);
+        a.addTask("cs1010", "Read Book B /by " + DATE_B);
+        a.addTask("cs1010", "Read Book A /by " + DATE_A);
+        a.addTask("cs1010", "Read Book D /by " + DATE_D);
+        a.addTask("cs1010", "Read Book E /by " + DATE_E);
+        a.addTask("cs1010", "Read Book F /by " + DATE_OVERDUE);
+        a.get(2).markDone();
+        a.get(1).markDone();
+        a.get(0).markDone();
+        // Create a stream to hold the output
+        ByteArrayOutputStream read = new ByteArrayOutputStream();
+        PrintStream save = new PrintStream(read);
+        // Tell Java to use your special stream
+        System.setOut(save);
+        // Print some output: goes to your special stream
+        String module = "moduleName";
+        a.sortTaskListByStatus(module);
+        a.printTasks(a.getTaskList());
+        List<String> actualLines = List.of(read.toString().split("/n"));
+        List<String> expectedLines = getSortedStatusStrings(module);
         assertLinesMatch(expectedLines, actualLines);
     }
 }

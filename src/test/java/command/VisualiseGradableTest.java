@@ -8,7 +8,6 @@ import java.io.PrintStream;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
 class VisualiseGradableTest {

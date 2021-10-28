@@ -22,7 +22,7 @@ public class StorageDecoder {
     private static final Path FILE_PATH = Paths.get(ROOT, "data", "data.json");
 
     //Logger object
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = command.Logger.myLogger();
 
     /**
      * Decodes a json file located at a specified path into a SemesterList object.

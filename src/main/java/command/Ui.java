@@ -3,6 +3,8 @@ package command;
 
 import module.Module;
 import module.ModuleList;
+import schedule.Schedule;
+import schedule.ScheduleList;
 import task.GradableTaskList;
 import task.OverallTask;
 import task.Task;
@@ -17,7 +19,7 @@ public class Ui {
     public static void printHelpMessage() {
         System.out.println("Display help messages: help");
         System.out.println("Add Module: add <module>");
-        System.out.println("Delete Module: delete <Module>");
+        System.out.println("Delete Module: delete <Module index>");
         System.out.println("List tasks: list task");
         System.out.println("List modules: list module");
         System.out.println("Show timetable: timetable");
@@ -272,5 +274,36 @@ public class Ui {
         System.out.println("Sum of all weightages cannot exceed 100%");
     }
 
+    public static void moduleNameHasSpace() {
+        System.out.println("Module name cannot include space.");
+    }
 
+    public static void duplicateTaskError() {
+        System.out.println("You are trying to add an existing task!");
+    }
+
+    public static void taskUpdateMessage() {
+        System.out.println("The task you are trying to add already exists");
+        System.out.println("Deadline for this task has been updated");
+    }
+
+    public static void deleteModuleMessage(Module m) {
+        System.out.print(m.getModuleName());
+        System.out.println(" has been successfully deleted");
+    }
+
+    public static void deleteScheduleMessage(Schedule s) {
+        System.out.println("Class: ");
+        System.out.println(s);
+        System.out.println("has been successfully deleted");
+    }
+
+    public static void printRemainingModules() {
+        System.out.println("Remaining Modules are: ");
+    }
+
+    public static void printRemainingSchedules(ScheduleList sl) {
+        System.out.println("\nRemaining Classes are: ");
+        System.out.println(sl);
+    }
 }

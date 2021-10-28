@@ -15,7 +15,7 @@ import java.util.Locale;
 public class Parser {
 
     public static final String EMPTY_STRING = "";
-    private static final String SPACE_STRING = " ";
+    public static final String SPACE_STRING = " ";
     public static final String SWITCHSEMESTER = "switch";
     public static final String SEMESTERS = "semesters";
     public static final String CAP = "cap";
@@ -123,9 +123,9 @@ public class Parser {
         }
 
         splitInput(taskDescription);
-      
         switch (taskType) {
         case LIST:
+            splitInput(taskDescription);
             list.moduleListParser(module, taskDescription);
             break;
         case ADDCLASS:
@@ -144,7 +144,7 @@ public class Parser {
             command.commandAddCredit(module, taskDescription);
             break;
         case DELETECLASS:
-            command.commandDeleteClass(module);
+            command.commandDeleteClass(module, taskDescription);
             break;
         case DELETETASK:
             command.commandDeleteTask(module, taskDescription);

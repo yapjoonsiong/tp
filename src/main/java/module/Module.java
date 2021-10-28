@@ -21,13 +21,20 @@ public class Module {
     protected String letterGrade;
     protected double points;
     protected String moduleName;
-    protected Schedule schedule;
     public TaskList taskList;
     private ScheduleList scheduleList;
     protected int credits;
     public GradableTaskList gradableTaskList;
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = command.Logger.myLogger();
 
+    /**
+     * Constructor to create an instance of Module.
+     * Empty SchdeuleList, TaskList and GradableTaskList is created
+     * Credits is automatically assigned 0
+     * LetterGrade automatically assigned to null
+     *
+     * @param moduleName Name of module to be created
+     */
     public Module(String moduleName) {
         assert !moduleName.equals("");
         this.moduleName = moduleName;
@@ -103,6 +110,14 @@ public class Module {
         return this.scheduleList.getSchedule(index);
     }
 
+    /**
+     * +
+     * Add grade to the module.
+     * Points are automatically update when the grade is added.
+     *
+     * @param letterGrade grade of module
+     */
+
     public void addGrade(String letterGrade) {
         this.letterGrade = letterGrade;
         updatePoints();
@@ -171,8 +186,8 @@ public class Module {
         this.scheduleList.addClass(input);
     }
 
-    public void deleteClass() {
-        this.scheduleList.deleteClass();
+    public void deleteClass(String input) {
+        this.scheduleList.deleteClass(input);
     }
 
     public void addTask(String userInput) {
@@ -186,11 +201,14 @@ public class Module {
     public void addCredits(int credits) {
         this.credits = credits;
     }
-    
+
     public void showInformation() {
         System.out.println(toString());
     }
 
+    /**
+     * Reformats Module for easier viewing.
+     */
     @Override
     public String toString() {
 

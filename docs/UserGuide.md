@@ -287,7 +287,7 @@ due date as a reminder that the user has forgotten to do the task.
 
 Shows a list of all tasks in each module.
 
-Format: `/m <module name> list task <optional argument>`
+Format: `/m <module> list task <optional argument>`
 
 By default, all tasks in the module specified in the current semester are listed, but this can be customised by adding
 optional arguments.

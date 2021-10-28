@@ -12,6 +12,11 @@ public class VisualiseGradable {
 
     public GradableTaskList gradableTaskList;
 
+    /**
+     * Constructor for VisualiseGrdable.
+     *
+     * @param gl GradableTaskList to be visualised.
+     */
     public VisualiseGradable(GradableTaskList gl) {
         assert (gl != null);
         this.gradableTaskList = gl;
@@ -129,6 +134,10 @@ public class VisualiseGradable {
         }
     }
 
+    /**
+     * Method to print the GradableTaskList to the terminal
+     * Individual methods to print out each part of the visualised GradableTaskList is called in order.
+     */
     public void print() {
         System.out.println("BREAKDOWN:");
         System.out.println(printTopBar());

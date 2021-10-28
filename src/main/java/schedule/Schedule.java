@@ -12,6 +12,17 @@ public class Schedule {
     protected String day;
     protected String comment;
 
+    /**
+     * Constructor for Schdeule
+     * During construction of Schedule, input format is checked.
+     *
+     * @param day       Day of class
+     * @param startTime timeslot of class
+     * @param location  location of the class
+     * @param comment   additional comments for the class
+     * @throws NoCapExceptions Throws an exception when a input format error is triggered.
+     */
+
     public Schedule(String day, String startTime, String location, String comment) throws NoCapExceptions {
         if (location.length() > 16 || comment.length() > 16) {
             throw new NoCapExceptions("location and comment must be less than 17 characters");
@@ -76,6 +87,11 @@ public class Schedule {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    /**
+     * Reformats Schedule for easier viewing.
+     */
+    @Override
 
     public String toString() {
         return "Day: " + day

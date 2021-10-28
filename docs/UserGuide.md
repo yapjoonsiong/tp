@@ -299,7 +299,24 @@ Comments: lect
 
 ### Add grade to module: `/m <module> addgrade <grade letter>`
 
-Adds a grade to the module.
+Adds a grade to a module
+
+Examples:
+* `/m CS2113 addgrade A`
+* `/m MA1508 addgrade B-`
+
+Example output:
+```/m cs2040c addgrade A
+Module grade successfully added: 
+Module name: CS2040C
+CREDITS: 4
+--------------------------- 
+SCHEDULE: 
+--------------------------- 
+GRADE: A
+TASKS: []
+BREAKDOWN: 
+```
 
 ### Delete grade from module: `/m <module> deletegrade`
 

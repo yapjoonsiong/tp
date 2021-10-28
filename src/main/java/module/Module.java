@@ -18,12 +18,12 @@ import java.util.logging.Logger;
 
 
 public class Module {
-    protected String moduleName;
     protected String letterGrade;
     protected double points;
-    protected int credits;
+    protected String moduleName;
     public TaskList taskList;
     private ScheduleList scheduleList;
+    protected int credits;
     public GradableTaskList gradableTaskList;
     private static final Logger logger = command.Logger.myLogger();
 

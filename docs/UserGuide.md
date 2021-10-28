@@ -226,11 +226,11 @@ Example of expected output:
 
 Shows a list of all tasks across modules
 
-Format: `list task <OPTIONAL ARGUMENT>`
+Format: `list task <optional argument>`
 
 By default, all tasks in the current semester are listed, but this can be customised by adding optional arguments.
 
-&lt;OPTIONAL ARGUMENT> includes:
+&lt;optional argument> includes:
 
 * sortbydate - Sort tasks by due date.
 * sortbystatus - Sort tasks by status, displaying finished tasks first.
@@ -276,12 +276,12 @@ due date as a reminder that the user has forgotten to do the task.
 
 Shows a list of all tasks in each module.
 
-Format: `/m <module> list task <OPTIONAL ARGUMENT>`
+Format: `/m <module> list task <optional argument>`
 
 By default, all tasks in the module specified in the current semester are listed, but this can be customised by adding
 optional arguments.
 
-&lt;OPTIONAL ARGUMENT> includes:
+&lt;optional argument> includes:
 
 * sortbydate - Sort tasks by due date, the closest deadline have the higher priority in the list. does not print the
   task list.

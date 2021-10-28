@@ -307,7 +307,24 @@ Deletes the grade, if any.
 
 ### Add credit to module: `/m <module> addcredit `
 
-Assign a credit number to the module.
+Adds credits to a module
+
+Examples:
+* `/m CS2113 addcredit 4`
+* `/m MA1511 addcredit 2`
+
+Expected output:
+```
+Module credits successfully added:
+Module name: CS2040C
+CREDITS: 4
+--------------------------- 
+SCHEDULE:
+--------------------------- 
+GRADE: A
+TASKS: []
+BREAKDOWN:
+```
 
 ### View Timetable : `timetable `
 

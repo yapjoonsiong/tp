@@ -52,6 +52,7 @@ public class ModuleList {
 
     /**
      * Overload delete method to take in String input.
+     * input index validity is checked.
      *
      * @param input User input for Module name.
      */
@@ -277,6 +278,11 @@ public class ModuleList {
         return c;
     }
 
+    /**
+     * Overrides toString() to show a formatted ModuelList when printed.
+     *
+     * @return String of formatted ModuleList
+     */
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();

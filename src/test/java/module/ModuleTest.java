@@ -11,18 +11,66 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class ModuleTest {
+    @Test
+    void testAddGrade() {
+        Module m1 = new Module("cs2113T");
+        Module m2 = new Module("cs2040c");
+        Module m3 = new Module("ma1508E");
+        m1.addGrade("A+");
+        m2.addGrade("A-");
+        m3.addGrade("B");
+        assertEquals("A+", m1.letterGrade);
+        assertEquals("A-", m2.letterGrade);
+        assertEquals("B", m3.letterGrade);
+    }
+
+    @Test
+    void testAddCredit() {
+        Module m1 = new Module("cs2113T");
+        Module m2 = new Module("cs2040c");
+        Module m3 = new Module("ma1508E");
+        m1.addCredits(2);
+        m2.addCredits(4);
+        m3.addCredits(6);
+        assertEquals(2, m1.credits);
+        assertEquals(4, m2.credits);
+        assertEquals(6, m3.credits);
+    }
+
+    @Test
+    void getCredits() {
+        Module m1 = new Module("cs2113T");
+        Module m2 = new Module("cs2040c");
+        Module m3 = new Module("ma1508E");
+        m1.addCredits(2);
+        m2.addCredits(4);
+        m3.addCredits(6);
+        assertEquals(2, m1.getCredits());
+        assertEquals(4, m2.getCredits());
+        assertEquals(6, m3.getCredits());
+    }
 
     @Test
     void getLetterGrade() {
-        Module m = new Module("cs2113T");
-        m.addGrade("A+");
-        assertEquals("A+", m.getLetterGrade());
+        Module m1 = new Module("cs2113T");
+        Module m2 = new Module("cs2040c");
+        Module m3 = new Module("ma1508E");
+        m1.addGrade("A+");
+        m2.addGrade("A-");
+        m3.addGrade("B");
+        assertEquals("A+", m1.getLetterGrade());
+        assertEquals("A-", m2.getLetterGrade());
+        assertEquals("B", m3.getLetterGrade());
     }
 
     @Test
     void getModuleName() {
-        Module m = new Module("cs2113T");
-        assertEquals("cs2113T", m.getModuleName());
+        Module m1 = new Module("cs2113T");
+        Module m2 = new Module("cs2040c");
+        Module m3 = new Module("ma1508E");
+        assertEquals("cs2113T", m1.getModuleName());
+        assertEquals("cs2040c", m2.getModuleName());
+        assertEquals("ma1508E", m3.getModuleName());
     }
 
     @Test
@@ -51,13 +99,6 @@ class ModuleTest {
         } catch (NoCapExceptions e) {
             e.printStackTrace();
         }
-    }
-
-    @Test
-    void getCredits() {
-        Module m = new Module("cs2113T");
-        m.addCredits(4);
-        assertEquals(4, m.getCredits());
     }
 
     @Test

@@ -49,6 +49,7 @@ public class ScheduleList {
 
     /**
      * Method to remove a single schedule from schedulelist based on index.
+     * input index validity is checked.
      *
      * @param input index of class to be deleted.
      * @throws ArrayIndexOutOfBoundsException Exception thrown when invalid index is given.
@@ -103,6 +104,11 @@ public class ScheduleList {
         return false;
     }
 
+    /**
+     * Overrides toString() to show a formatted ScheduleList when printed.
+     *
+     * @return String of formatted ScheduleList
+     */
     @Override
     public String toString() {
         int index = 1;

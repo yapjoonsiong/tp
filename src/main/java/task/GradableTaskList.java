@@ -64,6 +64,15 @@ public class GradableTaskList extends TaskList {
         return total <= 100;
     }
 
+    /**
+     * Method to add a gradableTask to GradableTaskList.
+     * Input format is checked before calling the constructor for GradableTask.
+     * Total weightage for all GradableTasks in GradableTaskList is checked. If total weightage is more than 100
+     * an error message is shown.
+     *
+     * @param module    Name of module GradableTask is apart of
+     * @param userInput Input of GradableTask data from User.
+     */
     public void addGradableTask(String module, String userInput) {
         logger.log(Level.INFO, "Successfully added task");
         String date = getDate(userInput);
@@ -121,6 +130,11 @@ public class GradableTaskList extends TaskList {
         return true;
     }
 
+    /**
+     * Overrides toString() to show a formatted GradableTaskList when printed.
+     *
+     * @return String of formatted GradableTaskList
+     */
     @Override
     public String toString() {
         int index = 1;

@@ -152,6 +152,7 @@ public class Command {
 
     void commandDeleteGrade(Module module) {
         module.deleteGrade();
+        Ui.deleteGradeMesage(module);
         NoCap.semester.updateCap();
         NoCap.semesterList.updateCap();
     }

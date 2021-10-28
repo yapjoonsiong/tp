@@ -12,6 +12,7 @@ import task.Task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.StreamSupport;
 
 public class Ui {
     private static final String logo = "NoCap Logo";
@@ -305,5 +306,10 @@ public class Ui {
     public static void printRemainingSchedules(ScheduleList sl) {
         System.out.println("\nRemaining Classes are: ");
         System.out.println(sl);
+    }
+
+    public static void deleteGradeMesage(Module m) {
+        System.out.println("Module grade has been successfully deleted");
+        System.out.println(m);
     }
 }

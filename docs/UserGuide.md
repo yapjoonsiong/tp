@@ -17,14 +17,14 @@ app for NUS students!
 
 ### **Command format:**
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user. \
-  e.g. `add MODULENAME` MODULENAME is the name of the module supplied by the user.
+* Words in `<>` are the parameters to be supplied by the user. \
+  e.g. `add <module name>` `<module name>` is the name of the module supplied by the user.
 * Items in curved brackets describe the input format. \
-  e.g.` MODULENAME addtask DESCRIPTION /by DATE(DDMMYY)` DDMMYY refers to the date-month-year of the description.
+  e.g.` /m <module name> addtask <description> /by <deadline (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the date-month-year and 24 hour time of the description.
 * Parameters must be in the exact order as seen in the user guide. \
   e.g. if the command
-  specifies `CS2113 addclass tutorial /on Wednesday /at 23:00, CS2113 addclass /at 23:00 tutorial /on Wednesday` is not
-  acceptable.
+  specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`, `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
+  is not acceptable.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `timetable `and `exit`) is not
   acceptable. \
   e.g. if the command specifies `help 123`, there will be an error.
@@ -120,13 +120,41 @@ Example of expected output:
 
 ### Add gradable task to module : `/m <module> addgradable`
 
-### Edit description of task : `/m <module> editdescription`
+Adds a Gradable Task to the module.
+* Refer to Add Task for deadline format.
 
-### Edit deadline of task : `/m <module> editdeadline`
+Note:
+* The weightage needs to be a number between 0 - 100.
+* The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message will be shown.
 
-### Delete task from module : `/m <module> deletetask`
+Examples:
+* `/m CS2113 addgradable Finals /by 10/10/10 1000 /w 30`
+* `/m CS1010 addgradable assignments /by 10/10/10 1000 /w 40`
+
+Expected output:
+![alt_text](media/UGgradabletasklist.png)
+
+### Edit description of task : `/m <module> editdesc <task index> <new description>`
+
+Edit the description of a task. 
+
+### Edit deadline of task : `/m <module> editdate <task index> <new date>`
+
+Edit the deadline of a task.
+
+### Delete task from module : `/m <module> deletetask <substring>`
+
+Finds and list down tasks with the substring. Type corresponding index to delete the task.
 
 ### Marks module task as done : `/m <module> done <task index>`
+
+Mark task as done.
+
+Other similar commands include:  
+Mark task as not done: `/m <module> notdone <task index>`  
+Mark gradable task as done:`/m <module> gradabledone <task index>`  
+Mark gradable task as not done:`/m <module> gradablenotdone <task index>`  
+  
 
 ### Listing module tasks : `/m <module> list task`
 
@@ -271,7 +299,7 @@ Comments: lect
 
 ### Add grade to module: `/m <module> addgrade <grade letter>`
 
-Adds a grade to the module Name.
+Adds a grade to the module.
 
 ### Delete grade from module: `/m <module> deletegrade`
 
@@ -399,8 +427,8 @@ Exits the program.
 |List all module| list module|
 |Add task| /m \<module> addtask \<description> /by \<date> \<time>|
 |Add gradable task | /m \<module> addgradable \<description> /by \<date> \<time> /w \<weightage>|
-|Edit description| /m \<module> editdescription|
-|Edit deadline| /m \<module> editdeadline|
+|Edit description| /m \<module> editdesc <task index> <new description>|
+|Edit deadline| /m \<module> editdate <task index> <new deadline>|
 |Delete task| /m \<module> deletetask|
 |Mark task as complete| /m \<module> done \<task index>|
 |Mark task as incomplete| /m \<module> notdone \<task index>|

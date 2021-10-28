@@ -8,8 +8,6 @@ app for NUS students!
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
@@ -17,14 +15,14 @@ app for NUS students!
 
 ### **Command format:**
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user. \
-  e.g. `add MODULENAME` MODULENAME is the name of the module supplied by the user.
+* Words in `<>` are the parameters to be supplied by the user. \
+  e.g. `add <module name>` `<module name>` is the name of the module supplied by the user.
 * Items in curved brackets describe the input format. \
-  e.g.` MODULENAME addtask DESCRIPTION /by DATE(DDMMYY)` DDMMYY refers to the date-month-year of the description.
+  e.g.` /m <module name> addtask <description> /by <deadline (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the date-month-year and 24 hour time of the description.
 * Parameters must be in the exact order as seen in the user guide. \
   e.g. if the command
-  specifies `CS2113 addclass tutorial /on Wednesday /at 23:00, CS2113 addclass /at 23:00 tutorial /on Wednesday` is not
-  acceptable.
+  specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`, `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
+  is not acceptable.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `timetable `and `exit`) is not
   acceptable. \
   e.g. if the command specifies `help 123`, there will be an error.
@@ -60,17 +58,15 @@ Example output:
 
 Switches the currently accessed semester to the corresponding input index (refer to `list semesters` for the index)
 
-Format: `switch SEMESTERINDEX`
-
 Examples:
 
 * `Switch 1`
 * `Switch 2`
 
-### Adding module: `add <module>`
+### Adding module: `add <module name>`
 
-Adds a module  
-Format: `add MODULENAME`  
+Adds a module   
+
 Examples:
 
 * `add CS2113T`
@@ -80,7 +76,6 @@ Examples:
 
 Deletes a module corresponding to the input index.(refer to `list module` for indexes )
 
-Format: `delete MODULE INDEX`
 Examples:
 
 * `delete 1`
@@ -102,11 +97,11 @@ TASKS: []
 BREAKDOWN: 
 ```
 
-### Add class : `/m <module> addclass ***VALID RANGE`
+### Add class : `/m <module name> addclass (valid range)`
 
 Adds a class to a module
 
-Format: `/m MODULENAME addclass DAY/PERIOD/LOCATION/COMMENTS`
+Format: `/m MODULENAME addclass <day/period(dd/MM/yyyy hhmm)/location/comments>`
 
 Examples:
 
@@ -150,11 +145,10 @@ Valid
 * LOCATION and COMMENTS can only take on a maximum of 16 characters and cannot be empty
 * Only one class can be added in any period
 
-### Delete classes: `/m <module> deleteclass <class index>`
+### Delete classes: `/m <module name> deleteclass <class index>`
 
 Deletes a module corresponding to the input index.(refer to `/m <module name> info` or `list module` for indexes )
 
-Format: `/m <module> deleteclass <class index>`
 Examples:
 
 * `/m CS2040C deleteclass 1`
@@ -195,9 +189,9 @@ Note:
 
 * Timetable can only display classes from 0800 to 1700 periods
 
-### Add task : `/m <module> addtask`
+### Add task : `/m <module> addtask <description> /by <deadline (dd/MM/yy hhmm)>`
 
-Format: `/m <module> addtask <description> /by <date> <time>`
+Adds a task to the module.
 
 * The `date` is in the format of dd/MM/yy.
 * The `time` is in the format of hhmm.
@@ -218,9 +212,24 @@ Example of expected output:
 
 ![alt_text](media/AddTaskOutput.jpg)
 
-### Add gradable task:`/m <module> addgradable`
+### Add gradable task:`/m <module> addgradable <description> /by <deadline (dd/MM/yy hhmm)> /w <weightage>`
+
+Adds a Gradable Task to the module. 
+* Refer to Add Task for deadline format.
+
+Note:
+* The weightage needs to be a number between 0 - 100. 
+* The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message will be shown.
+
+Examples:
+* `/m CS2113 addgradable Finals /by 10/10/10 1000 /w 30`
+* `/m CS1010 addgradable assignments /by 10/10/10 1000 /w 40`
+
+Expected output:
+![alt_text](media/UGgradabletasklist.png)
 
 ### Delete tasks: `/m <module> deletetask`
+
 
 ### Listing overall tasks : `list task`
 
@@ -272,7 +281,7 @@ NOTE:
 For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
 due date as a reminder that the user has forgotten to do the task.
 
-### Listing module tasks : `/m <module> list task`
+### Listing module tasks : `/m <module name> list task`
 
 Shows a list of all tasks in each module.
 
@@ -340,13 +349,46 @@ NOTE:
 For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
 due date as a reminder that the user has forgotten to do the task.
 
-### Add grade : `/m <module> addgrade `
+### Add grade : `/m <module name> addgrade <grade> `
 
-Adds a grade to the module Name
+Adds a grade to a module
 
-### Delete grade: `/m <module> deletegrade`
+Examples:
+* `/m CS2113 addgrade A`
+* `/m MA1508 addgrade B-`
 
-### Add credit : `/m <module> addcredit `
+Expected output:
+```/m cs2040c addgrade A
+Module grade successfully added: 
+Module name: CS2040C
+CREDITS: 4
+--------------------------- 
+SCHEDULE: 
+--------------------------- 
+GRADE: A
+TASKS: []
+BREAKDOWN: 
+```
+
+### Add credit : `/m <module name> addcredit <credit value>`
+Adds credits to a module
+
+Examples:
+* `/m CS2113 addcredit 4`
+* `/m MA1511 addcredit 2`
+
+Expected output:
+```
+Module credits successfully added:
+Module name: CS2040C
+CREDITS: 4
+--------------------------- 
+SCHEDULE:
+--------------------------- 
+GRADE: A
+TASKS: []
+BREAKDOWN:
+```
 
 ### View CAP : `cap `
 

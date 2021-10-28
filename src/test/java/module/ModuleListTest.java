@@ -32,7 +32,6 @@ public class ModuleListTest {
     @Test
     void testDelete() {
         ModuleList moduleList1 = new ModuleList();
-        ModuleList expectedList = new ModuleList();
         Module m1 = new Module("cs2113T");
         Module m2 = new Module("Cs2040c");
         Module m3 = new Module("ma1508E");
@@ -40,6 +39,7 @@ public class ModuleListTest {
         moduleList1.add(m2);
         moduleList1.add(m3);
         moduleList1.delete("1");
+        ModuleList expectedList = new ModuleList();
         expectedList.add(m2);
         expectedList.add(m3);
         assertEquals(expectedList.toString(), moduleList1.toString());

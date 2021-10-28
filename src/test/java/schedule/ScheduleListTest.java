@@ -56,4 +56,20 @@ public class ScheduleListTest {
         m.setScheduleList(expected);
         assertEquals(expected, m.getScheduleList());
     }
+
+    @Test
+    void testDelete() throws NoCapExceptions {
+        ScheduleList scheduleList1 = new ScheduleList();
+        Schedule s1 = new Schedule("WED", "0800", "E1-01", "tutorial");
+        Schedule s2 = new Schedule("MON", "1000", "ZOOM", "lecture");
+        Schedule s3 = new Schedule("TUE", "1500", "ARC", "lab");
+        scheduleList1.addClass(s1);
+        scheduleList1.addClass(s2);
+        scheduleList1.addClass(s3);
+        scheduleList1.deleteClass("1");
+        ScheduleList scheduleList2 = new ScheduleList();
+        scheduleList2.addClass(s2);
+        scheduleList2.addClass(s3);
+        assertEquals(scheduleList1.toString(), scheduleList2.toString());
+    }
 }

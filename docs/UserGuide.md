@@ -322,15 +322,32 @@ BREAKDOWN:
 
 Deletes the grade, if any.
 
+Examples:
+* `/m CS2113 deletegrade`
+* `/m MA1511 deletegrade`
+
+Example output:
+```
+Module grade has been successfully deleted
+Module name: CS1010
+CREDITS: 0
+--------------------------- 
+SCHEDULE: 
+--------------------------- 
+GRADE: null
+TASKS: []
+BREAKDOWN: 
+```
+
 ### Add credit to module: `/m <module> addcredit `
 
-Adds credits to a module
+Adds credits to a module.
 
 Examples:
 * `/m CS2113 addcredit 4`
 * `/m MA1511 addcredit 2`
 
-Expected output:
+Example output:
 ```
 Module credits successfully added:
 Module name: CS2040C

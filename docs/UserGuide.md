@@ -8,6 +8,8 @@ app for NUS students!
 
 ## Quick Start
 
+{Give steps to get started quickly}
+
 1. Ensure that you have Java 11 or above installed.
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
@@ -28,16 +30,10 @@ app for NUS students!
   e.g. if the command specifies `help 123`, there will be an error.
 
 ### Viewing help : `help`
-
 Shows a message explaining how to use NoCap
 
-Format: `help`
-
 ### Listing semesters : `list semesters`
-
-Lists all preloaded semesters and their corresponding indexes
-
-Format: `list semesters`
+Lists all preloaded semesters and their corresponding indexes  
 
 Example output:
 
@@ -56,16 +52,16 @@ Example output:
 
 ### Switching semesters : `switch <semester index>`
 
-Switches the currently accessed semester to the corresponding input index (refer to `list semesters` for the index)
+Switches the currently accessed semester to the corresponding input index. (refer to `list semesters` for the index)
 
 Examples:
 
 * `Switch 1`
 * `Switch 2`
 
-### Adding module: `add <module name>`
+### Adding module: `add <module>`
 
-Adds a module   
+Adds a module  
 
 Examples:
 
@@ -74,7 +70,7 @@ Examples:
 
 ### Delete module: `delete <module index> `
 
-Deletes a module corresponding to the input index.(refer to `list module` for indexes )
+Deletes a module corresponding to the input index. (refer to `list module` for indexes )
 
 Examples:
 
@@ -97,11 +93,140 @@ TASKS: []
 BREAKDOWN: 
 ```
 
-### Add class : `/m <module name> addclass (valid range)`
+### List module : `list module`
+
+Lists all added modules and their corresponding indexes.
+
+### Add task to module : `/m <module> addtask <description> /by <date> <time>`
+
+* The `date` is in the format of dd/MM/yy.
+* The `time` is in the format of hhmm.
+* The `description` can contain white spaces.
+
+Note:
+
+* If time is omitted, time will default to 0000 hrs.
+* If duplicate task exist and has a different deadline, the existing task's deadline will be updated with the new
+  deadline.
+* If duplicate task has same deadline, new task will be rejected by the program.
+
+Example of usage:
+
+* `/m cs1010 addtask Remember to S/U /by 20/11/2020 0000`
+
+Example of expected output:
+
+![alt_text](media/AddTaskOutput.jpg)
+
+### Add gradable task to module : `/m <module> addgradable`
+
+Adds a Gradable Task to the module.
+* Refer to Add Task for deadline format.
+
+Note:
+* The weightage needs to be a number between 0 - 100.
+* The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message will be shown.
+
+Examples:
+* `/m CS2113 addgradable Finals /by 10/10/10 1000 /w 30`
+* `/m CS1010 addgradable assignments /by 10/10/10 1000 /w 40`
+
+Expected output:
+![alt_text](media/UGgradabletasklist.png)
+
+### Edit description of task : `/m <module> editdesc <task index> <new description>`
+
+Edit the description of a task. 
+
+### Edit deadline of task : `/m <module> editdate <task index> <new date>`
+
+Edit the deadline of a task.
+
+### Delete task from module : `/m <module> deletetask <substring>`
+
+Finds and list down tasks with the substring. Type corresponding index to delete the task.
+
+### Marks module task as done : `/m <module> done <task index>`
+
+Mark task as done.
+
+Other similar commands include:  
+Mark task as not done: `/m <module> notdone <task index>`  
+Mark gradable task as done:`/m <module> gradabledone <task index>`  
+Mark gradable task as not done:`/m <module> gradablenotdone <task index>`  
+  
+
+### Listing module tasks : `/m <module> list task`
+
+Shows a list of task of specified module.
+
+Additional Format: `/m <module> list task <optional argument>`
+
+By default, all tasks in the module specified in the current semester are listed, but this can be customised by adding
+optional arguments.
+
+&lt;optional argument> includes:
+
+* sortbydate - Sort tasks by due date, the closest deadline have the higher priority in the list. does not print the
+  task list.
+* sortbystatus - Sort tasks by status, finished tasks of lower priority. Does not print task list.
+* w - list tasks due within the next week.
+* m - list tasks due within the next month.
+* y - list tasks due within the next year.
+
+Examples with expected output:
+
+Assuming tasks have been added to modules beforehand:
+
+* `/m cs1010 list task`
+
+    ```
+    Task List for CS1010: 
+  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
+  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
+  3.[ ] retake cs1010 by: 12 Dec 2021 11:59 PM
+  4.[ ] do assignment by: 30 Oct 2021 04:00 PM
+  ```
+
+
+* `/m cs1010 list task sortbydate`
+
+  ```
+  CS1010 successfully sorted by date
+  ```
+
+  ```
+  /m cs1010 list task
+  ```
+
+  ```
+  Task List for CS1010: 
+  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
+  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
+  3.[ ] do assignment by: 30 Oct 2021 04:00 PM 
+  4.[ ] retake cs1010 by: 12 Dec 2021 11:59 PM
+  
+  ```
+
+
+* `/m cs1010 list task w`
+
+  ```
+  Task List for CS1010: 
+  There are 3 tasks due within 7 days 
+  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
+  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
+  3.[ ] do assignment by: 30 Oct 2021 04:00 PM 
+  ```
+
+NOTE:
+
+For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
+due date as a reminder that the user has forgotten to do the task.
+
+### Add class to module : `/m <module> addclass <day/period/location/comments>`
 
 Adds a class to a module
-
-Format: `/m MODULENAME addclass <day/period(dd/MM/yyyy hhmm)/location/comments>`
 
 Examples:
 
@@ -145,7 +270,7 @@ Valid
 * LOCATION and COMMENTS can only take on a maximum of 16 characters and cannot be empty
 * Only one class can be added in any period
 
-### Delete classes: `/m <module name> deleteclass <class index>`
+### Delete classes from module: `/m <module> deleteclass <class index>`
 
 Deletes a module corresponding to the input index.(refer to `/m <module name> info` or `list module` for indexes )
 
@@ -172,15 +297,21 @@ Location: zoom
 Comments: lect
 ```
 
+### Add grade to module: `/m <module> addgrade <grade letter>`
+
+Adds a grade to the module.
+
+### Delete grade from module: `/m <module> deletegrade`
+
+Deletes the grade, if any.
+
+### Add credit to module: `/m <module> addcredit `
+
+Assign a credit number to the module.
+
 ### View Timetable : `timetable `
 
-Shows the timetable for the currently accessed semester
-
-Format: `timetable`
-
-Example input:
-
-* `timetable`
+Shows the timetable for the currently accessed semester.
 
 Example output:
 ![alt_text](media/timetableExampleOutput.png "image_tooltip")
@@ -189,53 +320,11 @@ Note:
 
 * Timetable can only display classes from 0800 to 1700 periods
 
-### Add task : `/m <module> addtask <description> /by <deadline (dd/MM/yy hhmm)>`
-
-Adds a task to the module.
-
-* The `date` is in the format of dd/MM/yy.
-* The `time` is in the format of hhmm.
-* The `description` can contain white spaces.
-
-Note:
-
-* If time is omitted, time will default to 0000 hrs.
-* If duplicate task exist and has a different deadline, the existing task's deadline will be updated with the new
-  deadline.
-* If duplicate task has same deadline, new task will be rejected by the program.
-
-Example of usage:
-
-* `/m cs1010 addtask Remember to S/U /by 20/11/2020 0000`
-
-Example of expected output:
-
-![alt_text](media/AddTaskOutput.jpg)
-
-### Add gradable task:`/m <module> addgradable <description> /by <deadline (dd/MM/yy hhmm)> /w <weightage>`
-
-Adds a Gradable Task to the module. 
-* Refer to Add Task for deadline format.
-
-Note:
-* The weightage needs to be a number between 0 - 100. 
-* The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message will be shown.
-
-Examples:
-* `/m CS2113 addgradable Finals /by 10/10/10 1000 /w 30`
-* `/m CS1010 addgradable assignments /by 10/10/10 1000 /w 40`
-
-Expected output:
-![alt_text](media/UGgradabletasklist.png)
-
-### Delete tasks: `/m <module> deletetask`
-
-
-### Listing overall tasks : `list task`
+### Listing all tasks : `list task`
 
 Shows a list of all tasks across modules
 
-Format: `list task <optional argument>`
+Additional format: `list task <optional argument>`
 
 By default, all tasks in the current semester are listed, but this can be customised by adding optional arguments.
 
@@ -281,138 +370,20 @@ NOTE:
 For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
 due date as a reminder that the user has forgotten to do the task.
 
-### Listing module tasks : `/m <module name> list task`
 
-Shows a list of all tasks in each module.
+### View CAP : `cap`
 
-Format: `/m <module> list task <optional argument>`
-
-By default, all tasks in the module specified in the current semester are listed, but this can be customised by adding
-optional arguments.
-
-&lt;optional argument> includes:
-
-* sortbydate - Sort tasks by due date, the closest deadline have the higher priority in the list. does not print the
-  task list.
-* sortbystatus - Sort tasks by status, finished tasks of lower priority. Does not print task list.
-* w - list tasks due within the next week.
-* m - list tasks due within the next month.
-* y - list tasks due within the next year.
-
-Examples with expected output:
-
-Assuming tasks have been added to modules beforehand:
-
-* `/m cs1010 list task`
-
-    ```
-    Task List for CS1010: 
-  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
-  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
-  3.[ ] retake cs1010 by: 12 Dec 2021 11:59 PM
-  4.[ ] do assignment by: 30 Oct 2021 04:00 PM
-  ```
-
-
-* `/m cs1010 list task sortbydate`
-
-  ```
-  CS1010 successfully sorted by date
-  ```
-
-  ```
-  /m cs1010 list task
-  ```
-  
-  ```
-  Task List for CS1010: 
-  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
-  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
-  3.[ ] do assignment by: 30 Oct 2021 04:00 PM 
-  4.[ ] retake cs1010 by: 12 Dec 2021 11:59 PM
-  
-  ```
-
-
-* `/m cs1010 list task w`
-
-  ```
-  Task List for CS1010: 
-  There are 3 tasks due within 7 days 
-  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
-  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
-  3.[ ] do assignment by: 30 Oct 2021 04:00 PM 
-  ```
-
-NOTE:
-
-For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
-due date as a reminder that the user has forgotten to do the task.
-
-### Add grade : `/m <module name> addgrade <grade> `
-
-Adds a grade to a module
-
-Examples:
-* `/m CS2113 addgrade A`
-* `/m MA1508 addgrade B-`
-
-Expected output:
-```/m cs2040c addgrade A
-Module grade successfully added: 
-Module name: CS2040C
-CREDITS: 4
---------------------------- 
-SCHEDULE: 
---------------------------- 
-GRADE: A
-TASKS: []
-BREAKDOWN: 
-```
-
-### Add credit : `/m <module name> addcredit <credit value>`
-Adds credits to a module
-
-Examples:
-* `/m CS2113 addcredit 4`
-* `/m MA1511 addcredit 2`
-
-Expected output:
-```
-Module credits successfully added:
-Module name: CS2040C
-CREDITS: 4
---------------------------- 
-SCHEDULE:
---------------------------- 
-GRADE: A
-TASKS: []
-BREAKDOWN:
-```
-
-### View CAP : `cap `
-
-Shows the CAP for the currently accessed semester
-
-Format: `cap`
-
-Example input:
-
-* `cap`
+Shows the CAP for the currently accessed semester.
 
 Example output:
 
 * `This semester's CAP: 4.25`
 
-### View all CAP : `allcap `
+### View all CAP : `allcap`
 
-Shows the CAP for all semesters and aggregated CAP
+Shows the CAP for all semesters and aggregated CAP.
 
 Format: `allcap`
-
-Example input:
-
-* `allcap`
 
 Example output:
 
@@ -434,8 +405,6 @@ Example output:
 
 Exits the program.
 
-Format: `bye`
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -446,6 +415,33 @@ Format: `bye`
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
 * Add todo `todo n/TODO_NAME d/DEADLINE`
+
+|Action|Format|
+|--------|----------|
+|show help| help |
+|Show all semesters| list semesters|
+|Change semester| switch \<semester index>|
+|Add module| add \<module name>|
+|Delete module| delete \<module index>|
+|List all module| list module|
+|Add task| /m \<module> addtask \<description> /by \<date> \<time>|
+|Add gradable task | /m \<module> addgradable \<description> /by \<date> \<time> /w \<weightage>|
+|Edit description| /m \<module> editdesc <task index> <new description>|
+|Edit deadline| /m \<module> editdate <task index> <new deadline>|
+|Delete task| /m \<module> deletetask|
+|Mark task as complete| /m \<module> done \<task index>|
+|Mark task as incomplete| /m \<module> notdone \<task index>|
+|Mark gradable task as complete| /m \<module> gradabledone \<task index>|
+|Mark gradable task as incomplete| /m \<module> gradablenotdone \<task index>|
+|List module tasks| /m \<module> list task \<optional argument>|
+|Add class | /m \<module> addclass \<day/period/location/comments>|
+|Delete class| /m \<module> deleteclass \<class index>|
+|Add grade| /m \<module> addgrade \<grade letter>|
+|Delete grade| /m \<module> deletegrade|
+|Add credit| /m \<module> addcredit|
+|Show timetable| timetable|
+|List all tasks| list task \<optional argument>|
+|Show module cap| cap|
+|Show overall cap| allcap|
+|Exit NoCap|bye|

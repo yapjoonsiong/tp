@@ -314,7 +314,7 @@ Assign a credit number to the module.
 Shows the timetable for the currently accessed semester.
 
 Example output:
-![alt_text](media/timetableExampleOutput.png "image_tooltip")
+![alt_text](media/timetableExampleOutput.PNG "image_tooltip")
 
 Note:
 
@@ -414,8 +414,6 @@ Exits the program.
 > **WARNING**: Replacing data.json file in another NoCap folder results in the  existing data being erased!
 
 ## Command Summary
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
 
 |Action|Format|
 |--------|----------|

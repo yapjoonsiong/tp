@@ -7,6 +7,13 @@ import java.time.DateTimeException;
 public class GradableTask extends Task {
     protected int weightage;
 
+    /**
+     * Constructor for GradableTask, which inherits from Task.
+     *
+     * @param description Description of GradableTask
+     * @param date        Deadline of GradableTask
+     * @param weightage   Weightage of GradableTask
+     */
     public GradableTask(String description, String date, int weightage) {
         super(description, date);
         this.weightage = weightage;
@@ -26,6 +33,9 @@ public class GradableTask extends Task {
         return isDone;
     }
 
+    /**
+     * Reformats GradableTask for easier viewing.
+     */
     @Override
     public String toString() {
         return getDescription() + " by: " + createFormattedDeadline() + " Weightage "

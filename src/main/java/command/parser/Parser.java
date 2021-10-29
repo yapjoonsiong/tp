@@ -144,7 +144,7 @@ public class Parser {
             command.commandAddCredit(module, taskDescription);
             break;
         case DELETECLASS:
-            command.commandDeleteClass(module);
+            command.commandDeleteClass(module, taskDescription);
             break;
         case DELETETASK:
             command.commandDeleteTask(module, taskDescription);

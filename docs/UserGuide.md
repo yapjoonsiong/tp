@@ -199,7 +199,7 @@ Note:
 
 Format: `/m <module> addtask <description> /by <date> <time>`
 
-* The `date` is in the format of dd/MM/yy.
+* The `date` is in the format of dd/MM/yyyy.
 * The `time` is in the format of hhmm.
 * The `description` can contain white spaces.
 
@@ -210,6 +210,7 @@ Note:
   deadline.
 * If duplicate task has same deadline, new task will be rejected by the program.
 
+
 Example of usage:
 
 * `/m cs1010 addtask Remember to S/U /by 20/11/2020 0000`
@@ -217,6 +218,16 @@ Example of usage:
 Example of expected output:
 
 ![alt_text](media/AddTaskOutput.jpg)
+
+
+Warning :
+* For every month, the program will take in 01 - 31 as an input for the day of the month.
+* In the case when the month does not have 31 days, the program will treat any input after the last day of the month until 31 as the last day.
+
+Example:
+
+* Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
+* Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
 
 ### Add gradable task:`/m <module> addgradable`
 

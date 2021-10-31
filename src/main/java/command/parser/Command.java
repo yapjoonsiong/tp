@@ -9,7 +9,9 @@ import schedule.Schedule;
 import schedule.ScheduleList;
 import task.GradableTask;
 import task.Task;
+import task.TaskList;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class Command {
@@ -157,9 +159,12 @@ public class Command {
     }
 
     void commandEditDescription(Module module, String taskType, String taskDescription) {
+        TaskList list = module.getTaskList();
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
-        if (selectedTask != null) {
+        if (selectedTask != null && !list.hasDuplicateDescription(taskDescription)) {
             selectedTask.setDescription(taskDescription);
+        } else {
+            Ui.duplicateTaskError();
         }
     }
 

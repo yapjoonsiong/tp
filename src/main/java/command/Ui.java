@@ -312,4 +312,8 @@ public class Ui {
         System.out.println("Module grade has been successfully deleted");
         System.out.println(m);
     }
+
+    public static void emptyModuleListMessage() {
+        System.out.println("You currently have no Modules.");
+    }
 }

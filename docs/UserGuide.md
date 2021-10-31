@@ -25,10 +25,10 @@ app for NUS students!
   e.g. if the command
   specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`, `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
   is not acceptable.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `timetable `and `exit`) is not
-  acceptable. \
-  e.g. if the command specifies `help 123`, there will be an error.
-
+* Commands that require parameters must be supplied, if not an error will be thrown.
+  e.g. if the command specifies `/m CG1111 addclass MON/0800/E1-03/tutorial` , `/m CG1111 addclass MON/0800/E1-03/` is not acceptable.
+* All specifier commands are case-sensitive. 
+  e.g. `HELP`, `/M CG1111 ADDCLASS MON/0800/E1-03/tutorial` and `ADD CS2113T` are invalid commands.
 ### Viewing help : `help`
 Shows a message explaining how to use NoCap
 
@@ -124,7 +124,7 @@ Adds a Gradable Task to the module.
 * Refer to Add Task for deadline format.
 
 Note:
-* The weightage needs to be a number between 0 - 100.
+* The weightage needs to be an Integer between 5 - 100.
 * The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message will be shown.
 
 Examples:

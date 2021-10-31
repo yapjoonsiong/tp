@@ -3,6 +3,7 @@ package command.parser;
 import command.NoCap;
 import command.Ui;
 import module.Module;
+import module.ModuleList;
 import task.OverallTaskList;
 import task.TaskList;
 
@@ -76,7 +77,11 @@ public class ListParser {
     public void overallListParser(String taskType, String taskDescription) {
         switch (taskType) {
         case Parser.MODULE:
-            NoCap.moduleList.printModules();
+            if (NoCap.moduleList.size() == 0) {
+                Ui.emptyModuleListMessage();
+            } else {
+                NoCap.moduleList.printModules();
+            }
             break;
         case Parser.SEMESTERS:
             NoCap.semesterList.printSemesters();

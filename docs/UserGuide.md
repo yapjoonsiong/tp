@@ -140,11 +140,16 @@ Note:
 * The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message will be shown.
 
 Examples:
-* `/m CS2113 addgradable Finals /by 10/10/10 1000 /w 30`
-* `/m CS1010 addgradable assignments /by 10/10/10 1000 /w 40`
+* `/m CS2113 addgradable Finals /by 10/10/2010 1000 /w 30`
+* `/m CS2113 addgradable assignments /by 10/10/2010 1000 /w 40`
 
 Expected output:
-![alt_text](media/UGgradabletasklist.png)
+![](media/GradableTaskOutput.jpg)
+
+Note:
+
+* The suffix of the Gradable Task `[]` shows if the task is completed.
+* If it is completed, the suffix will show `[X]`.
 
 ### Edit description of task : `/m <module> editdesc <task index> <new description>`
 

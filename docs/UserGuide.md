@@ -8,10 +8,11 @@ app for NUS students!
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
+3. Move the downloaded NoCap.jar to an empty directory.
+4. Navigate to this directory on the Command Prompt.
+5. Run NoCap.jar using the command `java -jar NoCap.jar`.
 
 ## Features
 
@@ -476,8 +477,8 @@ Exits the program.
 |List all module| list module|
 |Add task| /m \<module> addtask \<description> /by \<date> \<time>|
 |Add gradable task | /m \<module> addgradable \<description> /by \<date> \<time> /w \<weightage>|
-|Edit description| /m \<module> editdesc <task index> <new description>|
-|Edit deadline| /m \<module> editdate <task index> <new deadline>|
+|Edit description| /m \<module> editdesc \<task index> \<new description>|
+|Edit deadline| /m \<module> editdate \<task index> \<new deadline>|
 |Delete task| /m \<module> deletetask|
 |Mark task as complete| /m \<module> done \<task index>|
 |Mark task as incomplete| /m \<module> notdone \<task index>|

@@ -71,6 +71,9 @@ public class ParserChecks {
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
 
+        if (input.equals("x")) {
+            return task;
+        }
         task = getTaskFromIndex(input, taskList);
         return task;
     }

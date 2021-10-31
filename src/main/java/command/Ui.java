@@ -297,7 +297,7 @@ public class Ui {
     }
 
     public static void duplicateTaskError() {
-        System.out.println("You are trying to add an existing task!");
+        System.out.println("Doing this will result in duplicate tasks!");
     }
 
     public static void taskUpdateMessage() {

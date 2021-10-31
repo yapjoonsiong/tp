@@ -340,7 +340,13 @@ TASKS: []
 BREAKDOWN: 
 ```
 
+<<<<<<< HEAD
+* The `date` is in the format of dd/MM/yyyy.
+* The `time` is in the format of hhmm.
+* The `description` can contain white spaces.
+=======
 ### Add credit to module: `/m <module> addcredit `
+>>>>>>> master
 
 Adds credits to a module.
 
@@ -348,6 +354,10 @@ Examples:
 * `/m CS2113 addcredit 4`
 * `/m MA1511 addcredit 2`
 
+<<<<<<< HEAD
+
+Example of usage:
+=======
 Example output:
 ```
 Module credits successfully added:
@@ -360,6 +370,7 @@ GRADE: A
 TASKS: []
 BREAKDOWN:
 ```
+>>>>>>> master
 
 ### View Timetable : `timetable `
 
@@ -368,7 +379,21 @@ Shows the timetable for the currently accessed semester.
 Example output:
 ![alt_text](media/timetableExampleOutput.PNG "image_tooltip")
 
+<<<<<<< HEAD
+
+Warning :
+* For every month, the program will take in 01 - 31 as an input for the day of the month.
+* In the case when the month does not have 31 days, the program will treat any input after the last day of the month until 31 as the last day.
+
+Example:
+
+* Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
+* Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
+
+### Add gradable task:`/m <module> addgradable`
+=======
 Note:
+>>>>>>> master
 
 * Timetable can only display classes from 0800 to 1700 periods
 

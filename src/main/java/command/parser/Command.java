@@ -148,12 +148,14 @@ public class Command {
         }
         Task selectedTask = parserChecks.getTaskFromKeyword(taskDescription, module.taskList.getTaskList());
         if (selectedTask != null) {
+            Ui.printTaskDeleted(selectedTask);
             module.deleteTask(selectedTask);
         }
     }
 
     void commandDeleteGrade(Module module) {
         module.deleteGrade();
+        Ui.deleteGradeMesage(module);
         NoCap.semester.updateCap();
         NoCap.semesterList.updateCap();
     }

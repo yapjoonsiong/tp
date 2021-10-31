@@ -146,6 +146,7 @@ public class Command {
         }
         Task selectedTask = parserChecks.getTaskFromKeyword(taskDescription, module.taskList.getTaskList());
         if (selectedTask != null) {
+            Ui.printTaskDeleted(selectedTask);
             module.deleteTask(selectedTask);
         }
     }

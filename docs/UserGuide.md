@@ -21,24 +21,20 @@ app for NUS students!
 * Words in `<>` are the parameters to be supplied by the user. \
   e.g. `add <module name>` `<module name>` is the name of the module supplied by the user.
 * Items in curved brackets describe the input format. \
-  e.g.` /m <module name> addtask <description> /by <deadline (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the
-  date-month-year and 24 hour time of the description.
+  e.g.` /m <module name> addtask <description> /by <deadline (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the date-month-year and 24 hour time of the description.
 * Parameters must be in the exact order as seen in the user guide. \
-  e.g. if the command specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`
-  , `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
+  e.g. if the command
+  specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`, `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
   is not acceptable.
-* Commands that require parameters must be supplied, if not an error will be thrown. e.g. if the command
-  specifies `/m CG1111 addclass MON/0800/E1-03/tutorial` , `/m CG1111 addclass MON/0800/E1-03/` is not acceptable.
-* All specifier commands are case-sensitive. e.g. `HELP`, `/M CG1111 ADDCLASS MON/0800/E1-03/tutorial` and `ADD CS2113T`
-  are invalid commands.
-
+* Commands that require parameters must be supplied, if not an error will be thrown.
+  e.g. if the command specifies `/m CG1111 addclass MON/0800/E1-03/tutorial` , `/m CG1111 addclass MON/0800/E1-03/` is not acceptable.
+* All specifier commands are case-sensitive. 
+  e.g. `HELP`, `/M CG1111 ADDCLASS MON/0800/E1-03/tutorial` and `ADD CS2113T` are invalid commands.
 ### Viewing help : `help`
-
 Shows a message explaining how to use NoCap
 
 ### Listing semesters : `list semesters`
-
-Lists all preloaded semesters and their corresponding indexes
+Lists all preloaded semesters and their corresponding indexes  
 
 Example output:
 
@@ -66,7 +62,7 @@ Examples:
 
 ### Adding module: `add <module>`
 
-Adds a module
+Adds a module  
 
 Examples:
 
@@ -137,17 +133,13 @@ Example:
 ### Add gradable task to module : `/m <module> addgradable`
 
 Adds a Gradable Task to the module.
-
 * Refer to Add Task for deadline format.
 
 Note:
-
 * The weightage needs to be an Integer between 5 - 100.
-* The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message
-  will be shown.
+* The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message will be shown.
 
 Examples:
-
 * `/m CS2113 addgradable Finals /by 10/10/10 1000 /w 30`
 * `/m CS1010 addgradable assignments /by 10/10/10 1000 /w 40`
 
@@ -156,7 +148,7 @@ Expected output:
 
 ### Edit description of task : `/m <module> editdesc <task index> <new description>`
 
-Edit the description of a task.
+Edit the description of a task. 
 
 ### Edit deadline of task : `/m <module> editdate <task index> <new date>`
 
@@ -173,7 +165,8 @@ Mark task as done.
 Other similar commands include:  
 Mark task as not done: `/m <module> notdone <task index>`  
 Mark gradable task as done:`/m <module> gradabledone <task index>`  
-Mark gradable task as not done:`/m <module> gradablenotdone <task index>`
+Mark gradable task as not done:`/m <module> gradablenotdone <task index>`  
+  
 
 ### Listing module tasks : `/m <module> list task`
 
@@ -192,6 +185,12 @@ optional arguments.
 * w - list tasks due within the next week.
 * m - list tasks due within the next month.
 * y - list tasks due within the next year.
+
+Task Prefixes:
+
+* There are 2 prefixes in each Tasks defined as `[ ]`
+* The first prefix is a `LATE` tag. If the task is overdue, the tag will show `[LATE]`
+* The second prefix is a `DONE` tag. If the task is marked completed, the tag will show `[X]`
 
 Examples with expected output:
 
@@ -321,12 +320,10 @@ Comments: lect
 Adds a grade to a module
 
 Examples:
-
 * `/m CS2113 addgrade A`
 * `/m MA1508 addgrade B-`
 
 Example output:
-
 ```/m cs2040c addgrade A
 Module grade successfully added: 
 Module name: CS2040C
@@ -344,12 +341,10 @@ BREAKDOWN:
 Deletes the grade, if any.
 
 Examples:
-
 * `/m CS2113 deletegrade`
 * `/m MA1511 deletegrade`
 
 Example output:
-
 ```
 Module grade has been successfully deleted
 Module name: CS1010
@@ -362,29 +357,15 @@ TASKS: []
 BREAKDOWN: 
 ```
 
-<<<<<<< HEAD
-
-* The `date` is in the format of dd/MM/yyyy.
-* The `time` is in the format of hhmm.
-* The `description` can contain white spaces. =======
-
 ### Add credit to module: `/m <module> addcredit `
-
-> > > > > > > master
 
 Adds credits to a module.
 
 Examples:
-
 * `/m CS2113 addcredit 4`
 * `/m MA1511 addcredit 2`
 
-<<<<<<< HEAD
-
-Example of usage:
-=======
 Example output:
-
 ```
 Module credits successfully added:
 Module name: CS2040C
@@ -397,8 +378,6 @@ TASKS: []
 BREAKDOWN:
 ```
 
-> > > > > > > master
-
 ### View Timetable : `timetable `
 
 Shows the timetable for the currently accessed semester.
@@ -406,23 +385,7 @@ Shows the timetable for the currently accessed semester.
 Example output:
 ![alt_text](media/timetableExampleOutput.PNG "image_tooltip")
 
-<<<<<<< HEAD
-
-Warning :
-
-* For every month, the program will take in 01 - 31 as an input for the day of the month.
-* In the case when the month does not have 31 days, the program will treat any input after the last day of the month
-  until 31 as the last day.
-
-Example:
-
-* Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
-* Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
-
-### Add gradable task:`/m <module> addgradable`
-=======
 Note:
-> > > > > > > master
 
 * Timetable can only display classes from 0800 to 1700 periods
 
@@ -475,6 +438,7 @@ NOTE:
 
 For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
 due date as a reminder that the user has forgotten to do the task.
+
 
 ### View CAP : `cap`
 

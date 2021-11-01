@@ -382,12 +382,33 @@ By default, all tasks in the current semester are listed, but this can be custom
 &lt;optional argument> includes:
 
 * sortbydate - Sort tasks by due date.
-* sortbystatus - Sort tasks by status, displaying finished tasks first.
+* sortbystatus - Sort tasks by status, displaying unfinished tasks first.
+* gradable - list gradable tasks only
 * w - list tasks due within the next week.
-* m - list tasks due within the next month.
+* m -  list tasks due within the next month.
 * y - list tasks due within the next year.
 
-Examples with expected output:
+Tasks are listed in the format:
+
+[Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]
+
+
+
+* [Module Name] - Name of the module
+* [Gradable] - Shows ‘G’ if the task is gradable, and ‘ ‘ if the task is non-gradable.
+* [Lateness] - Shows ‘LATE’ if the task is overdue. Only shows up for overdue tasks
+* [Done] - Shows ‘X’ if the task is done, and ‘ ‘ if the task isn’t done yet.
+* &lt;description> - Description of the task
+* &lt;deadline> - Deadline of the task
+* [Weightage] - Weightage of the task, if it is gradable. Only shows up for gradable tasks.
+
+Example task:
+
+`[CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]`
+
+This is a task belonging to the module CS2132 that is gradable and has not been done yet. It is due on  16 Dec 2021 12:00 AM, and has a weightage of 50%.
+
+Example commands with expected output:
 
 Assuming tasks have been added to modules beforehand:
 

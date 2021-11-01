@@ -262,6 +262,17 @@ public class Ui {
         }
     }
 
+    public static void printNormalTasks(List<OverallTask> newTaskList) {
+        System.out.println("Non-gradable tasks: ");
+        if (newTaskList.isEmpty()) {
+            System.out.println("You have no non-gradable tasks");
+            return;
+        }
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
     public static void visualiseGradableTask(GradableTaskList gl) {
         VisualiseGradable v = new VisualiseGradable(gl);
         v.print();

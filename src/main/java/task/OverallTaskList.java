@@ -33,16 +33,24 @@ public class OverallTaskList extends TaskList {
     private void addAllModuleListTasks(ModuleList moduleList) {
         for (Module module : moduleList.getModuleList()) {
             String moduleName = module.getModuleName();
-            for (Task task : module.getTaskList().taskList) {
-                task.updateOverdue();
-                overallTaskList.add(new OverallTask(task, moduleName));
-            }
-            for (GradableTask gradableTask : module.getGradableTaskList().gradableTaskList) {
-                gradableTask.updateOverdue();
-                overallTaskList.add(new OverallTask(gradableTask, moduleName));
-            }
+            addAllNormalTasks(module, moduleName);
+            addAllGradableTasks(module, moduleName);
         }
         logger.log(Level.INFO, "Add all tasks from module list to overall task list");
+    }
+
+    private void addAllGradableTasks(Module module, String moduleName) {
+        for (GradableTask gradableTask : module.getGradableTaskList().gradableTaskList) {
+            gradableTask.updateOverdue();
+            overallTaskList.add(new OverallTask(gradableTask, moduleName));
+        }
+    }
+
+    private void addAllNormalTasks(Module module, String moduleName) {
+        for (Task task : module.getTaskList().taskList) {
+            task.updateOverdue();
+            overallTaskList.add(new OverallTask(task, moduleName));
+        }
     }
 
     /**
@@ -58,7 +66,7 @@ public class OverallTaskList extends TaskList {
     }
 
     /**
-     *  all tasks in task list by status and prints it out to the output.
+     * all tasks in task list by status and prints it out to the output.
      */
     public void sortByStatusAndPrint() {
         List<OverallTask> newTaskList = overallTaskList
@@ -115,6 +123,20 @@ public class OverallTaskList extends TaskList {
                 .collect(Collectors.toList());
         Ui.printGradableTasks(newTaskList);
         logger.log(Level.INFO, "print gradable tasks");
+    }
+
+    /**
+     * Prints all non-gradable tasks in the task list.
+     */
+    public void printNormalTasks() {
+        List<OverallTask> newTaskList = overallTaskList
+                .stream()
+                .filter(t -> (
+                        !t.isGradable()
+                ))
+                .collect(Collectors.toList());
+        Ui.printNormalTasks(newTaskList);
+        logger.log(Level.INFO, "print normal tasks");
     }
 
     /**

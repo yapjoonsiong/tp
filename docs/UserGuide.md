@@ -130,7 +130,7 @@ Example:
 * Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
 * Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
 
-### Add gradable task to module : `/m <module> addgradable`
+### Add gradable task to module : `/m <module> addgradable <day/period/location/comments> /w <weightage>`
 
 Adds a Gradable Task to the module.
 * Refer to Add Task for deadline format.
@@ -247,6 +247,33 @@ NOTE:
 For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
 due date as a reminder that the user has forgotten to do the task.
 
+### Listing module gradable tasks : `/m <module> list gradable`
+
+Shows the breakdown of the module, with all the gradable tasks.
+
+Example with output:
+
+`/m cs1010 list gradable`
+```
+  BREAKDOWN:
+<======================50%=======================><=======20%========><=====15%=====><=====15%=====>
+##################################################@@@@@@@@@@@@@@@@@@@@&&&&&&&&&&&&&&&+++++++++++++++
+|-----------------------1------------------------||--------2---------||------3------||------4------|
+1: Finals
+2: Midterms
+3: Assignment 1
+4: Assignment 2
+
+1 Finals by: 11 Nov 2021 04:00 PM Weightage 50% [ ]
+2 Midterms by: 11 Oct 2021 10:00 AM Weightage 20% [ ]
+3 Assignment 1 by: 21 Oct 2021 10:00 AM Weightage 15% [ ]
+4 Assignment 2 by: 25 Oct 2021 11:59 PM Weightage 15% [ ]
+  
+  ```
+Note:
+
+* The suffix of the Gradable Task `[]` shows if the task is completed.
+* If it is completed, the suffix will show `[X]`.
 ### Add class to module : `/m <module> addclass <day/period/location/comments>`
 
 Adds a class to a module

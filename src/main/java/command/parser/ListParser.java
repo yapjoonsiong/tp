@@ -141,6 +141,9 @@ public class ListParser {
         case SHOW_YEAR:
             listYearly(module);
             break;
+        case SHOW_GRADABLE:
+            Ui.visualiseGradableTask(module.getGradableTaskList());
+            break;
         default:
             listAll(module);
             break;

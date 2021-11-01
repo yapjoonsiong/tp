@@ -37,11 +37,19 @@ public class Command {
     }
 
     void commandPrintCap() {
-        NoCap.semester.printCap();
+        try {
+            NoCap.semester.printCap();
+        } catch (NoCapExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     void commandPrintAllCap() {
-        NoCap.semesterList.printAllCap();
+        try {
+            NoCap.semesterList.printAllCap();
+        } catch (NoCapExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     void commandPrintTimeTable() {
@@ -58,9 +66,13 @@ public class Command {
                 || parserChecks.includeSpace(taskDescription)) {
             return;
         }
-        NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
-        Ui.addModuleNameMessage(NoCap.moduleList);
-        StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
+        try {
+            NoCap.moduleList.add(taskDescription.toUpperCase(Locale.ROOT));
+            Ui.addModuleNameMessage(NoCap.moduleList);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
+        } catch (NoCapExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     void commandAddClass(Module module, String taskDescription) {
@@ -99,18 +111,31 @@ public class Command {
         }
         module.addGrade(taskDescription);
         Ui.addModuleGradeMessage(module);
-        NoCap.semester.updateCap();
-        NoCap.semesterList.updateCap();
+        try {
+            NoCap.semester.updateCap();
+        } catch (NoCapExceptions e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            NoCap.semesterList.updateCap();
+        } catch (NoCapExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     void commandAddCredit(Module module, String taskDescription) {
-        if (parserChecks.isEmptyDescription(taskDescription)) {
+        if (parserChecks.isEmptyDescription(taskDescription)
+                || parserChecks.isNotInteger(taskDescription)) {
             return;
         }
-        module.addCredits(Integer.parseInt(taskDescription));
-        Ui.addModuleCreditsMessage(module);
-        NoCap.semester.updateCap();
-        NoCap.semesterList.updateCap();
+        try {
+            module.addCredits(Integer.parseInt(taskDescription));
+            Ui.addModuleCreditsMessage(module);
+            NoCap.semester.updateCap();
+            NoCap.semesterList.updateCap();
+        } catch (NoCapExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     void commandDeleteModule(String taskDescription) {
@@ -156,8 +181,16 @@ public class Command {
     void commandDeleteGrade(Module module) {
         module.deleteGrade();
         Ui.deleteGradeMesage(module);
-        NoCap.semester.updateCap();
-        NoCap.semesterList.updateCap();
+        try {
+            NoCap.semester.updateCap();
+        } catch (NoCapExceptions e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            NoCap.semesterList.updateCap();
+        } catch (NoCapExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     void commandEditDescription(Module module, String taskType, String taskDescription) {

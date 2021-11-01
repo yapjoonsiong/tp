@@ -27,11 +27,27 @@ class StorageEncoderTest {
     public void encodeModuleList_normalModuleList_success() {
         SemesterList semesters = new SemesterList();
         ModuleList modules = semesters.extractAccessedSemester().getModuleList();
-        modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
-        modules.add(new Module("CS2132"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2132"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 21/08/2022 1600");
-        modules.get(0).addCredits(4);
+        try {
+            modules.get(0).addCredits(4);
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         try {
             modules.get(2).addClass(new Schedule("MON", "1200", "E3", "Bad"));
         } catch (NoCapExceptions e) {
@@ -63,7 +79,7 @@ class StorageEncoderTest {
                     + "    \"semester\" : \"Y1S1\",\n"
                     + "    \"moduleList\" : {\n"
                     + "      \"moduleList\" : [ {\n"
-                    + "        \"letterGrade\" : null,\n"
+                    + "        \"letterGrade\" : \"NIL\",\n"
                     + "        \"points\" : 0.0,\n"
                     + "        \"moduleName\" : \"CS2102\",\n"
                     + "        \"taskList\" : {\n"
@@ -95,7 +111,7 @@ class StorageEncoderTest {
                     + "          \"gradableTaskList\" : [ ]\n"
                     + "        }\n"
                     + "      }, {\n"
-                    + "        \"letterGrade\" : null,\n"
+                    + "        \"letterGrade\" : \"NIL\",\n"
                     + "        \"points\" : 0.0,\n"
                     + "        \"moduleName\" : \"CS2112\",\n"
                     + "        \"taskList\" : {\n"
@@ -112,7 +128,7 @@ class StorageEncoderTest {
                     + "          \"gradableTaskList\" : [ ]\n"
                     + "        }\n"
                     + "      }, {\n"
-                    + "        \"letterGrade\" : null,\n"
+                    + "        \"letterGrade\" : \"NIL\",\n"
                     + "        \"points\" : 0.0,\n"
                     + "        \"moduleName\" : \"CS2132\",\n"
                     + "        \"taskList\" : {\n"

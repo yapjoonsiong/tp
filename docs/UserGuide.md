@@ -53,7 +53,8 @@ Example output:
 
 ### Switching semesters : `switch <semester index>`
 
-Switches the currently accessed semester to the corresponding input index. (refer to `list semesters` for the index)
+Switches the currently accessed semester to the corresponding input index. (refer to `list semesters` for the index).
+The currently accessed semester on start up is your last accessed semester from any previous use.
 
 Examples:
 
@@ -62,12 +63,15 @@ Examples:
 
 ### Adding module: `add <module>`
 
-Adds a module  
+Adds a module
 
 Examples:
 
 * `add CS2113T`
 * `add MA1508`
+
+Note:
+* Module code can only contain up to 16 characters
 
 ### Delete module: `delete <module index> `
 
@@ -347,6 +351,30 @@ Location: zoom
 Comments: lect
 ```
 
+### Add credit to module: `/m <module> addcredit `
+
+Add credits to a module.
+
+Examples:
+* `/m CS2113 addcredit 4`
+* `/m MA1511 addcredit 2`
+
+Example output:
+```
+Module credits successfully added:
+Module name: CS2040C
+CREDITS: 4
+--------------------------- 
+SCHEDULE:
+--------------------------- 
+GRADE: A
+TASKS: []
+BREAKDOWN:
+```
+
+Note:
+* Credit values must be positive integers
+
 ### Add grade to module: `/m <module> addgrade <grade letter>`
 
 Adds a grade to a module
@@ -367,6 +395,9 @@ GRADE: A
 TASKS: []
 BREAKDOWN: 
 ```
+Note:
+
+* A grade can be added to a module only after credit is assigned to the module.
 
 ### Delete grade from module: `/m <module> deletegrade`
 
@@ -387,27 +418,6 @@ SCHEDULE:
 GRADE: null
 TASKS: []
 BREAKDOWN: 
-```
-
-### Add credit to module: `/m <module> addcredit `
-
-Adds credits to a module.
-
-Examples:
-* `/m CS2113 addcredit 4`
-* `/m MA1511 addcredit 2`
-
-Example output:
-```
-Module credits successfully added:
-Module name: CS2040C
-CREDITS: 4
---------------------------- 
-SCHEDULE:
---------------------------- 
-GRADE: A
-TASKS: []
-BREAKDOWN:
 ```
 
 ### View Timetable : `timetable `

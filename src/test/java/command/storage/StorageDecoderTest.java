@@ -23,13 +23,25 @@ class StorageDecoderTest {
     public void decodeSemesterList_normalSemesterList_success() {
         SemesterList semesters = new SemesterList();
         ModuleList modules = semesters.extractAccessedSemester().getModuleList();
-        modules.add(new Module("CS2102"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 21/08/2022 1600");
         //Change semester index
         semesters.setAccessedSemesterIndex(1);
         modules = semesters.extractAccessedSemester().getModuleList();
-        modules.add(new Module("CS2112"));
-        modules.get(0).addCredits(4);
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.get(0).addCredits(4);
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         try {
             modules.get(0).addClass(new Schedule("WED", "1200", "E3", "Tutorial"));
         } catch (NoCapExceptions e) {
@@ -38,7 +50,11 @@ class StorageDecoderTest {
         //Change semester index
         semesters.setAccessedSemesterIndex(2);
         modules = semesters.extractAccessedSemester().getModuleList();
-        modules.add(new Module("CS2132"));
+        try {
+            modules.add(new Module("CS2132"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         try {
             modules.get(0).addClass(new Schedule("MON", "1200", "D3", "Lecture"));
         } catch (NoCapExceptions e) {

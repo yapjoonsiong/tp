@@ -1,6 +1,7 @@
 package semester;
 
 import command.NoCap;
+import exceptions.NoCapExceptions;
 import module.ModuleList;
 import module.Module;
 
@@ -33,7 +34,9 @@ public class Semester {
     protected void updateCredits() {
         int c = 0;
         for (Module module : moduleList.getModuleList()) {
-            c += module.getCredits();
+            if (module.getCredits() > 0) {
+                c += module.getCredits();
+            }
         }
         credits = c;
     }
@@ -46,15 +49,20 @@ public class Semester {
     protected void updatePoints() {
         double p = 0;
         for (Module module : moduleList.getModuleList()) {
-            p += module.getCredits() * module.getPoints();
+            if (module.getCredits() > 0) {
+                p += module.getCredits() * module.getPoints();
+            }
         }
         points = p;
     }
 
-    public void updateCap() {
+    public void updateCap() throws NoCapExceptions {
         updateCredits();
         updatePoints();
-        cap = points / credits;
+        if (credits == 0) {
+            throw new NoCapExceptions("Unable to calculate cap as no credit assigned to any existing module");
+        }
+            cap = points / credits;
     }
 
     public int getCredits() {
@@ -77,8 +85,9 @@ public class Semester {
         return this.semester;
     }
 
-    public void printCap() {
-        System.out.println("This semester's CAP: " + getCap());
+    public void printCap() throws NoCapExceptions {
+        updateCap();
+        System.out.println("This semester's CAP: " + (String)String.format("%.2f", getCap()));
     }
 
     @Override

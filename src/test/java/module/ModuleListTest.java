@@ -1,5 +1,6 @@
 package module;
 
+import exceptions.NoCapExceptions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +9,12 @@ public class ModuleListTest {
     @Test
     void get_success() {
         ModuleList moduleList = new ModuleList();
-        Module m = new Module("cs2113T");
+        Module m = null;
+        try {
+            m = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         moduleList.add(m);
         assertEquals(m, moduleList.get(0));
     }
@@ -16,7 +22,12 @@ public class ModuleListTest {
     @Test
     void find_success() {
         ModuleList moduleList = new ModuleList();
-        Module m = new Module("cs2113T");
+        Module m = null;
+        try {
+            m = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         moduleList.add(m);
         assertEquals(m, moduleList.find("cs2113T"));
     }
@@ -24,7 +35,12 @@ public class ModuleListTest {
     @Test
     void size_success() {
         ModuleList moduleList = new ModuleList();
-        Module m = new Module("cs2113T");
+        Module m = null;
+        try {
+            m = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         moduleList.add(m);
         assertEquals(1, moduleList.size());
     }
@@ -32,9 +48,24 @@ public class ModuleListTest {
     @Test
     void testDelete() {
         ModuleList moduleList1 = new ModuleList();
-        Module m1 = new Module("cs2113T");
-        Module m2 = new Module("Cs2040c");
-        Module m3 = new Module("ma1508E");
+        Module m1 = null;
+        try {
+            m1 = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m2 = null;
+        try {
+            m2 = new Module("Cs2040c");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m3 = null;
+        try {
+            m3 = new Module("ma1508E");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         moduleList1.add(m1);
         moduleList1.add(m2);
         moduleList1.add(m3);

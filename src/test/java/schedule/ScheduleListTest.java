@@ -30,7 +30,12 @@ public class ScheduleListTest {
     void getSchedule_success() {
         NoCap.moduleList = new ModuleList();
         ModuleList moduleList = NoCap.moduleList;
-        Module m = new Module("cs2113T");
+        Module m = null;
+        try {
+            m = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         moduleList.add(m);
 
         Schedule expected = null;
@@ -51,7 +56,12 @@ public class ScheduleListTest {
 
     @Test
     void getScheduleList_success() {
-        Module m = new Module("cs2113T");
+        Module m = null;
+        try {
+            m = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         ScheduleList expected = new ScheduleList();
         m.setScheduleList(expected);
         assertEquals(expected, m.getScheduleList());

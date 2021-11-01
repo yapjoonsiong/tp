@@ -47,7 +47,6 @@ public class ModuleListTest {
 
     @Test
     void testDelete() {
-        ModuleList moduleList1 = new ModuleList();
         Module m1 = null;
         try {
             m1 = new Module("cs2113T");
@@ -66,6 +65,7 @@ public class ModuleListTest {
         } catch (NoCapExceptions e) {
             e.printStackTrace();
         }
+        ModuleList moduleList1 = new ModuleList();
         moduleList1.add(m1);
         moduleList1.add(m2);
         moduleList1.add(m3);

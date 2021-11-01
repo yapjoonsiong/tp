@@ -136,7 +136,7 @@ public class TaskList {
         logger.log(Level.INFO, "Successfully added task");
     }
 
-    private boolean hasDuplicateDescription(String newTaskDescription) {
+    public boolean hasDuplicateDescription(String newTaskDescription) {
         for (Task task : this.taskList) {
             String taskDescription = task.getDescription().toLowerCase(Locale.ROOT);
             if (newTaskDescription.equals(taskDescription)) {

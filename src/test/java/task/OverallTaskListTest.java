@@ -1,5 +1,6 @@
 package task;
 
+import exceptions.NoCapExceptions;
 import module.Module;
 import module.ModuleList;
 import org.junit.jupiter.api.Test;
@@ -18,9 +19,21 @@ class OverallTaskListTest extends TaskListTest {
     @Test
     void addModuleList_normalList_success() {
         ModuleList modules = new ModuleList();
-        modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
-        modules.add(new Module("CS2132"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2132"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 21/08/2022 1600");
         modules.get(1).addTask("sleep /by 21/08/2022 1600");
         modules.get(2).addTask("sleep /by 21/08/2022 1600");
@@ -45,7 +58,11 @@ class OverallTaskListTest extends TaskListTest {
     void addModuleList_taskListOnly_success() {
         ModuleList modules = new ModuleList();
         OverallTaskList taskList = new OverallTaskList(modules);
-        modules.add(new Module("CS2102"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("assignment /by 21/08/2022 1600");
         String expected = "";
         assertEquals(expected, taskList.toString());
@@ -55,7 +72,11 @@ class OverallTaskListTest extends TaskListTest {
     void addModuleList_gradableListOnly_success() {
         ModuleList modules = new ModuleList();
         OverallTaskList taskList = new OverallTaskList(modules);
-        modules.add(new Module("CS2102"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addGradableTask("assignment /by 21/08/2022 /w 50");
         String expected = "";
         assertEquals(expected, taskList.toString());
@@ -64,9 +85,21 @@ class OverallTaskListTest extends TaskListTest {
     @Test
     void printModuleList_normalList_success() {
         ModuleList modules = new ModuleList();
-        modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
-        modules.add(new Module("CS2132"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2132"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 21/08/2022 1600");
         modules.get(1).addTask("sleep /by 21/08/2022 1600");
         modules.get(2).addTask("sleep /by 21/08/2022 1600");
@@ -102,9 +135,21 @@ class OverallTaskListTest extends TaskListTest {
     @Test
     void sortModuleListByDate_normalList_success() {
         ModuleList modules = new ModuleList();
-        modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
-        modules.add(new Module("CS2132"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2132"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 23/08/2022 1600");
         modules.get(1).addTask("sleep /by 21/08/2022 1600");
         modules.get(2).addTask("sleep /by 20/08/2022 1600");
@@ -125,9 +170,21 @@ class OverallTaskListTest extends TaskListTest {
     @Test
     void sortModuleListByStatus_normalList_success() {
         ModuleList modules = new ModuleList();
-        modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
-        modules.add(new Module("CS2132"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2132"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 23/08/2022 1600");
         modules.get(1).addTask("sleep /by 21/08/2022 1600");
         modules.get(2).addTask("sleep /by 20/08/2022 1600");
@@ -149,9 +206,21 @@ class OverallTaskListTest extends TaskListTest {
     @Test
     void printWeeklyTask_normalList_success() {
         ModuleList modules = new ModuleList();
-        modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
-        modules.add(new Module("CS2132"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2132"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 23/08/2022 1600");
         modules.get(1).addTask("sleep /by 21/10/2021 1600");
         modules.get(2).addTask("sleep /by 20/11/2021 1600");
@@ -171,9 +240,21 @@ class OverallTaskListTest extends TaskListTest {
     @Test
     void printMonthlyTask_normalList_success() {
         ModuleList modules = new ModuleList();
-        modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
-        modules.add(new Module("CS2132"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2132"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 23/08/2022 1600");
         modules.get(1).addTask("sleep /by 21/10/2021 1600");
         modules.get(2).addTask("sleep /by 12/11/2021 1600");
@@ -194,9 +275,21 @@ class OverallTaskListTest extends TaskListTest {
     @Test
     void printYearlyTask_normalList_success() {
         ModuleList modules = new ModuleList();
-        modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
-        modules.add(new Module("CS2132"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2132"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 23/12/2022 1600");
         modules.get(1).addTask("sleep /by 21/10/2021 1600");
         modules.get(2).addTask("sleep /by 20/11/2021 1600");
@@ -217,8 +310,16 @@ class OverallTaskListTest extends TaskListTest {
     @Test
     void printNormalTask_normalList_success() {
         ModuleList modules = new ModuleList();
-        modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 23/12/2022 1600");
         modules.get(1).addTask("sleep /by 21/10/2021 1600");
         modules.get(0).addGradableTask("assignment /by 23/12/2022 /w 20");
@@ -238,8 +339,16 @@ class OverallTaskListTest extends TaskListTest {
     @Test
     void printGradableTask_normalList_success() {
         ModuleList modules = new ModuleList();
-        modules.add(new Module("CS2102"));
-        modules.add(new Module("CS2112"));
+        try {
+            modules.add(new Module("CS2102"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            modules.add(new Module("CS2112"));
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         modules.get(0).addTask("sleep /by 23/12/2022 1600");
         modules.get(1).addTask("sleep /by 21/10/2021 1600");
         modules.get(0).addGradableTask("assignment /by 23/12/2022 /w 20");

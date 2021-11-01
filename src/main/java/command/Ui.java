@@ -55,8 +55,9 @@ public class Ui {
         System.out.println("You are missing a date!");
     }
 
-    public static void printStartMessage() {
+    public static void printStartMessage(String semester) {
         System.out.println("Welcome to NoCap");
+        System.out.println("You are now accessing semester: " + semester);
     }
 
     public static void printEndMessage() {

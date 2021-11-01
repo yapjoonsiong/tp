@@ -28,10 +28,11 @@ public class Schedule {
             throw new NoCapExceptions("location and comment must be less than 17 characters");
         }
         if (!isCorrectDayFormat(day)) {
-            throw new NoCapExceptions("Wrong day format");
+            throw new NoCapExceptions("Wrong day format. Please key in mon/tue/wed/thu/fri/sat in either LOWERCASE or "
+                    + "UPPERCASE");
         }
         if (!isCorrectTimeFormat(startTime)) {
-            throw new NoCapExceptions("Wrong time format");
+            throw new NoCapExceptions("Wrong time format. Please key in 1 hour blocks of time (eg. 1000/1300)");
         }
         this.day = day;
         this.startTime = startTime;

@@ -62,7 +62,7 @@ public class Semester {
         if (credits == 0) {
             throw new NoCapExceptions("Unable to calculate cap as no credit assigned to any existing module");
         }
-            cap = points / credits;
+        cap = points / credits;
     }
 
     public int getCredits() {

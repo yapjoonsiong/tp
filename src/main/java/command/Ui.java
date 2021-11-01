@@ -18,20 +18,33 @@ public class Ui {
     private static final String logo = "NoCap Logo";
 
     public static void printHelpMessage() {
-        System.out.println("Display help messages: help");
-        System.out.println("Add Module: add <module>");
-        System.out.println("Delete Module: delete <Module index>");
-        System.out.println("List tasks: list task");
-        System.out.println("List modules: list module");
-        System.out.println("Show timetable: timetable");
-        System.out.println("Add class to module: /m <module> addclass <description> /by <date>");
-        System.out.println("Add task to module: /m <module> addtask <description> /by <date>");
-        System.out.println("Add grade to module: /m <module> addgrade <gradeLetter>");
-        System.out.println("Mark task as done: /m <module> done <taskIndex>");
-        System.out.println("Delete all classes from a module: /m <module> deleteclass");
-        System.out.println("Delete all tasks from a module: /m <module> deletetask");
-        System.out.println("Delete grade from a module: /m <module> deletegrade");
-        System.out.println("Exit programme: bye");
+        System.out.println("Show help: help \n"
+                + "Show all semesters: list semesters\n"
+                + "Change semester: switch <semester index>\n"
+                + "Add module: add <module name>\n"
+                + "Delete module: delete <module index>\n"
+                + "List all module: list module\n"
+                + "Add task: /m <module> addtask <description> /by <date> <time>\n"
+                + "Add gradable task:  /m <module> addgradable <description> /by <date> <time> /w <weightage>\n"
+                + "Edit description: /m <module> editdesc <task index> <new description>\n"
+                + "Edit deadline: /m <module> editdate <task index> <new deadline>\n"
+                + "Delete task: /m <module> deletetask\n"
+                + "Mark task as complete: /m <module> done <task index>\n"
+                + "Mark task as incomplete: /m <module> notdone <task index>\n"
+                + "Mark gradable task as complete: /m <module> gradabledone <task index>\n"
+                + "Mark gradable task as incomplete: /m <module> gradablenotdone <task index>\n"
+                + "List module tasks: /m <module> list task <optional argument>\n"
+                + "Add class:  /m <module> addclass <day/period/location/comments>\n"
+                + "Delete class: /m <module> deleteclass <class index>\n"
+                + "Add grade: /m <module> addgrade <grade letter>\n"
+                + "Delete grade: /m <module> deletegrade\n"
+                + "Add credit: /m <module> addcredit\n"
+                + "Show timetable: timetable\n"
+                + "List all tasks: list task <optional argument>\n"
+                + "Show module cap: cap\n"
+                + "Show overall cap: allcap\n"
+                + "Exit NoCap: bye");
+
     }
 
     public static void missingDescription() {
@@ -157,7 +170,11 @@ public class Ui {
     }
 
     public static void printSelectIndex() {
-        System.out.println("Please choose a task to perform the action:");
+        System.out.println("Please choose a task to perform the action, or press x to cancel:");
+    }
+
+    public static void printTaskDeleted(Task task) {
+        System.out.println(task.getDescription() + "has been deleted.");
     }
 
     public static void printMarkDoneMessage(Task task) {
@@ -262,6 +279,17 @@ public class Ui {
         }
     }
 
+    public static void printNormalTasks(List<OverallTask> newTaskList) {
+        System.out.println("Non-gradable tasks: ");
+        if (newTaskList.isEmpty()) {
+            System.out.println("You have no non-gradable tasks");
+            return;
+        }
+        for (int i = 0; i < newTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + newTaskList.get(i));
+        }
+    }
+
     public static void visualiseGradableTask(GradableTaskList gl) {
         VisualiseGradable v = new VisualiseGradable(gl);
         v.print();
@@ -280,7 +308,7 @@ public class Ui {
     }
 
     public static void duplicateTaskError() {
-        System.out.println("You are trying to add an existing task!");
+        System.out.println("Doing this will result in duplicate tasks!");
     }
 
     public static void taskUpdateMessage() {
@@ -311,5 +339,9 @@ public class Ui {
     public static void deleteGradeMesage(Module m) {
         System.out.println("Module grade has been successfully deleted");
         System.out.println(m);
+    }
+
+    public static void emptyModuleListMessage() {
+        System.out.println("You currently have no Modules.");
     }
 }

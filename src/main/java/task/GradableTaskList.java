@@ -1,6 +1,7 @@
 package task;
 
 
+import command.NoCap;
 import command.VisualiseGradable;
 import command.parser.DateParser;
 import command.parser.Parser;
@@ -18,6 +19,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GradableTaskList extends TaskList {
+    public static final int MAXWEIGHTAGE = 100;
+    public static final int MINWEIGHTAGE = 5;
+
     protected ArrayList<GradableTask> gradableTaskList;
     private static final Logger logger = command.Logger.myLogger();
 
@@ -44,8 +48,8 @@ public class GradableTaskList extends TaskList {
             int weightagePos = description.indexOf(ParserChecks.START_OF_WEIGHTAGE);
             int weightage = Integer.parseInt(description.substring(weightagePos)
                     .replace(ParserChecks.START_OF_WEIGHTAGE, "").trim());
-            if (weightage < 5 || weightage > 100) {
-                throw new NoCapExceptions("");
+            if (weightage < MINWEIGHTAGE || weightage > MAXWEIGHTAGE) {
+                throw new NoCapExceptions("wrong weightage");
             }
             return weightage;
         } catch (NumberFormatException | NoCapExceptions e) {
@@ -61,7 +65,21 @@ public class GradableTaskList extends TaskList {
         }
         total += w;
 
-        return total <= 100;
+        return total <= MAXWEIGHTAGE;
+    }
+
+    private boolean inputChecks(int weightage, String date) {
+        if (weightage == 0) {
+            return false;
+        }
+        if (!checkTotalWeightage(weightage)) {
+            Ui.wrongWeightageSplits();
+            return false;
+        } else if (date.isBlank()) {
+            Ui.missingDate();
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -77,14 +95,7 @@ public class GradableTaskList extends TaskList {
         logger.log(Level.INFO, "Successfully added task");
         String date = getDate(userInput);
         int weightage = getWeightage(userInput);
-        if (weightage == 0) {
-            return;
-        }
-        if (!checkTotalWeightage(weightage)) {
-            Ui.wrongWeightageSplits();
-        } else if (date.isBlank()) {
-            Ui.missingDate();
-        } else {
+        if (inputChecks(weightage, date)) {
             try {
                 String description = removeDate(userInput);
                 DateParser.parseDate(date);

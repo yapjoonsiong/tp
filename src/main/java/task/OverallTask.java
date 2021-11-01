@@ -7,6 +7,11 @@ import java.util.Comparator;
  * Inherits from task class but adds a moduleName, weightage and gradable attribute.
  */
 public class OverallTask extends Task {
+    //Constants for comparators
+    private static final int RIGHT_HEAVY = 1;
+    private static final int LEFT_HEAVY = -1;
+    private static final int EQUAL = 0;
+
     private final String moduleName;
     private final boolean isGradable;
     private int weightage;
@@ -49,16 +54,17 @@ public class OverallTask extends Task {
      */
     public static Comparator<OverallTask> dateComparator = Comparator.comparing(t -> t.deadline);
 
+
     /**
      * Comparator used to compare "done" status between OverallTask objects.
      */
     public static Comparator<OverallTask> statusComparator = (task1, task2) -> {
         if (task1.isDone && !task2.isDone) {
-            return -1;
+            return LEFT_HEAVY;
         } else if (!task1.isDone && task2.isDone) {
-            return 1;
+            return RIGHT_HEAVY;
         } else {
-            return 0;
+            return EQUAL;
         }
     };
 

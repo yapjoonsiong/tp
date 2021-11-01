@@ -344,4 +344,8 @@ public class Ui {
     public static void emptyModuleListMessage() {
         System.out.println("You currently have no Modules.");
     }
+
+    public static void invalidGrade() {
+        System.out.println("Invalid grade!");
+    }
 }

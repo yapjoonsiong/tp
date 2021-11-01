@@ -8,10 +8,11 @@ app for NUS students!
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
+3. Move the downloaded NoCap.jar to an empty directory.
+4. Navigate to this directory on the Command Prompt.
+5. Run NoCap.jar using the command `java -jar NoCap.jar`.
 
 ## Features
 
@@ -99,7 +100,7 @@ Lists all added modules and their corresponding indexes.
 
 ### Add task to module : `/m <module> addtask <description> /by <date> <time>`
 
-* The `date` is in the format of dd/MM/yy.
+* The `date` is in the format of dd/MM/yyyy.
 * The `time` is in the format of hhmm.
 * The `description` can contain white spaces.
 
@@ -118,6 +119,17 @@ Example of expected output:
 
 ![alt_text](media/AddTaskOutput.jpg)
 
+Warning :
+
+* For every month, the program will take in 01 - 31 as an input for the day of the month.
+* In the case when the month does not have 31 days, the program will treat any input after the last day of the month
+  until 31 as the last day.
+
+Example:
+
+* Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
+* Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
+
 ### Add gradable task to module : `/m <module> addgradable`
 
 Adds a Gradable Task to the module.
@@ -128,11 +140,16 @@ Note:
 * The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message will be shown.
 
 Examples:
-* `/m CS2113 addgradable Finals /by 10/10/10 1000 /w 30`
-* `/m CS1010 addgradable assignments /by 10/10/10 1000 /w 40`
+* `/m CS2113 addgradable Finals /by 10/10/2010 1000 /w 30`
+* `/m CS2113 addgradable assignments /by 10/10/2010 1000 /w 40`
 
 Expected output:
-![alt_text](media/UGgradabletasklist.png)
+![](media/GradableTaskOutput.jpg)
+
+Note:
+
+* The suffix of the Gradable Task `[]` shows if the task is completed.
+* If it is completed, the suffix will show `[X]`.
 
 ### Edit description of task : `/m <module> editdesc <task index> <new description>`
 
@@ -173,6 +190,12 @@ optional arguments.
 * w - list tasks due within the next week.
 * m - list tasks due within the next month.
 * y - list tasks due within the next year.
+
+Task Prefixes:
+
+* There are 2 prefixes in each Tasks defined as `[ ]`
+* The first prefix is a `LATE` tag. If the task is overdue, the tag will show `[LATE]`
+* The second prefix is a `DONE` tag. If the task is marked completed, the tag will show `[X]`
 
 Examples with expected output:
 
@@ -382,12 +405,33 @@ By default, all tasks in the current semester are listed, but this can be custom
 &lt;optional argument> includes:
 
 * sortbydate - Sort tasks by due date.
-* sortbystatus - Sort tasks by status, displaying finished tasks first.
+* sortbystatus - Sort tasks by status, displaying unfinished tasks first.
+* gradable - list gradable tasks only
 * w - list tasks due within the next week.
-* m - list tasks due within the next month.
+* m -  list tasks due within the next month.
 * y - list tasks due within the next year.
 
-Examples with expected output:
+Tasks are listed in the format:
+
+[Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]
+
+
+
+* [Module Name] - Name of the module
+* [Gradable] - Shows ‘G’ if the task is gradable, and ‘ ‘ if the task is non-gradable.
+* [Lateness] - Shows ‘LATE’ if the task is overdue. Only shows up for overdue tasks
+* [Done] - Shows ‘X’ if the task is done, and ‘ ‘ if the task isn’t done yet.
+* &lt;description> - Description of the task
+* &lt;deadline> - Deadline of the task
+* [Weightage] - Weightage of the task, if it is gradable. Only shows up for gradable tasks.
+
+Example task:
+
+`[CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]`
+
+This is a task belonging to the module CS2132 that is gradable and has not been done yet. It is due on  16 Dec 2021 12:00 AM, and has a weightage of 50%.
+
+Example commands with expected output:
 
 Assuming tasks have been added to modules beforehand:
 
@@ -476,8 +520,8 @@ Exits the program.
 |List all module| list module|
 |Add task| /m \<module> addtask \<description> /by \<date> \<time>|
 |Add gradable task | /m \<module> addgradable \<description> /by \<date> \<time> /w \<weightage>|
-|Edit description| /m \<module> editdesc <task index> <new description>|
-|Edit deadline| /m \<module> editdate <task index> <new deadline>|
+|Edit description| /m \<module> editdesc \<task index> \<new description>|
+|Edit deadline| /m \<module> editdate \<task index> \<new deadline>|
 |Delete task| /m \<module> deletetask|
 |Mark task as complete| /m \<module> done \<task index>|
 |Mark task as incomplete| /m \<module> notdone \<task index>|

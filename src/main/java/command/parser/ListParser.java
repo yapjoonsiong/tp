@@ -18,7 +18,9 @@ public class ListParser {
     public static final String SHOW_MONTH = "m";
     public static final String SHOW_YEAR = "y";
     public static final String SHOW_GRADABLE = "gradable";
+    public static final String SHOW_NORMAL = "normal";
     private static final Logger logger = command.Logger.myLogger();
+
 
     public ListParser() {
     }
@@ -112,6 +114,10 @@ public class ListParser {
             case SHOW_GRADABLE:
                 allTaskList.printGradableTasks();
                 logger.log(Level.INFO, "Print gradable TaskList");
+                break;
+            case SHOW_NORMAL:
+                allTaskList.printNormalTasks();
+                logger.log(Level.INFO, "Print normal TaskList");
                 break;
             default:
                 allTaskList.printAllTasks();

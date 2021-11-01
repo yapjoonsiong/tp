@@ -94,7 +94,7 @@ public class Command {
     }
 
     void commandAddGrade(Module module, String taskDescription) {
-        if (parserChecks.isEmptyDescription(taskDescription)) {
+        if (parserChecks.isEmptyDescription(taskDescription) || !parserChecks.validGrade(taskDescription)) {
             return;
         }
         module.addGrade(taskDescription);

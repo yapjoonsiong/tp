@@ -368,6 +368,22 @@ TASKS: []
 BREAKDOWN: 
 ```
 
+Note:
+* The input for `<grade>` is case-sensitive. 
+* The input for `<grade>` must correspond to one of the following values:
+    1. A+
+    2. A
+    3. A-
+    4. B+
+    5. B
+    6. B-
+    7. C+
+    8. C
+    9. D+
+    10. D
+    11. F
+    
+
 ### Delete grade from module: `/m <module> deletegrade`
 
 Deletes the grade, if any.

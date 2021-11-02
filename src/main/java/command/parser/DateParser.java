@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
+/**
+ * Class containing parser methods that specifically handles dateTime input.
+ * Additional dateTime Format can be added to DateTimeFormatter.
+ */
 public class DateParser {
 
     private static DateTimeFormatter inputFormatter = new DateTimeFormatterBuilder()
@@ -24,10 +28,21 @@ public class DateParser {
 
     public static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
 
-    public static LocalDateTime parseDate(String str) {
-        return LocalDateTime.parse(str, inputFormatter);
+    /**
+     * Takes in an input string and parse it for LocalDateTime.
+     * Throws DateTimeException if invalid string.
+     *
+     * @param string input string to be parsed. Assumes not empty.
+     */
+    public static LocalDateTime parseDate(String string) {
+        return LocalDateTime.parse(string, inputFormatter);
     }
 
+    /**
+     * Takes in a LocalDateTime variable and returns String based on outputFormatter.
+     *
+     * @param dateTime LocaleDateTime to be parsed into String
+     */
     public static String dateStringOutput(LocalDateTime dateTime) {
         return dateTime.format(outputFormatter);
     }

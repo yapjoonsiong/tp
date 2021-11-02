@@ -5,15 +5,12 @@ import command.Ui;
 import command.storage.StorageEncoder;
 import module.Module;
 
-import semester.Semester;
-import task.GradableTask;
-import task.Task;
-import semester.SemesterList;
-
 import java.util.Locale;
 
+/**
+ * Class containing initial commands to parse the user input.
+ */
 public class Parser {
-
     public static final String EMPTY_STRING = "";
     public static final String SPACE_STRING = " ";
     public static final String SWITCHSEMESTER = "switch";
@@ -48,10 +45,8 @@ public class Parser {
 
     private String taskType;
     private String taskDescription;
-
     private final Command command = new Command();
     private final ListParser list = new ListParser();
-
     protected boolean isExit;
 
     public Parser() {
@@ -59,7 +54,8 @@ public class Parser {
     }
 
     /**
-     * Method to process user command.
+     * Takes in the initial user input and splits it into taskType and taskDescription
+     * to be further processed.
      *
      * @param line User input
      */
@@ -107,10 +103,11 @@ public class Parser {
     }
 
     /**
+     * Parser group for user inputs starting with /m
      * First separate the input int part is saved as module.
      * The next part is split again to obtain the new taskType and taskDescription
      *
-     * @param input String to be separated
+     * @param input string after removing /m
      */
     void moduleParser(String input) {
         splitInput(input);
@@ -181,7 +178,13 @@ public class Parser {
         }
     }
 
-    //split string on first space
+    /**
+     * Splits inputs string and store them into taskType and taskDescription.
+     * If there are no SPACE_STRING, taskType is the input String and taskDescription is EMPTY_STRING.
+     * If the input string is empty, both variables are set to empty.
+     *
+     * @param input string to be split
+     */
     void splitInput(String input) {
         try {
             int typePos = input.indexOf(SPACE_STRING);

@@ -528,6 +528,8 @@ Example output:
 
 * `This semester's CAP: 4.25`
 
+NOTE: Modules with a credit value of 0 will not be calculated towards overall CAP.
+
 ### View all CAP : `allcap`
 
 Shows the CAP for all semesters and aggregated CAP.

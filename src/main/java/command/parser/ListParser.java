@@ -3,15 +3,16 @@ package command.parser;
 import command.NoCap;
 import command.Ui;
 import module.Module;
-import module.ModuleList;
 import task.OverallTaskList;
 import task.TaskList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class containing parser methods that specifically handles list methods.
+ */
 public class ListParser {
-
     public static final String SORT_BY_DATE = "sortbydate";
     public static final String SORT_BY_STATUS = "sortbystatus";
     public static final String SHOW_WEEK = "w";
@@ -21,11 +22,10 @@ public class ListParser {
     public static final String SHOW_NORMAL = "normal";
     private static final Logger logger = command.Logger.myLogger();
 
-
     public ListParser() {
     }
 
-    boolean isEmpty(Module module) {
+    private boolean isEmpty(Module module) {
         if (module.taskList.size() == 0) {
             Ui.printEmptyTaskList(module.getModuleName());
             return true;
@@ -76,6 +76,15 @@ public class ListParser {
         }
     }
 
+    /**
+     * Parser method for listing outside of modules.
+     * Check if taskType is MODULE, SEMESTER or TASK. If not, print error message.
+     * If taskType is Task, taskDescription is checked for optional sorting methods. If none matches,
+     * a default listing method is used.
+     *
+     * @param taskType string indicating type of listing.
+     * @param taskDescription string indicating sorting methods if taskType is task. Ignored otherwise.
+     */
     public void overallListParser(String taskType, String taskDescription) {
         switch (taskType) {
         case Parser.MODULE:
@@ -130,6 +139,14 @@ public class ListParser {
         }
     }
 
+    /**
+     * Parser method for listing tasks within a module.
+     * if input matches a specific sorting method, then a specified list is printed. If not,
+     * a default listing method is used.
+     *
+     * @param module the module in which the tasks are being accessed.
+     * @param input string indicating sorting methods. Default sorting is used if sorting method stated is invalid.
+     */
     public void moduleListParser(Module module, String input) {
         switch (input) {
         case SORT_BY_DATE:

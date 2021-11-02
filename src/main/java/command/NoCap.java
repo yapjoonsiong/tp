@@ -16,7 +16,7 @@ public class NoCap {
     public static Semester semester;
 
     private void run() {
-        Ui.printStartMessage();
+        Ui.printStartMessage(semesterList.get(semesterList.getAccessedSemesterIndex()).getSemester());
         Parser parse = new Parser();
         Scanner in = new Scanner(System.in);
         while (!parse.isExit()) {

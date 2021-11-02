@@ -2,6 +2,7 @@ package module;
 
 import command.Ui;
 import command.storage.StorageDecoder;
+import exceptions.NoCapExceptions;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -40,7 +41,7 @@ public class ModuleList {
      *
      * @param input User input for Module name.
      */
-    public void add(String input) {
+    public void add(String input) throws NoCapExceptions {
         Module module = new Module(input);
         this.moduleList.add(module);
         logger.log(Level.INFO, "Module added successfully");

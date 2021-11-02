@@ -13,9 +13,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ModuleTest {
     @Test
     void testAddGrade() {
-        Module m1 = new Module("cs2113T");
-        Module m2 = new Module("cs2040c");
-        Module m3 = new Module("ma1508E");
+        Module m1 = null;
+        try {
+            m1 = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m2 = null;
+        try {
+            m2 = new Module("cs2040c");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m3 = null;
+        try {
+            m3 = new Module("ma1508E");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         m1.addGrade("A+");
         m2.addGrade("A-");
         m3.addGrade("B");
@@ -26,12 +41,39 @@ class ModuleTest {
 
     @Test
     void testAddCredit() {
-        Module m1 = new Module("cs2113T");
-        Module m2 = new Module("cs2040c");
-        Module m3 = new Module("ma1508E");
-        m1.addCredits(2);
-        m2.addCredits(4);
-        m3.addCredits(6);
+        Module m1 = null;
+        try {
+            m1 = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m2 = null;
+        try {
+            m2 = new Module("cs2040c");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m3 = null;
+        try {
+            m3 = new Module("ma1508E");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            m1.addCredits(2);
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            m2.addCredits(4);
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            m3.addCredits(6);
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         assertEquals(2, m1.credits);
         assertEquals(4, m2.credits);
         assertEquals(6, m3.credits);
@@ -39,12 +81,39 @@ class ModuleTest {
 
     @Test
     void getCredits() {
-        Module m1 = new Module("cs2113T");
-        Module m2 = new Module("cs2040c");
-        Module m3 = new Module("ma1508E");
-        m1.addCredits(2);
-        m2.addCredits(4);
-        m3.addCredits(6);
+        Module m1 = null;
+        try {
+            m1 = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m2 = null;
+        try {
+            m2 = new Module("cs2040c");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m3 = null;
+        try {
+            m3 = new Module("ma1508E");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            m1.addCredits(2);
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            m2.addCredits(4);
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        try {
+            m3.addCredits(6);
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         assertEquals(2, m1.getCredits());
         assertEquals(4, m2.getCredits());
         assertEquals(6, m3.getCredits());
@@ -52,9 +121,24 @@ class ModuleTest {
 
     @Test
     void getLetterGrade() {
-        Module m1 = new Module("cs2113T");
-        Module m2 = new Module("cs2040c");
-        Module m3 = new Module("ma1508E");
+        Module m1 = null;
+        try {
+            m1 = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m2 = null;
+        try {
+            m2 = new Module("cs2040c");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m3 = null;
+        try {
+            m3 = new Module("ma1508E");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         m1.addGrade("A+");
         m2.addGrade("A-");
         m3.addGrade("B");
@@ -65,9 +149,24 @@ class ModuleTest {
 
     @Test
     void getModuleName() {
-        Module m1 = new Module("cs2113T");
-        Module m2 = new Module("cs2040c");
-        Module m3 = new Module("ma1508E");
+        Module m1 = null;
+        try {
+            m1 = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m2 = null;
+        try {
+            m2 = new Module("cs2040c");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
+        Module m3 = null;
+        try {
+            m3 = new Module("ma1508E");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         assertEquals("cs2113T", m1.getModuleName());
         assertEquals("cs2040c", m2.getModuleName());
         assertEquals("ma1508E", m3.getModuleName());
@@ -75,7 +174,12 @@ class ModuleTest {
 
     @Test
     void getTaskList() {
-        Module m = new Module("cs2113T");
+        Module m = null;
+        try {
+            m = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         m.addTask("read /by 1800");
         TaskList taskList = new TaskList();
         taskList.addTask("cs2113T", "read /by 1800");
@@ -87,7 +191,12 @@ class ModuleTest {
     void getScheduleList() {
         NoCap.moduleList = new ModuleList();
         ModuleList moduleList = NoCap.moduleList;
-        Module m = new Module("cs2113T");
+        Module m = null;
+        try {
+            m = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         moduleList.add(m);
         try {
             m.addClass("WED/0800/E1-01/tut");
@@ -105,7 +214,12 @@ class ModuleTest {
     void size() {
         NoCap.moduleList = new ModuleList();
         ModuleList moduleList = NoCap.moduleList;
-        Module m = new Module("cs2113T");
+        Module m = null;
+        try {
+            m = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         moduleList.add(m);
         try {
             m.addClass("WED/0800/E1-01/tut");
@@ -129,10 +243,19 @@ class ModuleTest {
     void testToString() {
         NoCap.moduleList = new ModuleList();
         ModuleList moduleList = NoCap.moduleList;
-        Module m = new Module("cs2113T");
+        Module m = null;
+        try {
+            m = new Module("cs2113T");
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         moduleList.add(m);
         m.addGrade("A+");
-        m.addCredits(4);
+        try {
+            m.addCredits(4);
+        } catch (NoCapExceptions e) {
+            e.printStackTrace();
+        }
         try {
             m.addClass("WED/0800/E1-01/tut");
         } catch (NoCapExceptions e) {

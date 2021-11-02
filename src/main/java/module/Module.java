@@ -35,12 +35,15 @@ public class Module {
      *
      * @param moduleName Name of module to be created
      */
-    public Module(String moduleName) {
-        assert !moduleName.equals("");
+    public Module(String moduleName) throws NoCapExceptions {
+        if (moduleName.length() > 16) {
+            throw new NoCapExceptions("Module name must be less than 17 characters");
+        }
         this.moduleName = moduleName;
-        this.letterGrade = null;
+        this.letterGrade = "NIL";
         this.scheduleList = new ScheduleList();
         this.credits = 0;
+        this.points = 0;
         this.taskList = new TaskList();
         this.gradableTaskList = new GradableTaskList();
     }
@@ -124,7 +127,8 @@ public class Module {
     }
 
     public void deleteGrade() {
-        this.letterGrade = null;
+        this.letterGrade = "NIL";
+        updatePoints();
     }
 
     private void updatePoints() {
@@ -158,9 +162,8 @@ public class Module {
             points = 1.0;
             break;
         case "F":
-            points = 0;
-            break;
         default:
+            points = 0;
             break;
         }
     }
@@ -198,7 +201,10 @@ public class Module {
         this.taskList.delete(task);
     }
 
-    public void addCredits(int credits) {
+    public void addCredits(int credits) throws NoCapExceptions {
+        if (credits < 0) {
+            throw new NoCapExceptions("credit must be an integer > 0");
+        }
         this.credits = credits;
     }
 

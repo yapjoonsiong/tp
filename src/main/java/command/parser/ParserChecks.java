@@ -149,4 +149,35 @@ public class ParserChecks {
         }
         return false;
     }
+
+    boolean validGrade(String input) {
+        String grade = input.trim();
+        switch (grade) {
+        case "A+":
+            return true;
+        case "A":
+            return true;
+        case "A-":
+            return true;
+        case "B+":
+            return true;
+        case "B":
+            return true;
+        case "B-":
+            return true;
+        case "C+":
+            return true;
+        case "C":
+            return true;
+        case "D+":
+            return true;
+        case "D":
+            return true;
+        case "F":
+            return true;
+        default:
+            Ui.invalidGrade();
+            return false;
+        }
+    }
 }

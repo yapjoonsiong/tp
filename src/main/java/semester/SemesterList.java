@@ -1,5 +1,7 @@
 package semester;
 
+import exceptions.NoCapExceptions;
+
 import java.util.ArrayList;
 
 public class SemesterList {
@@ -98,9 +100,12 @@ public class SemesterList {
     /**
      * Method to update the aggregate CAP of all Semesters in semesterList.
      */
-    public void updateCap() {
+    public void updateCap() throws NoCapExceptions {
         updateCredits();
         updatePoints();
+        if (credits == 0) {
+            throw new NoCapExceptions("Unable to calculate cap as no credit assigned to any existing module");
+        }
         cap = points / credits;
     }
 
@@ -140,10 +145,15 @@ public class SemesterList {
     /**
      * Method to print aggregated CAP and CAP of each Semester.
      */
-    public void printAllCap() {
-        System.out.println("Cumulative CAP: " + getCap());
+    public void printAllCap() throws NoCapExceptions {
+        updateCap();
+        System.out.println("Cumulative CAP: " + (String)String.format("%.2f", getCap()));
         for (Semester semester : semesterList) {
-            System.out.println(semester.getSemester() + ": " + semester.getCap());
+            if (semester.getCredits() > 0) {
+                System.out.println(semester.getSemester() + ": " + (String)String.format("%.2f", semester.getCap()));
+            } else {
+                System.out.println(semester.getSemester() + ": 0.00");
+            }
         }
     }
 

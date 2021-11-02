@@ -459,7 +459,8 @@ By default, all tasks in the current semester are listed, but this can be custom
 
 * sortbydate - Sort tasks by due date.
 * sortbystatus - Sort tasks by status, displaying unfinished tasks first.
-* gradable - list gradable tasks only
+* gradable - list gradable tasks only.
+* normal - list non-gradable tasks only.
 * w - list tasks due within the next week.
 * m -  list tasks due within the next month.
 * y - list tasks due within the next year.

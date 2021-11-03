@@ -4,10 +4,6 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
-<br>
-<br>
 Third party libraries:
 
 - [Jackson Databind](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind)
@@ -300,7 +296,7 @@ How the Overall`TaskList` class works:
 4. The constructor calls the method `addAllModuleListTasks(module list)` which adds all the tasks in the module list
    into `OverallTaskList`.
 5. Once the object is instantiated, the following methods can be called to sort and print the tasks in the
-   ArrayList `overallTaskList. `All sorting and filtering is done via `Java Streams`, and method details are omitted.
+   ArrayList `overallTaskList`. All sorting and filtering is done via `Java Streams`, and method details are omitted.
 
 * `sortByDateAndPrint() - Print all tasks sorted by deadline`
 * `sortByStatusAndPrint() - Print all tasks sorted by status(done)`
@@ -330,13 +326,13 @@ a `Semester`. It stores information from `GradableTask/Task `objects together wi
 4. `isLate`
 5. `Deadline`
 6. `isGradable`
-7. `Weightage `
+7. `Weightage`
 8. `moduleName`
 
 How the `OverallTask` component works:
 
-1. It inherits from `Task`, with additional attributes `isGradable, Weightage `and `moduleName. `
-2. The attributes `isGradable, Weightage `are added to provide more information for gradable tasks, while `moduleName`
+1. It inherits from `Task`, with additional attributes `isGradable`, `Weightage` and `moduleName`. 
+2. The attributes `isGradable`, `Weightage`are added to provide more information for gradable tasks, while `moduleName`
    is added to display module information.
 3. It can be instantiated with 2 different constructors:
     * `OverallTask(task: Task, moduleName: String)` - Instantiates using a `Task` object <br/>
@@ -346,9 +342,8 @@ How the `OverallTask` component works:
 
 4. During instantiation, information from `Task/GradableTask` objects are added to the `OverallTask` object together
    with their `moduleName.`
-5. Calling the  `toString()` method` `generates a string containing task information together with its `moduleName.`
+5. Calling the  `toString()` method generates a string containing task information together with its `moduleName`.
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 # Appendix A: Product Scope
 

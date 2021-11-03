@@ -177,11 +177,11 @@ Mark gradable task as done:`/m <module> gradabledone <task index>`
 Mark gradable task as not done:`/m <module> gradablenotdone <task index>`  
   
 
-### Listing module tasks : `/m <module> list task`
+### Listing module tasks : `/m <module> list`
 
 Shows a list of task of specified module.
 
-Additional Format: `/m <module> list task <optional argument>`
+Additional Format: `/m <module> list <optional argument>`
 
 By default, all tasks in the module specified in the current semester are listed, but this can be customised by adding
 optional arguments.
@@ -200,12 +200,13 @@ Task Prefixes:
 * There are 2 prefixes in each Tasks defined as `[ ]`
 * The first prefix is a `LATE` tag. If the task is overdue, the tag will show `[LATE]`
 * The second prefix is a `DONE` tag. If the task is marked completed, the tag will show `[X]`
+* Format will be as follows `[LATE][DONE] <task description> <date> <time>`
 
 Examples with expected output:
 
 Assuming tasks have been added to modules beforehand:
 
-* `/m cs1010 list task`
+* `/m cs1010 list`
 
     ```
     Task List for CS1010: 
@@ -216,14 +217,14 @@ Assuming tasks have been added to modules beforehand:
   ```
 
 
-* `/m cs1010 list task sortbydate`
+* `/m cs1010 list sortbydate`
 
   ```
   CS1010 successfully sorted by date
   ```
 
   ```
-  /m cs1010 list task
+  /m cs1010 list
   ```
 
   ```
@@ -236,7 +237,7 @@ Assuming tasks have been added to modules beforehand:
   ```
 
 
-* `/m cs1010 list task w`
+* `/m cs1010 list w`
 
   ```
   Task List for CS1010: 
@@ -276,7 +277,7 @@ Example with output:
   ```
 Note:
 
-* The suffix of the Gradable Task `[]` shows if the task is completed.
+* The suffix of the Gradable Task `[ ]` shows if the task is completed.
 * If it is completed, the suffix will show `[X]`.
 ### Add class to module : `/m <module> addclass <day/period/location/comments>`
 

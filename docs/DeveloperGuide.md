@@ -347,6 +347,17 @@ How the `OverallTask` component works:
 
 # Appendix A: Product Scope
 
+###Target User Profile:
+* NUS student
+* is reasonably comfortable using CLI apps
+* can type fast
+* prefers typing to mouse interactions
+* prefer desktop apps over other types
+
+###Value Proposition: 
+A centralized platform which allows NUS Students to carry out their learning management 
+without needing to frequently switch between multiple tools or applications such as NUSMods, Luminus, Sticky Notes etc.
+
 # Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
@@ -360,7 +371,7 @@ How the `OverallTask` component works:
 |v2.0|Student|easily track my CAP progression|  gauge how well I am doing.|
 |v2.0|Student|have quick access to upcoming gradable assignments|be sure everything is prepared for.|
 |v2.0|Student|be able to know what classes i have up next|  prepare for them in time.|
-|v2.5|University student| see the weightage of the modules| place emphasis/focus on certain work when there is a lack of time.|
+|v2.1|University student| see the weightage of the modules| place emphasis/focus on certain work when there is a lack of time.|
 
 # Appendix C: Non Functional Requirements
 

@@ -557,6 +557,29 @@ Example output:
 
 Exits the program.
 
+### Saving data 
+
+Program data is saved whenever data is added or modified. The process is done automatically, so no user input is needed
+for this.
+
+### Loading data
+
+Program data is loaded from the data folder during startup of the program. If the program can detect the data
+file successfully, the data is loaded and the following message should appear:
+
+```
+Data loaded successfully
+Welcome to NoCap
+```
+
+On the other hand, if no data file can be found, the program starts with an empty template,
+and the following message should appear:
+
+```
+No save file found, starting with an empty template
+Welcome to NoCap
+```
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?

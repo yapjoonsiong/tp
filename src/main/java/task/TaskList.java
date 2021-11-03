@@ -191,7 +191,7 @@ public class TaskList {
     }
 
     public void showAllWeekly(String module) {
-        //  logger.log(Level.INFO, "Printing weekly tasks list...");
+        logger.log(Level.INFO, "Printing weekly tasks list...");
         ArrayList<Task> list = new ArrayList<>(weeklyTaskList());
         Ui.printWeeklyTaskList(module, list.size());
         printTasks(list);

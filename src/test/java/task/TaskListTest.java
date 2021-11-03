@@ -19,14 +19,14 @@ import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
 
 public class TaskListTest {
-    protected static final LocalDateTime refDate = LocalDateTime.now().withHour(0);
-    protected static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
-    protected static final String DATE_A = refDate.plusDays(1).plusHours(10).format(format);
-    protected static final String DATE_B = refDate.plusDays(6).plusHours(12).format(format);
-    protected static final String DATE_C = refDate.plusDays(13).plusHours(15).format(format);
-    protected static final String DATE_D = refDate.plusYears(2).plusHours(15).format(format);
-    protected static final String DATE_E = refDate.plusMonths(2).plusHours(15).format(format);
-    protected static final String DATE_OVERDUE = refDate.minusMonths(2).plusHours(15).format(format);
+    protected static final LocalDateTime REF_DATE = LocalDateTime.now().withHour(0);
+    protected static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
+    protected static final String DATE_A = REF_DATE.plusDays(1).plusHours(10).format(FORMAT);
+    protected static final String DATE_B = REF_DATE.plusDays(6).plusHours(12).format(FORMAT);
+    protected static final String DATE_C = REF_DATE.plusDays(13).plusHours(15).format(FORMAT);
+    protected static final String DATE_D = REF_DATE.plusYears(2).plusHours(15).format(FORMAT);
+    protected static final String DATE_E = REF_DATE.plusMonths(2).plusHours(15).format(FORMAT);
+    protected static final String DATE_OVERDUE = REF_DATE.minusMonths(2).plusHours(15).format(FORMAT);
 
     @Test
     void get_success() {

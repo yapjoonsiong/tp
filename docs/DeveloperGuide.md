@@ -347,14 +347,15 @@ How the `OverallTask` component works:
 
 # Appendix A: Product Scope
 
-###Target User Profile:
+**Target User Profile:**
 * NUS student
 * is reasonably comfortable using CLI apps
 * can type fast
 * prefers typing to mouse interactions
 * prefer desktop apps over other types
 
-###Value Proposition: 
+**Value Proposition:**
+
 A centralized platform which allows NUS Students to carry out their learning management 
 without needing to frequently switch between multiple tools or applications such as NUSMods, Luminus, Sticky Notes etc.
 

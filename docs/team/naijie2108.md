@@ -17,9 +17,10 @@
   * `OverallTask` and `OverallTaskList` classes
     * Classes used for listing all tasks in a semester
     * Includes methods which allows multiple ways of filtering and sorting of semester tasks.
+    * Added constructors which construct `OverallTask` from either `Task` or `GradableTask` objects.
     * Added custom comparators for better sorting of tasks
   * `exceptions` package
-    * Created a framework for custom exceptions to be used by others team members.
+    * Created a framework for custom exceptions to be used by other team members.
     * Consist of two classes `NoCapExceptions` and `ExceptionMessages`.
 * **Contributions to the UG** :
   * Features: Listing all tasks 

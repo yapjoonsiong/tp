@@ -470,21 +470,31 @@ Tasks are listed in the format:
 
 [Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]
 
-
-
 * [Module Name] - Name of the module
-* [Gradable] - Shows ‘G’ if the task is gradable, and ‘ ‘ if the task is non-gradable.
-* [Lateness] - Shows ‘LATE’ if the task is overdue. Only shows up for overdue tasks
-* [Done] - Shows ‘X’ if the task is done, and ‘ ‘ if the task isn’t done yet.
+* [Gradable] - Shows `[G]` if the task is gradable, and `[ ]` if the task is non-gradable.
+* [Lateness] - Shows `[LATE]` if the task is overdue. Only shows up for overdue tasks
+* [Done] - Shows `[X]` if the task is done, and `[ ]` if the task isn’t done yet.
 * &lt;description> - Description of the task
 * &lt;deadline> - Deadline of the task
 * [Weightage] - Weightage of the task, if it is gradable. Only shows up for gradable tasks.
 
-Example task:
+Example tasks:
 
-`[CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]`
+1. `[CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]`
 
-This is a task belonging to the module CS2132 that is gradable and has not been done yet. It is due on  16 Dec 2021 12:00 AM, and has a weightage of 50%.
+   * Belongs to the module CS2132
+   * Gradable 
+   * Not done yet 
+   * Due on  16 Dec 2021 12:00 AM
+   * Has a weightage of 50%.
+
+2. `[CS2132][ ][X] Quiz by: 16 Nov 2021 12:00 AM`
+
+   * Belongs to the module CS2132 
+   * Non-Gradable
+   * Done
+   * Due on  16 Nov 2021 12:00 AM
+ 
 
 Example commands with expected output:
 
@@ -515,10 +525,11 @@ Assuming tasks have been added to modules beforehand:
   1. [CS2132][G][LATE][ ] asdf by: 10 Dec 2000 12:00 AM [Weightage: 50%]
   ```
 
-NOTE:
-
+**NOTE**:<br>
 For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
-due date as a reminder that the user has forgotten to do the task.
+due date as a reminder that the user has forgotten to  do the task.
+
+
 
 
 ### View CAP : `cap`

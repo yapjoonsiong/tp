@@ -286,12 +286,12 @@ Note: Some methods are ommited from the class diagram to improve clarity
 The OverallTaskList class is instantiated from ListParser only when the end user needs to list available tasks in
 a `Semester`.
 
-How the Overall`TaskList` class works:
+How the `OverallTaskList` class works:
 
 1. `OverallTask` objects (explained further under `OverallTask`) are stored in an ArrayList `overallTaskList.`
 2. Both `Task` and `GradableTask` objects are converted to OverallTask objects first before being inserted into
    OverallTaskList.
-3. When the `OverallTaskList` object is instantiated, a `ModuleList `object from a semester is passed to its
+3. When the `OverallTaskList` object is instantiated, a `ModuleList` object from a semester is passed to its
    constructor.
 
 ![alt_text](media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
@@ -346,7 +346,7 @@ How the `OverallTask` component works:
       ![alt_text](media/OverallTaskConstructorGradableTaskSequenceDiagram.png "image_tooltip")
 
 4. During instantiation, information from `Task/GradableTask` objects are added to the `OverallTask` object together
-   with their `moduleName.`
+   with their `moduleName` .
 5. Calling the `toString()` method generates a string containing task information together with its `moduleName`.
 
 

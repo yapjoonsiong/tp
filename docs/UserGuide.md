@@ -450,7 +450,7 @@ Note:
 
 ### Listing all tasks : `list task`
 
-Shows a list of all tasks across modules
+Shows a list of all tasks within the current semester
 
 Additional format: `list task <optional argument>`
 

@@ -236,16 +236,17 @@ How the `TaskList` component works:
 
 ![](media/TaskListSequenceDiagram.png)
 
-1. `TaskList` stores all tasks in an `ArrayList&lt;Task>`.
-2. When the `addTask()` method is called, the methods `getDate()` and `removeDate()` return the `date` and `description`
-   component of the user input respectively and store it as a local variable of a `String` type.
-3. The `String` variables will then be passed to instantialize a new `Task` object.
-4. This `Task` object will then be stored in the `ArrayList` in the `TaskList` object.
-5. The methods `weeklyTaskList()`, `monthlyTaskList` and `yearlyTaskList()` returns an `ArrayList` which contains
+1. `TaskList` stores all tasks in an `ArrayList<Task>`.
+2. When the `addTask()` method is called, the method `getDate()` will return the `date` string from the user input 
+3. The method `removeDate()` will return the `description` string from the user input by removing the date component in the user input.
+4. Then store it as a local variable of a `String` type.
+5. The `String` variables will then be passed to instantialize a new `Task` object.
+6. This `Task` object will then be stored in the `ArrayList` in the `TaskList` object.
+7. The methods `weeklyTaskList()`, `monthlyTaskList` and `yearlyTaskList()` returns an `ArrayList` which contains
    the `Task` objects of deadline within a week, a month and a year respectively.
-6. The methods `sortTaskListByDate()`  and `sortTaskListByStatus()` will sort the current `TaskList` object by ascending
+8. The methods `sortTaskListByDate()`  and `sortTaskListByStatus()` will sort the current `TaskList` object by ascending
    order of `Deadline` and completion status respectively
-7. The `ArrayList` returned by the above methods can then be passed to `printTasks()` which will call `toString()` in
+9. The `ArrayList` returned by the above methods can then be passed to `printTasks()` which will call `toString()` in
    each `Task` object and print to the `Output Stream`.
 
 ## Task
@@ -262,6 +263,8 @@ How the `TaskList` component works:
 
 How the `Task` component works:
 
+![](media/TaskSequenceDiagram.png)
+
 1. Whenever the `Task` object is instantiated, the `attributes` listed above will be initialized by the `setter`
    methods: `setDescription()`,  `setDate()`,  `setDone()`, `setLate()` and `setDeadline()`.
 2. When calling `printAllTask()`, `printWeeklyTask()`, `printMonthlyTask()` in `OverallTaskList` the
@@ -271,6 +274,9 @@ How the `Task` component works:
    attribute `isLate` of the current `Task` object to `TRUE`.
 4. Calling the toString prints out the task information in the Task object.
 
+Note:
+* The printTask() call in the sequence diagram is a generalised method from: `OverallTaskList#addAllNormalTasks()`, `OverallTaskList#addAllGradableTasks()` and `TaskList#printTasks()`
+* Any call from the methods above will result in the following sequence in the sequence diagram.
 
 ## OverallTaskList
 

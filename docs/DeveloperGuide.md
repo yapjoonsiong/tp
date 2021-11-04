@@ -127,7 +127,7 @@ This is how CAP is computed:
 
 ![alt_text](media/capComputationSequenceDiagram.png)
 
-* When `commandAddGrade()` or `commandAddCredit()` is called in Parser, `addgrade(description)`
+* When `commandAddGrade()` or `commandAddCredit()` is called in Parser, `addGrade(description)`
   or `addCredit(description)` respectively are called in `Module`, setting the module’s `grade`, `points` and `credits`
   to their corresponding values.
 * Then, `updateCap()` is called in `Semester` with the newly set `grade`/`credits` values in `Module`, followed
@@ -196,28 +196,25 @@ ScheduleList consists of all data for the schedule for the module.
 
 This includes:
 
-day of week
-
-timeslot
-
-location
-
-comments
+1. `day`
+2. `location`
+3. `startTime`
+4. `comments`
 
 How ScheduleList works:
 
-1. An empty ScheduleList is created when a module is constructed.
-2. When addClass is called in module , ScheduleList parses the input from the user and splits the information into the
-   relevant information. The information is then used to generate a new instance of Schedule which is then added to the
+1. An empty `ScheduleList` is created when a module is constructed.
+2. When `addClass` is called in `module` , `ScheduleList` parses the input from the user and splits the information into the
+   relevant information. The information is then used to generate a new instance of `Schedule` which is then added to the
    list.
-3. toString() prints out all relevant schedule information in a list format. This is done by going through the list and
-   printing Schedule one after another.
+3. `toString()` prints out all relevant schedule information in a list format. This is done by going through the list and
+   printing `Schedule` one after another.
 
 Notes about ScheduleList
 
-- ScheduleList checks that the input for the day of the week is only from the list of possible days: MON, TUE, WED, THU,
-  FRI, SAT ,SUN. All other inputs will result in an exception being thrown.
-- When a new Schedule class is called, ScheduleList ensures that the length of venue and comments are less than 16
+- ScheduleList checks that the input for the day of the week is only from the list of possible days: `MON`, `TUE`, `WED`, `THU`,
+  `FRI`, `SAT` ,`SUN`. All other inputs will result in an exception being thrown.
+- When a new `Schedule` class is called, `ScheduleList` ensures that the length of venue and comments are less than 16
   characters in length. This is to ensure that it fits within its time slot within the Timetable when printed.
 
 ![scheduleseq](media/scheduleseq.png)
@@ -499,12 +496,116 @@ exploratory testing.
     2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
     3. Expected: Tasks are shown accordingly, depending on the optional argument
 
-## Add class to a module
-1. Select an existing module with reference to the command `list module`.
-2. Run the command `/m <module> addclass <day>/<period>/<location>/<comment>` where:
-   1. `<day>` can only take in the first 3 letters of the day, from monday to saturday.
-   2. `<period` can only be in blocks of 1 hour in 24-hour format (e.g. 1100 or 1300).
-   3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
+## Adding a module to a semester
+1. Adding a module with a valid name.
+    Expected: Module successfully added message shown and list of modules in current semester is printed
+2. Adding a module that already exists.
+   1. Prerequisite: view list of modules in current semester with list module.
+   2. Adding a module with the same name as a module in current list will result in the following
+      error message: 
+      `This module already exists!`
+3. Adding a module that is longer than 16 Characters
+   Expected error message: `Module name must be less than 17 characters`
+
+## Adding a grade to module
+1. Adding a valid grade.
+
+    Grade successfully added message shown and module information is printed.
+2. Adding an invalid grade.
+    
+    Invalid Grade error message will be shown
+   1. Test case : `/m cs2040c addgrade G`
+   
+        Expected: `Invalid grade!`
+   2. Test case : `/m cs2040c addgrade `
+
+        Expected: `You are missing a description!`
+
+## Adding a credit to module 
+1. Adding a valid credit.
+    
+    Credit successfully added message shown and module information is printed.
+2. Adding an invalid credit
+
+   Invalid Credit error message will be shown
+    1. Test case : `/m cs2040c addcredit four`
+
+       Expected: `Input must be an integer!`
+    2. Test case : `/m cs2040c addcredit`
+
+       Expected: `You are missing a description!`
+
+## Adding a class to module
+1. Prerequisite: look up timetable to see existing classes.
+    
+    Note:
+    1. `<day>` can only take in the first 3 letters of the day, from monday to saturday.
+    2. `<period` can only be in blocks of 1 hour in 24-hour format (e.g. 1100 or 1300).
+    3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
+    
+3. Adding a valid class
+
+   Class successfully added message shown and schedule information for the module is printed.
+4. Adding a class that already exists in that timeslot.
+
+   Expected: `A class already exists in this timeslot!` 
+5. Adding a  class with invalid syntax
+    
+    1. adding a class with invalid day syntax
+    
+    Test case: `/m  cs2040c addclass aaa/1200/zoom/tut`
+
+    Expected: Error message shown. No classes added.
+
+    2. Adding a  class with invalid timeslot.
+
+    Test case: `/m  cs2040c addclass aaa/2500/zoom/tut`
+
+    Expected: Error message shown. No classes added.
+
+    3. Adding a class with comments/location that have more than 16 characters.
+
+    Test case: `/m  cs2040c addclass aaa/2500/12345678901234567/tut`
+
+    Expected: Error message shown. No classes added.
+
+## Adding a GradableTask to module
+1. Adding a valid GradableTask to module. 
+
+    GradableTask successfully added message shown. Breakdown of all gradableTasks will be shown.
+2. Adding a GradableTask with an invalid syntax.
+    1. Invalid date syntax
+
+    Test case: `/m cs2040c addgradable finals /by 00/00/00  /w 50`
+
+    Expected: Invalid error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+    2. Invalid weightage 
+    
+    Weightage must be between 5-100
+
+    Test case: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
+
+    Expected: Invalid weightage error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+    3. Total weightage invalid
+   
+    Total weightage must be greater or equal to 100. Adding a weightage that exceeds 100 will cause an error message to be shown.
+   GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+## listing all gradable tasks
+1. To look at all breakdown of each module, the command `/m <module> list gradable` can be called.
+
+2. If there are no gradable tasks currently inside the module, an empty breakdown will be shown.
+
+    Expected:
+    ```
+   BREAKDOWN:
+   
+
+
+   
+    ```
 
 ## Delete class from a module
 1. Select an existing class index with reference to the command `/m <module> info`.

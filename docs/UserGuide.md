@@ -9,7 +9,7 @@ app for NUS students!
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
+2. Down the latest version of `NoCap` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
 3. Move the downloaded NoCap.jar to an empty directory.
 4. Navigate to this directory on the Command Prompt.
 5. Run NoCap.jar using the command `java -jar NoCap.jar`.
@@ -177,11 +177,11 @@ Mark gradable task as done:`/m <module> gradabledone <task index>`
 Mark gradable task as not done:`/m <module> gradablenotdone <task index>`  
   
 
-### Listing module tasks : `/m <module> list task`
+### Listing module tasks : `/m <module> list`
 
 Shows a list of task of specified module.
 
-Additional Format: `/m <module> list task <optional argument>`
+Additional Format: `/m <module> list <optional argument>`
 
 By default, all tasks in the module specified in the current semester are listed, but this can be customised by adding
 optional arguments.
@@ -200,12 +200,13 @@ Task Prefixes:
 * There are 2 prefixes in each Tasks defined as `[ ]`
 * The first prefix is a `LATE` tag. If the task is overdue, the tag will show `[LATE]`
 * The second prefix is a `DONE` tag. If the task is marked completed, the tag will show `[X]`
+* Format will be as follows `[LATE][DONE] <task description> <date> <time>`
 
 Examples with expected output:
 
 Assuming tasks have been added to modules beforehand:
 
-* `/m cs1010 list task`
+* `/m cs1010 list`
 
     ```
     Task List for CS1010: 
@@ -216,14 +217,14 @@ Assuming tasks have been added to modules beforehand:
   ```
 
 
-* `/m cs1010 list task sortbydate`
+* `/m cs1010 list sortbydate`
 
   ```
   CS1010 successfully sorted by date
   ```
 
   ```
-  /m cs1010 list task
+  /m cs1010 list
   ```
 
   ```
@@ -236,7 +237,7 @@ Assuming tasks have been added to modules beforehand:
   ```
 
 
-* `/m cs1010 list task w`
+* `/m cs1010 list w`
 
   ```
   Task List for CS1010: 
@@ -276,7 +277,7 @@ Example with output:
   ```
 Note:
 
-* The suffix of the Gradable Task `[]` shows if the task is completed.
+* The suffix of the Gradable Task `[ ]` shows if the task is completed.
 * If it is completed, the suffix will show `[X]`.
 ### Add class to module : `/m <module> addclass <day/period/location/comments>`
 
@@ -449,7 +450,7 @@ Note:
 
 ### Listing all tasks : `list task`
 
-Shows a list of all tasks across modules
+Shows a list of all tasks within the current semester
 
 Additional format: `list task <optional argument>`
 
@@ -469,21 +470,31 @@ Tasks are listed in the format:
 
 [Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]
 
-
-
 * [Module Name] - Name of the module
-* [Gradable] - Shows ‘G’ if the task is gradable, and ‘ ‘ if the task is non-gradable.
-* [Lateness] - Shows ‘LATE’ if the task is overdue. Only shows up for overdue tasks
-* [Done] - Shows ‘X’ if the task is done, and ‘ ‘ if the task isn’t done yet.
+* [Gradable] - Shows `[G]` if the task is gradable, and `[ ]` if the task is non-gradable.
+* [Lateness] - Shows `[LATE]` if the task is overdue. Only shows up for overdue tasks
+* [Done] - Shows `[X]` if the task is done, and `[ ]` if the task isn’t done yet.
 * &lt;description> - Description of the task
 * &lt;deadline> - Deadline of the task
 * [Weightage] - Weightage of the task, if it is gradable. Only shows up for gradable tasks.
 
-Example task:
+Example tasks:
 
-`[CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]`
+1. `[CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]`
 
-This is a task belonging to the module CS2132 that is gradable and has not been done yet. It is due on  16 Dec 2021 12:00 AM, and has a weightage of 50%.
+   * Belongs to the module CS2132
+   * Gradable 
+   * Not done yet 
+   * Due on  16 Dec 2021 12:00 AM
+   * Has a weightage of 50%.
+
+2. `[CS2132][ ][X] Quiz by: 16 Nov 2021 12:00 AM`
+
+   * Belongs to the module CS2132 
+   * Non-Gradable
+   * Done
+   * Due on  16 Nov 2021 12:00 AM
+ 
 
 Example commands with expected output:
 
@@ -514,10 +525,11 @@ Assuming tasks have been added to modules beforehand:
   1. [CS2132][G][LATE][ ] asdf by: 10 Dec 2000 12:00 AM [Weightage: 50%]
   ```
 
-NOTE:
-
+**NOTE**:<br>
 For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
-due date as a reminder that the user has forgotten to do the task.
+due date as a reminder that the user has forgotten to  do the task.
+
+
 
 
 ### View CAP : `cap`
@@ -527,6 +539,8 @@ Shows the CAP for the currently accessed semester.
 Example output:
 
 * `This semester's CAP: 4.25`
+
+NOTE: Modules with a credit value of 0 will not be calculated towards overall CAP.
 
 ### View all CAP : `allcap`
 
@@ -553,6 +567,29 @@ Example output:
 ### Exiting the program : `bye`
 
 Exits the program.
+
+### Saving data 
+
+Program data is saved whenever data is added or modified. The process is done automatically, so no user input is needed
+for this.
+
+### Loading data
+
+Program data is loaded from the data folder during startup of the program. If the program can detect the data
+file successfully, the data is loaded and the following message should appear:
+
+```
+Data loaded successfully
+Welcome to NoCap
+```
+
+On the other hand, if no data file can be found, the program starts with an empty template,
+and the following message should appear:
+
+```
+No save file found, starting with an empty template
+Welcome to NoCap
+```
 
 ## FAQ
 

@@ -43,10 +43,10 @@ public class StorageDecoder {
             Ui.loadFileSuccessful();
             logger.log(Level.INFO, "Load file successful");
         } catch (IOException e) {
-            System.out.println(e.getMessage());
             System.out.println("Error reading save file, creating new template");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            // Create a new save file if save file is corrupted
+            assert semesters.toString().equals(new SemesterList().toString());
+            StorageEncoder.encodeAndSaveSemesterListToJson(semesters);
         }
         return semesters;
     }

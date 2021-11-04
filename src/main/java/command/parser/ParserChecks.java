@@ -4,19 +4,29 @@ import command.NoCap;
 import command.Ui;
 import task.GradableTask;
 import task.Task;
-
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Class containing parser methods that specifically handles error checking.
+ * Also includes methods for getting Task from index or string.
+ */
 public class ParserChecks {
-
     public static final String START_OF_DATE = "/by";
     public static final String START_OF_WEIGHTAGE = "/w";
 
     public ParserChecks() {
     }
 
+    /**
+     * Returns a task at the specified index from a tasklist.
+     * If input is not an index, error message is printed.
+     * Returns null if task cannot be found.
+     *
+     * @param input index to be accessed.
+     * @param taskList arraylist with tasks.
+     */
     public Task getTaskFromIndex(String input, ArrayList<Task> taskList) {
         int index;
         Task task = null;
@@ -31,6 +41,14 @@ public class ParserChecks {
         return task;
     }
 
+    /**
+     * Returns a gradable task at the specified index from a tasklist.
+     * If input is not an index, error message is printed.
+     * Returns null if task cannot be found.
+     *
+     * @param input index to be accessed.
+     * @param taskList arraylist with gradable tasks.
+     */
     public GradableTask getGradableTaskFromIndex(String input, ArrayList<GradableTask> taskList) {
         int index;
         GradableTask task = null;
@@ -45,6 +63,14 @@ public class ParserChecks {
         return task;
     }
 
+    /**
+     * Searches for tasks containing keyword from an arraylist of tasks and creates a filtered arraylist.
+     * Prints out this filtered list and request for user input to select an index.
+     * Calls getTaskFromIndex to get task from the filtered list.
+     *
+     * @param keyword keyword to search for.
+     * @param allTaskList arraylist with all tasks.
+     */
     public Task getTaskFromKeyword(String keyword, ArrayList<Task> allTaskList) {
         Task task = null;
         ArrayList<Task> taskList = new ArrayList<Task>();
@@ -67,15 +93,20 @@ public class ParserChecks {
             counter++;
         }
 
-        Ui.printSelectIndex();
-        Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
+        String input = requestUserInput();
 
         if (input.equals("x")) {
             return task;
         }
         task = getTaskFromIndex(input, taskList);
         return task;
+    }
+
+    private String requestUserInput() {
+        Ui.printSelectIndex();
+        Scanner in = new Scanner(System.in);
+        String input = in.nextLine();
+        return input;
     }
 
     boolean isValidIndex(int index) {
@@ -132,6 +163,12 @@ public class ParserChecks {
         return true;
     }
 
+    /**
+     * Checks if /w exists after /by.
+     *
+     * @param input string to be checked
+     * @return true if checks passes.
+     */
     boolean hasWeightageDescription(String input) {
         int typePos = input.indexOf(START_OF_DATE);
         String secondPart = input.substring(typePos);
@@ -150,29 +187,25 @@ public class ParserChecks {
         return false;
     }
 
+    /**
+     * Checks the input string is a valid grade.
+     *
+     * @param input string to be checked.
+     * @return true if checks passes.
+     */
     boolean validGrade(String input) {
         String grade = input.trim();
         switch (grade) {
         case "A+":
-            return true;
         case "A":
-            return true;
         case "A-":
-            return true;
         case "B+":
-            return true;
         case "B":
-            return true;
         case "B-":
-            return true;
         case "C+":
-            return true;
         case "C":
-            return true;
         case "D+":
-            return true;
         case "D":
-            return true;
         case "F":
             return true;
         default:

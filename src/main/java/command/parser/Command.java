@@ -5,23 +5,28 @@ import command.Ui;
 import command.storage.StorageEncoder;
 import exceptions.NoCapExceptions;
 import module.Module;
-import schedule.Schedule;
-import schedule.ScheduleList;
 import task.GradableTask;
 import task.Task;
 import task.TaskList;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * Class containing parser methods that calls commands to other classes.
+ */
 public class Command {
 
     private final ParserChecks parserChecks = new ParserChecks();
 
-
     public Command() {
     }
 
+    /**
+     * Takes in an input string and parse it for semester index.
+     * Checks input is indeed an integer and not empty.
+     *
+     * @param taskDescription string index of Semester to switch to.
+     */
     void commandSwitchSemester(String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
                 | parserChecks.isNotInteger(taskDescription)) {
@@ -31,6 +36,7 @@ public class Command {
             NoCap.semesterList.setAccessedSemesterIndex(Integer.parseInt(taskDescription) - 1);
             Ui.switchSemesterMessage(NoCap.semesterList
                     .get(Integer.parseInt(taskDescription) - 1).getSemester());
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }
@@ -60,6 +66,12 @@ public class Command {
         module.showInformation();
     }
 
+    /**
+     * Takes in an input string and parse it for module name
+     * Checks input is not empty, module name does not already exists and does not include spaces.
+     *
+     * @param taskDescription module name to add.
+     */
     void commandAddModule(String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
                 || parserChecks.isDuplicateModule(taskDescription)
@@ -75,6 +87,13 @@ public class Command {
         }
     }
 
+    /**
+     * Takes in an input string and parse it for class information.
+     * Checks input is not empty.
+     *
+     * @param module module in which the class is to be added to.
+     * @param taskDescription class to add.
+     */
     void commandAddClass(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)) {
             return;
@@ -82,19 +101,33 @@ public class Command {
         try {
             module.addClass(taskDescription);
             Ui.addModuleClassMessage(module);
-            //**can you explain this
         } catch (NoCapExceptions e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Takes in an input string and parse it for task information
+     * Checks input is not empty and contains /by.
+     *
+     * @param module module in which the task is to be added to.
+     * @param taskDescription module name to add.
+     */
     void commandAddTask(Module module, String taskDescription) {
-        if (parserChecks.isEmptyDescription(taskDescription) || !parserChecks.hasDateDescription(taskDescription)) {
+        if (parserChecks.isEmptyDescription(taskDescription)
+                || !parserChecks.hasDateDescription(taskDescription)) {
             return;
         }
         module.addTask(taskDescription);
     }
 
+    /**
+     * Takes in an input string and parse it for task information
+     * Checks input is not empty and contains /by and /w.
+     *
+     * @param module module in which the gradable task is to be added to.
+     * @param taskDescription module name to add.
+     */
     void commandAddGradable(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
                 || !parserChecks.hasDateDescription(taskDescription)
@@ -105,6 +138,13 @@ public class Command {
         Ui.visualiseGradableTask(module.getGradableTaskList());
     }
 
+    /**
+     * Takes in an input string and parse it for grade information
+     * Checks input is not empty and contains a valid grade digit.
+     *
+     * @param module module in which the grade is to be added to.
+     * @param taskDescription grade to add
+     */
     void commandAddGrade(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription) || !parserChecks.validGrade(taskDescription)) {
             return;
@@ -123,6 +163,13 @@ public class Command {
         }
     }
 
+    /**
+     * Takes in an input string and parse it for credit information
+     * Checks input is not empty and is an integer.
+     *
+     * @param module module in which the credit is to be assigned to.
+     * @param taskDescription credit value to add
+     */
     void commandAddCredit(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
                 || parserChecks.isNotInteger(taskDescription)) {
@@ -138,6 +185,12 @@ public class Command {
         }
     }
 
+    /**
+     * Takes in a module index and deletes it from module list.
+     * Checks input is not empty and contains an index.
+     *
+     * @param taskDescription string index of module to delete.
+     */
     void commandDeleteModule(String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
                 || parserChecks.isNotInteger(taskDescription)) {
@@ -153,6 +206,13 @@ public class Command {
         }
     }
 
+    /**
+     * Deletes a class at the specified index from the module given.
+     * Checks input is not empty and contains an index.
+     *
+     * @param module module in which the class is to be deleted from.
+     * @param taskDescription string index of class to delete.
+     */
     void commandDeleteClass(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)
                 || parserChecks.isNotInteger(taskDescription)) {
@@ -167,6 +227,12 @@ public class Command {
         }
     }
 
+    /**
+     * Deletes a task from a module by searching for keyword matches.
+     *
+     * @param module module in which the task is to be deleted from.
+     * @param taskDescription keyword to search for.
+     */
     void commandDeleteTask(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)) {
             return;
@@ -178,6 +244,11 @@ public class Command {
         }
     }
 
+    /**
+     * Deletes an assigned grade from a module.
+     *
+     * @param module module in which the grade is to be deleted from.
+     */
     void commandDeleteGrade(Module module) {
         module.deleteGrade();
         Ui.deleteGradeMesage(module);
@@ -193,6 +264,15 @@ public class Command {
         }
     }
 
+    /**
+     * Edits the description of a task.
+     * Perform additional checks to verify that a task of that index can be found,
+     * and the provided description is not the same as an existing task.
+     *
+     * @param module module of the task to be edited.
+     * @param taskType index of the task in the module.
+     * @param taskDescription new description to replace the old description.
+     */
     void commandEditDescription(Module module, String taskType, String taskDescription) {
         TaskList list = module.getTaskList();
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
@@ -203,6 +283,14 @@ public class Command {
         }
     }
 
+    /**
+     * Edits the deadline of a task.
+     * Perform additional checks to verify that a task of that index can be found.
+     *
+     * @param module module of the task to be edited.
+     * @param taskType index of the task in the module.
+     * @param taskDescription new deadline to replace the old deadline.
+     */
     void commandEditDeadline(Module module, String taskType, String taskDescription) {
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
         if (selectedTask != null) {
@@ -210,6 +298,13 @@ public class Command {
         }
     }
 
+    /**
+     * Edit the status of a task to be completed.
+     * Checks taskDescription is not empty
+     *
+     * @param module module of the task to be edited.
+     * @param taskDescription index of task in module.
+     */
     void commandMarkDone(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)) {
             return;
@@ -220,6 +315,13 @@ public class Command {
         }
     }
 
+    /**
+     * Edit the status of a task to be not completed.
+     * Checks taskDescription is not empty
+     *
+     * @param module module of the task to be edited.
+     * @param taskDescription index of task in module.
+     */
     void commandMarkNotDone(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)) {
             return;
@@ -230,6 +332,13 @@ public class Command {
         }
     }
 
+    /**
+     * Edit the status of a gradable task to be completed.
+     * Checks taskDescription is not empty
+     *
+     * @param module module of the task to be edited.
+     * @param taskDescription index of task in module.
+     */
     void commandMarkGradableDone(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)) {
             return;
@@ -241,6 +350,13 @@ public class Command {
         }
     }
 
+    /**
+     * Edit the status of a gradable task to be not completed.
+     * Checks taskDescription is not empty
+     *
+     * @param module module of the task to be edited.
+     * @param taskDescription index of task in module.
+     */
     void commandMarkGradableNotDone(Module module, String taskDescription) {
         if (parserChecks.isEmptyDescription(taskDescription)) {
             return;

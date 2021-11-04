@@ -4,7 +4,7 @@ participant ":OverallTaskList" as OverallTaskList
 
 [->*OverallTaskList: new OverallTaskList(module list)
 activate OverallTaskList
-OverallTaskList->OverallTaskList:addAllModuleListTasks()
+OverallTaskList->OverallTaskList:addAllModuleListTasks(module list)
 activate OverallTaskList
 OverallTaskList-->OverallTaskList:
 deactivate OverallTaskList

@@ -127,7 +127,7 @@ This is how CAP is computed:
 
 ![alt_text](media/capComputationSequenceDiagram.png)
 
-* When `commandAddGrade()` or `commandAddCredit()` is called in Parser, `addgrade(description)`
+* When `commandAddGrade()` or `commandAddCredit()` is called in Parser, `addGrade(description)`
   or `addCredit(description)` respectively are called in `Module`, setting the module’s `grade`, `points` and `credits`
   to their corresponding values.
 * Then, `updateCap()` is called in `Semester` with the newly set `grade`/`credits` values in `Module`, followed
@@ -137,7 +137,8 @@ This is how CAP is computed:
 
 **API** : module
 
-All data related to module is stored in the module class. An Arraylist of Module is used to store and manage the modules. ModuleList is also responsible for constructing and printing out the Timetable.
+All data related to module is stored in the module class. An Arraylist of Module is used to store and manage the
+modules. ModuleList is also responsible for constructing and printing out the Timetable.
 
 ![moduleListClassDiagram](media/moduleListClassDiagram.png)
 
@@ -146,7 +147,8 @@ The modules are stored in an ArrayList and ModuleList uses the Module.get(int in
 - ModuleList is responsible for printing the Time Table.
 - ModuleList contains the getter method find(String input) which returns a module by the same name as the input.
 - Module contains getter and setter methods to change or access its contents.
-- When Module is constructed, an empty gradableTaskList, taskList and scheduleList wll be instantiated and stored in Module.
+- When Module is constructed, an empty gradableTaskList, taskList and scheduleList wll be instantiated and stored in
+  Module.
 
 Data stored in Module includes:
 
@@ -158,8 +160,8 @@ Data stored in Module includes:
 6. GradableTaskList
 7. ScheduleList
 
-<<<<<<< HEAD
-The modules are stored in an ArrayList and ModuleList uses the Module.get(int index) method to access the target Module.
+The modules are stored in an ArrayList and ModuleList uses the Module.get(int index) method to access the
+target Module.
 
 - ModuleList is responsible for printing the Time Table. It accesses different schedules of different mods before
   constructing a Time Table.
@@ -172,18 +174,19 @@ How printing a timetable works:
    corresponds to the schedule.
 
 - If day of week and timeslot corresponds, venue and comments information is printed out
-- If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead.
-=======
+- If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead. =======
+
 # ![modulePrintTimetableSeq](media/modulePrintTimetableSeq.png)
 
 How printing a timetable works:
 
-1. When Timetable is called, ModuleList goes into a loop to print out the timetable. ModuleList iterates through the 207 character long length and the 33 lines which makes up the entire timetable.
+1. When Timetable is called, ModuleList goes into a loop to print out the timetable. ModuleList iterates through the 207
+   character long length and the 33 lines which makes up the entire timetable.
 2. Each iteration of the loop can result in 1 of 3 cases:
 1. It is at a border. When this happens a &quot;#&quot; character is printed to the console which denotes a border.
 2. It is empty. When this happens a &quot; &quot;(blank) character is printed to the console.
-3. It contains module information. When this happens, getMoudleName() , getModuleLocation() and getModuleComment() is called. The information is then printed onto the console.
->>>>>>> master
+3. It contains module information. When this happens, getMoudleName() , getModuleLocation() and getModuleComment() is
+   called. The information is then printed onto the console.
 
 # ScheduleList
 
@@ -193,35 +196,34 @@ ScheduleList consists of all data for the schedule for the module.
 
 This includes:
 
-day of week
-
-timeslot
-
-location
-
-comments
+1. `day`
+2. `location`
+3. `startTime`
+4. `comments`
 
 How ScheduleList works:
 
-1. An empty ScheduleList is created when a module is constructed.
-2. When addClass is called in module , ScheduleList parses the input from the user and splits the information into the
-   relevant information. The information is then used to generate a new instance of Schedule which is then added to the
+1. An empty `ScheduleList` is created when a module is constructed.
+2. When `addClass` is called in `module` , `ScheduleList` parses the input from the user and splits the information into the
+   relevant information. The information is then used to generate a new instance of `Schedule` which is then added to the
    list.
-3. toString() prints out all relevant schedule information in a list format. This is done by going through the list and
-   printing Schedule one after another.
+3. `toString()` prints out all relevant schedule information in a list format. This is done by going through the list and
+   printing `Schedule` one after another.
 
 Notes about ScheduleList
 
-- ScheduleList checks that the input for the day of the week is only from the list of possible days: MON, TUE, WED, THU,
-  FRI, SAT ,SUN. All other inputs will result in an exception being thrown.
-- When a new Schedule class is called, ScheduleList ensures that the length of venue and comments are less than 16
+- ScheduleList checks that the input for the day of the week is only from the list of possible days: `MON`, `TUE`, `WED`, `THU`,
+  `FRI`, `SAT` ,`SUN`. All other inputs will result in an exception being thrown.
+- When a new `Schedule` class is called, `ScheduleList` ensures that the length of venue and comments are less than 16
   characters in length. This is to ensure that it fits within its time slot within the Timetable when printed.
 
 ![scheduleseq](media/scheduleseq.png)
 
 Adding Schedule to scheduleList
 
-- When addclass() is called, schedule first checks if there is a duplicate schedule currently in the list. This is done by going through the whole list and checking if a schedule has the same time slot. If there exists a schedule in the same time slot, an error message is printed.
+- When addclass() is called, schedule first checks if there is a duplicate schedule currently in the list. This is done
+  by going through the whole list and checking if a schedule has the same time slot. If there exists a schedule in the
+  same time slot, an error message is printed.
 - If it is an empty timeslot, schedule list parses the input and checks for formatting errors within the input.
 - A new instance of Schedule is generated and added to the schedule list.
 
@@ -235,16 +237,18 @@ How the `TaskList` component works:
 
 ![](media/TaskListSequenceDiagram.png)
 
-1. `TaskList` stores all tasks in an `ArrayList&lt;Task>`.
-2. When the `addTask()` method is called, the methods `getDate()` and `removeDate()` return the `date` and `description`
-   component of the user input respectively and store it as a local variable of a `String` type.
-3. The `String` variables will then be passed to instantialize a new `Task` object.
-4. This `Task` object will then be stored in the `ArrayList` in the `TaskList` object.
-5. The methods `weeklyTaskList()`, `monthlyTaskList` and `yearlyTaskList()` returns an `ArrayList` which contains
+1. `TaskList` stores all tasks in an `ArrayList<Task>`.
+2. When the `addTask()` method is called, the method `getDate()` will return the `date` string from the user input
+3. The method `removeDate()` will return the `description` string from the user input by removing the date component in
+   the user input.
+4. Then store it as a local variable of a `String` type.
+5. The `String` variables will then be passed to instantialize a new `Task` object.
+6. This `Task` object will then be stored in the `ArrayList` in the `TaskList` object.
+7. The methods `weeklyTaskList()`, `monthlyTaskList` and `yearlyTaskList()` returns an `ArrayList` which contains
    the `Task` objects of deadline within a week, a month and a year respectively.
-6. The methods `sortTaskListByDate()`  and `sortTaskListByStatus()` will sort the current `TaskList` object by ascending
+8. The methods `sortTaskListByDate()`  and `sortTaskListByStatus()` will sort the current `TaskList` object by ascending
    order of `Deadline` and completion status respectively
-7. The `ArrayList` returned by the above methods can then be passed to `printTasks()` which will call `toString()` in
+9. The `ArrayList` returned by the above methods can then be passed to `printTasks()` which will call `toString()` in
    each `Task` object and print to the `Output Stream`.
 
 ## Task
@@ -261,6 +265,8 @@ How the `TaskList` component works:
 
 How the `Task` component works:
 
+![](media/TaskSequenceDiagram.png)
+
 1. Whenever the `Task` object is instantiated, the `attributes` listed above will be initialized by the `setter`
    methods: `setDescription()`,  `setDate()`,  `setDone()`, `setLate()` and `setDeadline()`.
 2. When calling `printAllTask()`, `printWeeklyTask()`, `printMonthlyTask()` in `OverallTaskList` the
@@ -270,12 +276,18 @@ How the `Task` component works:
    attribute `isLate` of the current `Task` object to `TRUE`.
 4. Calling the toString prints out the task information in the Task object.
 
+Note:
+
+* The printTask() call in the sequence diagram is a generalised method from: `OverallTaskList#addAllNormalTasks()`
+  , `OverallTaskList#addAllGradableTasks()` and `TaskList#printTasks()`
+* Any call from the methods above will result in the following sequence in the sequence diagram.
 
 ## OverallTaskList
 
 ![alt_text](media/OverallTaskClassDiagram.png)
 
 _Class diagram for OverallTask and OverallTaskList_
+
 ```
 Note: Some methods are ommited from the class diagram to improve clarity
 ```
@@ -335,7 +347,7 @@ a `Semester`. It stores information from `GradableTask/Task `objects together wi
 
 How the `OverallTask` component works:
 
-1. It inherits from `Task`, with additional attributes `isGradable`, `weightage` and `moduleName`. 
+1. It inherits from `Task`, with additional attributes `isGradable`, `weightage` and `moduleName`.
 2. The attributes `isGradable`, `weightage` are added to provide more information for gradable tasks, while `moduleName`
    is added to display module information.
 3. It can be instantiated with 2 different constructors:
@@ -348,10 +360,10 @@ How the `OverallTask` component works:
    with their `moduleName` .
 5. Calling the `toString()` method generates a string containing task information together with its `moduleName`.
 
-
 # Appendix A: Product Scope
 
 **Target User Profile:**
+
 * NUS student
 * is reasonably comfortable using CLI apps
 * can type fast
@@ -360,8 +372,8 @@ How the `OverallTask` component works:
 
 **Value Proposition:**
 
-A centralized platform which allows NUS Students to carry out their learning management 
-without needing to frequently switch between multiple tools or applications such as NUSMods, Luminus, Sticky Notes etc.
+A centralized platform which allows NUS Students to carry out their learning management without needing to frequently
+switch between multiple tools or applications such as NUSMods, Luminus, Sticky Notes etc.
 
 # Appendix B: User Stories
 
@@ -379,69 +391,240 @@ without needing to frequently switch between multiple tools or applications such
 |v2.1|University student| see the weightage of the modules| place emphasis/focus on certain work when there is a lack of time.|
 
 # Appendix C: Non Functional Requirements
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 # Appendix D: Glossary
 
 # Appendix E: Instructions for Manual Testing
+
 Given below are instructions to test the app manually.
 
-**Note:** These instructions only provide a starting point for testers to work on, testers are expected to do more exploratory testing.
+**Note:** These instructions only provide a starting point for testers to work on, testers are expected to do more
+exploratory testing.
 
 ## Launch
+
 1. Initial launch
-   1. Download the JAR file and copy it into an empty folder
-   2. Open up your terminal, and navigate to the folder containing the JAR file
-   3. Type the following command:
+    1. Download the JAR file and copy it into an empty folder
+    2. Open up your terminal, and navigate to the folder containing the JAR file
+    3. Type the following command:
    ```
    java -jar NoCap.jar
    ```
-   **Note**: It is important that you navigate to the directory containing the JAR file before the running the application, as it may affect the location of the save file.
-
-
+   **Note**: It is important that you navigate to the directory containing the JAR file before the running the
+   application, as it may affect the location of the save file.
 
 ## Saving/Loading data
+
 1. Automatic saving
-   1. Carry out any command that adds/modifies data in the application, e.g `add CS2102`, or simply exit the application using the command `bye`.
-   2. Expected: A JSON file is created/updated automatically in the data folder located in folder containing the JAR file, provided the instructions in `Launch` is followed correctly. 
+    1. Carry out any command that adds/modifies data in the application, e.g `add CS2102`, or simply exit the
+       application using the command `bye`.
+    2. Expected: A JSON file is created/updated automatically in the data folder located in folder containing the JAR
+       file, provided the instructions in `Launch` is followed correctly.
 2. No save file exists
-   1. Prerequisites: Make sure the data folder does not exist/is deleted from the folder containing the JAR file.
-   2. Run the application as stated in `Launch`
-   3. Expected: Application starts with an empty template and shows the following message
-      ```
-      No save file found, starting with an empty template
-      Welcome to NoCap
-      ```
+    1. Prerequisites: Make sure the data folder does not exist/is deleted from the folder containing the JAR file.
+    2. Run the application as stated in `Launch`
+    3. Expected: Application starts with an empty template and shows the following message
+       ```
+       No save file found, starting with an empty template
+       Welcome to NoCap
+       ```
 3. Save file exists
-   1. Prerequisites: Make sure that a save file already exists in the data folder that is located in the folder containing the JAR file.
-        If not, simply carry out any command that adds/modifies data in the application, e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
-   2. Run the application as stated in `Launch`
-   3. Expected: Application loads the save file when starting the application and shows the following message
+    1. Prerequisites: Make sure that a save file already exists in the data folder that is located in the folder
+       containing the JAR file. If not, simply carry out any command that adds/modifies data in the application,
+       e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
+    2. Run the application as stated in `Launch`
+    3. Expected: Application loads the save file when starting the application and shows the following message
    ```
    Data loaded successfully
    Welcome to NoCap
    ```
 4. Corrupted save file
-   1. Prerequisites: Make sure that a save file already exists in the data folder that is located in the folder containing the JAR file
-      If not, simply carry out any command that adds/modifies data in the application, e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
-   2. Corrupt the save file by removing lines from the JSON file stored in the data folder.
-   3. Run the application
-   4. Expected: An error message is shown and application starts with an empty template, showing the message below: 
+    1. Prerequisites: Make sure that a save file already exists in the data folder that is located in the folder
+       containing the JAR file If not, simply carry out any command that adds/modifies data in the application,
+       e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
+    2. Corrupt the save file by removing lines from the JSON file stored in the data folder.
+    3. Run the application
+    4. Expected: An error message is shown and application starts with an empty template, showing the message below:
    ```
    Error reading save file, creating new template
    Welcome to NoCap
    ```
-## List tasks in a semester
-1. List tasks when there are no available tasks
-   1. Prerequisites: There should be no tasks added to modules in the current semester yet.
-   2. Run the command `list task`
-   3. Expected: No tasks are shown and the following message is shown:
+   
+## Listing semesters
+1. Run the command `list semesters`
+2. Expected: 10 pre-loaded semesters from Y1S1 to Y5S2 presented in the following message:
+    ```
+    1 : Y1S1
+    2 : Y1S2
+    3 : Y2S1
+    4 : Y2S2
+    5 : Y3S1
+    6 : Y3S2
+    7 : Y4S1
+    8 : Y4S2
+    9 : Y5S1
+    10 : Y5S2
+    ```
+    
+## Switching semesters
+1. On first use, NoCap defaults to Y1S1 semester
+2. On subsequent launches, NoCap defaults to the last accessed semester
+3. Switching between semesters
+   1. Choose a semester index from 1-10 with reference to `list semesters`
+   2. Run the command `switch <index>` to switch to the new semester
+   3. For example, if '3' is chosen, running `switch 3` gives the following expected message:
       ```
-      All tasks: 
-      You have no tasks
-      ```
-2. List tasks with optional arguments
-   1. Prerequisites: There should be tasks added to modules in the semester beforehand. Can be checked by running `list task`.
-      If there are no tasks in the semester, add in tasks first(including both gradable and non-gradable tasks)
-   2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
-   3. Expected: Tasks are shown accordingly, depending on the optional argument
+      Semester successfully switched
+      You are now accessing semester: Y2S1
 
+## List tasks in a semester
+
+1. List tasks when there are no available tasks
+    1. Prerequisites: There should be no tasks added to modules in the current semester yet.
+    2. Run the command `list task`
+    3. Expected: No tasks are shown and the following message is shown:
+       ```
+       All tasks: 
+       You have no tasks
+       ```
+2. List tasks with optional arguments
+    1. Prerequisites: There should be tasks added to modules in the semester beforehand. Can be checked by
+       running `list task`. If there are no tasks in the semester, add in tasks first(including both gradable and
+       non-gradable tasks)
+    2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
+    3. Expected: Tasks are shown accordingly, depending on the optional argument
+
+## Adding a module to a semester
+1. Adding a module with a valid name.
+    Expected: Module successfully added message shown and list of modules in current semester is printed
+2. Adding a module that already exists.
+   1. Prerequisite: view list of modules in current semester with list module.
+   2. Adding a module with the same name as a module in current list will result in the following
+      error message: 
+      `This module already exists!`
+3. Adding a module that is longer than 16 Characters
+   Expected error message: `Module name must be less than 17 characters`
+
+## Adding a grade to module
+1. Adding a valid grade.
+
+    Grade successfully added message shown and module information is printed.
+2. Adding an invalid grade.
+    
+    Invalid Grade error message will be shown
+   1. Test case : `/m cs2040c addgrade G`
+   
+        Expected: `Invalid grade!`
+   2. Test case : `/m cs2040c addgrade `
+
+        Expected: `You are missing a description!`
+
+## Adding a credit to module 
+1. Adding a valid credit.
+    
+    Credit successfully added message shown and module information is printed.
+2. Adding an invalid credit
+
+   Invalid Credit error message will be shown
+    1. Test case : `/m cs2040c addcredit four`
+
+       Expected: `Input must be an integer!`
+    2. Test case : `/m cs2040c addcredit`
+
+       Expected: `You are missing a description!`
+
+## Adding a class to module
+1. Prerequisite: look up timetable to see existing classes.
+    
+    Note:
+    1. `<day>` can only take in the first 3 letters of the day, from monday to saturday.
+    2. `<period` can only be in blocks of 1 hour in 24-hour format (e.g. 1100 or 1300).
+    3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
+    
+3. Adding a valid class
+
+   Class successfully added message shown and schedule information for the module is printed.
+4. Adding a class that already exists in that timeslot.
+
+   Expected: `A class already exists in this timeslot!` 
+5. Adding a  class with invalid syntax
+    
+    1. adding a class with invalid day syntax
+    
+    Test case: `/m  cs2040c addclass aaa/1200/zoom/tut`
+
+    Expected: Error message shown. No classes added.
+
+    2. Adding a  class with invalid timeslot.
+
+    Test case: `/m  cs2040c addclass aaa/2500/zoom/tut`
+
+    Expected: Error message shown. No classes added.
+
+    3. Adding a class with comments/location that have more than 16 characters.
+
+    Test case: `/m  cs2040c addclass aaa/2500/12345678901234567/tut`
+
+    Expected: Error message shown. No classes added.
+
+## Adding a GradableTask to module
+1. Adding a valid GradableTask to module. 
+
+    GradableTask successfully added message shown. Breakdown of all gradableTasks will be shown.
+2. Adding a GradableTask with an invalid syntax.
+    1. Invalid date syntax
+
+    Test case: `/m cs2040c addgradable finals /by 00/00/00  /w 50`
+
+    Expected: Invalid error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+    2. Invalid weightage 
+    
+    Weightage must be between 5-100
+
+    Test case: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
+
+    Expected: Invalid weightage error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+    3. Total weightage invalid
+   
+    Total weightage must be greater or equal to 100. Adding a weightage that exceeds 100 will cause an error message to be shown.
+   GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+## listing all gradable tasks
+1. To look at all breakdown of each module, the command `/m <module> list gradable` can be called.
+
+2. If there are no gradable tasks currently inside the module, an empty breakdown will be shown.
+
+    Expected:
+    ```
+   BREAKDOWN:
+   
+
+
+   
+    ```
+
+## Delete class from a module
+1. Select an existing class index with reference to the command `/m <module> info`.
+2. Run the command `/m <module> deleteclass <index>`.
+3. Expected: Corresponding class is deleted from module schedule.
+
+## Show timetable
+1. Run the command `timetable`
+2. Expected: Prints out a timetable of all classes from 0800 to 1700 periods
+
+## Show semester cap
+1. Run the command `cap`
+2. If no credit is added for any module in the semester, the following message is printed:
+    ```
+    Unable to calculate cap as no credit assigned to any existing module
+    ```
+3. Else, the cap is calculated accordingly and printed.
+
+## Show all cap
+1. Run the command `allcap`
+2. Expected: prints out the aggregate cumulative CAP and respective CAP of each semester
+3. Semesters with no credit assigned for any module will default to 0.00 CAP

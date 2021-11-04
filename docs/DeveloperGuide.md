@@ -132,7 +132,7 @@ This is how CAP is computed:
 
 ![alt_text](media/capComputationSequenceDiagram.png)
 
-* When `commandAddGrade()` or `commandAddCredit()` is called in Parser, `addgrade(description)`
+* When `commandAddGrade()` or `commandAddCredit()` is called in Parser, `addGrade(description)`
   or `addCredit(description)` respectively are called in `Module`, setting the module’s `grade`, `points` and `credits`
   to their corresponding values.
 * Then, `updateCap()` is called in `Semester` with the newly set `grade`/`credits` values in `Module`, followed
@@ -163,22 +163,12 @@ Data stored in Module includes:
 6. GradableTaskList
 7. ScheduleList
 
-<<<<<<< HEAD
 The modules are stored in an ArrayList and ModuleList uses the Module.get(int index) method to access the target Module.
 
 - ModuleList is responsible for printing the Time Table. It accesses different schedules of different mods before
   constructing a Time Table.
 - ModuleList contains getter method find(String input) which returns a module by the same name as the input.
 
-How printing a timetable works:
-
-1. ModuleList first extracts day of week and timeslot information from different schedules.
-2. It then prints out the Timetable one line at a time. At the same time it checks if the day of week and the timeslot
-   corresponds to the schedule.
-
-- If day of week and timeslot corresponds, venue and comments information is printed out
-- If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead.
-=======
 # ![modulePrintTimetableSeq](media/modulePrintTimetableSeq.png)
 
 How printing a timetable works:
@@ -188,7 +178,6 @@ How printing a timetable works:
 1. It is at a border. When this happens a &quot;#&quot; character is printed to the console which denotes a border.
 2. It is empty. When this happens a &quot; &quot;(blank) character is printed to the console.
 3. It contains module information. When this happens, getMoudleName() , getModuleLocation() and getModuleComment() is called. The information is then printed onto the console.
->>>>>>> master
 
 # ScheduleList
 
@@ -198,28 +187,25 @@ ScheduleList consists of all data for the schedule for the module.
 
 This includes:
 
-day of week
-
-timeslot
-
-location
-
-comments
+1. `day`
+2. `location`
+3. `startTime`
+4. `comments`
 
 How ScheduleList works:
 
-1. An empty ScheduleList is created when a module is constructed.
-2. When addClass is called in module , ScheduleList parses the input from the user and splits the information into the
-   relevant information. The information is then used to generate a new instance of Schedule which is then added to the
+1. An empty `ScheduleList` is created when a module is constructed.
+2. When `addClass` is called in `module` , `ScheduleList` parses the input from the user and splits the information into the
+   relevant information. The information is then used to generate a new instance of `Schedule` which is then added to the
    list.
-3. toString() prints out all relevant schedule information in a list format. This is done by going through the list and
-   printing Schedule one after another.
+3. `toString()` prints out all relevant schedule information in a list format. This is done by going through the list and
+   printing `Schedule` one after another.
 
 Notes about ScheduleList
 
-- ScheduleList checks that the input for the day of the week is only from the list of possible days: MON, TUE, WED, THU,
-  FRI, SAT ,SUN. All other inputs will result in an exception being thrown.
-- When a new Schedule class is called, ScheduleList ensures that the length of venue and comments are less than 16
+- ScheduleList checks that the input for the day of the week is only from the list of possible days: `MON`, `TUE`, `WED`, `THU`,
+  `FRI`, `SAT` ,`SUN`. All other inputs will result in an exception being thrown.
+- When a new `Schedule` class is called, `ScheduleList` ensures that the length of venue and comments are less than 16
   characters in length. This is to ensure that it fits within its time slot within the Timetable when printed.
 
 ![scheduleseq](media/scheduleseq.png)

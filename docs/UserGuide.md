@@ -157,7 +157,11 @@ Note:
 
 ### Edit description of task : `/m <module> editdesc <task index> <new description>`
 
-Edit the description of a task. 
+Edit the description of a task.
+
+Note:
+
+* An error message will be shown if the user input a duplicate description of an existing task.
 
 ### Edit deadline of task : `/m <module> editdate <task index> <new date>`
 
@@ -197,7 +201,7 @@ optional arguments.
 
 Task Prefixes:
 
-* There are 2 prefixes in each Tasks defined as `[ ]`
+* There are 2 prefixes in each Task defined as `[ ]`
 * The first prefix is a `LATE` tag. If the task is overdue, the tag will show `[LATE]`
 * The second prefix is a `DONE` tag. If the task is marked completed, the tag will show `[X]`
 * Format will be as follows `[LATE][DONE] <task description> <date> <time>`
@@ -385,17 +389,18 @@ Examples:
 * `/m MA1508 addgrade B-`
 
 Example output:
-```/m cs2040c addgrade A
-Module grade successfully added: 
-Module name: CS2040C
-CREDITS: 4
---------------------------- 
-SCHEDULE: 
---------------------------- 
-GRADE: A
-TASKS: []
-BREAKDOWN: 
-```
+
+    /m cs2040c addgrade A
+    Module grade successfully added: 
+    Module name: CS2040C
+    CREDITS: 4
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: A
+    TASKS: []
+    BREAKDOWN:
+
 Note:
 
 * A grade can be added to a module only after credit is assigned to the module.
@@ -425,17 +430,17 @@ Examples:
 * `/m MA1511 deletegrade`
 
 Example output:
-```
-Module grade has been successfully deleted
-Module name: CS1010
-CREDITS: 0
---------------------------- 
-SCHEDULE: 
---------------------------- 
-GRADE: null
-TASKS: []
-BREAKDOWN: 
-```
+
+    Module grade has been successfully deleted
+    Module name: CS1010
+    CREDITS: 0
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: null
+    TASKS: []
+    BREAKDOWN: 
+
 
 ### View Timetable : `timetable `
 
@@ -550,7 +555,6 @@ Format: `allcap`
 
 Example output:
 
-```
     Cumulative CAP: 4.25
     Y1S1: 4.25
     Y1S2: 0.0
@@ -562,7 +566,6 @@ Example output:
     Y4S2: 0.0
     Y5S1: 0.0
     Y5S2: 0.0
-```
 
 ### Exiting the program : `bye`
 
@@ -626,6 +629,6 @@ Welcome to NoCap
 |Add credit| /m \<module> addcredit|
 |Show timetable| timetable|
 |List all tasks| list task \<optional argument>|
-|Show module cap| cap|
+|Show semester cap| cap|
 |Show overall cap| allcap|
 |Exit NoCap|bye|

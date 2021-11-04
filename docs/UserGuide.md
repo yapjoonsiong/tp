@@ -157,7 +157,11 @@ Note:
 
 ### Edit description of task : `/m <module> editdesc <task index> <new description>`
 
-Edit the description of a task. 
+Edit the description of a task.
+
+Note:
+
+* An error message will be shown if the user input a duplicate description of an existing task.
 
 ### Edit deadline of task : `/m <module> editdate <task index> <new date>`
 
@@ -197,7 +201,7 @@ optional arguments.
 
 Task Prefixes:
 
-* There are 2 prefixes in each Tasks defined as `[ ]`
+* There are 2 prefixes in each Task defined as `[ ]`
 * The first prefix is a `LATE` tag. If the task is overdue, the tag will show `[LATE]`
 * The second prefix is a `DONE` tag. If the task is marked completed, the tag will show `[X]`
 * Format will be as follows `[LATE][DONE] <task description> <date> <time>`

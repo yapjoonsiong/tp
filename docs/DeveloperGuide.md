@@ -506,12 +506,6 @@ exploratory testing.
       `This module already exists!`
 3. Adding a module that is longer than 16 Characters
    Expected error message: `Module name must be less than 17 characters`
-## Add class to a module
-1. Select an existing module with reference to the command `list module`.
-2. Run the command `/m <module> addclass <day>/<period>/<location>/<comment>` where:
-   1. `<day>` can only take in the first 3 letters of the day, from monday to saturday.
-   2. `<period` can only be in blocks of 1 hour in 24-hour format (e.g. 1100 or 1300).
-   3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
 
 ## Adding a grade to module
 1. Adding a valid grade.
@@ -542,15 +536,20 @@ exploratory testing.
        Expected: `You are missing a description!`
 
 ## Adding a class to module
-1. Prerequisite: look up timetable to see existing classes
-
-2. Adding a valid class
+1. Prerequisite: look up timetable to see existing classes.
+    
+    Note:
+    1. `<day>` can only take in the first 3 letters of the day, from monday to saturday.
+    2. `<period` can only be in blocks of 1 hour in 24-hour format (e.g. 1100 or 1300).
+    3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
+    
+3. Adding a valid class
 
    Class successfully added message shown and schedule information for the module is printed.
-3. Adding a class that already exists in that timeslot.
+4. Adding a class that already exists in that timeslot.
 
    Expected: `A class already exists in this timeslot!` 
-4. Adding a  class with invalid syntax
+5. Adding a  class with invalid syntax
     
     1. adding a class with invalid day syntax
     

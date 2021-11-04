@@ -12,7 +12,7 @@ StorageDecoder<-[: DecodeJsonToSemesterList()
 activate StorageDecoder
 
 alt No save file found
-StorageDecoder->*SemesterList: SemesterList()
+StorageDecoder->*SemesterList: new SemesterList()
 activate SemesterList
 SemesterList-->StorageDecoder:
 deactivate SemesterList

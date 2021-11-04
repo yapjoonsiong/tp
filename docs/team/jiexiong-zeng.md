@@ -68,8 +68,7 @@ Step 4: `splitInput` is called for the second time and splits the user input int
 **TaskType** and **TaskDescription** are passed to `ListParser` through `ListParser#overallListParser`.
 <br/><br/>
 
-Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and **
-TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the
+Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and **TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the
 name implies, this method sorts all tasks by date and prints them.
 > If **TaskType** does not match, then an error message is displayed.  
 > If **TaskDescription** does not match, all tasks are printed by default.

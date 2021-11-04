@@ -86,6 +86,7 @@ public class Parser {
         case LIST:
             splitInput(taskDescription);
             list.overallListParser(taskType, taskDescription);
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
             break;
         case MODULETYPE:
             moduleParser(taskDescription);

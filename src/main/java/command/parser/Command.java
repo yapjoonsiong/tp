@@ -36,6 +36,7 @@ public class Command {
             NoCap.semesterList.setAccessedSemesterIndex(Integer.parseInt(taskDescription) - 1);
             Ui.switchSemesterMessage(NoCap.semesterList
                     .get(Integer.parseInt(taskDescription) - 1).getSemester());
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }

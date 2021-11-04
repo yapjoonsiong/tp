@@ -182,8 +182,7 @@ How printing a timetable works:
 2. Each iteration of the loop can result in 1 of 3 cases:
 1. It is at a border. When this happens a &quot;#&quot; character is printed to the console which denotes a border.
 2. It is empty. When this happens a &quot; &quot;(blank) character is printed to the console.
-3. It contains module information. When this happens, getMoudleName() , getModuleLocation() and getModuleComment() is called. The information is then printed onto the console.
->>>>>>> master
+3. It contains module information. When this happens, getModuleName() , getModuleLocation() and getModuleComment() is called. The information is then printed onto the console.
 
 # ScheduleList
 
@@ -379,6 +378,8 @@ without needing to frequently switch between multiple tools or applications such
 |v2.1|University student| see the weightage of the modules| place emphasis/focus on certain work when there is a lack of time.|
 
 # Appendix C: Non Functional Requirements
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 # Appendix D: Glossary
 
@@ -430,6 +431,35 @@ Given below are instructions to test the app manually.
    Error reading save file, creating new template
    Welcome to NoCap
    ```
+   
+## Listing semesters
+1. Run the command `list semesters`
+2. Expected: 10 pre-loaded semesters from Y1S1 to Y5S2 presented in the following message:
+    ```
+    1 : Y1S1
+    2 : Y1S2
+    3 : Y2S1
+    4 : Y2S2
+    5 : Y3S1
+    6 : Y3S2
+    7 : Y4S1
+    8 : Y4S2
+    9 : Y5S1
+    10 : Y5S2
+    ```
+   
+## Switching semesters
+1. On first use, NoCap defaults to Y1S1 semester
+2. On subsequent launches, NoCap defaults to the last accessed semester
+3. Switching between semesters
+   1. Choose a semester index from 1-10 with reference to `list semesters`
+   2. Run the command `switch <index>` to switch to the new semester
+   3. For example, if '3' is chosen, running `switch 3` gives the following expected message:
+      ```
+      Semester successfully switched
+      You are now accessing semester: Y2S1
+      ```
+   
 ## List tasks in a semester
 1. List tasks when there are no available tasks
    1. Prerequisites: There should be no tasks added to modules in the current semester yet.
@@ -445,3 +475,31 @@ Given below are instructions to test the app manually.
    2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
    3. Expected: Tasks are shown accordingly, depending on the optional argument
 
+## Add class to a module
+1. Select an existing module with reference to the command `list module`.
+2. Run the command `/m <module> addclass <day>/<period>/<location>/<comment>` where:
+   1. `<day>` can only take in the first 3 letters of the day, from monday to saturday.
+   2. `<period` can only be in blocks of 1 hour in 24-hour format (e.g. 1100 or 1300).
+   3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
+
+## Delete class from a module
+1. Select an existing class index with reference to the command `/m <module> info`.
+2. Run the command `/m <module> deleteclass <index>`.
+3. Expected: Corresponding class is deleted from module schedule.
+
+## Show timetable
+1. Run the command `timetable`
+2. Expected: Prints out a timetable of all classes from 0800 to 1700 periods
+
+## Show semester cap
+1. Run the command `cap`
+2. If no credit is added for any module in the semester, the following message is printed:
+    ```
+    Unable to calculate cap as no credit assigned to any existing module
+    ```
+3. Else, the cap is calculated accordingly and printed.
+
+## Show all cap
+1. Run the command `allcap`
+2. Expected: prints out the aggregate cumulative CAP and respective CAP of each semester
+3. Semesters with no credit assigned for any module will default to 0.00 CAP

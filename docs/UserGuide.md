@@ -385,17 +385,18 @@ Examples:
 * `/m MA1508 addgrade B-`
 
 Example output:
-```/m cs2040c addgrade A
-Module grade successfully added: 
-Module name: CS2040C
-CREDITS: 4
---------------------------- 
-SCHEDULE: 
---------------------------- 
-GRADE: A
-TASKS: []
-BREAKDOWN: 
-```
+
+    /m cs2040c addgrade A
+    Module grade successfully added: 
+    Module name: CS2040C
+    CREDITS: 4
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: A
+    TASKS: []
+    BREAKDOWN:
+
 Note:
 
 * A grade can be added to a module only after credit is assigned to the module.
@@ -425,17 +426,17 @@ Examples:
 * `/m MA1511 deletegrade`
 
 Example output:
-```
-Module grade has been successfully deleted
-Module name: CS1010
-CREDITS: 0
---------------------------- 
-SCHEDULE: 
---------------------------- 
-GRADE: null
-TASKS: []
-BREAKDOWN: 
-```
+
+    Module grade has been successfully deleted
+    Module name: CS1010
+    CREDITS: 0
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: null
+    TASKS: []
+    BREAKDOWN: 
+
 
 ### View Timetable : `timetable `
 
@@ -550,7 +551,6 @@ Format: `allcap`
 
 Example output:
 
-```
     Cumulative CAP: 4.25
     Y1S1: 4.25
     Y1S2: 0.0
@@ -562,7 +562,6 @@ Example output:
     Y4S2: 0.0
     Y5S1: 0.0
     Y5S2: 0.0
-```
 
 ### Exiting the program : `bye`
 
@@ -626,6 +625,6 @@ Welcome to NoCap
 |Add credit| /m \<module> addcredit|
 |Show timetable| timetable|
 |List all tasks| list task \<optional argument>|
-|Show module cap| cap|
+|Show semester cap| cap|
 |Show overall cap| allcap|
 |Exit NoCap|bye|

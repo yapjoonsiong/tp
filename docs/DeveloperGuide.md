@@ -431,3 +431,108 @@ Given below are instructions to test the app manually.
    2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
    3. Expected: Tasks are shown accordingly, depending on the optional argument
 
+## Adding a module to a semester
+1. Adding a module with a valid name.
+    Expected: Module successfully added message shown and list of modules in current semester is printed
+2. Adding a module that already exists.
+   1. Prerequisite: view list of modules in current semester with list module.
+   2. Adding a module with the same name as a module in current list will result in the following
+      error message: 
+      `This module already exists!`
+3. Adding a module that is longer than 16 Characters
+   Expected error message: `Module name must be less than 17 characters`
+
+## Adding a grade to module
+1. Adding a valid grade.
+
+    Grade successfully added message shown and module information is printed.
+2. Adding an invalid grade.
+    
+    Invalid Grade error message will be shown
+   1. Test case : `/m cs2040c addgrade G`
+   
+        Expected: `Invalid grade!`
+   2. Test case : `/m cs2040c addgrade `
+
+        Expected: `You are missing a description!`
+
+## Adding a credit to module 
+1. Adding a valid credit.
+    
+    Credit successfully added message shown and module information is printed.
+2. Adding an invalid credit
+
+   Invalid Credit error message will be shown
+    1. Test case : `/m cs2040c addcredit four`
+
+       Expected: `Input must be an integer!`
+    2. Test case : `/m cs2040c addcredit`
+
+       Expected: `You are missing a description!`
+
+## Adding a class to module
+1. Prerequisite: look up timetable to see existing classes
+
+2. Adding a valid class
+
+   Class successfully added message shown and schedule information for the module is printed.
+3. Adding a class that already exists in that timeslot.
+
+   Expected: `A class already exists in this timeslot!` 
+4. Adding a  class with invalid syntax
+    
+    1. adding a class with invalid day syntax
+    
+    Test case: `/m  cs2040c addclass aaa/1200/zoom/tut`
+
+    Expected: Error message shown. No classes added.
+
+    2. Adding a  class with invalid timeslot.
+
+    Test case: `/m  cs2040c addclass aaa/2500/zoom/tut`
+
+    Expected: Error message shown. No classes added.
+
+    3. Adding a class with comments/location that have more than 16 characters.
+
+    Test case: `/m  cs2040c addclass aaa/2500/12345678901234567/tut`
+
+    Expected: Error message shown. No classes added.
+
+## Adding a GradableTask to module
+1. Adding a valid GradableTask to module. 
+
+    GradableTask successfully added message shown. Breakdown of all gradableTasks will be shown.
+2. Adding a GradableTask with an invalid syntax.
+    1. Invalid date syntax
+
+    Test case: `/m cs2040c addgradable finals /by 00/00/00  /w 50`
+
+    Expected: Invalid error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+    2. Invalid weightage 
+    
+    Weightage must be between 5-100
+
+    Test case: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
+
+    Expected: Invalid weightage error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+    3. Total weightage invalid
+   
+    Total weightage must be greater or equal to 100. Adding a weightage that exceeds 100 will cause an error message to be shown.
+   GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+## listing all gradable tasks
+1. To look at all breakdown of each module, the command `/m <module> list gradable` can be called.
+
+2. If there are no gradable tasks currently inside the module, an empty breakdown will be shown.
+
+    Expected:
+    ```
+   BREAKDOWN:
+   
+
+
+   
+    ```

@@ -388,7 +388,7 @@ Given below are instructions to test the app manually.
 
 **Note:** These instructions only provide a starting point for testers to work on, testers are expected to do more exploratory testing.
 
-##Launch
+## Launch
 1. Initial launch
    1. Download the JAR file and copy it into an empty folder
    2. Open up your terminal, and navigate to the folder containing the JAR file
@@ -400,7 +400,7 @@ Given below are instructions to test the app manually.
 
 
 
-##Saving/Loading data
+## Saving/Loading data
 1. Automatic saving
    1. Carry out any command that adds/modifies data in the application, e.g `add CS2102`, or simply exit the application using the command `bye`.
    2. Expected: A JSON file is created/updated automatically in the data folder located in folder containing the JAR file, provided the instructions in `Launch` is followed correctly. 
@@ -413,7 +413,7 @@ Given below are instructions to test the app manually.
       Welcome to NoCap
       ```
 3. Save file exists
-   1. Prerequisites: Make sure that a save file already exists in the data folder that is located in the folder containing the JAR file
+   1. Prerequisites: Make sure that a save file already exists in the data folder that is located in the folder containing the JAR file.
         If not, simply carry out any command that adds/modifies data in the application, e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
    2. Run the application as stated in `Launch`
    3. Expected: Application loads the save file when starting the application and shows the following message
@@ -431,7 +431,7 @@ Given below are instructions to test the app manually.
    Error reading save file, creating new template
    Welcome to NoCap
    ```
-##List tasks in a semester
+## List tasks in a semester
 1. List tasks when there are no available tasks
    1. Prerequisites: There should be no tasks added to modules in the current semester yet.
    2. Run the command `list task`
@@ -441,7 +441,7 @@ Given below are instructions to test the app manually.
       You have no tasks
       ```
 2. List tasks with optional arguments
-   1. Prerequisites: There should be tasks added to modules in the semester beforehand. Can be checked by running `list task`
+   1. Prerequisites: There should be tasks added to modules in the semester beforehand. Can be checked by running `list task`.
       If there are no tasks in the semester, add in tasks first(including both gradable and non-gradable tasks)
    2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
    3. Expected: Tasks are shown accordingly, depending on the optional argument

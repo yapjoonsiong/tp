@@ -107,24 +107,25 @@ using a 3rd party library Jackson Databind.
 It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object
 `SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
 
-How StorageEncoder works:
+How the `StorageEncoder` class works:
 
 ![alt_text](media/StorageEncoderSequenceDiagram.png "image_tooltip")
 
-1. The static method `encodeAndSaveSemesterListToJson() `is called when NoCap data needs to be saved
-2. If the save file directory has not been created, it is first created in order to store the save file
+1. The static method `encodeAndSaveSemesterListToJson()` from `StorageEncoder` is called when NoCap data needs to be saved
+2. If the save file directory has not been created yet, it is first created in order to store the save file
 3. Similarly, an empty file is created to store the data if it has not been created yet
-4. The parent object `SemesterList` is passed to the method to be converted into json format with an `ObjectMapper`
+4. The parent object `SemesterList` is passed to the method to be converted into a JSON file with an `ObjectMapper`
    object from the  `jackson-databind` library
+5. Finally, the data file is saved in a default data directory.
 
-How StorageDecoder works:
+**How the `StorageDecoder` class works:**
 
 ![alt_text](media/StorageDecoderSequenceDiagram.png "image_tooltip")
 
-1. The static method `DecodeJsonToSemesterList() `is called when NoCap data needs to be loaded from the save file
-2. If there is no save file available, a new `SemesterList `object is created and returned to the caller
-3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the json save file
-   into a SemesterList object to be returned to the caller
+1. The static method `DecodeJsonToSemesterList()` from `StorageDecoder` is called when NoCap data needs to be loaded from the save file
+2. If there is no save file available in the default data directory, a new `SemesterList `object is created and returned to the caller
+3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the JSON save file
+   into a `SemesterList` object to be returned to the caller
    <br/><br/>
 
 ## Semester
@@ -315,22 +316,25 @@ Note:
 
 _Class diagram for OverallTask and OverallTaskList_
 
-**Note**: Some methods are ommited from the class diagram to improve clarity
 
-The OverallTaskList class is instantiated from ListParser only when the end user needs to list available tasks in
+
+**Note**: Some methods are omitted from the class diagram to improve clarity
+
+    
+
+The `OverallTaskList` class is instantiated from `ListParser` only when the end user needs to list available tasks in
+
 a `Semester`.
 
 How the `OverallTaskList` class works:
 
 1. `OverallTask` objects (explained further under `OverallTask`) are stored in an ArrayList `overallTaskList.`
-2. Both `Task` and `GradableTask` objects are converted to OverallTask objects first before being inserted into
-   OverallTaskList.
+2. Both `Task` and `GradableTask` objects are converted to `OverallTask` objects first before being inserted into
+   `OverallTaskList`.
 3. When the `OverallTaskList` object is instantiated, a `ModuleList` object from a semester is passed to its
    constructor.
-
 ![alt_text](media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
-
-4. The constructor calls the method `addAllModuleListTasks(module list)` which adds all the tasks in the module list
+4. The constructor calls the method `addAllModuleListTasks(module list)` which converts and adds all the tasks in the module list
    into `OverallTaskList`.
 5. Once the object is instantiated, the following methods can be called to sort and print the tasks in the
    ArrayList `overallTaskList`. All sorting and filtering is done via `Java Streams`, and method details are omitted.
@@ -355,7 +359,7 @@ Notes about `OverallTaskList`
 
 **API** : `task.OverallTask`
 
-`OverallTask` objects are stored in a OverallTaskList object when the end user needs to list available tasks in
+`OverallTask` objects are stored in a `OverallTaskList` object when the end user needs to list available tasks in
 a `Semester`. It stores information from `GradableTask/Task `objects together with their module name.
 
 `OverallTask` object stores the following for each task:
@@ -426,7 +430,8 @@ switch between multiple tools or applications such as NUSMods, Luminus, Sticky N
    <br/><br/>
 
 # Appendix D: Glossary
-
+* **Command Line Interface(CLI)** - A command-line interface (CLI) processes commands to a computer program in the form of lines of text(From [Wikipedia](https://en.wikipedia.org/wiki/Command-line_interface)).
+* **Mainstrem Operating Systems(OS)** - Windows, Linux, Unix, OS-X 
 <br/><br/>
 
 # Appendix E: Instructions for Manual Testing
@@ -445,7 +450,7 @@ exploratory testing.
    ```
    java -jar NoCap.jar
    ```
-   **Note**: It is important that you navigate to the directory containing the JAR file before the running the
+   **Note**: It is important that you navigate to the directory containing the JAR file first before running the
    application, as it may affect the location of the save file.
 
 ## Saving/Loading data

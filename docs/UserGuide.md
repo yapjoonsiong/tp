@@ -151,6 +151,7 @@ Examples:
 * `/m CS2113 addgradable assignments /by 10/10/2010 1000 /w 40`
 
 Expected output:
+
 ![](media/GradableTaskOutput.jpg)
 
 Note:
@@ -475,7 +476,7 @@ By default, all tasks in the current semester are listed, but this can be custom
 
 Tasks are listed in the format:
 
-`[Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]`
+`[Module Code][Gradable][Lateness][Done] <description> by: <deadline> [Weightage]`
 
 * [Module Name] - Name of the module
 * [Gradable] - Shows `[G]` if the task is gradable, and `[ ]` if the task is non-gradable.

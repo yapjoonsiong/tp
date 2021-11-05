@@ -145,7 +145,7 @@ public class Ui {
     }
 
     public static void loadFileSuccessful() {
-        System.out.println("Modules loaded successfully");
+        System.out.println("Data loaded successfully");
     }
 
     public static void printNoSaveFileMessage() {

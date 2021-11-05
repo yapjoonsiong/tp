@@ -83,7 +83,7 @@ class OverallTaskTest {
         GradableTask task2 = new GradableTask("Quiz", "19/09/2021 1600", 50);
         OverallTask overallTask2 = new OverallTask(task2, "CS2113");
         int result = OverallTask.statusComparator.compare(overallTask1, overallTask2);
-        assertTrue(result < 0);
+        assertTrue(result > 0);
     }
 
     @Test
@@ -94,7 +94,7 @@ class OverallTaskTest {
         task2.markDone();
         OverallTask overallTask2 = new OverallTask(task2, "CS2113");
         int result = OverallTask.statusComparator.compare(overallTask1, overallTask2);
-        assertTrue(result > 0);
+        assertTrue(result < 0);
     }
 
 

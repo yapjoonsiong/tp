@@ -135,7 +135,7 @@ This is how CAP is computed:
 
 # Module
 
-**API** : module
+**API** : `module`
 
 All data related to module is stored in the module class. An Arraylist of Module is used to store and manage the
 modules. ModuleList is also responsible for constructing and printing out the Timetable.
@@ -190,7 +190,7 @@ How printing a timetable works:
 
 # ScheduleList
 
-**API** : schedule
+**API** : `schedule`
 
 ScheduleList consists of all data for the schedule for the module.
 

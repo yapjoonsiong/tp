@@ -15,7 +15,7 @@
   * Scribing to-dos in team meetings and creating corresponding issue trackers.
   * Managing team deadlines and creating releases.
 
-###Developer Guide Extract
+### Developer Guide Extract
 
 **API** : <code>command.parser </code>
 
@@ -24,7 +24,7 @@ respective classes.
 
 The class diagram below is an overview of relationship between Parser classes and other classes.
 
-![alt_text](../../docs/media/ParserClassDiagram.JPG)
+![alt_text](../media/ParserClassDiagram.JPG)
 
 How the parsing works:
 
@@ -47,7 +47,7 @@ Below is a step by step example of how the parser receives and decipher a user i
 `list task sortbydate`.
 
 The Sequence Diagram below illustrates the process
-![alt_text](../../docs/media/ParserSequenceDiagram.png)  
+![alt_text](../media/ParserSequenceDiagram.png)  
 **Note**: The alternate paths are omitted from the diagram for clarity.<br/><br/>
 
 Step 1: The User launches the application. `NoCap` creates a new `Parser` instance through the constructor and `Parser`
@@ -79,4 +79,4 @@ Step 6: The full command is carried out and the application returns to NoCap and
 
 The diagram below illustrates the `splitString` process:
 
-![alt_text](../../docs/media/splitStringDiagram.JPG)
+![alt_text](../media/splitStringDiagram.JPG)

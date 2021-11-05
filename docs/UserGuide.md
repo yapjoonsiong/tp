@@ -9,7 +9,7 @@ app for NUS students!
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `NoCap` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
+2. Download the latest version of `NoCap` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
 3. Move the downloaded NoCap.jar to an empty directory.
 4. Navigate to this directory on the Command Prompt.
 5. Run NoCap.jar using the command `java -jar NoCap.jar`.
@@ -21,7 +21,7 @@ app for NUS students!
 * Words in `<>` are the parameters to be supplied by the user. \
   e.g. `add <module name>` `<module name>` is the name of the module supplied by the user.
 * Items in curved brackets describe the input format. \
-  e.g.` /m <module name> addtask <description> /by <deadline (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the date-month-year and 24 hour time of the description.
+  e.g.`/m <module name> addtask <description> /by <deadline> (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the date-month-year and 24 hour time of the description.
 * Parameters must be in the exact order as seen in the user guide. \
   e.g. if the command
   specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`, `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
@@ -29,12 +29,13 @@ app for NUS students!
 * Commands that require parameters must be supplied, if not an error will be thrown.
   e.g. if the command specifies `/m CG1111 addclass MON/0800/E1-03/tutorial` , `/m CG1111 addclass MON/0800/E1-03/` is not acceptable.
 * All specifier commands are case-sensitive. 
-  e.g. `HELP`, `/M CG1111 ADDCLASS MON/0800/E1-03/tutorial` and `ADD CS2113T` are invalid commands.
+  e.g. `HELP`, `/M CG1111 ADDCLASS MON/0800/E1-03/tutorial` and `ADD CS2113T` are invalid commands.   
+
 ### Viewing help : `help`
-Shows a message explaining how to use NoCap
+Shows a message explaining how to use NoCap.
 
 ### Listing semesters : `list semesters`
-Lists all preloaded semesters and their corresponding indexes  
+Lists all preloaded semesters and their corresponding indexes.   
 
 Example output:
 
@@ -60,7 +61,7 @@ Examples:
 
 * `Switch 1`
 * `Switch 2`
-
+ 
 ### Adding module: `add <module>`
 
 Adds a module
@@ -72,7 +73,7 @@ Examples:
 
 Note:
 * Module code can only contain up to 16 characters
-
+ 
 ### Delete module: `delete <module index> `
 
 Deletes a module corresponding to the input index. (refer to `list module` for indexes )
@@ -134,6 +135,8 @@ Example:
 * Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
 * Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
 
+
+
 ### Add gradable task to module : `/m <module> addgradable <day/period/location/comments> /w <weightage>`
 
 Adds a Gradable Task to the module.
@@ -148,6 +151,7 @@ Examples:
 * `/m CS2113 addgradable assignments /by 10/10/2010 1000 /w 40`
 
 Expected output:
+
 ![](media/GradableTaskOutput.jpg)
 
 Note:
@@ -157,7 +161,7 @@ Note:
 
 ### Edit description of task : `/m <module> editdesc <task index> <new description>`
 
-Edit the description of a task.
+Edit the description of a task at the specified index in the given module.
 
 Note:
 
@@ -165,7 +169,7 @@ Note:
 
 ### Edit deadline of task : `/m <module> editdate <task index> <new date>`
 
-Edit the deadline of a task.
+Edit the deadline of a task at the specified index in the given module.
 
 ### Delete task from module : `/m <module> deletetask <substring>`
 
@@ -178,8 +182,7 @@ Mark task as done.
 Other similar commands include:  
 Mark task as not done: `/m <module> notdone <task index>`  
 Mark gradable task as done:`/m <module> gradabledone <task index>`  
-Mark gradable task as not done:`/m <module> gradablenotdone <task index>`  
-  
+Mark gradable task as not done:`/m <module> gradablenotdone <task index>`
 
 ### Listing module tasks : `/m <module> list`
 
@@ -253,7 +256,7 @@ Assuming tasks have been added to modules beforehand:
 
 NOTE:
 
-For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
+* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
 due date as a reminder that the user has forgotten to do the task.
 
 ### Listing module gradable tasks : `/m <module> list gradable`
@@ -283,6 +286,7 @@ Note:
 
 * The suffix of the Gradable Task `[ ]` shows if the task is completed.
 * If it is completed, the suffix will show `[X]`.
+
 ### Add class to module : `/m <module> addclass <day/period/location/comments>`
 
 Adds a class to a module
@@ -419,7 +423,7 @@ Note:
     9. D+
     10. D
     11. F
-    
+
 
 ### Delete grade from module: `/m <module> deletegrade`
 
@@ -439,8 +443,7 @@ Example output:
     --------------------------- 
     GRADE: null
     TASKS: []
-    BREAKDOWN: 
-
+    BREAKDOWN:
 
 ### View Timetable : `timetable `
 
@@ -473,7 +476,7 @@ By default, all tasks in the current semester are listed, but this can be custom
 
 Tasks are listed in the format:
 
-[Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]
+`[Module Code][Gradable][Lateness][Done] <description> by: <deadline> [Weightage]`
 
 * [Module Name] - Name of the module
 * [Gradable] - Shows `[G]` if the task is gradable, and `[ ]` if the task is non-gradable.
@@ -530,12 +533,9 @@ Assuming tasks have been added to modules beforehand:
   1. [CS2132][G][LATE][ ] asdf by: 10 Dec 2000 12:00 AM [Weightage: 50%]
   ```
 
-**NOTE**:<br>
-For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
+NOTE:
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
 due date as a reminder that the user has forgotten to  do the task.
-
-
-
 
 ### View CAP : `cap`
 
@@ -545,7 +545,8 @@ Example output:
 
 * `This semester's CAP: 4.25`
 
-NOTE: Modules with a credit value of 0 will not be calculated towards overall CAP.
+NOTE: 
+* Modules with a credit value of 0 will not be calculated towards overall CAP.
 
 ### View all CAP : `allcap`
 
@@ -616,7 +617,7 @@ Welcome to NoCap
 |Add gradable task | /m \<module> addgradable \<description> /by \<date> \<time> /w \<weightage>|
 |Edit description| /m \<module> editdesc \<task index> \<new description>|
 |Edit deadline| /m \<module> editdate \<task index> \<new deadline>|
-|Delete task| /m \<module> deletetask|
+|Delete task| /m \<module> deletetask \<substring>|
 |Mark task as complete| /m \<module> done \<task index>|
 |Mark task as incomplete| /m \<module> notdone \<task index>|
 |Mark gradable task as complete| /m \<module> gradabledone \<task index>|

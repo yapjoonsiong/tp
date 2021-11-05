@@ -17,6 +17,7 @@
   * `OverallTask` and `OverallTaskList` classes
     * Classes used for listing all tasks in a semester
     * Includes methods which allows multiple ways of filtering and sorting of semester tasks.
+    * Integrated and modified classes as project went on to fit with other classes
     * Added constructors which construct `OverallTask` from either `Task` or `GradableTask` objects.
     * Added custom comparators for better sorting of tasks
   * `exceptions` package
@@ -39,6 +40,7 @@
   * Help teammates when faced with technical issues by meeting up and helping to debug, 
     such as debugging failing IO redirection tests and failing JUNIT tests.
   
+---
 ### Developer Guide Extract
 
 ## [Storage](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
@@ -157,6 +159,7 @@ How the `OverallTask` component works:
 A centralized platform which allows NUS Students to carry out their learning management
 without needing to frequently switch between multiple tools or applications such as NUSMods, Luminus, Sticky Notes etc.
 
+--- 
 
 ## User Guide Extract
 ### Listing all tasks : `list task`

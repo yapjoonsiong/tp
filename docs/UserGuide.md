@@ -139,8 +139,6 @@ Example:
 * Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
 * Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
 
-
-
 ### Add gradable task to module : `/m <module> addgradable <day/period/location/comments> /w <weightage>`
 
 Adds a Gradable Task to the module.
@@ -274,8 +272,8 @@ Assuming tasks have been added to modules beforehand:
 
 NOTE:
 
-* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless
-  of due date as a reminder that the user has forgotten to do the task.
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks
+  regardless of due date as a reminder that the user has forgotten to do the task.
 * `/m <module> list` does not show gradable tasks.
 * To show gradable task in module, have to input optional argument as shown above.
 
@@ -560,8 +558,9 @@ Assuming tasks have been added to modules beforehand:
   ```
 
 NOTE:
-* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
-due date as a reminder that the user has forgotten to  do the task.
+
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks
+  regardless of due date as a reminder that the user has forgotten to do the task.
 
 ### View CAP : `cap`
 

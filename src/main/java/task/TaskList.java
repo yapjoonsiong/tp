@@ -128,9 +128,9 @@ public class TaskList {
     }
 
     /**
-     * Update the selected task deadline with a new user input deadline
+     * Update the selected task deadline with a new user input deadline.
      *
-     * @param date        the deadline of the task
+     * @param date the deadline of the task
      * @param description the description of the task
      */
     private void updateTaskDeadline(String date, String description) {
@@ -145,10 +145,10 @@ public class TaskList {
     }
 
     /**
-     * Add new task to the task list
+     * Add new task to the task list.
      *
-     * @param module      the module that is currently accessed
-     * @param date        the deadline that the user input for the task
+     * @param module the module that is currently accessed
+     * @param date the deadline that the user input for the task
      * @param description the description of the task that the user added
      */
     private void updateTaskList(String module, String date, String description) {
@@ -160,11 +160,11 @@ public class TaskList {
     }
 
     /**
-     * Checks if there is duplication in the task list
-     * This is done by iterating through the task list
+     * Checks if there is duplication in the task list.
+     * This is done by iterating through the task list.
      *
      * @param newTaskDescription the new task description input by user
-     * @return a boolean value, true if there is duplication found.
+     * @return a boolean value, true if there is duplication found
      */
     public boolean hasDuplicateDescription(String newTaskDescription) {
         for (Task task : this.taskList) {
@@ -188,16 +188,18 @@ public class TaskList {
 
     /**
      * Custom comparator to determine if the task is of higher priority than the other based on custom condition
-     * such as task deadline. The task deadline is of LocalDateTime data type. A task with a more recent deadline will be
-     * 'greater' than a task with a later deadline. Therefore, tasks with deadline closer to the current system date will be sorted
-     * to the top of the list if this comparator is used for sorting.
+     * such as task deadline. The task deadline is of LocalDateTime data type.
+     * A task with a more recent deadline will be 'greater' than a task with a later deadline.
+     * Therefore, tasks with deadline closer to the current system date will be sorted to
+     * the top of the list if this comparator is used for sorting.
      */
     protected static final Comparator<Task> sortByDate = Comparator.comparing(t -> t.deadline);
 
     /**
      * Custom comparator to determine if the task is of higher priority than the other based on custom condition
-     * such as completion status. If the task is completed, it will have a LOW priority. If a task is not completed, it will
-     * have a HIGH priority. Sorting a list of task using this comparator to sort will put the tasks that is not completed
+     * such as completion status. If the task is completed, it will have a LOW priority.
+     * If a task is not completed, it will have a HIGH priority.
+     * Sorting a list of task using this comparator to sort will put the tasks that is not completed
      * at the top of the list while the tasks that are done will be sorted to the bottom of the list.
      */
     protected static final Comparator<Task> sortByStatus = (t1, t2) -> {
@@ -271,9 +273,9 @@ public class TaskList {
     }
 
     /**
-     * Get all weekly tasks in a list
+     * Get all weekly tasks in a list.
      *
-     * @return ArrayList<Task> the list of weekly tasks
+     * @return an arraylist which is the list of weekly tasks
      */
     public ArrayList<Task> weeklyTaskList() {
         ArrayList<Task> list = new ArrayList<>();
@@ -287,9 +289,9 @@ public class TaskList {
     }
 
     /**
-     * Get all monthly tasks in a list
+     * Get all monthly tasks in a list.
      *
-     * @return ArrayList<Task> the list of monthly tasks
+     * @return an arraylist which is the list of monthly tasks
      */
     public ArrayList<Task> monthlyTaskList() {
         ArrayList<Task> list = new ArrayList<>();
@@ -303,9 +305,9 @@ public class TaskList {
     }
 
     /**
-     * Get all yearly tasks in a list
+     * Get all yearly tasks in a list.
      *
-     * @return ArrayList<Task> the list of yearly tasks
+     * @return an arraylist which is the list of yearly tasks
      */
     public ArrayList<Task> yearlyTaskList() {
         ArrayList<Task> list = new ArrayList<>();

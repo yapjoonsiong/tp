@@ -518,18 +518,71 @@ exploratory testing.
 
 ## Adding a module to a semester
 
-1. Adding a module with a valid name. Expected: Module successfully added message shown and list of modules in current
-   semester is printed
-2. Adding a module that already exists.
-    1. Prerequisite: view list of modules in current semester with list module.
-    2. Adding a module with the same name as a module in current list will result in the following error message:
-       `This module already exists!`
-3. Adding a module that is longer than 16 Characters Expected error
-   message: `Module name must be less than 17 characters`
+1. Prerequisite: Semester should already exist.
+2. Adding a module that does not exist.
+   1. Run the command: `add CS2040C`
+   2. Expected: 
+   ```
+   Module successfully added: 
+   1
+    Module name: CS2040C
+    CREDITS: 0
+    --------------------------- 
+    SCHEDULE:
+    --------------------------- 
+    GRADE: NIL
+    TASKS: []
+    BREAKDOWN:
+   ```
+3. Adding a module that already exists.
+    1. Prerequisite: module with the same name exists in current semester list. e.g. CS2040C
+    2. Run the command `add CS2040C`
+    3. Expected:`This module already exists!`
+   
+4. Adding a module that is longer than 16 Characters.
+   
+    Expected: `Module name must be less than 17 characters`
 
 ## Deleting a module from a semester
-
+1. Prerequisite: Module index should already exist in the ModuleList
+2. Deleting a module with a valid index.
+   1. Run the command: `delete 1`
+   2. Expected: 
+   ```
+    CS2040C has been successfully deleted
+    Remaining Modules are:
+   ```
+3. Deleting a module with an invalid index
+    1. Run the command: `delete 999`
+    2. Expected
+   ```
+    Invalid number value
+   ```
 ## Listing all modules in a semester
+1. Prerequisite: Semester should exist.
+2. Run the command: `list module`
+3. Expected: 
+```
+1
+Module name: CS2113T
+CREDITS: 4
+--------------------------- 
+SCHEDULE: 
+--------------------------- 
+GRADE: B+
+TASKS: []
+BREAKDOWN: 
+
+2
+Module name: CS1010
+CREDITS: 0
+--------------------------- 
+SCHEDULE: 
+--------------------------- 
+GRADE: NIL
+TASKS: []
+BREAKDOWN: 
+```
 
 ## List tasks in a semester
 
@@ -551,45 +604,51 @@ exploratory testing.
 ## Adding a task to a module
 
 ## Adding a GradableTask to module
-
-1. Adding a valid GradableTask to module.
-
-   GradableTask successfully added message shown. Breakdown of all gradableTasks will be shown.
-2. Adding a GradableTask with an invalid syntax.
-    1. Invalid date syntax
-
-   Test case: `/m cs2040c addgradable finals /by 00/00/00 /w 50`
-
-   Expected: Invalid error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
-
-    2. Invalid weightage
-
-   Weightage must be between 5-100
-
-   Test case: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
-
-   Expected: Invalid weightage error message shown. GradableTask not added. Breakdown of all gradableTasks will be
-   shown.
-
-    3. Total weightage invalid
-
-   Total weightage must be greater or equal to 100. Adding a weightage that exceeds 100 will cause an error message to
-   be shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
-
+1. Prerequisite: Module CS2040C should already exist.
+2. Adding a valid GradableTask to module.
+    1. Run the command: `/m cs2040c addgradable finals /by 11/11/2021 1000 /w 50`
+    2. Expected:
+   ```
+     Added new task to CS2040C
+    finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
+    BREAKDOWN:
+    <======================50%=======================>
+    ##################################################
+    |-----------------------1------------------------|
+    1: finals
+    
+    1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
+   ```
+3. Adding a GradableTask with an invalid syntax. 
+   1. Run the command : `/m cs2040c addgradable finals /by 00/00/00 /w 50`
+   2. Run the command: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
+   3. Expected:
+  ```
+  Wrong date format input!
+  Format: dd/MM/yyyy hhmm
+  BREAKDOWN:
+    
+    
+    
+    
+   ```
 ## Listing all gradable tasks
 
-1. To look at all breakdown of each module, the command `/m <module> list gradable` can be called.
-
-2. If there are no gradable tasks currently inside the module, an empty breakdown will be shown.
+1. Prerequisite: Module (CS2040C) should already exist.
+2. Run the command: `/m CS2040C list gradable`
 
    Expected:
     ```
    BREAKDOWN:
+    <======================50%=======================><======================50%=======================>
+    ##################################################@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    |-----------------------1------------------------||-----------------------2------------------------|
+    1: finals
+    2: midterms
 
-
-
-
-    ```
+    1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
+    2 midterms by: 11 Sep 2021 01:00 PM Weightage 50% [ ]
+    ``` 
 
 ## Editing a task
 
@@ -656,74 +715,68 @@ exploratory testing.
     ```
    
 ## Adding a grade to a module
+1. Prerequisites: module CS2040C exists 
+2. Run the command: `/m cs2040c addgrade A`
+3. Expected: 
+```
+    Module grade successfully added: 
+    Module name: CS2040C
+    CREDITS: 0
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: A
+    TASKS: []
+    BREAKDOWN: 
 
-1. Adding a valid grade.
-
-   Grade successfully added message shown and module information is printed.
-2. Adding an invalid grade.
-
-   Invalid Grade error message will be shown
-    1. Test case : `/m cs2040c addgrade G`
-
-   Expected: `Invalid grade!`
-    2. Test case : `/m cs2040c addgrade `
-
-   Expected: `You are missing a description!`
+```
 
 ## Deleting a grade from a module
 1. Prerequisites: module CS2040C exists and has an assigned grade.
-2. Run the command: `/m cs2040c deletegrade A`.
+2. Run the command: `/m cs2040c deletegrade`.
 3. Expected: `Module grade has been successfully deleted`.
 
 ## Adding a credit to module
+1. Prerequisites: module CS2040C exists.
+2. Run the command: `/m cs2040c addcredit 4`
+3. Expected: 
+```
+    Module credits successfully added: 
+    Module name: CS2040C
+    CREDITS: 4
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: A
+    TASKS: []
+    BREAKDOWN: 
 
-1. Adding a valid credit.
-
-   Credit successfully added message shown and module information is printed.
-2. Adding an invalid credit
-
-   Invalid Credit error message will be shown
-    1. Test case : `/m cs2040c addcredit four`
-
-   Expected: `Input must be an integer!`
-    2. Test case : `/m cs2040c addcredit`
-
-   Expected: `You are missing a description!`
+```
 
 ## Adding a class to module
 
-1. Prerequisite: look up timetable to see existing classes.
+1. Prerequisite: module CS2040C exists
 
    Note:
     1. `<day>` can only take in the first 3 letters of the day, from monday to saturday.
     2. `<period` can only be in blocks of 1 hour in 24-hour format (e.g. 1100 or 1300).
     3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
 
-3. Adding a valid class
+2. Adding a class with valid syntax.
+   1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/LECT`
+   2. Expected: 
+```
+    Module Class successfully added: 
+    1.
+    Day: MON
+    Start Time: 1000
+    Location: ZOOM
+    Comments: LECT
 
-   Class successfully added message shown and schedule information for the module is printed.
-4. Adding a class that already exists in that timeslot.
-
-   Expected: `A class already exists in this timeslot!`
-5. Adding a class with invalid syntax
-
-    1. adding a class with invalid day syntax
-
-   Test case: `/m  cs2040c addclass aaa/1200/zoom/tut`
-
-   Expected: Error message shown. No classes added.
-
-    2. Adding a class with invalid timeslot.
-
-   Test case: `/m  cs2040c addclass aaa/2500/zoom/tut`
-
-   Expected: Error message shown. No classes added.
-
-    3. Adding a class with comments/location that have more than 16 characters.
-
-   Test case: `/m  cs2040c addclass aaa/2500/12345678901234567/tut`
-
-   Expected: Error message shown. No classes added.
+```
+5. Adding a class with invalid syntax 
+   1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/TUT`
+   2. Expected: `A class already exists in this timeslot!`
 
 ## Delete class from a module
 

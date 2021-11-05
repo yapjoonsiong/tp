@@ -130,7 +130,7 @@ public class TaskList {
     /**
      * Update the selected task deadline with a new user input deadline.
      *
-     * @param date the deadline of the task
+     * @param date        the deadline of the task
      * @param description the description of the task
      */
     private void updateTaskDeadline(String date, String description) {
@@ -147,8 +147,8 @@ public class TaskList {
     /**
      * Add new task to the task list.
      *
-     * @param module the module that is currently accessed
-     * @param date the deadline that the user input for the task
+     * @param module      the module that is currently accessed
+     * @param date        the deadline that the user input for the task
      * @param description the description of the task that the user added
      */
     private void updateTaskList(String module, String date, String description) {

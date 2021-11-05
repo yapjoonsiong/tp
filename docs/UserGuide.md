@@ -9,7 +9,7 @@ app for NUS students!
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `NoCap` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
+2. Download the latest version of `NoCap` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
 3. Move the downloaded NoCap.jar to an empty directory.
 4. Navigate to this directory on the Command Prompt.
 5. Run NoCap.jar using the command `java -jar NoCap.jar`.
@@ -139,6 +139,8 @@ Example:
 * Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
 * Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
 
+
+
 ### Add gradable task to module : `/m <module> addgradable <day/period/location/comments> /w <weightage>`
 
 Adds a Gradable Task to the module.
@@ -157,6 +159,7 @@ Examples:
 * `/m CS2113 addgradable assignments /by 10/10/2010 1000 /w 40`
 
 Expected output:
+
 ![](media/GradableTaskOutput.jpg)
 
 Note:
@@ -500,7 +503,7 @@ By default, all tasks in the current semester are listed, but this can be custom
 
 Tasks are listed in the format:
 
-[Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]
+`[Module Code][Gradable][Lateness][Done] <description> by: <deadline> [Weightage]`
 
 * [Module Name] - Name of the module
 * [Gradable] - Shows `[G]` if the task is gradable, and `[ ]` if the task is non-gradable.
@@ -557,9 +560,8 @@ Assuming tasks have been added to modules beforehand:
   ```
 
 NOTE:
-
-* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless
-  of due date as a reminder that the user has forgotten to do the task.
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
+due date as a reminder that the user has forgotten to  do the task.
 
 ### View CAP : `cap`
 

@@ -634,7 +634,7 @@ BREAKDOWN:
    ```
 ## Listing all gradable tasks
 
-1. Prerequisite: Module (CS2040C) should already exist.
+1. Prerequisite: module CS2040C should already exist.
 2. Run the command: `/m CS2040C list gradable`
 
    Expected:

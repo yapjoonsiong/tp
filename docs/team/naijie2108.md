@@ -262,7 +262,7 @@ exploratory testing.
        non-gradable tasks)
     2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
     3. Expected: Tasks are shown accordingly, depending on the optional argument
---- 
+
 
 ## User Guide Extract
 

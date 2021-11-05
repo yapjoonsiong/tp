@@ -25,6 +25,9 @@
         * Enhanced adding of task by automatically updating task deadline when user adds a duplicate task of different
           deadline.
         * Continued maintenance of the class for dependencies throughout the project.
+    * Testing
+        * Added a way to test output from print functions by using `ByteArrayOutputStream` and `PrintStream` and
+        * verifying the actual and expected outputs.
 * **Contributions to the UG** :
     * Features: Listing module tasks
     * Features: Adding tasks to module
@@ -32,224 +35,188 @@
     * Design and implementation: Task
     * Design and implementation: TaskList
 * **Contributions to team-based tasks** :
-    * Managing gradle build file (`build.gradle`) in adding 3rd party libraries and assertions
-    * Setting up milestone `v2.1`
-    * Contacting teaching team to enquire on doubts about project
+    * Contributed ideas during brainstorming about enhancement and bug fixes.
+    * Maintained clean github environment.
 * **Review/Mentoring Contributions**
-    * Help teammates when faced with technical issues by meeting up and helping to debug, such as debugging failing IO
-      redirection tests and failing JUNIT tests.
+    * Helped teammates debug code in a collaborative manner.
 
 ### Developer Guide Extract
 
-## [Storage](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
+## TaskList
 
-**API** : `command.storage`
+**API** : `task.tasklist`
 
-The Storage component saves data of NoCap into JSON format, and reads them back into corresponding objects when needed
-using a 3rd party library Jackson Databind.
+![](../media/TaskClassDiagram.png)
 
-It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object
-`SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
+How the `TaskList` component works:
 
-How StorageEncoder works:
+![](../media/TaskListSequenceDiagram.png)
 
-![alt_text](../media/StorageEncoderSequenceDiagram.png "image_tooltip")
+1. `TaskList` stores all tasks in an `ArrayList<Task>`.
+2. When the `addTask()` method is called, the method `getDate()` will return the `date` string from the user input
+3. The method `removeDate()` will return the `description` string from the user input by removing the date component in
+   the user input.
+4. Then store it as a local variable of a `String` type.
+5. The `String` variables will then be passed to instantialize a new `Task` object.
+6. This `Task` object will then be stored in the `ArrayList` in the `TaskList` object.
+7. The methods `weeklyTaskList()`, `monthlyTaskList` and `yearlyTaskList()` returns an `ArrayList` which contains
+   the `Task` objects of deadline within a week, a month and a year respectively.
+8. The methods `sortTaskListByDate()`  and `sortTaskListByStatus()` will sort the current `TaskList` object by ascending
+   order of `Deadline` and completion status respectively
+9. The `ArrayList` returned by the above methods can then be passed to `printTasks()` which will call `toString()` in
+   each `Task` object and print to the `Output Stream`.
+   <br/><br/>
 
-1. The static method `encodeAndSaveSemesterListToJson() `is called when NoCap data needs to be saved
-2. If the save file directory has not been created, it is first created in order to store the save file
-3. Similarly, an empty file is created to store the data if it has not been created yet
-4. The parent object `SemesterList` is passed to the method to be converted into json format with an `ObjectMapper`
-   object from the  `jackson-databind` library
+## Task
 
-How StorageDecoder works:
+**API** : `task.task`
 
-![alt_text](../media/StorageDecoderSequenceDiagram.png "image_tooltip")
-
-1. The static method `DecodeJsonToSemesterList() `is called when NoCap data needs to be loaded from the save file
-2. If there is no save file available, a new `SemesterList `object is created and returned to the caller
-3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the json save file
-   into a SemesterList object to be returned to the caller
-
-## OverallTaskList
-
-![alt_text](../media/OverallTaskClassDiagram.png)
-
-_Class diagram for OverallTask and OverallTaskList_
-
-**API** : `task.OverallTasklist`
-
-The OverallTaskList class is instantiated from ListParser only when the end user needs to list available tasks in
-a `Semester`.
-
-How the Overall`TaskList` class works:
-
-1. `OverallTask` objects (explained further under `OverallTask`) are stored in an ArrayList `overallTaskList.`
-2. Both `Task` and `GradableTask` objects are converted to OverallTask objects first before being inserted into
-   OverallTaskList.
-3. When the `OverallTaskList` object is instantiated, a `ModuleList `object from a semester is passed to its
-   constructor.
-
-![alt_text](../media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
-
-4. The constructor calls the method `addAllModuleListTasks(module list)` which adds all the tasks in the module list
-   into `OverallTaskList`.
-5. Once the object is instantiated, the following methods can be called to sort and print the tasks in the
-   ArrayList `overallTaskList`. All sorting and filtering is done via `Java Streams`, and method details are omitted.
-
-* `sortByDateAndPrint() - Print all tasks sorted by deadline`
-* `sortByStatusAndPrint() - Print all tasks sorted by status(done)`
-* `printWeeklyTasks() - Print tasks due in a week`
-* `printMonthlyTasks() - Print tasks due in a month`
-* `printYearlyTasks() - Print tasks due in a year`
-* `printAllTasks() - Print all tasks without sorting`
-
-Notes about `OverallTaskList`
-
-* Once `ListParser` is done using the object, it is deleted and the task list is not stored anywhere. The reason for
-  this is to reduce coupling between objects and remove the need to update separate task lists whenever tasks are added
-  to `Modules`.
-
-## OverallTask
-
-**API** : `task.OverallTask`
-
-`OverallTask` objects are stored in a OverallTaskList object when the end user needs to list available tasks in
-a `Semester`. It stores information from `GradableTask/Task `objects together with their module name.
-
-`OverallTask` object stores the following for each task:
+`Task` object stores the following for each task:
 
 1. `description`
 2. `Date`
 3. `isDone`
 4. `isLate`
-5. `Deadline`
-6. `isGradable`
-7. `Weightage`
-8. `moduleName`
+5. `deadline`
 
-How the `OverallTask` component works:
+How the `Task` component works:
 
-1. It inherits from `Task`, with additional attributes `isGradable`, `Weightage` and `moduleName`.
-2. The attributes `isGradable`, `Weightage`are added to provide more information for gradable tasks, while `moduleName`
-   is added to display module information.
-3. It can be instantiated with 2 different constructors:
+![](../media/TaskSequenceDiagram.png)
 
-* `OverallTask(task: Task, moduleName: String)` - Instantiates using a `Task` object <br/>
-  ![alt_text](../media/OverallTaskConstructorTaskSequenceDiagram.png "image_tooltip")
-* `OverallTask(gradableTask:GradableTask, moduleName: String)` - Instantiates using a `GradableTask `object <br>
-  ![alt_text](../media/OverallTaskConstructorGradableTaskSequenceDiagram.png "image_tooltip")
+1. Whenever the `Task` object is instantiated, the `attributes` listed above will be initialized by the `setter`
+   methods: `setDescription()`,  `setDate()`,  `setDone()`, `setLate()` and `setDeadline()`.
+2. When calling `printAllTask()`, `printWeeklyTask()`, `printMonthlyTask()` in `OverallTaskList` the
+   method  `updateOverdue()`will be called which checks for the truth value of the `boolean` attribute `isDone` and also
+   whether the current date and time of the system clock is after the `deadline` of the `Task` object.
+3. If `isDone` is `FALSE` and the `deadline` is later than the current date and time, `updateOverdue()` will set the
+   attribute `isLate` of the current `Task` object to `TRUE`.
+4. Calling the toString prints out the task information in the Task object.
 
-4. During instantiation, information from `Task/GradableTask` objects are added to the `OverallTask` object together
-   with their `moduleName.`
-5. Calling the  `toString()` method generates a string containing task information together with its `moduleName`.
+Note:
 
-# Appendix A: Product Scope
+* The printTask() call in the sequence diagram is a generalised method from: `OverallTaskList#addAllNormalTasks()`
+  , `OverallTaskList#addAllGradableTasks()` and `TaskList#printTasks()`
+* Any call from the methods above will result in the following sequence in the sequence diagram.
+  <br/><br/>
 
-**Target User Profile:**
+### User Guide Extract
 
-* NUS student
-* is reasonably comfortable using CLI apps
-* can type fast
-* prefers typing to mouse interactions
-* prefer desktop apps over other types
+### Add task to module : `/m <module> addtask <description> /by <date> <time>`
 
-**Value Proposition:**
+* The `date` is in the format of dd/MM/yyyy.
+* The `time` is in the format of hhmm.
+* The `description` can contain white spaces.
 
-A centralized platform which allows NUS Students to carry out their learning management without needing to frequently
-switch between multiple tools or applications such as NUSMods, Luminus, Sticky Notes etc.
+Note:
 
-## User Guide Extract
+* If time is omitted, time will default to 0000 hrs.
+* If duplicate task exist and has a different deadline, the existing task's deadline will be updated with the new
+  deadline.
+* If duplicate task has same deadline, new task will be rejected by the program.
 
-### Listing all tasks : `list task`
+Example of usage:
 
-Shows a list of all tasks across modules
+* `/m cs1010 addtask Remember to S/U /by 20/11/2020 0000`
 
-Additional format: `list task <optional argument>`
+Example of expected output:
 
-By default, all tasks in the current semester are listed, but this can be customised by adding optional arguments.
+![alt_text](../media/AddTaskOutput.jpg)
+
+Warning :
+
+* For every month, the program will take in 01 - 31 as an input for the day of the month.
+* In the case when the month does not have 31 days, the program will treat any input after the last day of the month
+  until 31 as the last day.
+
+Example:
+
+* Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
+* Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
+
+
+### Listing module tasks : `/m <module> list`
+
+Shows a list of task of specified module.
+
+Additional Format: `/m <module> list <optional argument>`
+
+By default, all tasks in the module specified in the current semester are listed, but this can be customised by adding
+optional arguments.
 
 &lt;optional argument> includes:
 
-* sortbydate - Sort tasks by due date.
-* sortbystatus - Sort tasks by status, displaying unfinished tasks first.
-* gradable - list gradable tasks only.
-* normal - list non-gradable tasks only.
+* gradable - Shows a list of gradable tasks in the module.
+* sortbydate - Sort tasks by due date, the closest deadline have the higher priority in the list. does not print the
+  task list.
+* sortbystatus - Sort tasks by status, finished tasks of lower priority. Does not print task list.
 * w - list tasks due within the next week.
 * m - list tasks due within the next month.
 * y - list tasks due within the next year.
 
-Tasks are listed in the format:
+Task Prefixes:
 
-[Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]
+* There are 2 prefixes in each Task defined as `[ ]`
+* The first prefix is a `LATE` tag. If the task is overdue, the tag will show `[LATE]`
+* The second prefix is a `DONE` tag. If the task is marked completed, the tag will show `[X]`
+* Format will be as follows `[LATE][DONE] <task description> <date> <time>`
 
-* [Module Name] - Name of the module
-* [Gradable] - Shows ‘G’ if the task is gradable, and ‘ ‘ if the task is non-gradable.
-* [Lateness] - Shows ‘LATE’ if the task is overdue. Only shows up for overdue tasks
-* [Done] - Shows ‘X’ if the task is done, and ‘ ‘ if the task isn’t done yet.
-* &lt;description> - Description of the task
-* &lt;deadline> - Deadline of the task
-* [Weightage] - Weightage of the task, if it is gradable. Only shows up for gradable tasks.
-
-Example task:
-
-`[CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]`
-
-This is a task belonging to the module CS2132 that is gradable and has not been done yet. It is due on 16 Dec 2021 12:00
-AM, and has a weightage of 50%.
-
-Example commands with expected output:
+Examples with expected output:
 
 Assuming tasks have been added to modules beforehand:
 
-* `list task`
+* `/m cs1010 list`
 
     ```
-    All tasks: 
-    1. [CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]
-    2. [CS2132][G][LATE][ ] asdf by: 10 Dec 2000 12:00 AM [Weightage: 50%]
-    ```
-
-
-* `list task sortbydate`
-
-  ```
-  Tasks sorted by date: 
-  1. [CS2132][G][LATE][ ] asdf by: 10 Dec 2000 12:00 AM [Weightage: 50%]
-  2. [CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]
+    Task List for CS1010: 
+  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
+  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
+  3.[ ] retake cs1010 by: 12 Dec 2021 11:59 PM
+  4.[ ] do assignment by: 30 Oct 2021 04:00 PM
   ```
 
+* `/m cs1010 list gradable`
+  ```
+  BREAKDOWN:
+    <=================40%==================>
+    ########################################
+    |------------------1-------------------|
+    1: assignments
 
-* `list task w`
+    1 assignments by: 10 Oct 2010 10:00 AM Weightage 40% [ ]
+  ```
+* `/m cs1010 list sortbydate`
 
   ```
-  Weekly tasks: 
-  1. [CS2132][G][LATE][ ] asdf by: 10 Dec 2000 12:00 AM [Weightage: 50%]
+  CS1010 successfully sorted by date
+  ```
+
+  ```
+  /m cs1010 list
+  ```
+
+  ```
+  Task List for CS1010: 
+  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
+  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
+  3.[ ] do assignment by: 30 Oct 2021 04:00 PM 
+  4.[ ] retake cs1010 by: 12 Dec 2021 11:59 PM
+  
+  ```
+
+
+* `/m cs1010 list w`
+
+  ```
+  Task List for CS1010: 
+  There are 3 tasks due within 7 days 
+  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
+  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
+  3.[ ] do assignment by: 30 Oct 2021 04:00 PM 
   ```
 
 NOTE:
 
-For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
-due date as a reminder that the user has forgotten to do the task.
-
-### Saving data
-
-Program data is saved whenever data is added or modified. The process is done automatically, so no user input is needed
-for this.
-
-### Loading data
-
-Program data is loaded from the data folder during startup of the program. If the program can detect the data file
-successfully, the data is loaded and the following message should appear:
-
-```
-Data loaded successfully
-Welcome to NoCap
-```
-
-On the other hand, if no data file can be found, the program starts with an empty template, and the following message
-should appear:
-
-```
-No save file found, starting with an empty template
-Welcome to NoCap
-```
+* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless
+  of due date as a reminder that the user has forgotten to do the task.
+* /m <module> list does not show gradable tasks.
+* To show gradable task in module, have to input optional argument as shown above.

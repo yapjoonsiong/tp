@@ -308,16 +308,16 @@ Note:
   <br/><br/>
 
 ## OverallTaskList
+**API** : `task.OverallTasklist`  
 
 ![alt_text](media/OverallTaskClassDiagram.png)
 
 _Class diagram for OverallTask and OverallTaskList_
 
-```
-Note: Some methods are ommited from the class diagram to improve clarity
-```
 
-**API** : `task.OverallTasklist`
+**Note**: Some methods are ommited from the class diagram to improve clarity
+
+    
 
 The OverallTaskList class is instantiated from ListParser only when the end user needs to list available tasks in
 a `Semester`.

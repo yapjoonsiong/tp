@@ -1,6 +1,22 @@
 # Developer Guide
 
 ## Navigation
+* [Acknowledgements](#acknowledgements)
+* [Design and Implementation](#design--implementation)
+  * [Parser](#parser)
+  * [Storage](#storage)
+  * [Semester](#semester)
+  * [Module](#module)
+  * [Schedule List](#schedulelist)
+  * [Task list](#tasklist)
+  * [Task](#task)
+  * [Overall Task List](#overalltasklist)
+  * [Overall Task](#overalltask)
+* [Product Scope](#appendix-a-product-scope)
+* [User Stories](#appendix-b-user-stories)
+* [Non-Functional Requirements](#appendix-c-non-functional-requirements)
+* [Glossary](#appendix-d-glossary)
+* [Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -77,8 +93,8 @@ Step 6: The full command is carried out and the application returns to NoCap and
 The diagram below illustrates the `splitString` process:
 
 ![alt_text](media/splitStringDiagram.JPG)
-
-## [Storage](https://se-education.org/addressbook-level3/DeveloperGuide.html#logic-component)
+<br/><br/>
+## Storage
 
 **API** : `command.storage`
 
@@ -106,7 +122,7 @@ How StorageDecoder works:
 2. If there is no save file available, a new `SemesterList `object is created and returned to the caller
 3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the json save file
    into a SemesterList object to be returned to the caller
-
+<br/><br/>
 ## Semester
 
 **API** : `semester`
@@ -132,8 +148,8 @@ This is how CAP is computed:
   to their corresponding values.
 * Then, `updateCap()` is called in `Semester` with the newly set `grade`/`credits` values in `Module`, followed
   by `updateCap()` in `SemesterList` with the newly set `points`/`credits` values in `Semester`.
-
-# Module
+  <br/><br/>
+## Module
 
 **API** : `module`
 
@@ -187,8 +203,8 @@ How printing a timetable works:
 2. It is empty. When this happens a &quot; &quot;(blank) character is printed to the console.
 3. It contains module information. When this happens, getMoudleName() , getModuleLocation() and getModuleComment() is
    called. The information is then printed onto the console.
-
-# ScheduleList
+   <br/><br/>
+## ScheduleList
 
 **API** : `schedule`
 
@@ -226,7 +242,7 @@ Adding Schedule to scheduleList
   same time slot, an error message is printed.
 - If it is an empty timeslot, schedule list parses the input and checks for formatting errors within the input.
 - A new instance of Schedule is generated and added to the schedule list.
-
+  <br/><br/>
 ## TaskList
 
 **API** : `task.tasklist`
@@ -250,7 +266,7 @@ How the `TaskList` component works:
    order of `Deadline` and completion status respectively
 9. The `ArrayList` returned by the above methods can then be passed to `printTasks()` which will call `toString()` in
    each `Task` object and print to the `Output Stream`.
-
+   <br/><br/>
 ## Task
 
 **API** : `task.task`
@@ -281,7 +297,7 @@ Note:
 * The printTask() call in the sequence diagram is a generalised method from: `OverallTaskList#addAllNormalTasks()`
   , `OverallTaskList#addAllGradableTasks()` and `TaskList#printTasks()`
 * Any call from the methods above will result in the following sequence in the sequence diagram.
-
+  <br/><br/>
 ## OverallTaskList
 
 ![alt_text](media/OverallTaskClassDiagram.png)
@@ -326,7 +342,7 @@ Notes about `OverallTaskList`
 * Once `ListParser` is done using the object, it is deleted and the task list is not stored anywhere. The reason for
   this is to reduce coupling between objects and remove the need to update separate task lists whenever tasks are added
   to `Modules`.
-
+  <br/><br/>
 ## OverallTask
 
 **API** : `task.OverallTask`
@@ -359,7 +375,7 @@ How the `OverallTask` component works:
 4. During instantiation, information from `Task/GradableTask` objects are added to the `OverallTask` object together
    with their `moduleName` .
 5. Calling the `toString()` method generates a string containing task information together with its `moduleName`.
-
+   <br/><br/>
 # Appendix A: Product Scope
 
 **Target User Profile:**
@@ -374,7 +390,7 @@ How the `OverallTask` component works:
 
 A centralized platform which allows NUS Students to carry out their learning management without needing to frequently
 switch between multiple tools or applications such as NUSMods, Luminus, Sticky Notes etc.
-
+<br/><br/>
 # Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
@@ -389,13 +405,13 @@ switch between multiple tools or applications such as NUSMods, Luminus, Sticky N
 |v2.0|Student|have quick access to upcoming gradable assignments|be sure everything is prepared for.|
 |v2.0|Student|be able to know what classes i have up next|  prepare for them in time.|
 |v2.1|University student| see the weightage of the modules| place emphasis/focus on certain work when there is a lack of time.|
-
+<br/><br/>
 # Appendix C: Non Functional Requirements
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+   <br/><br/>
 # Appendix D: Glossary
-
+<br/><br/>
 # Appendix E: Instructions for Manual Testing
 
 Given below are instructions to test the app manually.

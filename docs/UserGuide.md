@@ -158,7 +158,7 @@ Note:
   <br></br>
 ### Edit description of task : `/m <module> editdesc <task index> <new description>`
 
-Edit the description of a task.
+Edit the description of a task at the specified index in the given module.
 
 Note:
 
@@ -166,7 +166,7 @@ Note:
   <br></br>
 ### Edit deadline of task : `/m <module> editdate <task index> <new date>`
 
-Edit the deadline of a task.
+Edit the deadline of a task at the specified index in the given module.
 <br></br>
 ### Delete task from module : `/m <module> deletetask <substring>`
 
@@ -253,7 +253,7 @@ Assuming tasks have been added to modules beforehand:
 
 NOTE:
 
-For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
+* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
 due date as a reminder that the user has forgotten to do the task.
 <br></br>
 ### Listing module gradable tasks : `/m <module> list gradable`
@@ -530,8 +530,8 @@ Assuming tasks have been added to modules beforehand:
   1. [CS2132][G][LATE][ ] asdf by: 10 Dec 2000 12:00 AM [Weightage: 50%]
   ```
 
-**NOTE**:<br>
-For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
+NOTE:
+* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
 due date as a reminder that the user has forgotten to  do the task.
 <br></br>
 ### View CAP : `cap`
@@ -542,7 +542,8 @@ Example output:
 
 * `This semester's CAP: 4.25`
 
-NOTE: Modules with a credit value of 0 will not be calculated towards overall CAP.
+NOTE: 
+* Modules with a credit value of 0 will not be calculated towards overall CAP.
 <br></br>
 ### View all CAP : `allcap`
 
@@ -598,7 +599,7 @@ Welcome to NoCap
 **A**: Simply transfer your data.json file to the data folder of the operating system that you plan to use NoCap on.
 
 > **WARNING**: Replacing data.json file in another NoCap folder results in the  existing data being erased!
-
+<br></br>
 ## Command Summary
 
 |Action|Format|

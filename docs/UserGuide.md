@@ -9,7 +9,7 @@ app for NUS students!
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `NoCap` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
+2. Download the latest version of `NoCap` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
 3. Move the downloaded NoCap.jar to an empty directory.
 4. Navigate to this directory on the Command Prompt.
 5. Run NoCap.jar using the command `java -jar NoCap.jar`.

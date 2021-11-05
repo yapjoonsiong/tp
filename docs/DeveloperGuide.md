@@ -36,7 +36,7 @@ Third party libraries:
 The Parser classes is responsible for receiving user input and converting it into commands which are directly passed to
 respective classes.
 
-The simplified  class diagram below is an overview of relationship between Parser classes and other classes.
+The simplified class diagram below is an overview of relationship between Parser classes and other classes.
 
 ![alt_text](media/ParserClassDiagram.JPG)
 
@@ -111,7 +111,8 @@ How the `StorageEncoder` class works:
 
 ![alt_text](media/StorageEncoderSequenceDiagram.png "image_tooltip")
 
-1. The static method `encodeAndSaveSemesterListToJson()` from `StorageEncoder` is called when NoCap data needs to be saved
+1. The static method `encodeAndSaveSemesterListToJson()` from `StorageEncoder` is called when NoCap data needs to be
+   saved
 2. If the save file directory has not been created yet, it is first created in order to store the save file
 3. Similarly, an empty file is created to store the data if it has not been created yet
 4. The parent object `SemesterList` is passed to the method to be converted into a JSON file with an `ObjectMapper`
@@ -122,8 +123,10 @@ How the `StorageEncoder` class works:
 
 ![alt_text](media/StorageDecoderSequenceDiagram.png "image_tooltip")
 
-1. The static method `DecodeJsonToSemesterList()` from `StorageDecoder` is called when NoCap data needs to be loaded from the save file
-2. If there is no save file available in the default data directory, a new `SemesterList `object is created and returned to the caller
+1. The static method `DecodeJsonToSemesterList()` from `StorageDecoder` is called when NoCap data needs to be loaded
+   from the save file
+2. If there is no save file available in the default data directory, a new `SemesterList `object is created and returned
+   to the caller
 3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the JSON save file
    into a `SemesterList` object to be returned to the caller
    <br/><br/>
@@ -309,18 +312,17 @@ Note:
   <br/><br/>
 
 ## OverallTaskList
-**API** : `task.OverallTasklist`  
+
+**API** : `task.OverallTasklist`
 
 ![alt_text](media/OverallTaskClassDiagram.png)
 
 _Class diagram for OverallTask and OverallTaskList_
 
-
 **Note**: Some methods are omitted from the class diagram to improve clarity
 
-    
-
 The `OverallTaskList` class is instantiated from `ListParser` only when the end user needs to list available tasks in
+
 a `Semester`.
 
 How the `OverallTaskList` class works:
@@ -330,9 +332,9 @@ How the `OverallTaskList` class works:
    `OverallTaskList`.
 3. When the `OverallTaskList` object is instantiated, a `ModuleList` object from a semester is passed to its
    constructor.
-![alt_text](media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
-4. The constructor calls the method `addAllModuleListTasks(module list)` which converts and adds all the tasks in the module list
-   into `OverallTaskList`.
+   ![alt_text](media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
+4. The constructor calls the method `addAllModuleListTasks(module list)` which converts and adds all the tasks in the
+   module list into `OverallTaskList`.
 5. Once the object is instantiated, the following methods can be called to sort and print the tasks in the
    ArrayList `overallTaskList`. All sorting and filtering is done via `Java Streams`, and method details are omitted.
 
@@ -427,9 +429,11 @@ switch between multiple tools or applications such as NUSMods, Luminus, Sticky N
    <br/><br/>
 
 # Appendix D: Glossary
-* **Command Line Interface(CLI)** - A command-line interface (CLI) processes commands to a computer program in the form of lines of text(From [Wikipedia](https://en.wikipedia.org/wiki/Command-line_interface)).
-* **Mainstrem Operating Systems(OS)** - Windows, Linux, Unix, OS-X 
-<br/><br/>
+
+* **Command Line Interface(CLI)** - A command-line interface (CLI) processes commands to a computer program in the form
+  of lines of text(From [Wikipedia](https://en.wikipedia.org/wiki/Command-line_interface)).
+* **Mainstrem Operating Systems(OS)** - Windows, Linux, Unix, OS-X
+  <br/><br/>
 
 # Appendix E: Instructions for Manual Testing
 
@@ -520,8 +524,8 @@ exploratory testing.
 
 1. Prerequisite: Semester should already exist.
 2. Adding a module that does not exist.
-   1. Run the command: `add CS2040C`
-   2. Expected: 
+    1. Run the command: `add CS2040C`
+    2. Expected:
    ```
    Module successfully added: 
    1
@@ -538,16 +542,17 @@ exploratory testing.
     1. Prerequisite: module with the same name exists in current semester list. e.g. CS2040C
     2. Run the command `add CS2040C`
     3. Expected:`This module already exists!`
-   
+
 4. Adding a module that is longer than 16 Characters.
-   
-    Expected: `Module name must be less than 17 characters`
+
+   Expected: `Module name must be less than 17 characters`
 
 ## Deleting a module from a semester
+
 1. Prerequisite: Module index should already exist in the ModuleList
 2. Deleting a module with a valid index.
-   1. Run the command: `delete 1`
-   2. Expected: 
+    1. Run the command: `delete 1`
+    2. Expected:
    ```
     CS2040C has been successfully deleted
     Remaining Modules are:
@@ -560,9 +565,10 @@ exploratory testing.
    ```   
 
 ## Listing all modules in a semester
+
 1. Prerequisite: Semester should exist.
 2. Run the command: `list module`
-3. Expected: 
+3. Expected:
     ```
     1
     Module name: CS2113T
@@ -604,7 +610,29 @@ exploratory testing.
 
 ## Adding a task to a module
 
+1. Prerequisite: Module CS1010 already exists.
+2. Adding a valid Task to CS1010.
+    1. Run the command: `/m cs1010 addtask as01 /by 11/12/2021 2359`
+    2. Expected:
+   ```
+    Added new task to CS1010
+    [ ] as01 by: 11 Dec 2021 11:59 PM
+   ```
+3. Adding a Task with an invalid syntax.
+    1. Run the command : `/m cs1010 addtask as01 /by 11-12-21 2359`
+    2. Expected:
+    ```
+    Wrong date format input!
+    Format: dd/MM/yyyy hhmm
+    ```
+    3. Run the command: `/m cs1010 addtask /by 11/12/2021 2359`
+    4. Expected:
+    ```
+    You are missing a description!
+    ```
+
 ## Adding a GradableTask to module
+
 1. Prerequisite: Module CS2040C should already exist.
 2. Adding a valid GradableTask to module.
     1. Run the command: `/m cs2040c addgradable finals /by 11/11/2021 1000 /w 50`
@@ -620,15 +648,16 @@ exploratory testing.
     
     1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
    ```
-3. Adding a GradableTask with an invalid syntax. 
-   1. Run the command : `/m cs2040c addgradable finals /by 00/00/00 /w 50`
-   2. Run the command: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
-   3. Expected:
+3. Adding a GradableTask with an invalid syntax.
+    1. Run the command : `/m cs2040c addgradable finals /by 00/00/00 /w 50`
+    2. Run the command: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
+    3. Expected:
     ```
     Wrong date format input!
     Format: dd/MM/yyyy hhmm
     BREAKDOWN:
     ```
+
 ## Listing all gradable tasks
 
 1. Prerequisite: module CS2040C should already exist.
@@ -688,6 +717,7 @@ exploratory testing.
     4. Expected: `testcase 1 has been deleted`.
 
 ## Marking a task as complete
+
 1. Prerequisites: module CS2040C exists without any existing task.
 2. Add a new task: `/m cs2040c addtask testcase 1 /by 11/11/2021 0000`.
 3. Run the command: `/m cs2040c done 1`.
@@ -698,6 +728,7 @@ exploratory testing.
     ```
 
 ## Listing all tasks in a module
+
 1. Prerequisites: module CS2040C exists without any existing task.
 2. Add a new task: `/m cs2040c addtask testcase 1 /by 11/11/2021 0000`.
 3. Add a new task: `/m cs2040c addtask testcase 2 /by 12/12/2022 1212`.
@@ -709,11 +740,12 @@ exploratory testing.
     1.[ ] testcase 1 by: 11 Nov 2021 12:00 AM
     2.[ ] testcase 2 by: 12 Dec 2022 12:12 PM
     ```
-   
+
 ## Adding a grade to a module
-1. Prerequisites: module CS2040C exists 
+
+1. Prerequisites: module CS2040C exists
 2. Run the command: `/m cs2040c addgrade A`
-3. Expected: 
+3. Expected:
     ```
     Module grade successfully added: 
     Module name: CS2040C
@@ -727,14 +759,16 @@ exploratory testing.
     ```
 
 ## Deleting a grade from a module
+
 1. Prerequisites: module CS2040C exists and has an assigned grade.
 2. Run the command: `/m cs2040c deletegrade`.
 3. Expected: `Module grade has been successfully deleted`.
 
 ## Adding a credit to module
+
 1. Prerequisites: module CS2040C exists.
 2. Run the command: `/m cs2040c addcredit 4`
-3. Expected: 
+3. Expected:
     ```
     Module credits successfully added: 
     Module name: CS2040C
@@ -757,8 +791,8 @@ exploratory testing.
     3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
 
 2. Adding a class with valid syntax.
-   1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/LECT`
-   2. Expected: 
+    1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/LECT`
+    2. Expected:
     ```
     Module Class successfully added: 
     1.
@@ -767,9 +801,9 @@ exploratory testing.
     Location: ZOOM
     Comments: LECT
     ```
-5. Adding a class with invalid syntax 
-   1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/TUT`
-   2. Expected: `A class already exists in this timeslot!`
+5. Adding a class with invalid syntax
+    1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/TUT`
+    2. Expected: `A class already exists in this timeslot!`
 
 ## Delete class from a module
 

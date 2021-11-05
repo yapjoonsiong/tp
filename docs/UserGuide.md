@@ -21,21 +21,24 @@ app for NUS students!
 * Words in `<>` are the parameters to be supplied by the user. \
   e.g. `add <module name>` `<module name>` is the name of the module supplied by the user.
 * Items in curved brackets describe the input format. \
-  e.g.`/m <module name> addtask <description> /by <deadline> (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the date-month-year and 24 hour time of the description.
+  e.g.`/m <module name> addtask <description> /by <deadline> (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the
+  date-month-year and 24 hour time of the description.
 * Parameters must be in the exact order as seen in the user guide. \
-  e.g. if the command
-  specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`, `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
+  e.g. if the command specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`
+  , `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
   is not acceptable.
-* Commands that require parameters must be supplied, if not an error will be thrown.
-  e.g. if the command specifies `/m CG1111 addclass MON/0800/E1-03/tutorial` , `/m CG1111 addclass MON/0800/E1-03/` is not acceptable.
-* All specifier commands are case-sensitive. 
-  e.g. `HELP`, `/M CG1111 ADDCLASS MON/0800/E1-03/tutorial` and `ADD CS2113T` are invalid commands.   
+* Commands that require parameters must be supplied, if not an error will be thrown. e.g. if the command
+  specifies `/m CG1111 addclass MON/0800/E1-03/tutorial` , `/m CG1111 addclass MON/0800/E1-03/` is not acceptable.
+* All specifier commands are case-sensitive. e.g. `HELP`, `/M CG1111 ADDCLASS MON/0800/E1-03/tutorial` and `ADD CS2113T`
+  are invalid commands.
 
 ### Viewing help : `help`
+
 Shows a message explaining how to use NoCap.
 
 ### Listing semesters : `list semesters`
-Lists all preloaded semesters and their corresponding indexes.   
+
+Lists all preloaded semesters and their corresponding indexes.
 
 Example output:
 
@@ -61,7 +64,7 @@ Examples:
 
 * `Switch 1`
 * `Switch 2`
- 
+
 ### Adding module: `add <module>`
 
 Adds a module
@@ -72,8 +75,9 @@ Examples:
 * `add MA1508`
 
 Note:
+
 * Module code can only contain up to 16 characters
- 
+
 ### Delete module: `delete <module index> `
 
 Deletes a module corresponding to the input index. (refer to `list module` for indexes )
@@ -135,18 +139,20 @@ Example:
 * Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
 * Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
 
-
-
 ### Add gradable task to module : `/m <module> addgradable <day/period/location/comments> /w <weightage>`
 
 Adds a Gradable Task to the module.
+
 * Refer to Add Task for deadline format.
 
 Note:
+
 * The weightage needs to be an Integer between 5 - 100.
-* The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message will be shown.
+* The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message
+  will be shown.
 
 Examples:
+
 * `/m CS2113 addgradable Finals /by 10/10/2010 1000 /w 30`
 * `/m CS2113 addgradable assignments /by 10/10/2010 1000 /w 40`
 
@@ -195,6 +201,7 @@ optional arguments.
 
 &lt;optional argument> includes:
 
+* gradable - Shows a list of gradable tasks in the module.
 * sortbydate - Sort tasks by due date, the closest deadline have the higher priority in the list. does not print the
   task list.
 * sortbystatus - Sort tasks by status, finished tasks of lower priority. Does not print task list.
@@ -223,7 +230,16 @@ Assuming tasks have been added to modules beforehand:
   4.[ ] do assignment by: 30 Oct 2021 04:00 PM
   ```
 
+* `/m cs1010 list gradable`
+  ```
+  BREAKDOWN:
+    <=================40%==================>
+    ########################################
+    |------------------1-------------------|
+    1: assignments
 
+    1 assignments by: 10 Oct 2010 10:00 AM Weightage 40% [ ]
+  ```
 * `/m cs1010 list sortbydate`
 
   ```
@@ -256,8 +272,10 @@ Assuming tasks have been added to modules beforehand:
 
 NOTE:
 
-* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
-due date as a reminder that the user has forgotten to do the task.
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks
+  regardless of due date as a reminder that the user has forgotten to do the task.
+* `/m <module> list` does not show gradable tasks.
+* To show gradable task in module, have to input optional argument as shown above.
 
 ### Listing module gradable tasks : `/m <module> list gradable`
 
@@ -266,6 +284,7 @@ Shows the breakdown of the module, with all the gradable tasks.
 Example with output:
 
 `/m cs1010 list gradable`
+
 ```
   BREAKDOWN:
 <======================50%=======================><=======20%========><=====15%=====><=====15%=====>
@@ -282,6 +301,7 @@ Example with output:
 4 Assignment 2 by: 25 Oct 2021 11:59 PM Weightage 15% [ ]
   
   ```
+
 Note:
 
 * The suffix of the Gradable Task `[ ]` shows if the task is completed.
@@ -365,10 +385,12 @@ Comments: lect
 Add credits to a module.
 
 Examples:
+
 * `/m CS2113 addcredit 4`
 * `/m MA1511 addcredit 2`
 
 Example output:
+
 ```
 Module credits successfully added:
 Module name: CS2040C
@@ -382,6 +404,7 @@ BREAKDOWN:
 ```
 
 Note:
+
 * Credit values must be positive integers
 
 ### Add grade to module: `/m <module> addgrade <grade letter>`
@@ -389,6 +412,7 @@ Note:
 Adds a grade to a module
 
 Examples:
+
 * `/m CS2113 addgrade A`
 * `/m MA1508 addgrade B-`
 
@@ -410,7 +434,8 @@ Note:
 * A grade can be added to a module only after credit is assigned to the module.
 
 Note:
-* The input for `<grade>` is case-sensitive. 
+
+* The input for `<grade>` is case-sensitive.
 * The input for `<grade>` must correspond to one of the following values:
     1. A+
     2. A
@@ -424,12 +449,12 @@ Note:
     10. D
     11. F
 
-
 ### Delete grade from module: `/m <module> deletegrade`
 
 Deletes the grade, if any.
 
 Examples:
+
 * `/m CS2113 deletegrade`
 * `/m MA1511 deletegrade`
 
@@ -471,7 +496,7 @@ By default, all tasks in the current semester are listed, but this can be custom
 * gradable - list gradable tasks only.
 * normal - list non-gradable tasks only.
 * w - list tasks due within the next week.
-* m -  list tasks due within the next month.
+* m - list tasks due within the next month.
 * y - list tasks due within the next year.
 
 Tasks are listed in the format:
@@ -490,19 +515,18 @@ Example tasks:
 
 1. `[CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]`
 
-   * Belongs to the module CS2132
-   * Gradable 
-   * Not done yet 
-   * Due on  16 Dec 2021 12:00 AM
-   * Has a weightage of 50%.
+    * Belongs to the module CS2132
+    * Gradable
+    * Not done yet
+    * Due on 16 Dec 2021 12:00 AM
+    * Has a weightage of 50%.
 
 2. `[CS2132][ ][X] Quiz by: 16 Nov 2021 12:00 AM`
 
-   * Belongs to the module CS2132 
-   * Non-Gradable
-   * Done
-   * Due on  16 Nov 2021 12:00 AM
- 
+    * Belongs to the module CS2132
+    * Non-Gradable
+    * Done
+    * Due on 16 Nov 2021 12:00 AM
 
 Example commands with expected output:
 
@@ -534,8 +558,9 @@ Assuming tasks have been added to modules beforehand:
   ```
 
 NOTE:
-* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
-due date as a reminder that the user has forgotten to  do the task.
+
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks
+  regardless of due date as a reminder that the user has forgotten to do the task.
 
 ### View CAP : `cap`
 
@@ -545,7 +570,8 @@ Example output:
 
 * `This semester's CAP: 4.25`
 
-NOTE: 
+NOTE:
+
 * Modules with a credit value of 0 will not be calculated towards overall CAP.
 
 ### View all CAP : `allcap`
@@ -572,23 +598,23 @@ Example output:
 
 Exits the program.
 
-### Saving data 
+### Saving data
 
 Program data is saved whenever data is added or modified. The process is done automatically, so no user input is needed
 for this.
 
 ### Loading data
 
-Program data is loaded from the data folder during startup of the program. If the program can detect the data
-file successfully, the data is loaded and the following message should appear:
+Program data is loaded from the data folder during startup of the program. If the program can detect the data file
+successfully, the data is loaded and the following message should appear:
 
 ```
 Data loaded successfully
 Welcome to NoCap
 ```
 
-On the other hand, if no data file can be found, the program starts with an empty template,
-and the following message should appear:
+On the other hand, if no data file can be found, the program starts with an empty template, and the following message
+should appear:
 
 ```
 No save file found, starting with an empty template

@@ -140,16 +140,51 @@ public class Ui {
         System.out.println(module.toUpperCase(Locale.ROOT) + " successfully sorted by date");
     }
 
+
     public static void printSortListByStatus(String module) {
         System.out.println(module.toUpperCase(Locale.ROOT) + " successfully sorted by status");
     }
 
+    /**
+     * Method to print error when save file cannot be parsed.
+     */
+    public static void parseSaveFileError() {
+        System.out.println("Error parsing save file");
+    }
+
+    /**
+     * Method to print error when a save file could not be written.
+     */
+    public static void writeSaveFileError() {
+        System.out.println("Error writing to save file");
+    }
+
+    /**
+     * Method to print error if there are errors when trying to save the file.
+     */
+    public static void saveFileError() {
+        System.out.println("Error saving file");
+    }
+
+    /**
+     * Method to print message when data is loaded successfully from a save file.
+     */
     public static void loadFileSuccessful() {
         System.out.println("Data loaded successfully");
     }
 
+    /**
+     * Method to print message when a save file cannot be found.
+     */
     public static void printNoSaveFileMessage() {
         System.out.println("No save file found, starting with an empty template");
+    }
+
+    /**
+     * Method to print message when a save file is corrupted.
+     */
+    public static void printCorruptFileMessage() {
+        System.out.println("Error reading save file, creating new template");
     }
 
     public static void printInvalidListFormat() {
@@ -203,6 +238,11 @@ public class Ui {
         System.out.println("Invalid Module name!");
     }
 
+    /**
+     * Method to print overall task list that has been sorted by date.
+     *
+     * @param newTaskList Overall task list to be printed.
+     */
     public static void printOverallListOrderedByDate(List<OverallTask> newTaskList) {
         System.out.println("Tasks sorted by date: ");
         if (newTaskList.isEmpty()) {
@@ -214,6 +254,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print overall task list that has been sorted by status.
+     *
+     * @param newTaskList Overall task list to be printed.
+     */
     public static void printOverallListOrderedByStatus(List<OverallTask> newTaskList) {
         System.out.println("Tasks sorted by status: ");
         if (newTaskList.isEmpty()) {
@@ -225,6 +270,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print overall task list containing weekly tasks.
+     *
+     * @param newTaskList Overall task list to be printed.
+     */
     public static void printOverallWeeklyTasks(List<OverallTask> newTaskList) {
         System.out.println("Weekly tasks: ");
         if (newTaskList.isEmpty()) {
@@ -236,6 +286,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print overall task list containing monthly tasks.
+     *
+     * @param newTaskList Overall task list to be printed.
+     */
     public static void printOverallMonthlyTasks(List<OverallTask> newTaskList) {
         System.out.println("Monthly tasks: ");
         if (newTaskList.isEmpty()) {
@@ -247,6 +302,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print overall task list containing yearly tasks.
+     *
+     * @param newTaskList Overall task list to be printed.
+     */
     public static void printOverallYearlyTasks(List<OverallTask> newTaskList) {
         System.out.println("Yearly tasks: ");
         if (newTaskList.isEmpty()) {
@@ -258,6 +318,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print all tasks in an overall task list.
+     *
+     * @param overallTaskList Overall task list to be printed.
+     */
     public static void printAllOverallTasks(ArrayList<OverallTask> overallTaskList) {
         System.out.println("All tasks: ");
         if (overallTaskList.isEmpty()) {
@@ -269,6 +334,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print overall task list containing only gradable tasks.
+     *
+     * @param newTaskList Overall task list to be printed.
+     */
     public static void printGradableTasks(List<OverallTask> newTaskList) {
         System.out.println("Gradable tasks: ");
         if (newTaskList.isEmpty()) {
@@ -280,6 +350,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print overall task list containing only non-gradable tasks.
+     *
+     * @param newTaskList Overall task list to be printed.
+     */
     public static void printNormalTasks(List<OverallTask> newTaskList) {
         System.out.println("Non-gradable tasks: ");
         if (newTaskList.isEmpty()) {

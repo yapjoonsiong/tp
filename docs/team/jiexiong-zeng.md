@@ -15,7 +15,7 @@
   * Scribing to-dos in team meetings and creating corresponding issue trackers.
   * Managing team deadlines and creating releases.
 
-###Developer Guide Extract
+### Developer Guide Extract
 
 **API** : <code>command.parser </code>
 

@@ -271,9 +271,9 @@ Assuming tasks have been added to modules beforehand:
 
 NOTE:
 
-* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless
   of due date as a reminder that the user has forgotten to do the task.
-* /m <module> list does not show gradable tasks.
+* `/m <module> list` does not show gradable tasks.
 * To show gradable task in module, have to input optional argument as shown above.
 
 ### Listing module gradable tasks : `/m <module> list gradable`

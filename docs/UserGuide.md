@@ -9,7 +9,7 @@ app for NUS students!
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `NoCap` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
+2. Download the latest version of `NoCap` from [here](https://github.com/AY2122S1-CS2113T-F11-1/tp/releases).
 3. Move the downloaded NoCap.jar to an empty directory.
 4. Navigate to this directory on the Command Prompt.
 5. Run NoCap.jar using the command `java -jar NoCap.jar`.
@@ -21,21 +21,24 @@ app for NUS students!
 * Words in `<>` are the parameters to be supplied by the user. \
   e.g. `add <module name>` `<module name>` is the name of the module supplied by the user.
 * Items in curved brackets describe the input format. \
-  e.g.`/m <module name> addtask <description> /by <deadline> (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the date-month-year and 24 hour time of the description.
+  e.g.`/m <module name> addtask <description> /by <deadline> (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the
+  date-month-year and 24 hour time of the description.
 * Parameters must be in the exact order as seen in the user guide. \
-  e.g. if the command
-  specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`, `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
+  e.g. if the command specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`
+  , `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
   is not acceptable.
-* Commands that require parameters must be supplied, if not an error will be thrown.
-  e.g. if the command specifies `/m CG1111 addclass MON/0800/E1-03/tutorial` , `/m CG1111 addclass MON/0800/E1-03/` is not acceptable.
-* All specifier commands are case-sensitive. 
-  e.g. `HELP`, `/M CG1111 ADDCLASS MON/0800/E1-03/tutorial` and `ADD CS2113T` are invalid commands.   
+* Commands that require parameters must be supplied, if not an error will be thrown. e.g. if the command
+  specifies `/m CG1111 addclass MON/0800/E1-03/tutorial` , `/m CG1111 addclass MON/0800/E1-03/` is not acceptable.
+* All specifier commands are case-sensitive. e.g. `HELP`, `/M CG1111 ADDCLASS MON/0800/E1-03/tutorial` and `ADD CS2113T`
+  are invalid commands.
 
 ### Viewing help : `help`
+
 Shows a message explaining how to use NoCap.
-<br></br>
+
 ### Listing semesters : `list semesters`
-Lists all preloaded semesters and their corresponding indexes.   
+
+Lists all preloaded semesters and their corresponding indexes.
 
 Example output:
 
@@ -51,7 +54,7 @@ Example output:
     9 : Y5S1
     10 : Y5S2
 ```
-<br></br>
+
 ### Switching semesters : `switch <semester index>`
 
 Switches the currently accessed semester to the corresponding input index. (refer to `list semesters` for the index).
@@ -61,7 +64,7 @@ Examples:
 
 * `Switch 1`
 * `Switch 2`
-  <br></br>
+
 ### Adding module: `add <module>`
 
 Adds a module
@@ -72,8 +75,9 @@ Examples:
 * `add MA1508`
 
 Note:
+
 * Module code can only contain up to 16 characters
-  <br></br>
+
 ### Delete module: `delete <module index> `
 
 Deletes a module corresponding to the input index. (refer to `list module` for indexes )
@@ -98,11 +102,11 @@ GRADE: A
 TASKS: []
 BREAKDOWN: 
 ```
-<br></br>
+
 ### List module : `list module`
 
 Lists all added modules and their corresponding indexes.
-<br></br>
+
 ### Add task to module : `/m <module> addtask <description> /by <date> <time>`
 
 * The `date` is in the format of dd/MM/yyyy.
@@ -134,28 +138,33 @@ Example:
 
 * Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
 * Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
-  <br></br>
+
 ### Add gradable task to module : `/m <module> addgradable <day/period/location/comments> /w <weightage>`
 
 Adds a Gradable Task to the module.
+
 * Refer to Add Task for deadline format.
 
 Note:
+
 * The weightage needs to be an Integer between 5 - 100.
-* The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message will be shown.
+* The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message
+  will be shown.
 
 Examples:
+
 * `/m CS2113 addgradable Finals /by 10/10/2010 1000 /w 30`
 * `/m CS2113 addgradable assignments /by 10/10/2010 1000 /w 40`
 
 Expected output:
+
 ![](media/GradableTaskOutput.jpg)
 
 Note:
 
 * The suffix of the Gradable Task `[]` shows if the task is completed.
 * If it is completed, the suffix will show `[X]`.
-  <br></br>
+
 ### Edit description of task : `/m <module> editdesc <task index> <new description>`
 
 Edit the description of a task at the specified index in the given module.
@@ -163,15 +172,15 @@ Edit the description of a task at the specified index in the given module.
 Note:
 
 * An error message will be shown if the user input a duplicate description of an existing task.
-  <br></br>
+
 ### Edit deadline of task : `/m <module> editdate <task index> <new date>`
 
 Edit the deadline of a task at the specified index in the given module.
-<br></br>
+
 ### Delete task from module : `/m <module> deletetask <substring>`
 
 Finds and list down tasks with the substring. Type corresponding index to delete the task.
-<br></br>
+
 ### Marks module task as done : `/m <module> done <task index>`
 
 Mark task as done.
@@ -180,7 +189,7 @@ Other similar commands include:
 Mark task as not done: `/m <module> notdone <task index>`  
 Mark gradable task as done:`/m <module> gradabledone <task index>`  
 Mark gradable task as not done:`/m <module> gradablenotdone <task index>`
-<br></br>
+
 ### Listing module tasks : `/m <module> list`
 
 Shows a list of task of specified module.
@@ -192,6 +201,7 @@ optional arguments.
 
 &lt;optional argument> includes:
 
+* gradable - Shows a list of gradable tasks in the module.
 * sortbydate - Sort tasks by due date, the closest deadline have the higher priority in the list. does not print the
   task list.
 * sortbystatus - Sort tasks by status, finished tasks of lower priority. Does not print task list.
@@ -220,7 +230,16 @@ Assuming tasks have been added to modules beforehand:
   4.[ ] do assignment by: 30 Oct 2021 04:00 PM
   ```
 
+* `/m cs1010 list gradable`
+  ```
+  BREAKDOWN:
+    <=================40%==================>
+    ########################################
+    |------------------1-------------------|
+    1: assignments
 
+    1 assignments by: 10 Oct 2010 10:00 AM Weightage 40% [ ]
+  ```
 * `/m cs1010 list sortbydate`
 
   ```
@@ -253,9 +272,11 @@ Assuming tasks have been added to modules beforehand:
 
 NOTE:
 
-* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
-due date as a reminder that the user has forgotten to do the task.
-<br></br>
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks
+  regardless of due date as a reminder that the user has forgotten to do the task.
+* `/m <module> list` does not show gradable tasks.
+* To show gradable task in module, have to input optional argument as shown above.
+
 ### Listing module gradable tasks : `/m <module> list gradable`
 
 Shows the breakdown of the module, with all the gradable tasks.
@@ -263,6 +284,7 @@ Shows the breakdown of the module, with all the gradable tasks.
 Example with output:
 
 `/m cs1010 list gradable`
+
 ```
   BREAKDOWN:
 <======================50%=======================><=======20%========><=====15%=====><=====15%=====>
@@ -279,11 +301,12 @@ Example with output:
 4 Assignment 2 by: 25 Oct 2021 11:59 PM Weightage 15% [ ]
   
   ```
+
 Note:
 
 * The suffix of the Gradable Task `[ ]` shows if the task is completed.
 * If it is completed, the suffix will show `[X]`.
-  <br></br>
+
 ### Add class to module : `/m <module> addclass <day/period/location/comments>`
 
 Adds a class to a module
@@ -329,7 +352,7 @@ Valid
 
 * LOCATION and COMMENTS can only take on a maximum of 16 characters and cannot be empty
 * Only one class can be added in any period
-  <br></br>
+
 ### Delete classes from module: `/m <module> deleteclass <class index>`
 
 Deletes a module corresponding to the input index.(refer to `/m <module name> info` or `list module` for indexes )
@@ -356,16 +379,18 @@ Start Time: 1000
 Location: zoom
 Comments: lect
 ```
-<br></br>
+
 ### Add credit to module: `/m <module> addcredit `
 
 Add credits to a module.
 
 Examples:
+
 * `/m CS2113 addcredit 4`
 * `/m MA1511 addcredit 2`
 
 Example output:
+
 ```
 Module credits successfully added:
 Module name: CS2040C
@@ -379,13 +404,15 @@ BREAKDOWN:
 ```
 
 Note:
+
 * Credit values must be positive integers
-  <br></br>
+
 ### Add grade to module: `/m <module> addgrade <grade letter>`
 
 Adds a grade to a module
 
 Examples:
+
 * `/m CS2113 addgrade A`
 * `/m MA1508 addgrade B-`
 
@@ -407,7 +434,8 @@ Note:
 * A grade can be added to a module only after credit is assigned to the module.
 
 Note:
-* The input for `<grade>` is case-sensitive. 
+
+* The input for `<grade>` is case-sensitive.
 * The input for `<grade>` must correspond to one of the following values:
     1. A+
     2. A
@@ -421,12 +449,12 @@ Note:
     10. D
     11. F
 
-<br></br>
 ### Delete grade from module: `/m <module> deletegrade`
 
 Deletes the grade, if any.
 
 Examples:
+
 * `/m CS2113 deletegrade`
 * `/m MA1511 deletegrade`
 
@@ -441,7 +469,7 @@ Example output:
     GRADE: null
     TASKS: []
     BREAKDOWN:
-<br></br>
+
 ### View Timetable : `timetable `
 
 Shows the timetable for the currently accessed semester.
@@ -452,7 +480,7 @@ Example output:
 Note:
 
 * Timetable can only display classes from 0800 to 1700 periods
-  <br></br>
+
 ### Listing all tasks : `list task`
 
 Shows a list of all tasks within the current semester
@@ -468,12 +496,12 @@ By default, all tasks in the current semester are listed, but this can be custom
 * gradable - list gradable tasks only.
 * normal - list non-gradable tasks only.
 * w - list tasks due within the next week.
-* m -  list tasks due within the next month.
+* m - list tasks due within the next month.
 * y - list tasks due within the next year.
 
 Tasks are listed in the format:
 
-[Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]
+`[Module Code][Gradable][Lateness][Done] <description> by: <deadline> [Weightage]`
 
 * [Module Name] - Name of the module
 * [Gradable] - Shows `[G]` if the task is gradable, and `[ ]` if the task is non-gradable.
@@ -487,19 +515,18 @@ Example tasks:
 
 1. `[CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]`
 
-   * Belongs to the module CS2132
-   * Gradable 
-   * Not done yet 
-   * Due on  16 Dec 2021 12:00 AM
-   * Has a weightage of 50%.
+    * Belongs to the module CS2132
+    * Gradable
+    * Not done yet
+    * Due on 16 Dec 2021 12:00 AM
+    * Has a weightage of 50%.
 
 2. `[CS2132][ ][X] Quiz by: 16 Nov 2021 12:00 AM`
 
-   * Belongs to the module CS2132 
-   * Non-Gradable
-   * Done
-   * Due on  16 Nov 2021 12:00 AM
- 
+    * Belongs to the module CS2132
+    * Non-Gradable
+    * Done
+    * Due on 16 Nov 2021 12:00 AM
 
 Example commands with expected output:
 
@@ -531,9 +558,10 @@ Assuming tasks have been added to modules beforehand:
   ```
 
 NOTE:
-* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
-due date as a reminder that the user has forgotten to  do the task.
-<br></br>
+
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks
+  regardless of due date as a reminder that the user has forgotten to do the task.
+
 ### View CAP : `cap`
 
 Shows the CAP for the currently accessed semester.
@@ -542,9 +570,10 @@ Example output:
 
 * `This semester's CAP: 4.25`
 
-NOTE: 
+NOTE:
+
 * Modules with a credit value of 0 will not be calculated towards overall CAP.
-<br></br>
+
 ### View all CAP : `allcap`
 
 Shows the CAP for all semesters and aggregated CAP.
@@ -564,34 +593,34 @@ Example output:
     Y4S2: 0.0
     Y5S1: 0.0
     Y5S2: 0.0
-<br></br>
+
 ### Exiting the program : `bye`
 
 Exits the program.
-<br></br>
-### Saving data 
+
+### Saving data
 
 Program data is saved whenever data is added or modified. The process is done automatically, so no user input is needed
 for this.
-<br></br>
+
 ### Loading data
 
-Program data is loaded from the data folder during startup of the program. If the program can detect the data
-file successfully, the data is loaded and the following message should appear:
+Program data is loaded from the data folder during startup of the program. If the program can detect the data file
+successfully, the data is loaded and the following message should appear:
 
 ```
 Data loaded successfully
 Welcome to NoCap
 ```
 
-On the other hand, if no data file can be found, the program starts with an empty template,
-and the following message should appear:
+On the other hand, if no data file can be found, the program starts with an empty template, and the following message
+should appear:
 
 ```
 No save file found, starting with an empty template
 Welcome to NoCap
 ```
-<br></br>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -599,7 +628,7 @@ Welcome to NoCap
 **A**: Simply transfer your data.json file to the data folder of the operating system that you plan to use NoCap on.
 
 > **WARNING**: Replacing data.json file in another NoCap folder results in the  existing data being erased!
-<br></br>
+
 ## Command Summary
 
 |Action|Format|

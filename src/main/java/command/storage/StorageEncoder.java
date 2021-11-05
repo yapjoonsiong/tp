@@ -4,10 +4,9 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import command.Ui;
 import exceptions.ExceptionMessages;
 import exceptions.NoCapExceptions;
-import module.ModuleList;
-import semester.Semester;
 import semester.SemesterList;
 
 import java.io.File;
@@ -32,7 +31,7 @@ public class StorageEncoder {
      * Takes in a SemesterList object and converts it into json format.
      * Then, stores it in a specified file path. If the specified directory does
      * not exist, this method will attempt to create the directory first before saving the
-     * SemesterList object
+     * SemesterList object. Is implemented using the jackson databind library.
      *
      * @param semesterList The SemesterList object to be converted into json format.
      */
@@ -51,9 +50,9 @@ public class StorageEncoder {
         } catch (NoCapExceptions e) {
             System.out.println(e.getMessage());
         } catch (DatabindException e) {
-            System.out.println("Error parsing save file");
+            Ui.parseSaveFileError();
         } catch (IOException e) {
-            System.out.println("Error writing to save file");
+            Ui.writeSaveFileError();
         }
     }
 
@@ -77,7 +76,7 @@ public class StorageEncoder {
             }
             assert Files.exists(FILE_PATH);
         } catch (IOException e) {
-            System.out.println("Error saving file");
+            Ui.saveFileError();
         }
     }
 }

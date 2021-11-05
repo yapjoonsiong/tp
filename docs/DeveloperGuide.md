@@ -36,7 +36,7 @@ Third party libraries:
 The Parser classes is responsible for receiving user input and converting it into commands which are directly passed to
 respective classes.
 
-The class diagram below is an overview of relationship between Parser classes and other classes.
+The simplified class diagram below is an overview of relationship between Parser classes and other classes.
 
 ![alt_text](media/ParserClassDiagram.JPG)
 
@@ -107,24 +107,28 @@ using a 3rd party library Jackson Databind.
 It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object
 `SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
 
-How StorageEncoder works:
+How the `StorageEncoder` class works:
 
 ![alt_text](media/StorageEncoderSequenceDiagram.png "image_tooltip")
 
-1. The static method `encodeAndSaveSemesterListToJson() `is called when NoCap data needs to be saved
-2. If the save file directory has not been created, it is first created in order to store the save file
+1. The static method `encodeAndSaveSemesterListToJson()` from `StorageEncoder` is called when NoCap data needs to be
+   saved
+2. If the save file directory has not been created yet, it is first created in order to store the save file
 3. Similarly, an empty file is created to store the data if it has not been created yet
-4. The parent object `SemesterList` is passed to the method to be converted into json format with an `ObjectMapper`
+4. The parent object `SemesterList` is passed to the method to be converted into a JSON file with an `ObjectMapper`
    object from the  `jackson-databind` library
+5. Finally, the data file is saved in a default data directory.
 
-How StorageDecoder works:
+**How the `StorageDecoder` class works:**
 
 ![alt_text](media/StorageDecoderSequenceDiagram.png "image_tooltip")
 
-1. The static method `DecodeJsonToSemesterList() `is called when NoCap data needs to be loaded from the save file
-2. If there is no save file available, a new `SemesterList `object is created and returned to the caller
-3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the json save file
-   into a SemesterList object to be returned to the caller
+1. The static method `DecodeJsonToSemesterList()` from `StorageDecoder` is called when NoCap data needs to be loaded
+   from the save file
+2. If there is no save file available in the default data directory, a new `SemesterList `object is created and returned
+   to the caller
+3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the JSON save file
+   into a `SemesterList` object to be returned to the caller
    <br/><br/>
 
 ## Semester
@@ -309,31 +313,28 @@ Note:
 
 ## OverallTaskList
 
+**API** : `task.OverallTasklist`
+
 ![alt_text](media/OverallTaskClassDiagram.png)
 
 _Class diagram for OverallTask and OverallTaskList_
 
-```
-Note: Some methods are ommited from the class diagram to improve clarity
-```
+**Note**: Some methods are omitted from the class diagram to improve clarity
 
-**API** : `task.OverallTasklist`
+The `OverallTaskList` class is instantiated from `ListParser` only when the end user needs to list available tasks in
 
-The OverallTaskList class is instantiated from ListParser only when the end user needs to list available tasks in
 a `Semester`.
 
 How the `OverallTaskList` class works:
 
 1. `OverallTask` objects (explained further under `OverallTask`) are stored in an ArrayList `overallTaskList.`
-2. Both `Task` and `GradableTask` objects are converted to OverallTask objects first before being inserted into
-   OverallTaskList.
+2. Both `Task` and `GradableTask` objects are converted to `OverallTask` objects first before being inserted into
+   `OverallTaskList`.
 3. When the `OverallTaskList` object is instantiated, a `ModuleList` object from a semester is passed to its
    constructor.
-
-![alt_text](media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
-
-4. The constructor calls the method `addAllModuleListTasks(module list)` which adds all the tasks in the module list
-   into `OverallTaskList`.
+   ![alt_text](media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
+4. The constructor calls the method `addAllModuleListTasks(module list)` which converts and adds all the tasks in the
+   module list into `OverallTaskList`.
 5. Once the object is instantiated, the following methods can be called to sort and print the tasks in the
    ArrayList `overallTaskList`. All sorting and filtering is done via `Java Streams`, and method details are omitted.
 
@@ -357,7 +358,7 @@ Notes about `OverallTaskList`
 
 **API** : `task.OverallTask`
 
-`OverallTask` objects are stored in a OverallTaskList object when the end user needs to list available tasks in
+`OverallTask` objects are stored in a `OverallTaskList` object when the end user needs to list available tasks in
 a `Semester`. It stores information from `GradableTask/Task `objects together with their module name.
 
 `OverallTask` object stores the following for each task:
@@ -429,7 +430,10 @@ switch between multiple tools or applications such as NUSMods, Luminus, Sticky N
 
 # Appendix D: Glossary
 
-<br/><br/>
+* **Command Line Interface(CLI)** - A command-line interface (CLI) processes commands to a computer program in the form
+  of lines of text(From [Wikipedia](https://en.wikipedia.org/wiki/Command-line_interface)).
+* **Mainstream Operating Systems(OS)** - Windows, Linux, Unix, OS-X
+  <br/><br/>
 
 # Appendix E: Instructions for Manual Testing
 
@@ -447,7 +451,7 @@ exploratory testing.
    ```
    java -jar NoCap.jar
    ```
-   **Note**: It is important that you navigate to the directory containing the JAR file before the running the
+   **Note**: It is important that you navigate to the directory containing the JAR file first before running the
    application, as it may affect the location of the save file.
 
 ## Saving/Loading data
@@ -479,7 +483,7 @@ exploratory testing.
     1. Prerequisites: Make sure that a save file already exists in the data folder that is located in the folder
        containing the JAR file If not, simply carry out any command that adds/modifies data in the application,
        e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
-    2. Corrupt the save file by removing lines from the JSON file stored in the data folder.
+    2. To simulate data corruption, remove lines to cause syntax errors in the JSON file, such as lines containing `{` and `}`.
     3. Run the application
     4. Expected: An error message is shown and application starts with an empty template, showing the message below:
    ```
@@ -518,18 +522,74 @@ exploratory testing.
 
 ## Adding a module to a semester
 
-1. Adding a module with a valid name. Expected: Module successfully added message shown and list of modules in current
-   semester is printed
-2. Adding a module that already exists.
-    1. Prerequisite: view list of modules in current semester with list module.
-    2. Adding a module with the same name as a module in current list will result in the following error message:
-       `This module already exists!`
-3. Adding a module that is longer than 16 Characters Expected error
-   message: `Module name must be less than 17 characters`
+1. Prerequisite: Semester should already exist.
+2. Adding a module that does not exist.
+    1. Run the command: `add CS2040C`
+    2. Expected:
+   ```
+   Module successfully added: 
+   1
+    Module name: CS2040C
+    CREDITS: 0
+    --------------------------- 
+    SCHEDULE:
+    --------------------------- 
+    GRADE: NIL
+    TASKS: []
+    BREAKDOWN:
+   ```
+3. Adding a module that already exists.
+    1. Prerequisite: module with the same name exists in current semester list. e.g. CS2040C
+    2. Run the command `add CS2040C`
+    3. Expected:`This module already exists!`
+
+4. Adding a module that is longer than 16 Characters.
+
+   Expected: `Module name must be less than 17 characters`
 
 ## Deleting a module from a semester
 
+1. Prerequisite: Module index should already exist in the ModuleList
+2. Deleting a module with a valid index.
+    1. Run the command: `delete 1`
+    2. Expected:
+   ```
+    CS2040C has been successfully deleted
+    Remaining Modules are:
+   ```
+3. Deleting a module with an invalid index
+    1. Run the command: `delete 999`
+    2. Expected
+   ```
+    Invalid number value
+   ```   
+
 ## Listing all modules in a semester
+
+1. Prerequisite: Semester should exist.
+2. Run the command: `list module`
+3. Expected:
+    ```
+    1
+    Module name: CS2113T
+    CREDITS: 4
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: B+
+    TASKS: []
+    BREAKDOWN: 
+    
+    2
+    Module name: CS1010
+    CREDITS: 0
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: NIL
+    TASKS: []
+    BREAKDOWN: 
+    ```
 
 ## List tasks in a semester
 
@@ -546,50 +606,74 @@ exploratory testing.
        running `list task`. If there are no tasks in the semester, add in tasks first(including both gradable and
        non-gradable tasks)
     2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
-        3. Expected: Tasks are shown accordingly, depending on the optional argument
+    3. Expected: Tasks are shown accordingly, depending on the optional argument
 
 ## Adding a task to a module
 
+1. Prerequisite: Module CS1010 already exists.
+2. Adding a valid Task to CS1010.
+    1. Run the command: `/m cs1010 addtask as01 /by 11/12/2021 2359`
+    2. Expected:
+   ```
+    Added new task to CS1010
+    [ ] as01 by: 11 Dec 2021 11:59 PM
+   ```
+3. Adding a Task with an invalid syntax.
+    1. Run the command : `/m cs1010 addtask as01 /by 11-12-21 2359`
+    2. Expected:
+    ```
+    Wrong date format input!
+    Format: dd/MM/yyyy hhmm
+    ```
+    3. Run the command: `/m cs1010 addtask /by 11/12/2021 2359`
+    4. Expected:
+    ```
+    You are missing a description!
+    ```
+
 ## Adding a GradableTask to module
 
-1. Adding a valid GradableTask to module.
-
-   GradableTask successfully added message shown. Breakdown of all gradableTasks will be shown.
-2. Adding a GradableTask with an invalid syntax.
-    1. Invalid date syntax
-
-   Test case: `/m cs2040c addgradable finals /by 00/00/00 /w 50`
-
-   Expected: Invalid error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
-
-    2. Invalid weightage
-
-   Weightage must be between 5-100
-
-   Test case: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
-
-   Expected: Invalid weightage error message shown. GradableTask not added. Breakdown of all gradableTasks will be
-   shown.
-
-    3. Total weightage invalid
-
-   Total weightage must be greater or equal to 100. Adding a weightage that exceeds 100 will cause an error message to
-   be shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
+1. Prerequisite: Module CS2040C should already exist.
+2. Adding a valid GradableTask to module.
+    1. Run the command: `/m cs2040c addgradable finals /by 11/11/2021 1000 /w 50`
+    2. Expected:
+   ```
+     Added new task to CS2040C
+    finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
+    BREAKDOWN:
+    <======================50%=======================>
+    ##################################################
+    |-----------------------1------------------------|
+    1: finals
+    
+    1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
+   ```
+3. Adding a GradableTask with an invalid syntax.
+    1. Run the command : `/m cs2040c addgradable finals /by 00/00/00 /w 50`
+    2. Run the command: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
+    3. Expected:
+    ```
+    Wrong date format input!
+    Format: dd/MM/yyyy hhmm
+    BREAKDOWN:
+    ```
 
 ## Listing all gradable tasks
 
-1. To look at all breakdown of each module, the command `/m <module> list gradable` can be called.
-
-2. If there are no gradable tasks currently inside the module, an empty breakdown will be shown.
-
-   Expected:
+1. Prerequisite: module CS2040C should already exist.
+2. Run the command: `/m CS2040C list gradable`
+3. Expected:
     ```
    BREAKDOWN:
+    <======================50%=======================><======================50%=======================>
+    ##################################################@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    |-----------------------1------------------------||-----------------------2------------------------|
+    1: finals
+    2: midterms
 
-
-
-
-    ```
+    1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
+    2 midterms by: 11 Sep 2021 01:00 PM Weightage 50% [ ]
+    ``` 
 
 ## Editing a task
 
@@ -633,6 +717,7 @@ exploratory testing.
     4. Expected: `testcase 1 has been deleted`.
 
 ## Marking a task as complete
+
 1. Prerequisites: module CS2040C exists without any existing task.
 2. Add a new task: `/m cs2040c addtask testcase 1 /by 11/11/2021 0000`.
 3. Run the command: `/m cs2040c done 1`.
@@ -643,6 +728,7 @@ exploratory testing.
     ```
 
 ## Listing all tasks in a module
+
 1. Prerequisites: module CS2040C exists without any existing task.
 2. Add a new task: `/m cs2040c addtask testcase 1 /by 11/11/2021 0000`.
 3. Add a new task: `/m cs2040c addtask testcase 2 /by 12/12/2022 1212`.
@@ -654,76 +740,70 @@ exploratory testing.
     1.[ ] testcase 1 by: 11 Nov 2021 12:00 AM
     2.[ ] testcase 2 by: 12 Dec 2022 12:12 PM
     ```
-   
+
 ## Adding a grade to a module
 
-1. Adding a valid grade.
-
-   Grade successfully added message shown and module information is printed.
-2. Adding an invalid grade.
-
-   Invalid Grade error message will be shown
-    1. Test case : `/m cs2040c addgrade G`
-
-   Expected: `Invalid grade!`
-    2. Test case : `/m cs2040c addgrade `
-
-   Expected: `You are missing a description!`
+1. Prerequisites: module CS2040C exists
+2. Run the command: `/m cs2040c addgrade A`
+3. Expected:
+    ```
+    Module grade successfully added: 
+    Module name: CS2040C
+    CREDITS: 0
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: A
+    TASKS: []
+    BREAKDOWN: 
+    ```
 
 ## Deleting a grade from a module
+
 1. Prerequisites: module CS2040C exists and has an assigned grade.
-2. Run the command: `/m cs2040c deletegrade A`.
+2. Run the command: `/m cs2040c deletegrade`.
 3. Expected: `Module grade has been successfully deleted`.
 
 ## Adding a credit to module
 
-1. Adding a valid credit.
-
-   Credit successfully added message shown and module information is printed.
-2. Adding an invalid credit
-
-   Invalid Credit error message will be shown
-    1. Test case : `/m cs2040c addcredit four`
-
-   Expected: `Input must be an integer!`
-    2. Test case : `/m cs2040c addcredit`
-
-   Expected: `You are missing a description!`
+1. Prerequisites: module CS2040C exists.
+2. Run the command: `/m cs2040c addcredit 4`
+3. Expected:
+    ```
+    Module credits successfully added: 
+    Module name: CS2040C
+    CREDITS: 4
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: A
+    TASKS: []
+    BREAKDOWN: 
+    ```
 
 ## Adding a class to module
 
-1. Prerequisite: look up timetable to see existing classes.
+1. Prerequisite: module CS2040C exists
 
    Note:
     1. `<day>` can only take in the first 3 letters of the day, from monday to saturday.
     2. `<period` can only be in blocks of 1 hour in 24-hour format (e.g. 1100 or 1300).
     3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
 
-3. Adding a valid class
-
-   Class successfully added message shown and schedule information for the module is printed.
-4. Adding a class that already exists in that timeslot.
-
-   Expected: `A class already exists in this timeslot!`
+2. Adding a class with valid syntax.
+    1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/LECT`
+    2. Expected:
+    ```
+    Module Class successfully added: 
+    1.
+    Day: MON
+    Start Time: 1000
+    Location: ZOOM
+    Comments: LECT
+    ```
 5. Adding a class with invalid syntax
-
-    1. adding a class with invalid day syntax
-
-   Test case: `/m  cs2040c addclass aaa/1200/zoom/tut`
-
-   Expected: Error message shown. No classes added.
-
-    2. Adding a class with invalid timeslot.
-
-   Test case: `/m  cs2040c addclass aaa/2500/zoom/tut`
-
-   Expected: Error message shown. No classes added.
-
-    3. Adding a class with comments/location that have more than 16 characters.
-
-   Test case: `/m  cs2040c addclass aaa/2500/12345678901234567/tut`
-
-   Expected: Error message shown. No classes added.
+    1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/TUT`
+    2. Expected: `A class already exists in this timeslot!`
 
 ## Delete class from a module
 

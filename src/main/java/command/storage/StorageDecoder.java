@@ -26,6 +26,7 @@ public class StorageDecoder {
 
     /**
      * Decodes a json file located at a specified path into a SemesterList object.
+     * Is implemented using the jackson databind library.
      *
      * @return A SemesterList containing information from previous runs.
      */
@@ -43,7 +44,7 @@ public class StorageDecoder {
             Ui.loadFileSuccessful();
             logger.log(Level.INFO, "Load file successful");
         } catch (IOException e) {
-            System.out.println("Error reading save file, creating new template");
+            Ui.printCorruptFileMessage();
             // Create a new save file if save file is corrupted
             assert semesters.toString().equals(new SemesterList().toString());
             StorageEncoder.encodeAndSaveSemesterListToJson(semesters);

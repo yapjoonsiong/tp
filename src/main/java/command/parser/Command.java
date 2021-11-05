@@ -45,6 +45,7 @@ public class Command {
     void commandPrintCap() {
         try {
             NoCap.semester.printCap();
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
         } catch (NoCapExceptions e) {
             System.out.println(e.getMessage());
         }
@@ -53,6 +54,7 @@ public class Command {
     void commandPrintAllCap() {
         try {
             NoCap.semesterList.printAllCap();
+            StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
         } catch (NoCapExceptions e) {
             System.out.println(e.getMessage());
         }
@@ -60,6 +62,7 @@ public class Command {
 
     void commandPrintTimeTable() {
         NoCap.moduleList.printTimeTable();
+        StorageEncoder.encodeAndSaveSemesterListToJson(NoCap.semesterList);
     }
 
     void commandShowInfo(Module module) {
@@ -278,7 +281,8 @@ public class Command {
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
         if (selectedTask != null && !list.hasDuplicateDescription(taskDescription)) {
             selectedTask.setDescription(taskDescription);
-        } else {
+            Ui.printUpdateTaskDescription(selectedTask);
+        } else if (list.hasDuplicateDescription(taskDescription)) {
             Ui.duplicateTaskError();
         }
     }

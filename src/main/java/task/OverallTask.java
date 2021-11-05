@@ -8,8 +8,8 @@ import java.util.Comparator;
  */
 public class OverallTask extends Task {
     //Constants for comparators
-    private static final int RIGHT_HEAVY = 1;
-    private static final int LEFT_HEAVY = -1;
+    private static final int RIGHT_HEAVY = -1;
+    private static final int LEFT_HEAVY = 1;
     private static final int EQUAL = 0;
 
     private final String moduleName;
@@ -50,13 +50,18 @@ public class OverallTask extends Task {
     }
 
     /**
-     * Comparator used to compare deadline between OverallTask objects.
+     * Comparator used to compare deadlines between OverallTask objects.
+     * An overall task that has an earlier deadline is considered less than an overall task with a
+     * later deadline, and vice versa. If both tasks have the same deadline, they are
+     * considered equal.
      */
     public static Comparator<OverallTask> dateComparator = Comparator.comparing(t -> t.deadline);
 
 
     /**
      * Comparator used to compare "done" status between OverallTask objects.
+     * If task1 is done while task2 is not, task1 is greater than task2 and vice versa.
+     * If both task1 and task2 have the same status, they are considered equal.
      */
     public static Comparator<OverallTask> statusComparator = (task1, task2) -> {
         if (task1.isDone && !task2.isDone) {

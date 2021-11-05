@@ -432,7 +432,8 @@ switch between multiple tools or applications such as NUSMods, Luminus, Sticky N
 * **Command Line Interface(CLI)** - A command-line interface (CLI) processes commands to a computer program in the form
   of lines of text(From [Wikipedia](https://en.wikipedia.org/wiki/Command-line_interface)).
 * **Mainstream Operating Systems(OS)** - Windows, Linux, Unix, OS-X
-  <br/><br/>
+* **Visualise** - Snapshot of the graded components which the module is made up of and their individual percentages.
+<br/><br/>
 
 # Appendix E: Instructions for Manual Testing
 

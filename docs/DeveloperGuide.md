@@ -562,27 +562,27 @@ exploratory testing.
 1. Prerequisite: Semester should exist.
 2. Run the command: `list module`
 3. Expected: 
-```
-1
-Module name: CS2113T
-CREDITS: 4
---------------------------- 
-SCHEDULE: 
---------------------------- 
-GRADE: B+
-TASKS: []
-BREAKDOWN: 
-
-2
-Module name: CS1010
-CREDITS: 0
---------------------------- 
-SCHEDULE: 
---------------------------- 
-GRADE: NIL
-TASKS: []
-BREAKDOWN: 
-```
+    ```
+    1
+    Module name: CS2113T
+    CREDITS: 4
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: B+
+    TASKS: []
+    BREAKDOWN: 
+    
+    2
+    Module name: CS1010
+    CREDITS: 0
+    --------------------------- 
+    SCHEDULE: 
+    --------------------------- 
+    GRADE: NIL
+    TASKS: []
+    BREAKDOWN: 
+    ```
 
 ## List tasks in a semester
 
@@ -623,21 +623,16 @@ BREAKDOWN:
    1. Run the command : `/m cs2040c addgradable finals /by 00/00/00 /w 50`
    2. Run the command: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
    3. Expected:
-  ```
-  Wrong date format input!
-  Format: dd/MM/yyyy hhmm
-  BREAKDOWN:
-    
-    
-    
-    
-   ```
+    ```
+    Wrong date format input!
+    Format: dd/MM/yyyy hhmm
+    BREAKDOWN:
+    ```
 ## Listing all gradable tasks
 
 1. Prerequisite: module CS2040C should already exist.
 2. Run the command: `/m CS2040C list gradable`
-
-   Expected:
+3. Expected:
     ```
    BREAKDOWN:
     <======================50%=======================><======================50%=======================>
@@ -718,7 +713,7 @@ BREAKDOWN:
 1. Prerequisites: module CS2040C exists 
 2. Run the command: `/m cs2040c addgrade A`
 3. Expected: 
-```
+    ```
     Module grade successfully added: 
     Module name: CS2040C
     CREDITS: 0
@@ -728,8 +723,7 @@ BREAKDOWN:
     GRADE: A
     TASKS: []
     BREAKDOWN: 
-
-```
+    ```
 
 ## Deleting a grade from a module
 1. Prerequisites: module CS2040C exists and has an assigned grade.
@@ -740,7 +734,7 @@ BREAKDOWN:
 1. Prerequisites: module CS2040C exists.
 2. Run the command: `/m cs2040c addcredit 4`
 3. Expected: 
-```
+    ```
     Module credits successfully added: 
     Module name: CS2040C
     CREDITS: 4
@@ -750,8 +744,7 @@ BREAKDOWN:
     GRADE: A
     TASKS: []
     BREAKDOWN: 
-
-```
+    ```
 
 ## Adding a class to module
 
@@ -765,15 +758,14 @@ BREAKDOWN:
 2. Adding a class with valid syntax.
    1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/LECT`
    2. Expected: 
-```
+    ```
     Module Class successfully added: 
     1.
     Day: MON
     Start Time: 1000
     Location: ZOOM
     Comments: LECT
-
-```
+    ```
 5. Adding a class with invalid syntax 
    1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/TUT`
    2. Expected: `A class already exists in this timeslot!`

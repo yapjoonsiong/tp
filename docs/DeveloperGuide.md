@@ -483,7 +483,7 @@ exploratory testing.
     1. Prerequisites: Make sure that a save file already exists in the data folder that is located in the folder
        containing the JAR file If not, simply carry out any command that adds/modifies data in the application,
        e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
-    2. Corrupt the save file by removing lines from the JSON file stored in the data folder.
+    2. To simulate data corruption, remove lines to cause syntax errors in the JSON file, such as lines containing `{` and `}`.
     3. Run the application
     4. Expected: An error message is shown and application starts with an empty template, showing the message below:
    ```
@@ -606,7 +606,7 @@ exploratory testing.
        running `list task`. If there are no tasks in the semester, add in tasks first(including both gradable and
        non-gradable tasks)
     2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
-        3. Expected: Tasks are shown accordingly, depending on the optional argument
+3. Expected: Tasks are shown accordingly, depending on the optional argument
 
 ## Adding a task to a module
 

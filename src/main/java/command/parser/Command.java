@@ -278,7 +278,8 @@ public class Command {
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
         if (selectedTask != null && !list.hasDuplicateDescription(taskDescription)) {
             selectedTask.setDescription(taskDescription);
-        } else {
+            Ui.printUpdateTaskDescription(selectedTask);
+        } else if (list.hasDuplicateDescription(taskDescription)) {
             Ui.duplicateTaskError();
         }
     }

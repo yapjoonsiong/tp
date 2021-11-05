@@ -317,6 +317,12 @@ public class Ui {
         System.out.println("Deadline for this task has been updated");
     }
 
+    public static void printUpdateTaskDescription(Task t) {
+        System.out.println("Task is updated with a new description."
+                + System.lineSeparator() + "This is your new Task:"
+                + System.lineSeparator() + t);
+    }
+
     public static void deleteModuleMessage(Module m) {
         System.out.print(m.getModuleName());
         System.out.println(" has been successfully deleted");

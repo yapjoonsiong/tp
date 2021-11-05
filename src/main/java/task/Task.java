@@ -113,6 +113,10 @@ public class Task {
         this.isLate = isLate;
     }
 
+    /**
+     * Checks if the task is overdue by checking the deadline of the task
+     * against the system clock. If it is overdue, update the task attribute.
+     */
     public void updateOverdue() throws NullPointerException {
         try {
             LocalDateTime currentDateTime = LocalDateTime.now();

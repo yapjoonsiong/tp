@@ -606,7 +606,7 @@ exploratory testing.
        running `list task`. If there are no tasks in the semester, add in tasks first(including both gradable and
        non-gradable tasks)
     2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
-3. Expected: Tasks are shown accordingly, depending on the optional argument
+    3. Expected: Tasks are shown accordingly, depending on the optional argument
 
 ## Adding a task to a module
 

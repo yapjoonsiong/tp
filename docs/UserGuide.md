@@ -614,7 +614,7 @@ Welcome to NoCap
 |Add gradable task | /m \<module> addgradable \<description> /by \<date> \<time> /w \<weightage>|
 |Edit description| /m \<module> editdesc \<task index> \<new description>|
 |Edit deadline| /m \<module> editdate \<task index> \<new deadline>|
-|Delete task| /m \<module> deletetask|
+|Delete task| /m \<module> deletetask \<substring>|
 |Mark task as complete| /m \<module> done \<task index>|
 |Mark task as incomplete| /m \<module> notdone \<task index>|
 |Mark gradable task as complete| /m \<module> gradabledone \<task index>|

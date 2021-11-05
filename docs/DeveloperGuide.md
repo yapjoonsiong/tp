@@ -1,17 +1,18 @@
 # Developer Guide
 
 ## Navigation
+
 * [Acknowledgements](#acknowledgements)
 * [Design and Implementation](#design--implementation)
-  * [Parser](#parser)
-  * [Storage](#storage)
-  * [Semester](#semester)
-  * [Module](#module)
-  * [Schedule List](#schedulelist)
-  * [Task list](#tasklist)
-  * [Task](#task)
-  * [Overall Task List](#overalltasklist)
-  * [Overall Task](#overalltask)
+    * [Parser](#parser)
+    * [Storage](#storage)
+    * [Semester](#semester)
+    * [Module](#module)
+    * [Schedule List](#schedulelist)
+    * [Task list](#tasklist)
+    * [Task](#task)
+    * [Overall Task List](#overalltasklist)
+    * [Overall Task](#overalltask)
 * [Product Scope](#appendix-a-product-scope)
 * [User Stories](#appendix-b-user-stories)
 * [Non-Functional Requirements](#appendix-c-non-functional-requirements)
@@ -81,7 +82,8 @@ Step 4: `splitInput` is called for the second time and splits the user input int
 **TaskType** and **TaskDescription** are passed to `ListParser` through `ListParser#overallListParser`.
 <br/><br/>
 
-Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and **TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the
+Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and **
+TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the
 name implies, this method sorts all tasks by date and prints them.
 > If **TaskType** does not match, then an error message is displayed.  
 > If **TaskDescription** does not match, all tasks are printed by default.
@@ -94,6 +96,7 @@ The diagram below illustrates the `splitString` process:
 
 ![alt_text](media/splitStringDiagram.JPG)
 <br/><br/>
+
 ## Storage
 
 **API** : `command.storage`
@@ -122,7 +125,8 @@ How StorageDecoder works:
 2. If there is no save file available, a new `SemesterList `object is created and returned to the caller
 3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the json save file
    into a SemesterList object to be returned to the caller
-<br/><br/>
+   <br/><br/>
+
 ## Semester
 
 **API** : `semester`
@@ -149,6 +153,7 @@ This is how CAP is computed:
 * Then, `updateCap()` is called in `Semester` with the newly set `grade`/`credits` values in `Module`, followed
   by `updateCap()` in `SemesterList` with the newly set `points`/`credits` values in `Semester`.
   <br/><br/>
+
 ## Module
 
 **API** : `module`
@@ -176,8 +181,7 @@ Data stored in Module includes:
 6. GradableTaskList
 7. ScheduleList
 
-The modules are stored in an ArrayList and ModuleList uses the Module.get(int index) method to access the
-target Module.
+The modules are stored in an ArrayList and ModuleList uses the Module.get(int index) method to access the target Module.
 
 - ModuleList is responsible for printing the Time Table. It accesses different schedules of different mods before
   constructing a Time Table.
@@ -204,6 +208,7 @@ How printing a timetable works:
 3. It contains module information. When this happens, getMoudleName() , getModuleLocation() and getModuleComment() is
    called. The information is then printed onto the console.
    <br/><br/>
+
 ## ScheduleList
 
 **API** : `schedule`
@@ -220,15 +225,16 @@ This includes:
 How ScheduleList works:
 
 1. An empty `ScheduleList` is created when a module is constructed.
-2. When `addClass` is called in `module` , `ScheduleList` parses the input from the user and splits the information into the
-   relevant information. The information is then used to generate a new instance of `Schedule` which is then added to the
-   list.
-3. `toString()` prints out all relevant schedule information in a list format. This is done by going through the list and
-   printing `Schedule` one after another.
+2. When `addClass` is called in `module` , `ScheduleList` parses the input from the user and splits the information into
+   the relevant information. The information is then used to generate a new instance of `Schedule` which is then added
+   to the list.
+3. `toString()` prints out all relevant schedule information in a list format. This is done by going through the list
+   and printing `Schedule` one after another.
 
 Notes about ScheduleList
 
-- ScheduleList checks that the input for the day of the week is only from the list of possible days: `MON`, `TUE`, `WED`, `THU`,
+- ScheduleList checks that the input for the day of the week is only from the list of possible days: `MON`, `TUE`, `WED`
+  , `THU`,
   `FRI`, `SAT` ,`SUN`. All other inputs will result in an exception being thrown.
 - When a new `Schedule` class is called, `ScheduleList` ensures that the length of venue and comments are less than 16
   characters in length. This is to ensure that it fits within its time slot within the Timetable when printed.
@@ -243,6 +249,7 @@ Adding Schedule to scheduleList
 - If it is an empty timeslot, schedule list parses the input and checks for formatting errors within the input.
 - A new instance of Schedule is generated and added to the schedule list.
   <br/><br/>
+
 ## TaskList
 
 **API** : `task.tasklist`
@@ -267,6 +274,7 @@ How the `TaskList` component works:
 9. The `ArrayList` returned by the above methods can then be passed to `printTasks()` which will call `toString()` in
    each `Task` object and print to the `Output Stream`.
    <br/><br/>
+
 ## Task
 
 **API** : `task.task`
@@ -298,6 +306,7 @@ Note:
   , `OverallTaskList#addAllGradableTasks()` and `TaskList#printTasks()`
 * Any call from the methods above will result in the following sequence in the sequence diagram.
   <br/><br/>
+
 ## OverallTaskList
 
 ![alt_text](media/OverallTaskClassDiagram.png)
@@ -343,6 +352,7 @@ Notes about `OverallTaskList`
   this is to reduce coupling between objects and remove the need to update separate task lists whenever tasks are added
   to `Modules`.
   <br/><br/>
+
 ## OverallTask
 
 **API** : `task.OverallTask`
@@ -376,6 +386,7 @@ How the `OverallTask` component works:
    with their `moduleName` .
 5. Calling the `toString()` method generates a string containing task information together with its `moduleName`.
    <br/><br/>
+
 # Appendix A: Product Scope
 
 **Target User Profile:**
@@ -391,6 +402,7 @@ How the `OverallTask` component works:
 A centralized platform which allows NUS Students to carry out their learning management without needing to frequently
 switch between multiple tools or applications such as NUSMods, Luminus, Sticky Notes etc.
 <br/><br/>
+
 # Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
@@ -405,13 +417,20 @@ switch between multiple tools or applications such as NUSMods, Luminus, Sticky N
 |v2.0|Student|have quick access to upcoming gradable assignments|be sure everything is prepared for.|
 |v2.0|Student|be able to know what classes i have up next|  prepare for them in time.|
 |v2.1|University student| see the weightage of the modules| place emphasis/focus on certain work when there is a lack of time.|
+
 <br/><br/>
+
 # Appendix C: Non Functional Requirements
+
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
-2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+   able to accomplish most of the tasks faster using commands than using the mouse.
    <br/><br/>
+
 # Appendix D: Glossary
+
 <br/><br/>
+
 # Appendix E: Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -467,8 +486,9 @@ exploratory testing.
    Error reading save file, creating new template
    Welcome to NoCap
    ```
-   
+
 ## Listing semesters
+
 1. Run the command `list semesters`
 2. Expected: 10 pre-loaded semesters from Y1S1 to Y5S2 presented in the following message:
     ```
@@ -483,17 +503,33 @@ exploratory testing.
     9 : Y5S1
     10 : Y5S2
     ```
-    
+
 ## Switching semesters
+
 1. On first use, NoCap defaults to Y1S1 semester
 2. On subsequent launches, NoCap defaults to the last accessed semester
 3. Switching between semesters
-   1. Choose a semester index from 1-10 with reference to `list semesters`
-   2. Run the command `switch <index>` to switch to the new semester
-   3. For example, if '3' is chosen, running `switch 3` gives the following expected message:
-      ```
-      Semester successfully switched
-      You are now accessing semester: Y2S1
+    1. Choose a semester index from 1-10 with reference to `list semesters`
+    2. Run the command `switch <index>` to switch to the new semester
+    3. For example, if '3' is chosen, running `switch 3` gives the following expected message:
+       ```
+       Semester successfully switched
+       You are now accessing semester: Y2S1
+
+## Adding a module to a semester
+
+1. Adding a module with a valid name. Expected: Module successfully added message shown and list of modules in current
+   semester is printed
+2. Adding a module that already exists.
+    1. Prerequisite: view list of modules in current semester with list module.
+    2. Adding a module with the same name as a module in current list will result in the following error message:
+       `This module already exists!`
+3. Adding a module that is longer than 16 Characters Expected error
+   message: `Module name must be less than 17 characters`
+
+## Deleting a module from a semester
+
+## Listing all modules in a semester
 
 ## List tasks in a semester
 
@@ -510,129 +546,198 @@ exploratory testing.
        running `list task`. If there are no tasks in the semester, add in tasks first(including both gradable and
        non-gradable tasks)
     2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
-    3. Expected: Tasks are shown accordingly, depending on the optional argument
+        3. Expected: Tasks are shown accordingly, depending on the optional argument
 
-## Adding a module to a semester
-1. Adding a module with a valid name.
-    Expected: Module successfully added message shown and list of modules in current semester is printed
-2. Adding a module that already exists.
-   1. Prerequisite: view list of modules in current semester with list module.
-   2. Adding a module with the same name as a module in current list will result in the following
-      error message: 
-      `This module already exists!`
-3. Adding a module that is longer than 16 Characters
-   Expected error message: `Module name must be less than 17 characters`
+## Adding a task to a module
 
-## Adding a grade to module
+## Adding a GradableTask to module
+
+1. Adding a valid GradableTask to module.
+
+   GradableTask successfully added message shown. Breakdown of all gradableTasks will be shown.
+2. Adding a GradableTask with an invalid syntax.
+    1. Invalid date syntax
+
+   Test case: `/m cs2040c addgradable finals /by 00/00/00 /w 50`
+
+   Expected: Invalid error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+    2. Invalid weightage
+
+   Weightage must be between 5-100
+
+   Test case: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
+
+   Expected: Invalid weightage error message shown. GradableTask not added. Breakdown of all gradableTasks will be
+   shown.
+
+    3. Total weightage invalid
+
+   Total weightage must be greater or equal to 100. Adding a weightage that exceeds 100 will cause an error message to
+   be shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
+
+## Listing all gradable tasks
+
+1. To look at all breakdown of each module, the command `/m <module> list gradable` can be called.
+
+2. If there are no gradable tasks currently inside the module, an empty breakdown will be shown.
+
+   Expected:
+    ```
+   BREAKDOWN:
+
+
+
+
+    ```
+
+## Editing a task
+
+1. Prerequisites: module CS2040C exists without any existing task.
+2. Add a new task: `/m cs2040c addtask testcase 1 /by 11/11/2021 0000`.
+3. Editing description:
+    1. Run the command: `/m cs2040c editdesc 1 testcase 2`.
+    2. Run the command: `/m cs2040c list task`.
+    3. Expected:
+    ```
+    Task List for CS2040C:
+    There are 1 tasks
+    1.[ ] testcase 2 by: 11 Nov 2021 12:00 AM
+    ```
+4. Editing deadline:
+    1. Run the command: `/m cs2040c editdate 1 12/12/2022 1212`.
+    2. Run the command: `/m cs2040c list task`.
+    3. Expected:
+    ```
+    Task List for CS2040C:
+    There are 1 tasks
+    1.[ ] testcase 2 by: 12 Dec 2022 12:12 PM
+    ```
+
+## Deleting a task
+
+1. Prerequisites: module CS2040C exists without any existing task.
+2. Add a new task: `/m cs2040c addtask testcase 1 /by 11/11/2021 0000`.
+3. Deleting a task without matching keyword:
+    1. Run the command: `/m cs2040c deletetask apple`.
+    2. Expected: `Task with the specified keyword not found!`
+4. Deleting a task with the matching keyword:
+    1. Run the command: `/m cs2040c deletetask test`.
+    2. Expected:
+    ```
+    The following task(s) are found:
+    1: testcase 2
+    Please choose a task to perform the action, or press x to cancel:
+    ```
+    3. Enter input: `1`.
+    4. Expected: `testcase 1 has been deleted`.
+
+## Marking a task as complete
+1. Prerequisites: module CS2040C exists without any existing task.
+2. Add a new task: `/m cs2040c addtask testcase 1 /by 11/11/2021 0000`.
+3. Run the command: `/m cs2040c done 1`.
+4. Expected:
+    ```
+    Task is completed:
+    [X] testcase 1 by: 11 Nov 2021 12:00 AM
+    ```
+
+## Listing all tasks in a module
+1. Prerequisites: module CS2040C exists without any existing task.
+2. Add a new task: `/m cs2040c addtask testcase 1 /by 11/11/2021 0000`.
+3. Add a new task: `/m cs2040c addtask testcase 2 /by 12/12/2022 1212`.
+4. Run the command: `/m cs2040c list task`.
+5. Expected:
+    ```
+    Task List for CS2040C:
+    There are 2 tasks
+    1.[ ] testcase 1 by: 11 Nov 2021 12:00 AM
+    2.[ ] testcase 2 by: 12 Dec 2022 12:12 PM
+    ```
+   
+## Adding a grade to a module
+
 1. Adding a valid grade.
 
-    Grade successfully added message shown and module information is printed.
+   Grade successfully added message shown and module information is printed.
 2. Adding an invalid grade.
-    
-    Invalid Grade error message will be shown
-   1. Test case : `/m cs2040c addgrade G`
-   
-        Expected: `Invalid grade!`
-   2. Test case : `/m cs2040c addgrade `
 
-        Expected: `You are missing a description!`
+   Invalid Grade error message will be shown
+    1. Test case : `/m cs2040c addgrade G`
 
-## Adding a credit to module 
+   Expected: `Invalid grade!`
+    2. Test case : `/m cs2040c addgrade `
+
+   Expected: `You are missing a description!`
+
+## Deleting a grade from a module
+1. Prerequisites: module CS2040C exists and has an assigned grade.
+2. Run the command: `/m cs2040c deletegrade A`.
+3. Expected: `Module grade has been successfully deleted`.
+
+## Adding a credit to module
+
 1. Adding a valid credit.
-    
-    Credit successfully added message shown and module information is printed.
+
+   Credit successfully added message shown and module information is printed.
 2. Adding an invalid credit
 
    Invalid Credit error message will be shown
     1. Test case : `/m cs2040c addcredit four`
 
-       Expected: `Input must be an integer!`
+   Expected: `Input must be an integer!`
     2. Test case : `/m cs2040c addcredit`
 
-       Expected: `You are missing a description!`
+   Expected: `You are missing a description!`
 
 ## Adding a class to module
+
 1. Prerequisite: look up timetable to see existing classes.
-    
-    Note:
+
+   Note:
     1. `<day>` can only take in the first 3 letters of the day, from monday to saturday.
     2. `<period` can only be in blocks of 1 hour in 24-hour format (e.g. 1100 or 1300).
     3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
-    
+
 3. Adding a valid class
 
    Class successfully added message shown and schedule information for the module is printed.
 4. Adding a class that already exists in that timeslot.
 
-   Expected: `A class already exists in this timeslot!` 
-5. Adding a  class with invalid syntax
-    
+   Expected: `A class already exists in this timeslot!`
+5. Adding a class with invalid syntax
+
     1. adding a class with invalid day syntax
-    
-    Test case: `/m  cs2040c addclass aaa/1200/zoom/tut`
 
-    Expected: Error message shown. No classes added.
+   Test case: `/m  cs2040c addclass aaa/1200/zoom/tut`
 
-    2. Adding a  class with invalid timeslot.
+   Expected: Error message shown. No classes added.
 
-    Test case: `/m  cs2040c addclass aaa/2500/zoom/tut`
+    2. Adding a class with invalid timeslot.
 
-    Expected: Error message shown. No classes added.
+   Test case: `/m  cs2040c addclass aaa/2500/zoom/tut`
+
+   Expected: Error message shown. No classes added.
 
     3. Adding a class with comments/location that have more than 16 characters.
 
-    Test case: `/m  cs2040c addclass aaa/2500/12345678901234567/tut`
+   Test case: `/m  cs2040c addclass aaa/2500/12345678901234567/tut`
 
-    Expected: Error message shown. No classes added.
-
-## Adding a GradableTask to module
-1. Adding a valid GradableTask to module. 
-
-    GradableTask successfully added message shown. Breakdown of all gradableTasks will be shown.
-2. Adding a GradableTask with an invalid syntax.
-    1. Invalid date syntax
-
-    Test case: `/m cs2040c addgradable finals /by 00/00/00  /w 50`
-
-    Expected: Invalid error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
-
-    2. Invalid weightage 
-    
-    Weightage must be between 5-100
-
-    Test case: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
-
-    Expected: Invalid weightage error message shown. GradableTask not added. Breakdown of all gradableTasks will be shown.
-
-    3. Total weightage invalid
-   
-    Total weightage must be greater or equal to 100. Adding a weightage that exceeds 100 will cause an error message to be shown.
-   GradableTask not added. Breakdown of all gradableTasks will be shown.
-
-## listing all gradable tasks
-1. To look at all breakdown of each module, the command `/m <module> list gradable` can be called.
-
-2. If there are no gradable tasks currently inside the module, an empty breakdown will be shown.
-
-    Expected:
-    ```
-   BREAKDOWN:
-   
-
-
-   
-    ```
+   Expected: Error message shown. No classes added.
 
 ## Delete class from a module
+
 1. Select an existing class index with reference to the command `/m <module> info`.
 2. Run the command `/m <module> deleteclass <index>`.
 3. Expected: Corresponding class is deleted from module schedule.
 
 ## Show timetable
+
 1. Run the command `timetable`
 2. Expected: Prints out a timetable of all classes from 0800 to 1700 periods
 
 ## Show semester cap
+
 1. Run the command `cap`
 2. If no credit is added for any module in the semester, the following message is printed:
     ```
@@ -641,6 +746,7 @@ exploratory testing.
 3. Else, the cap is calculated accordingly and printed.
 
 ## Show all cap
+
 1. Run the command `allcap`
 2. Expected: prints out the aggregate cumulative CAP and respective CAP of each semester
 3. Semesters with no credit assigned for any module will default to 0.00 CAP

@@ -28,7 +28,7 @@ public class Ui {
                 + "Add gradable task:  /m <module> addgradable <description> /by <date> <time> /w <weightage>\n"
                 + "Edit description: /m <module> editdesc <task index> <new description>\n"
                 + "Edit deadline: /m <module> editdate <task index> <new deadline>\n"
-                + "Delete task: /m <module> deletetask\n"
+                + "Delete task: /m <module> deletetask <sub string>\n"
                 + "Mark task as complete: /m <module> done <task index>\n"
                 + "Mark task as incomplete: /m <module> notdone <task index>\n"
                 + "Mark gradable task as complete: /m <module> gradabledone <task index>\n"
@@ -175,7 +175,7 @@ public class Ui {
     }
 
     public static void printTaskDeleted(Task task) {
-        System.out.println(task.getDescription() + "has been deleted.");
+        System.out.println(task.getDescription() + " has been deleted.");
     }
 
     public static void printMarkDoneMessage(Task task) {

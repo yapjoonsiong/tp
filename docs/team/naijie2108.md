@@ -77,13 +77,13 @@ How the `StorageEncoder` class works:
 3. Similarly, an empty file is created to store the data if it has not been created yet
 4. The parent object `SemesterList` is passed to the method to be converted into a JSON file with an `ObjectMapper`
    object from the  `jackson-databind` library
-5. Finally, the data file is saved in a default data directory.
+5. Upon completion, the data file is saved in a default data directory.
 
 **How the `StorageDecoder` class works:**
 
 ![alt_text](../media/StorageDecoderSequenceDiagram.png "image_tooltip")
 
-1. The static method `DecodeJsonToSemesterList()` from `StorageDecoder` is called when NoCap data needs to be loaded
+1. The static method `decodeJsonToSemesterList()` from `StorageDecoder` is called when NoCap data needs to be loaded
    from the save file
 2. If there is no save file available in the default data directory, a new `SemesterList `object is created and returned
    to the caller
@@ -102,7 +102,6 @@ _Class diagram for OverallTask and OverallTaskList_
 **Note**: Some methods are omitted from the class diagram to improve clarity
 
 The `OverallTaskList` class is instantiated from `ListParser` only when the end user needs to list available tasks in
-
 a `Semester`.
 
 How the `OverallTaskList` class works:
@@ -246,6 +245,7 @@ exploratory testing.
    Error reading save file, creating new template
    Welcome to NoCap
    ```
+
 ## List tasks in a semester
 
 1. List tasks when there are no available tasks

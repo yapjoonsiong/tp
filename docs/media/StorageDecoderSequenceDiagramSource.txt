@@ -7,7 +7,7 @@ participant ":ObjectMapper" as ObjectMapper
 
 participant ":SemesterList" as SemesterList
 
-StorageDecoder<-[: DecodeJsonToSemesterList()
+StorageDecoder<-[: decodeJsonToSemesterList()
 
 activate StorageDecoder
 

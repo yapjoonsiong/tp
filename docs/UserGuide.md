@@ -475,7 +475,7 @@ By default, all tasks in the current semester are listed, but this can be custom
 
 Tasks are listed in the format:
 
-[Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]
+`[Module Code][Gradable][Lateness][Done] &lt;description> by: &lt;deadline> [Weightage]`
 
 * [Module Name] - Name of the module
 * [Gradable] - Shows `[G]` if the task is gradable, and `[ ]` if the task is non-gradable.
@@ -533,7 +533,7 @@ Assuming tasks have been added to modules beforehand:
   ```
 
 NOTE:
-* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless of
 due date as a reminder that the user has forgotten to  do the task.
 
 ### View CAP : `cap`

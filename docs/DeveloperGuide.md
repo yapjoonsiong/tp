@@ -36,7 +36,7 @@ Third party libraries:
 The Parser classes is responsible for receiving user input and converting it into commands which are directly passed to
 respective classes.
 
-The class diagram below is an overview of relationship between Parser classes and other classes.
+The simplified  class diagram below is an overview of relationship between Parser classes and other classes.
 
 ![alt_text](media/ParserClassDiagram.JPG)
 
@@ -557,7 +557,8 @@ exploratory testing.
     2. Expected
    ```
     Invalid number value
-   ```
+   ```   
+
 ## Listing all modules in a semester
 1. Prerequisite: Semester should exist.
 2. Run the command: `list module`

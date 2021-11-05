@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import exceptions.ExceptionMessages;
 import exceptions.NoCapExceptions;
-import module.ModuleList;
-import semester.Semester;
 import semester.SemesterList;
 
 import java.io.File;

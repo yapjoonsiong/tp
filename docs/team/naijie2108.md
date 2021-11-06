@@ -51,28 +51,6 @@ app for NUS students!
 
 ## Developer Guide Extract
 
-## Storage
-
-**API** : `command.storage`
-
-The Storage component saves data of NoCap into JSON format, and reads them back into corresponding objects when needed
-using a 3rd party library Jackson Databind.
-
-It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object
-`SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
-
-How the `StorageDecoder` class works:
-
-![alt_text](../media/StorageDecoderSequenceDiagram.png "image_tooltip")
-
-1. The static method `decodeJsonToSemesterList()` from `StorageDecoder` is called when NoCap data needs to be loaded
-   from the save file
-2. If there is no save file available in the default data directory, a new `SemesterList `object is created and returned
-   to the caller
-3. Otherwise, an `ObjectMapper` object from the  `jackson-databind` library is used to deserialize the JSON save file
-   into a `SemesterList` object to be returned to the caller
-   <br/><br/>
-
 ## OverallTaskList
 
 **API** : `task.OverallTasklist`
@@ -232,26 +210,3 @@ NOTE:
 
 * For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks
   regardless of due date as a reminder that the user has forgotten to do the task.
-
-### Saving data
-
-Program data is saved whenever data is added or modified. The process is done automatically, so no user input is needed
-for this.
-
-### Loading data
-
-Program data is loaded from the data folder during startup of the program. If the program can detect the data file
-successfully, the data is loaded and the following message should appear:
-
-```
-Data loaded successfully
-Welcome to NoCap
-```
-
-On the other hand, if no data file can be found, the program starts with an empty template, and the following message
-should appear:
-
-```
-No save file found, starting with an empty template
-Welcome to NoCap
-```

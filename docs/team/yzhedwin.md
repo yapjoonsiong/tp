@@ -161,58 +161,7 @@ Task Prefixes:
 * Format will be as follows `[LATE][DONE] <task description> <date> <time>`
 
 Examples with expected output:
-
-Assuming tasks have been added to modules beforehand:
-
-* `/m cs1010 list`
-
-    ```
-    Task List for CS1010: 
-  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
-  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
-  3.[ ] retake cs1010 by: 12 Dec 2021 11:59 PM
-  4.[ ] do assignment by: 30 Oct 2021 04:00 PM
-  ```
-
-* `/m cs1010 list gradable`
-  ```
-  BREAKDOWN:
-    <=================40%==================>
-    ########################################
-    |------------------1-------------------|
-    1: assignments
-
-    1 assignments by: 10 Oct 2010 10:00 AM Weightage 40% [ ]
-  ```
-* `/m cs1010 list sortbydate`
-
-  ```
-  CS1010 successfully sorted by date
-  ```
-
-  ```
-  /m cs1010 list
-  ```
-
-  ```
-  Task List for CS1010: 
-  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
-  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
-  3.[ ] do assignment by: 30 Oct 2021 04:00 PM 
-  4.[ ] retake cs1010 by: 12 Dec 2021 11:59 PM
-  
-  ```
-
-
-* `/m cs1010 list w`
-
-  ```
-  Task List for CS1010: 
-  There are 3 tasks due within 7 days 
-  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
-  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
-  3.[ ] do assignment by: 30 Oct 2021 04:00 PM 
-  ```
+* Removed to satisfy page requirements
 
 NOTE:
 

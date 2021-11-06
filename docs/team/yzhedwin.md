@@ -124,7 +124,7 @@ Example of usage:
 
 Example of expected output:
 
-![alt_text](media/AddTaskOutput.jpg)
+![alt_text](../media/AddTaskOutput.jpg)
 
 **Warning** :
 
@@ -160,6 +160,9 @@ Task Prefixes:
 * The first prefix is a `LATE` tag. If the task is overdue, the tag will show `[LATE]`
 * The second prefix is a `DONE` tag. If the task is marked completed, the tag will show `[X]`
 * Format will be as follows `[LATE][DONE] <task description> <date> <time>`
+
+Examples with expected output:
+* Removed to satisfy page requirement
 
 NOTE:
 

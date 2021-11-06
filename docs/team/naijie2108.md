@@ -96,39 +96,7 @@ Notes about `OverallTaskList`
   to `Modules`.
   <br/><br/>
 
-## OverallTask
-
-**API** : `task.OverallTask`
-
-`OverallTask` objects are stored in a `OverallTaskList` object when the end user needs to list available tasks in
-a `Semester`. It stores information from `GradableTask/Task `objects together with their module name.
-
-`OverallTask` object stores the following for each task:
-
-1. `description`
-2. `Date`
-3. `isDone`
-4. `isLate`
-5. `Deadline`
-6. `isGradable`
-7. `Weightage`
-8. `moduleName`
-
-How the `OverallTask` component works:
-
-1. It inherits from `Task`, with additional attributes `isGradable`, `weightage` and `moduleName`.
-2. The attributes `isGradable`, `weightage` are added to provide more information for gradable tasks, while `moduleName`
-   is added to display module information.
-3. It can be instantiated with 2 different constructors:
-    * `OverallTask(task: Task, moduleName: String)` - Instantiates using a `Task` object <br/>
-      ![alt_text](../media/OverallTaskConstructorTaskSequenceDiagram.png "image_tooltip")
-    * `OverallTask(gradableTask:GradableTask, moduleName: String)` - Instantiates using a `GradableTask `object <br>
-      ![alt_text](../media/OverallTaskConstructorGradableTaskSequenceDiagram.png "image_tooltip")
-
-4. During instantiation, information from `Task/GradableTask` objects are added to the `OverallTask` object together
-   with their `moduleName` .
-5. Calling the `toString()` method generates a string containing task information together with its `moduleName`.
-   <br/><br/>
+<div style="page-break-after: always;"></div>
 
 ## User Guide Extract
 
@@ -170,13 +138,6 @@ Example tasks:
     * Due on 16 Dec 2021 12:00 AM
     * Has a weightage of 50%.
 
-2. `[CS2132][ ][X] Quiz by: 16 Nov 2021 12:00 AM`
-
-    * Belongs to the module CS2132
-    * Non-Gradable
-    * Done
-    * Due on 16 Nov 2021 12:00 AM
-
 Example commands with expected output:
 
 Assuming tasks have been added to modules beforehand:
@@ -188,24 +149,6 @@ Assuming tasks have been added to modules beforehand:
     1. [CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]
     2. [CS2132][G][LATE][ ] asdf by: 10 Dec 2000 12:00 AM [Weightage: 50%]
     ```
-
-
-* `list task sortbydate`
-
-  ```
-  Tasks sorted by date: 
-  1. [CS2132][G][LATE][ ] asdf by: 10 Dec 2000 12:00 AM [Weightage: 50%]
-  2. [CS2132][G][ ] Assignment by: 16 Dec 2021 12:00 AM [Weightage: 50%]
-  ```
-
-
-* `list task w`
-
-  ```
-  Weekly tasks: 
-  1. [CS2132][G][LATE][ ] asdf by: 10 Dec 2000 12:00 AM [Weightage: 50%]
-  ```
-
 NOTE:
 
 * For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks

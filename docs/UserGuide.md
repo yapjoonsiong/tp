@@ -20,15 +20,13 @@ app for NUS students!
 
 * Words in `<>` are the parameters to be supplied by the user. \
   e.g. `add <module name>` `<module name>` is the name of the module supplied by the user.
-* Items in curved brackets describe the input format. \
-  e.g.`/m <module name> addtask <description> /by <deadline> (dd/MM/yyyy hhmm)` "dd/MM/yyyy hhmm" refers to the
-  date-month-year and 24 hour time of the description.
 * Parameters must be in the exact order as seen in the user guide. \
   e.g. if the command specifies `/m CG1111 addclass MON/0800/E1-03/tutorial`
   , `/m CG1111 addclass 0800/E1-03/tutorial/MON/`
   is not acceptable.
-* Commands that require parameters must be supplied, if not an error will be thrown. e.g. if the command
-  specifies `/m CG1111 addclass MON/0800/E1-03/tutorial` , `/m CG1111 addclass MON/0800/E1-03/` is not acceptable.
+* Commands that require <> parameters must be supplied, if not an error will be thrown. e.g. if the command
+  specifies `/m <module> addclass <day/period/location/comments>` , `/m CG1111 addclass MON/0800/E1-03/` is not acceptable.
+* Commands that require () parameters are optional. e.g. for `/m <module> list (optional argument)`, `/m cs1010 list` is acceptable.
 * All specifier commands are case-sensitive. e.g. `HELP`, `/M CG1111 ADDCLASS MON/0800/E1-03/tutorial` and `ADD CS2113T`
   are invalid commands.
 
@@ -107,9 +105,9 @@ BREAKDOWN:
 
 Lists all added modules and their corresponding indexes.
 
-### Add task to module : `/m <module> addtask <description> /by <date> <time>`
+### Add task to module : `/m <module> addtask <description> /by <date> (time)`
 
-* The `date` is in the format of dd/MM/yyyy.
+* The `date` is in the format of dd/MM/yyyy, dd MM yyyy.
 * The `time` is in the format of hhmm.
 * The `description` can contain white spaces.
 
@@ -122,13 +120,13 @@ Note:
 
 Example of usage:
 
-* `/m cs1010 addtask Remember to S/U /by 20/11/2020 0000`
+* `/m cs1010 addtask Remember to S/U /by 20/11/2020`
 
 Example of expected output:
 
 ![alt_text](media/AddTaskOutput.jpg)
 
-Warning :
+**Warning** :
 
 * For every month, the program will take in 01 - 31 as an input for the day of the month.
 * In the case when the month does not have 31 days, the program will treat any input after the last day of the month
@@ -139,7 +137,7 @@ Example:
 * Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
 * Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
 
-### Add gradable task to module : `/m <module> addgradable <day/period/location/comments> /w <weightage>`
+### Add gradable task to module : `/m <module> addgradable <description> /by <date> (time) /w <weightage>`
 
 Adds a Gradable Task to the module.
 
@@ -190,16 +188,14 @@ Mark task as not done: `/m <module> notdone <task index>`
 Mark gradable task as done:`/m <module> gradabledone <task index>`  
 Mark gradable task as not done:`/m <module> gradablenotdone <task index>`
 
-### Listing module tasks : `/m <module> list`
+### Listing module tasks : `/m <module> list (optional argument)`
 
 Shows a list of task of specified module.
-
-Additional Format: `/m <module> list <optional argument>`
 
 By default, all tasks in the module specified in the current semester are listed, but this can be customised by adding
 optional arguments.
 
-&lt;optional argument> includes:
+(optional argument) includes:
 
 * gradable - Shows a list of gradable tasks in the module.
 * sortbydate - Sort tasks by due date, the closest deadline have the higher priority in the list. does not print the
@@ -230,7 +226,8 @@ Assuming tasks have been added to modules beforehand:
   4.[ ] do assignment by: 30 Oct 2021 04:00 PM
   ```
 
-* `/m cs1010 list gradable`
+* `/m cs1010 list gradable`   
+
   ```
   BREAKDOWN:
     <=================40%==================>
@@ -276,36 +273,6 @@ NOTE:
   regardless of due date as a reminder that the user has forgotten to do the task.
 * `/m <module> list` does not show gradable tasks.
 * To show gradable task in module, have to input optional argument as shown above.
-
-### Listing module gradable tasks : `/m <module> list gradable`
-
-Shows the breakdown of the module, with all the gradable tasks.
-
-Example with output:
-
-`/m cs1010 list gradable`
-
-```
-  BREAKDOWN:
-<======================50%=======================><=======20%========><=====15%=====><=====15%=====>
-##################################################@@@@@@@@@@@@@@@@@@@@&&&&&&&&&&&&&&&+++++++++++++++
-|-----------------------1------------------------||--------2---------||------3------||------4------|
-1: Finals
-2: Midterms
-3: Assignment 1
-4: Assignment 2
-
-1 Finals by: 11 Nov 2021 04:00 PM Weightage 50% [ ]
-2 Midterms by: 11 Oct 2021 10:00 AM Weightage 20% [ ]
-3 Assignment 1 by: 21 Oct 2021 10:00 AM Weightage 15% [ ]
-4 Assignment 2 by: 25 Oct 2021 11:59 PM Weightage 15% [ ]
-  
-  ```
-
-Note:
-
-* The suffix of the Gradable Task `[ ]` shows if the task is completed.
-* If it is completed, the suffix will show `[X]`.
 
 ### Add class to module : `/m <module> addclass <day/period/location/comments>`
 
@@ -355,7 +322,7 @@ Valid
 
 ### Delete classes from module: `/m <module> deleteclass <class index>`
 
-Deletes a module corresponding to the input index.(refer to `/m <module name> info` or `list module` for indexes )
+Deletes a module corresponding to the input index.(refer to `/m <module name> info` or `list module` for indexes)
 
 Examples:
 
@@ -380,7 +347,7 @@ Location: zoom
 Comments: lect
 ```
 
-### Add credit to module: `/m <module> addcredit `
+### Add credit to module: `/m <module> addcredit <credit value>`
 
 Add credits to a module.
 
@@ -481,15 +448,13 @@ Note:
 
 * Timetable can only display classes from 0800 to 1700 periods
 
-### Listing all tasks : `list task`
+### Listing all tasks : `list task (optional argument)`
 
 Shows a list of all tasks within the current semester
 
-Additional format: `list task <optional argument>`
-
 By default, all tasks in the current semester are listed, but this can be customised by adding optional arguments.
 
-&lt;optional argument> includes:
+(optional argument) includes:
 
 * sortbydate - Sort tasks by due date.
 * sortbystatus - Sort tasks by status, displaying unfinished tasks first.
@@ -625,7 +590,7 @@ Welcome to NoCap
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Simply transfer your data.json file to the data folder of the operating system that you plan to use NoCap on.
+**A**: Simply transfer your data.json file to the data subfolder of another NoCap application.
 
 > **WARNING**: Replacing data.json file in another NoCap folder results in the  existing data being erased!
 
@@ -639,8 +604,8 @@ Welcome to NoCap
 |Add module| add \<module name>|
 |Delete module| delete \<module index>|
 |List all module| list module|
-|Add task| /m \<module> addtask \<description> /by \<date> \<time>|
-|Add gradable task | /m \<module> addgradable \<description> /by \<date> \<time> /w \<weightage>|
+|Add task| /m \<module> addtask \<description> /by \<date> (time)|
+|Add gradable task | /m \<module> addgradable \<description> /by \<date> (time) /w \<weightage>|
 |Edit description| /m \<module> editdesc \<task index> \<new description>|
 |Edit deadline| /m \<module> editdate \<task index> \<new deadline>|
 |Delete task| /m \<module> deletetask \<substring>|
@@ -648,14 +613,14 @@ Welcome to NoCap
 |Mark task as incomplete| /m \<module> notdone \<task index>|
 |Mark gradable task as complete| /m \<module> gradabledone \<task index>|
 |Mark gradable task as incomplete| /m \<module> gradablenotdone \<task index>|
-|List module tasks| /m \<module> list task \<optional argument>|
+|List module tasks| /m \<module> list (optional argument)|
 |Add class | /m \<module> addclass \<day/period/location/comments>|
 |Delete class| /m \<module> deleteclass \<class index>|
 |Add grade| /m \<module> addgrade \<grade letter>|
 |Delete grade| /m \<module> deletegrade|
-|Add credit| /m \<module> addcredit|
+|Add credit| /m \<module> addcredit <credit value>|
 |Show timetable| timetable|
-|List all tasks| list task \<optional argument>|
+|List all tasks| list task (optional argument)|
 |Show semester cap| cap|
 |Show overall cap| allcap|
 |Exit NoCap|bye|

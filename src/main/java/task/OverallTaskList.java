@@ -55,6 +55,7 @@ public class OverallTaskList extends TaskList {
 
     /**
      * Sorts all tasks by deadline in the task list and prints it out to output.
+     * The method lists tasks in ascending order of deadlines.
      */
     public void sortByDateAndPrint() {
         List<OverallTask> newTaskList = overallTaskList
@@ -66,19 +67,21 @@ public class OverallTaskList extends TaskList {
     }
 
     /**
-     * all tasks in task list by status and prints it out to the output.
+     * Sorts all tasks in task list by status and prints it out to the output.
+     * The method lists unfinished tasks first, then followed by tasks that have been done.
      */
     public void sortByStatusAndPrint() {
         List<OverallTask> newTaskList = overallTaskList
                 .stream()
-                .sorted(OverallTask.statusComparator.reversed())
+                .sorted(OverallTask.statusComparator)
                 .collect(Collectors.toList());
         Ui.printOverallListOrderedByStatus(newTaskList);
         logger.log(Level.INFO, "Sort overall task by status");
     }
 
     /**
-     * Prints all tasks due within the next week.
+     * Prints all tasks due within the next week.Uses isWeekly() method
+     * inherited from TaskList.
      */
     public void printWeeklyTasks() {
         List<OverallTask> newTaskList = overallTaskList
@@ -90,7 +93,8 @@ public class OverallTaskList extends TaskList {
     }
 
     /**
-     * Prints all tasks due within the month.
+     * Prints all tasks due within the month. Uses isMonthly() method
+     * inherited from TaskList.
      */
     public void printMonthlyTasks() {
         List<OverallTask> newTaskList = overallTaskList
@@ -102,7 +106,8 @@ public class OverallTaskList extends TaskList {
     }
 
     /**
-     * Prints all tasks due within a year.
+     * Prints all tasks due within a year. Uses isYearly() method
+     * inherited from TaskList.
      */
     public void printYearlyTasks() {
         List<OverallTask> newTaskList = overallTaskList

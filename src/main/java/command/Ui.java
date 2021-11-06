@@ -60,10 +60,6 @@ public class Ui {
         System.out.println("You are now accessing semester: " + semester);
     }
 
-    public static void printEndMessage() {
-        System.out.println("Thank you for using NoCap");
-    }
-
     public static void invalidDate() {
         System.out.println("Missing /by");
     }
@@ -188,8 +184,7 @@ public class Ui {
     }
 
     public static void printInvalidListFormat() {
-        System.out.println("The list format is wrong! Please use list module/tasks "
-                + "[ sortbydate | sortbystatus ] [ w | m | y]");
+        System.out.println("The list format is wrong!");
         System.out.println("Please refer to the user guide or help function for more details!");
     }
 

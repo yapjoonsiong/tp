@@ -118,7 +118,7 @@ How the `StorageEncoder` class works:
    object from the  `jackson-databind` library
 5. Upon completion, the data file is saved in a default data directory.
 
-**How the `StorageDecoder` class works:**
+How the `StorageDecoder` class works:
 
 ![alt_text](media/StorageDecoderSequenceDiagram.png "image_tooltip")
 

@@ -2,6 +2,10 @@
 
 ## Overview
 
+NoCap (NC) is a **desktop app for managing modules taken in NUS, optimized for use via a Command Line Interface** (CLI).
+If you can type fast, NC can get your module management tasks done faster than traditional GUI apps. It is the perfect
+app for NUS students!
+
 ### Summary of Contributions
 
 * **Code
@@ -46,7 +50,7 @@
 
 **API** : `task.tasklist`
 
-![](../media/TaskClassDiagram.png)
+![alt_text](../media/TaskClassDiagram.png)
 
 How the `TaskList` component works:
 
@@ -59,7 +63,7 @@ How the `TaskList` component works:
 4. Then store it as a local variable of a `String` type.
 5. The `String` variables will then be passed to instantialize a new `Task` object.
 6. This `Task` object will then be stored in the `ArrayList` in the `TaskList` object.
-7. The methods `weeklyTaskList()`, `monthlyTaskList` and `yearlyTaskList()` returns an `ArrayList` which contains
+7. The methods `weeklyTaskList()`, `monthlyTaskList()` and `yearlyTaskList()` returns an `ArrayList` which contains
    the `Task` objects of deadline within a week, a month and a year respectively.
 8. The methods `sortTaskListByDate()`  and `sortTaskListByStatus()` will sort the current `TaskList` object by ascending
    order of `Deadline` and completion status respectively
@@ -74,7 +78,7 @@ How the `TaskList` component works:
 `Task` object stores the following for each task:
 
 1. `description`
-2. `Date`
+2. `date`
 3. `isDone`
 4. `isLate`
 5. `deadline`
@@ -90,7 +94,7 @@ How the `Task` component works:
    whether the current date and time of the system clock is after the `deadline` of the `Task` object.
 3. If `isDone` is `FALSE` and the `deadline` is later than the current date and time, `updateOverdue()` will set the
    attribute `isLate` of the current `Task` object to `TRUE`.
-4. Calling the toString prints out the task information in the Task object.
+4. Calling the toString converts the task information in the Task object to printable String.
 
 Note:
 
@@ -101,9 +105,9 @@ Note:
 
 ### User Guide Extract
 
-### Add task to module : `/m <module> addtask <description> /by <date> <time>`
+### Add task to module : `/m <module> addtask <description> /by <date> (time)`
 
-* The `date` is in the format of dd/MM/yyyy.
+* The `date` is in the format of dd/MM/yyyy, dd MM yyyy.
 * The `time` is in the format of hhmm.
 * The `description` can contain white spaces.
 
@@ -116,13 +120,13 @@ Note:
 
 Example of usage:
 
-* `/m cs1010 addtask Remember to S/U /by 20/11/2020 0000`
+* `/m cs1010 addtask Remember to S/U /by 20/11/2020`
 
 Example of expected output:
 
 ![alt_text](../media/AddTaskOutput.jpg)
 
-Warning :
+**Warning** :
 
 * For every month, the program will take in 01 - 31 as an input for the day of the month.
 * In the case when the month does not have 31 days, the program will treat any input after the last day of the month
@@ -133,17 +137,14 @@ Example:
 * Date input as `31/02/2021` will be parsed as `28/02/2021` because there are only 28 days in the month of February.
 * Date input as `31/04/2021` will be parsed as `30/04/2021` because there are only 30 days in the month of April
 
-
-### Listing module tasks : `/m <module> list`
+### Listing module tasks : `/m <module> list (optional argument)`
 
 Shows a list of task of specified module.
-
-Additional Format: `/m <module> list <optional argument>`
 
 By default, all tasks in the module specified in the current semester are listed, but this can be customised by adding
 optional arguments.
 
-&lt;optional argument> includes:
+(optional argument) includes:
 
 * gradable - Shows a list of gradable tasks in the module.
 * sortbydate - Sort tasks by due date, the closest deadline have the higher priority in the list. does not print the
@@ -161,62 +162,11 @@ Task Prefixes:
 * Format will be as follows `[LATE][DONE] <task description> <date> <time>`
 
 Examples with expected output:
-
-Assuming tasks have been added to modules beforehand:
-
-* `/m cs1010 list`
-
-    ```
-    Task List for CS1010: 
-  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
-  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
-  3.[ ] retake cs1010 by: 12 Dec 2021 11:59 PM
-  4.[ ] do assignment by: 30 Oct 2021 04:00 PM
-  ```
-
-* `/m cs1010 list gradable`
-  ```
-  BREAKDOWN:
-    <=================40%==================>
-    ########################################
-    |------------------1-------------------|
-    1: assignments
-
-    1 assignments by: 10 Oct 2010 10:00 AM Weightage 40% [ ]
-  ```
-* `/m cs1010 list sortbydate`
-
-  ```
-  CS1010 successfully sorted by date
-  ```
-
-  ```
-  /m cs1010 list
-  ```
-
-  ```
-  Task List for CS1010: 
-  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
-  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
-  3.[ ] do assignment by: 30 Oct 2021 04:00 PM 
-  4.[ ] retake cs1010 by: 12 Dec 2021 11:59 PM
-  
-  ```
-
-
-* `/m cs1010 list w`
-
-  ```
-  Task List for CS1010: 
-  There are 3 tasks due within 7 days 
-  1.[LATE][X] Remember to S/U by: 20 Nov 2020 12:00 AM
-  2.[LATE][ ] Remember to drop out by: 12 Dec 2020 11:59 PM
-  3.[ ] do assignment by: 30 Oct 2021 04:00 PM 
-  ```
+* Removed to satisfy page requirement
 
 NOTE:
 
-* For optional arguments w, m and y, overdue tasks are listed together with the weekly/monthly/yearly tasks regardless
-  of due date as a reminder that the user has forgotten to do the task.
-* /m <module> list does not show gradable tasks.
+* For optional arguments `w`, `m` and `y`, overdue tasks are listed together with the weekly/monthly/yearly tasks
+  regardless of due date as a reminder that the user has forgotten to do the task.
+* `/m <module> list` does not show gradable tasks.
 * To show gradable task in module, have to input optional argument as shown above.

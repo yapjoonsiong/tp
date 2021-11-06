@@ -75,15 +75,15 @@ How the `StorageEncoder` class works:
    saved
 2. If the save file directory has not been created yet, it is first created in order to store the save file
 3. Similarly, an empty file is created to store the data if it has not been created yet
-4. The parent object `SemesterList` is passed to the method to be converted into a JSON file with an `ObjectMapper`
+4. Then, the object `SemesterList` is  converted into a JSON file with an `ObjectMapper`
    object from the  `jackson-databind` library
-5. Finally, the data file is saved in a default data directory.
+5. Upon completion, the data file is saved in a default data directory.
 
 **How the `StorageDecoder` class works:**
 
 ![alt_text](../media/StorageDecoderSequenceDiagram.png "image_tooltip")
 
-1. The static method `DecodeJsonToSemesterList()` from `StorageDecoder` is called when NoCap data needs to be loaded
+1. The static method `decodeJsonToSemesterList()` from `StorageDecoder` is called when NoCap data needs to be loaded
    from the save file
 2. If there is no save file available in the default data directory, a new `SemesterList `object is created and returned
    to the caller
@@ -102,7 +102,6 @@ _Class diagram for OverallTask and OverallTaskList_
 **Note**: Some methods are omitted from the class diagram to improve clarity
 
 The `OverallTaskList` class is instantiated from `ListParser` only when the end user needs to list available tasks in
-
 a `Semester`.
 
 How the `OverallTaskList` class works:
@@ -112,20 +111,22 @@ How the `OverallTaskList` class works:
    `OverallTaskList`.
 3. When the `OverallTaskList` object is instantiated, a `ModuleList` object from a semester is passed to its
    constructor.
+
+
    ![alt_text](../media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
 4. The constructor calls the method `addAllModuleListTasks(module list)` which converts and adds all the tasks in the
    module list into `OverallTaskList`.
 5. Once the object is instantiated, the following methods can be called to sort and print the tasks in the
    ArrayList `overallTaskList`. All sorting and filtering is done via `Java Streams`, and method details are omitted.
 
-* `sortByDateAndPrint() - Print all tasks sorted by deadline`
-* `sortByStatusAndPrint() - Print all tasks sorted by status(done)`
-* `printWeeklyTasks() - Print tasks due in a week`
-* `printMonthlyTasks() - Print tasks due in a month`
-* `printYearlyTasks() - Print tasks due in a year`
-* `printAllTasks() - Print all tasks without sorting`
-* `printGradableTasks() - Print all gradable tasks`
-* `printNormalTasks() - Print all non-gradable tasks`
+   * `sortByDateAndPrint() - Print all tasks sorted by deadline`
+   * `sortByStatusAndPrint() - Print all tasks sorted by status(done)`
+   * `printWeeklyTasks() - Print tasks due in a week`
+   * `printMonthlyTasks() - Print tasks due in a month`
+   * `printYearlyTasks() - Print tasks due in a year`
+   * `printAllTasks() - Print all tasks without sorting`
+   * `printGradableTasks() - Print all gradable tasks`
+   * `printNormalTasks() - Print all non-gradable tasks`
 
 Notes about `OverallTaskList`
 
@@ -246,6 +247,7 @@ exploratory testing.
    Error reading save file, creating new template
    Welcome to NoCap
    ```
+
 ## List tasks in a semester
 
 1. List tasks when there are no available tasks
@@ -262,7 +264,7 @@ exploratory testing.
        non-gradable tasks)
     2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
     3. Expected: Tasks are shown accordingly, depending on the optional argument
---- 
+
 
 ## User Guide Extract
 

@@ -96,8 +96,6 @@ Notes about `OverallTaskList`
   to `Modules`.
   <br/><br/>
 
-<div style="page-break-after: always;"></div>
-
 ## User Guide Extract
 
 ### Listing all tasks : `list task (optional argument)`

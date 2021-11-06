@@ -24,9 +24,9 @@ public class NoCap {
             moduleList = semesterList.extractAccessedSemester().getModuleList();
             semester = semesterList.extractAccessedSemester();
             String input = in.nextLine();
+            System.out.println();
             parse.chooseTask(input);
         }
-        Ui.printEndMessage();
     }
 
     public static void main(String[] args) {

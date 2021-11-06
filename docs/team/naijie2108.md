@@ -114,7 +114,7 @@ How the `OverallTaskList` class works:
    constructor.
 
 
-![alt_text](../media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")<br></br>
+![alt_text](../media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")<br>
 4. The constructor calls the method `addAllModuleListTasks(module list)` which converts and adds all the tasks in the
    module list into `OverallTaskList`.
 5. Once the object is instantiated, the following methods can be called to sort and print the tasks in the

@@ -75,7 +75,7 @@ How the `StorageEncoder` class works:
    saved
 2. If the save file directory has not been created yet, it is first created in order to store the save file
 3. Similarly, an empty file is created to store the data if it has not been created yet
-4. The parent object `SemesterList` is passed to the method to be converted into a JSON file with an `ObjectMapper`
+4. Then, the object `SemesterList` is  converted into a JSON file with an `ObjectMapper`
    object from the  `jackson-databind` library
 5. Upon completion, the data file is saved in a default data directory.
 

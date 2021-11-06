@@ -447,6 +447,9 @@ Example output:
 Note:
 
 * Timetable can only display classes from 0800 to 1700 periods
+* If timetable shows artifacts (i.e. columns not aligned/information displayed incorrectly):
+  * Restart NoCap in a maximized command prompt window
+  * Reduce text size in your computer settings
 
 ### Listing all tasks : `list task (optional argument)`
 

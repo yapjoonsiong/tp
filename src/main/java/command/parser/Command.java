@@ -156,10 +156,6 @@ public class Command {
         Ui.addModuleGradeMessage(module);
         try {
             NoCap.semester.updateCap();
-        } catch (NoCapExceptions e) {
-            System.out.println(e.getMessage());
-        }
-        try {
             NoCap.semesterList.updateCap();
         } catch (NoCapExceptions e) {
             System.out.println(e.getMessage());
@@ -257,10 +253,6 @@ public class Command {
         Ui.deleteGradeMesage(module);
         try {
             NoCap.semester.updateCap();
-        } catch (NoCapExceptions e) {
-            System.out.println(e.getMessage());
-        }
-        try {
             NoCap.semesterList.updateCap();
         } catch (NoCapExceptions e) {
             System.out.println(e.getMessage());

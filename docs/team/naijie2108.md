@@ -58,7 +58,6 @@ Third party libraries:
 - [Jackson Datatype-jsr310](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310)
 - [Jackson Annotations](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations)
 
-
 ## Storage
 
 **API** : `command.storage`
@@ -115,20 +114,20 @@ How the `OverallTaskList` class works:
    constructor.
 
 
-   ![alt_text](../media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
+![alt_text](../media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip")
 4. The constructor calls the method `addAllModuleListTasks(module list)` which converts and adds all the tasks in the
    module list into `OverallTaskList`.
 5. Once the object is instantiated, the following methods can be called to sort and print the tasks in the
    ArrayList `overallTaskList`. All sorting and filtering is done via `Java Streams`, and method details are omitted.
 
-   * `sortByDateAndPrint() - Print all tasks sorted by deadline`
-   * `sortByStatusAndPrint() - Print all tasks sorted by status(done)`
-   * `printWeeklyTasks() - Print tasks due in a week`
-   * `printMonthlyTasks() - Print tasks due in a month`
-   * `printYearlyTasks() - Print tasks due in a year`
-   * `printAllTasks() - Print all tasks without sorting`
-   * `printGradableTasks() - Print all gradable tasks`
-   * `printNormalTasks() - Print all non-gradable tasks`
+    * `sortByDateAndPrint() - Print all tasks sorted by deadline`
+    * `sortByStatusAndPrint() - Print all tasks sorted by status(done)`
+    * `printWeeklyTasks() - Print tasks due in a week`
+    * `printMonthlyTasks() - Print tasks due in a month`
+    * `printYearlyTasks() - Print tasks due in a year`
+    * `printAllTasks() - Print all tasks without sorting`
+    * `printGradableTasks() - Print all gradable tasks`
+    * `printNormalTasks() - Print all non-gradable tasks`
 
 Notes about `OverallTaskList`
 
@@ -192,7 +191,6 @@ switch between multiple tools or applications such as NUSMods, Luminus, Sticky N
 * **Command Line Interface(CLI)** - A command-line interface (CLI) processes commands to a computer program in the form
   of lines of text(From [Wikipedia](https://en.wikipedia.org/wiki/Command-line_interface)).
 * **Mainstream Operating Systems(OS)** - Windows, Linux, Unix, OS-X
-  <br/><br/>
 
 # Appendix E: Instructions for Manual Testing
 
@@ -223,7 +221,7 @@ exploratory testing.
 2. No save file exists
     1. Prerequisites: Make sure the data folder does not exist/is deleted from the folder containing the JAR file.
     2. Run the application as stated in `Launch`
-    3. Expected: Application starts with an empty template and shows the following message
+    3. Expected: Application starts with an empty template and shows the following message:
        ```
        No save file found, starting with an empty template
        Welcome to NoCap
@@ -233,7 +231,7 @@ exploratory testing.
        containing the JAR file. If not, simply carry out any command that adds/modifies data in the application,
        e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
     2. Run the application as stated in `Launch`
-    3. Expected: Application loads the save file when starting the application and shows the following message
+    3. Expected: Application loads the save file when starting the application and shows the following message:
    ```
    Data loaded successfully
    Welcome to NoCap
@@ -267,18 +265,15 @@ exploratory testing.
     2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
     3. Expected: Tasks are shown accordingly, depending on the optional argument
 
-
 ## User Guide Extract
 
-### Listing all tasks : `list task`
+### Listing all tasks : `list task (optional argument)`
 
 Shows a list of all tasks within the current semester
 
-Additional format: `list task <optional argument>`
-
 By default, all tasks in the current semester are listed, but this can be customised by adding optional arguments.
 
-&lt;optional argument> includes:
+(optional argument) includes:
 
 * sortbydate - Sort tasks by due date.
 * sortbystatus - Sort tasks by status, displaying unfinished tasks first.

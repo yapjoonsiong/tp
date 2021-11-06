@@ -51,16 +51,6 @@ app for NUS students!
 
 ## Developer Guide Extract
 
-## Acknowledgements
-
-Third party libraries:
-
-- [Jackson Databind](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind)
-- [Jackson Datatype-jsr310](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310)
-- [Jackson Annotations](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations)
-
-
-
 ## Storage
 
 **API** : `command.storage`
@@ -71,19 +61,6 @@ using a 3rd party library Jackson Databind.
 It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object
 `SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
 
-How the `StorageEncoder` class works:
-
-![alt_text](../media/StorageEncoderSequenceDiagram.png "image_tooltip")
-
-1. The static method `encodeAndSaveSemesterListToJson()` from `StorageEncoder` is called when NoCap data needs to be
-   saved
-2. If the save file directory has not been created yet, it is first created in order to store the save file
-3. Similarly, an empty file is created to store the data if it has not been created yet
-4. Then, the object `SemesterList` is  converted into a JSON file with an `ObjectMapper`
-   object from the  `jackson-databind` library
-5. Upon completion, the data file is saved in a default data directory.
-
-<div style="page-break-after: always;"></div>
 How the `StorageDecoder` class works:
 
 ![alt_text](../media/StorageDecoderSequenceDiagram.png "image_tooltip")
@@ -174,101 +151,6 @@ How the `OverallTask` component works:
    with their `moduleName` .
 5. Calling the `toString()` method generates a string containing task information together with its `moduleName`.
    <br/><br/>
-
-# Appendix A: Product Scope
-
-**Target User Profile:**
-
-* NUS student
-* is reasonably comfortable using CLI apps
-* can type fast
-* prefers typing to mouse interactions
-* prefer desktop apps over other types
-
-**Value Proposition:**
-
-A centralized platform which allows NUS Students to carry out their learning management without needing to frequently
-switch between multiple tools or applications such as NUSMods, Luminus, Sticky Notes etc.
-<br/><br/>
-
-# Appendix D: Glossary
-
-* **Command Line Interface(CLI)** - A command-line interface (CLI) processes commands to a computer program in the form
-  of lines of text(From [Wikipedia](https://en.wikipedia.org/wiki/Command-line_interface)).
-* **Mainstream Operating Systems(OS)** - Windows, Linux, Unix, OS-X
-
-# Appendix E: Instructions for Manual Testing
-
-Given below are instructions to test the app manually.
-
-**Note:** These instructions only provide a starting point for testers to work on, testers are expected to do more
-exploratory testing.
-
-## Launch
-
-1. Initial launch
-    1. Download the JAR file and copy it into an empty folder
-    2. Open up your terminal, and navigate to the folder containing the JAR file
-    3. Type the following command:
-   ```
-   java -jar NoCap.jar
-   ```
-   **Note**: It is important that you navigate to the directory containing the JAR file first before running the
-   application, as it may affect the location of the save file.
-
-## Saving/Loading data
-
-1. Automatic saving
-    1. Carry out any command that adds/modifies data in the application, e.g `add CS2102`, or simply exit the
-       application using the command `bye`.
-    2. Expected: A JSON file is created/updated automatically in the data folder located in folder containing the JAR
-       file, provided the instructions in `Launch` is followed correctly.
-2. No save file exists
-    1. Prerequisites: Make sure the data folder does not exist/is deleted from the folder containing the JAR file.
-    2. Run the application as stated in `Launch`
-    3. Expected: Application starts with an empty template and shows the following message:
-       ```
-       No save file found, starting with an empty template
-       Welcome to NoCap
-       ```
-3. Save file exists
-    1. Prerequisites: Make sure that a save file already exists in the data folder that is located in the folder
-       containing the JAR file. If not, simply carry out any command that adds/modifies data in the application,
-       e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
-    2. Run the application as stated in `Launch`
-    3. Expected: Application loads the save file when starting the application and shows the following message:
-   ```
-   Data loaded successfully
-   Welcome to NoCap
-   ```
-4. Corrupted save file
-    1. Prerequisites: Make sure that a save file already exists in the data folder that is located in the folder
-       containing the JAR file If not, simply carry out any command that adds/modifies data in the application,
-       e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
-    2. To simulate data corruption, remove lines to cause syntax errors in the JSON file, such as lines containing `{` and `}`.
-    3. Run the application
-    4. Expected: An error message is shown and application starts with an empty template, showing the message below:
-   ```
-   Error reading save file, creating new template
-   Welcome to NoCap
-   ```
-
-## List tasks in a semester
-
-1. List tasks when there are no available tasks
-    1. Prerequisites: There should be no tasks added to modules in the current semester yet.
-    2. Run the command `list task`
-    3. Expected: No tasks are shown and the following message is shown:
-       ```
-       All tasks: 
-       You have no tasks
-       ```
-2. List tasks with optional arguments
-    1. Prerequisites: There should be tasks added to modules in the semester beforehand. Can be checked by
-       running `list task`. If there are no tasks in the semester, add in tasks first(including both gradable and
-       non-gradable tasks)
-    2. Run list task command with optional arguments, as specified in the user guide, e.g. `list task gradable`
-    3. Expected: Tasks are shown accordingly, depending on the optional argument
 
 ## User Guide Extract
 

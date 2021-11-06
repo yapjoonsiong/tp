@@ -58,6 +58,8 @@ Third party libraries:
 - [Jackson Datatype-jsr310](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310)
 - [Jackson Annotations](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations)
 
+<div style="page-break-after: always;"></div>
+
 ## Storage
 
 **API** : `command.storage`
@@ -68,6 +70,7 @@ using a 3rd party library Jackson Databind.
 It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object
 `SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
 
+<div style="page-break-after: always;"></div>
 How the `StorageEncoder` class works:
 
 ![alt_text](../media/StorageEncoderSequenceDiagram.png "image_tooltip")
@@ -80,7 +83,8 @@ How the `StorageEncoder` class works:
    object from the  `jackson-databind` library
 5. Upon completion, the data file is saved in a default data directory.
 
-**How the `StorageDecoder` class works:**
+<div style="page-break-after: always;"></div>
+How the `StorageDecoder` class works:
 
 ![alt_text](../media/StorageDecoderSequenceDiagram.png "image_tooltip")
 
@@ -105,6 +109,7 @@ _Class diagram for OverallTask and OverallTaskList_
 The `OverallTaskList` class is instantiated from `ListParser` only when the end user needs to list available tasks in
 a `Semester`.
 
+<div style="page-break-after: always;"></div>
 How the `OverallTaskList` class works:
 
 1. `OverallTask` objects (explained further under `OverallTask`) are stored in an ArrayList `overallTaskList.`

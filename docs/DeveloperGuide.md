@@ -49,7 +49,7 @@ How the parsing works:
 * Otherwise, the taskDescription is passed to `Command` which calls the corresponding commands in `SemesterList`,
   `Semester` ,`ModuleList`, `Module` , `Task`, `Gradable Task`. For clarity purposes, associations are shown but
   dependencies are not.
-* `ParserChecks` is a utility class that handles various error checking and string searching methods such as
+* `ParserChecks` is a class that handles various error checking and string searching methods such as
   `ParserSearch#getTaskFromIndex()` and `ParserSearch#getTaskFromKeyword()`. `Command` utilizes these methods to verify
   the Strings before passing them to other classes.
   *In NoCap, Parser verifies the validity of input (Whether it exists in the right format). Input content is verified by
@@ -139,7 +139,7 @@ How the `StorageEncoder` class works:
 The `Semester` component stores all NoCap data i.e., all `Semester` objects and their components and cumulative average
 point (CAP) (which are contained in a SemesterList object)
 
-* It consists of 2 utility classes `SemesterList` and `Semester`
+* It consists of 2 classes `SemesterList` and `Semester`
 * `SemesterList` is used to compute and store the cumulative CAP of all semesters and also stores 10 `Semester` objects
 * Each `Semester` object stores and computes the individual CAP for the semester, while also storing a `ModuleList` of
   the `Module` objects taken during the semester

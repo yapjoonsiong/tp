@@ -20,7 +20,7 @@ public class NoCap {
         Parser parse = new Parser();
         Scanner in = new Scanner(System.in);
         while (!parse.isExit()) {
-            //System.out.println();
+            System.out.println();
             moduleList = semesterList.extractAccessedSemester().getModuleList();
             semester = semesterList.extractAccessedSemester();
             String input = in.nextLine();

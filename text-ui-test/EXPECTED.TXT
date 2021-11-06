@@ -1,7 +1,9 @@
 No save file found, starting with an empty template
 Welcome to NoCap
 You are now accessing semester: Y1S1
+
 Invalid Input!
+
 Thank you for using NoCap!
 Have a nice day!
 Thank you for using NoCap

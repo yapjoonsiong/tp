@@ -49,7 +49,7 @@ How the parsing works:
 * Otherwise, the taskDescription is passed to `Command` which calls the corresponding commands in `SemesterList`,
   `Semester` ,`ModuleList`, `Module` , `Task`, `Gradable Task`. For clarity purposes, associations are shown but
   dependencies are not.
-* `ParserChecks` is a utility class that handles various error checking and string searching methods such as
+* `ParserChecks` is a class that handles various error checking and string searching methods such as
   `ParserSearch#getTaskFromIndex()` and `ParserSearch#getTaskFromKeyword()`. `Command` utilizes these methods to verify
   the Strings before passing them to other classes.
   *In NoCap, Parser verifies the validity of input (Whether it exists in the right format). Input content is verified by
@@ -82,8 +82,7 @@ Step 4: `splitInput` is called for the second time and splits the user input int
 **TaskType** and **TaskDescription** are passed to `ListParser` through `ListParser#overallListParser`.
 <br/><br/>
 
-Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and **
-TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the
+Step 5: `overallListParser` creates an `OverallTaskList`. Through nested switch cases, **TaskType** and **TaskDescription** are matched, and the corresponding method `OverallTaskList#sortByDateAndPrint()` is called. As the
 name implies, this method sorts all tasks by date and prints them.
 > If **TaskType** does not match, then an error message is displayed.  
 > If **TaskDescription** does not match, all tasks are printed by default.
@@ -140,7 +139,7 @@ How the `StorageEncoder` class works:
 The `Semester` component stores all NoCap data i.e., all `Semester` objects and their components and cumulative average
 point (CAP) (which are contained in a SemesterList object)
 
-* It consists of 2 utility classes `SemesterList` and `Semester`
+* It consists of 2 classes `SemesterList` and `Semester`
 * `SemesterList` is used to compute and store the cumulative CAP of all semesters and also stores 10 `Semester` objects
 * Each `Semester` object stores and computes the individual CAP for the semester, while also storing a `ModuleList` of
   the `Module` objects taken during the semester
@@ -198,7 +197,7 @@ How printing a timetable works:
    corresponds to the schedule.
 
 - If day of week and timeslot corresponds, venue and comments information is printed out
-- If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead. =======
+- If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead.
 
 # ![modulePrintTimetableSeq](media/modulePrintTimetableSeq.png)
 
@@ -232,8 +231,6 @@ How ScheduleList works:
 2. When `addClass` is called in `module` , `ScheduleList` parses the input from the user and splits the information into
    the relevant information. The information is then used to generate a new instance of `Schedule` which is then added
    to the list.
-3. `toString()` prints out all relevant schedule information in a list format. This is done by going through the list
-   and printing `Schedule` one after another.
 
 Notes about ScheduleList
 
@@ -271,7 +268,7 @@ How the `TaskList` component works:
 4. Then store it as a local variable of a `String` type.
 5. The `String` variables will then be passed to instantialize a new `Task` object.
 6. This `Task` object will then be stored in the `ArrayList` in the `TaskList` object.
-7. The methods `weeklyTaskList()`, `monthlyTaskList` and `yearlyTaskList()` returns an `ArrayList` which contains
+7. The methods `weeklyTaskList()`, `monthlyTaskList()` and `yearlyTaskList()` returns an `ArrayList` which contains
    the `Task` objects of deadline within a week, a month and a year respectively.
 8. The methods `sortTaskListByDate()`  and `sortTaskListByStatus()` will sort the current `TaskList` object by ascending
    order of `Deadline` and completion status respectively
@@ -286,7 +283,7 @@ How the `TaskList` component works:
 `Task` object stores the following for each task:
 
 1. `description`
-2. `Date`
+2. `date`
 3. `isDone`
 4. `isLate`
 5. `deadline`
@@ -302,7 +299,7 @@ How the `Task` component works:
    whether the current date and time of the system clock is after the `deadline` of the `Task` object.
 3. If `isDone` is `FALSE` and the `deadline` is later than the current date and time, `updateOverdue()` will set the
    attribute `isLate` of the current `Task` object to `TRUE`.
-4. Calling the toString prints out the task information in the Task object.
+4. Calling the toString converts the task information in the Task object to printable String.
 
 Note:
 
@@ -466,7 +463,7 @@ exploratory testing.
 2. No save file exists
     1. Prerequisites: Make sure the data folder does not exist/is deleted from the folder containing the JAR file.
     2. Run the application as stated in `Launch`
-    3. Expected: Application starts with an empty template and shows the following message
+    3. Expected: Application starts with an empty template and shows the following message:
        ```
        No save file found, starting with an empty template
        Welcome to NoCap
@@ -476,7 +473,7 @@ exploratory testing.
        containing the JAR file. If not, simply carry out any command that adds/modifies data in the application,
        e.g `add CS2102`(see 1. Automatic Saving), and the save file will be created automatically.
     2. Run the application as stated in `Launch`
-    3. Expected: Application loads the save file when starting the application and shows the following message
+    3. Expected: Application loads the save file when starting the application and shows the following message:
    ```
    Data loaded successfully
    Welcome to NoCap
@@ -521,10 +518,11 @@ exploratory testing.
        ```
        Semester successfully switched
        You are now accessing semester: Y2S1
+       ```
 
 ## Adding a module to a semester
 
-1. Prerequisite: Semester should already exist.
+1. Prerequisite: Module should already exist.
 2. Adding a module that does not exist.
     1. Run the command: `add CS2040C`
     2. Expected:
@@ -638,8 +636,8 @@ exploratory testing.
 1. Prerequisite: Module CS2040C should already exist.
 2. Adding a valid GradableTask to module.
     1. Run the command: `/m cs2040c addgradable finals /by 11/11/2021 1000 /w 50`
-    2. Expected:
-   ```
+    2. Expected:  
+    ```
      Added new task to CS2040C
     finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
     BREAKDOWN:
@@ -649,11 +647,10 @@ exploratory testing.
     1: finals
     
     1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
-   ```
+    ```
 3. Adding a GradableTask with an invalid syntax.
     1. Run the command : `/m cs2040c addgradable finals /by 00/00/00 /w 50`
-    2. Run the command: `/m cs2040c addgradable finals /by 10/10/2021 1000 /w 1`
-    3. Expected:
+    2. Expected:
     ```
     Wrong date format input!
     Format: dd/MM/yyyy hhmm
@@ -663,8 +660,10 @@ exploratory testing.
 ## Listing all gradable tasks
 
 1. Prerequisite: module CS2040C should already exist.
-2. Run the command: `/m CS2040C list gradable`
-3. Expected:
+2. Run the command: `/m cs2040c addgradable finals /by 11/11/2021 1000 /w 50`
+3. Run the command: `/m cs2040c addgradable midterms /by 11/09/2021 1300 /w 50`
+4. Run the command: `/m CS2040C list gradable`
+5. Expected:
     ```
    BREAKDOWN:
     <======================50%=======================><======================50%=======================>
@@ -683,7 +682,7 @@ exploratory testing.
 2. Add a new task: `/m cs2040c addtask testcase 1 /by 11/11/2021 0000`.
 3. Editing description:
     1. Run the command: `/m cs2040c editdesc 1 testcase 2`.
-    2. Run the command: `/m cs2040c list task`.
+    2. Run the command: `/m cs2040c list`.
     3. Expected:
     ```
     Task List for CS2040C:
@@ -692,7 +691,7 @@ exploratory testing.
     ```
 4. Editing deadline:
     1. Run the command: `/m cs2040c editdate 1 12/12/2022 1212`.
-    2. Run the command: `/m cs2040c list task`.
+    2. Run the command: `/m cs2040c list`.
     3. Expected:
     ```
     Task List for CS2040C:
@@ -734,7 +733,7 @@ exploratory testing.
 1. Prerequisites: module CS2040C exists without any existing task.
 2. Add a new task: `/m cs2040c addtask testcase 1 /by 11/11/2021 0000`.
 3. Add a new task: `/m cs2040c addtask testcase 2 /by 12/12/2022 1212`.
-4. Run the command: `/m cs2040c list task`.
+4. Run the command: `/m cs2040c list`.
 5. Expected:
     ```
     Task List for CS2040C:
@@ -745,7 +744,7 @@ exploratory testing.
 
 ## Adding a grade to a module
 
-1. Prerequisites: module CS2040C exists
+1. Prerequisites: module CS2040C exists without any task/class/credit.
 2. Run the command: `/m cs2040c addgrade A`
 3. Expected:
     ```
@@ -768,7 +767,7 @@ exploratory testing.
 
 ## Adding a credit to module
 
-1. Prerequisites: module CS2040C exists.
+1. Prerequisites: module CS2040C exists without any task/class/grade.
 2. Run the command: `/m cs2040c addcredit 4`
 3. Expected:
     ```
@@ -778,20 +777,14 @@ exploratory testing.
     --------------------------- 
     SCHEDULE: 
     --------------------------- 
-    GRADE: A
+    GRADE: NIL
     TASKS: []
     BREAKDOWN: 
     ```
 
 ## Adding a class to module
 
-1. Prerequisite: module CS2040C exists
-
-   Note:
-    1. `<day>` can only take in the first 3 letters of the day, from monday to saturday.
-    2. `<period` can only be in blocks of 1 hour in 24-hour format (e.g. 1100 or 1300).
-    3. `<location>` and `<comment>` cannot be empty and can take a maximum of 16 characters.
-
+1. Prerequisite: module CS2040C exists.
 2. Adding a class with valid syntax.
     1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/LECT`
     2. Expected:
@@ -803,7 +796,7 @@ exploratory testing.
     Location: ZOOM
     Comments: LECT
     ```
-5. Adding a class with invalid syntax
+5. Adding a class that occupies the same timeslot.
     1. Run the command: `/m CS2040C addclass MON/1000/ZOOM/TUT`
     2. Expected: `A class already exists in this timeslot!`
 
@@ -821,7 +814,7 @@ exploratory testing.
 ## Show semester cap
 
 1. Run the command `cap`
-2. If no credit is added for any module in the semester, the following message is printed:
+2. If no credit is added for any module in the semester, expected:
     ```
     Unable to calculate cap as no credit assigned to any existing module
     ```

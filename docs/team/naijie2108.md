@@ -47,6 +47,7 @@ app for NUS students!
   * Help teammates when faced with technical issues by meeting up and helping to debug, 
     such as debugging failing IO redirection tests and failing JUNIT tests.
   
+ <div style="page-break-after: always;"></div>
 ---
 ## Developer Guide Extract
 
@@ -58,7 +59,7 @@ Third party libraries:
 - [Jackson Datatype-jsr310](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310)
 - [Jackson Annotations](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations)
 
-<div style="page-break-after: always;"></div>
+
 
 ## Storage
 
@@ -70,7 +71,6 @@ using a 3rd party library Jackson Databind.
 It consists of 2 utility classes StorageDecoder and StorageEncoder. StorageEncoder is used to encode the parent object
 `SemesterList` into a JSON file. StorageDecoder decodes a JSON file into a `SemesterList `object
 
-<div style="page-break-after: always;"></div>
 How the `StorageEncoder` class works:
 
 ![alt_text](../media/StorageEncoderSequenceDiagram.png "image_tooltip")

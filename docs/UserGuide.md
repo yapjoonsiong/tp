@@ -226,7 +226,8 @@ Assuming tasks have been added to modules beforehand:
   4.[ ] do assignment by: 30 Oct 2021 04:00 PM
   ```
 
-* `/m cs1010 list gradable`
+* `/m cs1010 list gradable`   
+
   ```
   BREAKDOWN:
     <=================40%==================>
@@ -321,7 +322,7 @@ Valid
 
 ### Delete classes from module: `/m <module> deleteclass <class index>`
 
-Deletes a module corresponding to the input index.(refer to `/m <module name> info` or `list module` for indexes )
+Deletes a module corresponding to the input index.(refer to `/m <module name> info` or `list module` for indexes)
 
 Examples:
 
@@ -346,7 +347,7 @@ Location: zoom
 Comments: lect
 ```
 
-### Add credit to module: `/m <module> addcredit `
+### Add credit to module: `/m <module> addcredit <credit value>`
 
 Add credits to a module.
 
@@ -589,7 +590,7 @@ Welcome to NoCap
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Simply transfer your data.json file to the data folder of the operating system that you plan to use NoCap on.
+**A**: Simply transfer your data.json file to the data subfolder of another NoCap application.
 
 > **WARNING**: Replacing data.json file in another NoCap folder results in the  existing data being erased!
 
@@ -612,12 +613,12 @@ Welcome to NoCap
 |Mark task as incomplete| /m \<module> notdone \<task index>|
 |Mark gradable task as complete| /m \<module> gradabledone \<task index>|
 |Mark gradable task as incomplete| /m \<module> gradablenotdone \<task index>|
-|List module tasks| /m \<module> list task (optional argument)|
+|List module tasks| /m \<module> list (optional argument)|
 |Add class | /m \<module> addclass \<day/period/location/comments>|
 |Delete class| /m \<module> deleteclass \<class index>|
 |Add grade| /m \<module> addgrade \<grade letter>|
 |Delete grade| /m \<module> deletegrade|
-|Add credit| /m \<module> addcredit|
+|Add credit| /m \<module> addcredit <credit value>|
 |Show timetable| timetable|
 |List all tasks| list task (optional argument)|
 |Show semester cap| cap|

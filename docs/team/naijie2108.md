@@ -47,8 +47,8 @@ app for NUS students!
   * Help teammates when faced with technical issues by meeting up and helping to debug, 
     such as debugging failing IO redirection tests and failing JUNIT tests.
   
- <div style="page-break-after: always;"></div>
----
+<div style="page-break-after: always;"></div>
+
 ## Developer Guide Extract
 
 ## Acknowledgements

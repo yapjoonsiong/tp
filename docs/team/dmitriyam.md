@@ -99,7 +99,7 @@ How printing a timetable works:
 - If day of week and timeslot corresponds, venue and comments information is printed out
 - If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead. =======
 
-# ![modulePrintTimetableSeq](../media/modulePrintTimetableSeq.png)
+# ![modulePrintTimetableSeq](../media/ModuleListseq.png)
 
 How printing a timetable works:
 
